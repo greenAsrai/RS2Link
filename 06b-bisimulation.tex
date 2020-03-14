@@ -1,0 +1,235 @@
+% !TEX root = ./main_RS2L_LNCS.tex
+\section{Bio-simulation}
+\label{sec:biosimulation}
+
+The classical notion of bisimulation for process algebra equates two processes
+when one process can simulate all the instructions executed by the other one and viceversa.
+In its weak formulation, internal instructions, i.e. non visible by external observers,
+are abstracted away. 
+There are many variants of the bisimulation for process algebras,  for example the
+barbed bisimulation~\cite{10.1007/3-540-55719-9_114} only consider the execution of invisible actions, and then equates two processes when the expose the same prefixes; for the mobile ambients~\cite{CardelliG00}, a process algebra equipped with a reduction semantics, a notion of
+behavioural equivalence equates two processes when they expose the same ambients\cite{GC03}. 
+
+There are some previous works based on bisimulation applied to models for biological systems. Barbuti et al \cite{BMMT08} define a classical setting for bisimulation for two formalisms: the Calculus of Looping Sequences, which is a rewriting system, and the Brane Calculi, which is based on process calculi.
+Bisimulation is used to verify properties of the regulation of lactose degradation in
+Escherichia coli and the EGF signalling pathway. These calculi allow the authors to model membranes' behaviour.
+\cite{CTTV15} presents two quantitative behavioral equivalences over species of a 
+chemical reaction network with semantics based on ordinary differential equations.
+Bisimulation identifies a partition where each equivalence class represents the exact sum of the concentrations of the species belonging to that class.
+Bisimulation also relates species that have identical solutions at all time points when starting from the same initial conditions.
+Both the mentioned formalisms \cite{BMMT08,CTTV15} adopt a classical approach to bisimulation. Moreover our formalisms is different, for different applications and purposes. 
+
+Albeit the bisimulation is a powerful tool for verifying if the behaviour of two different software 
+programs is indistinguishable, in the case of biological systems the classical bisimulation seems to be inappropriate, as it considers too many details.
+In fact, in a biological soup, a high number of interactions occur every seconds, and generally, biologists
+are only interested to analyse a small subset of them.
+
+For this reason, we propose an alternative notion of bisimulation, that hereafter we call biosimulation,
+that allows us  to compare two biological systems by restricting the observation to only the limited events of interest.
+
+The transition labels of our systems record detailed information about all the reactions that have been applied in one transition, about the elements that acted as reagents, as inhibitors or that have been produced, or that have been provided by the context.
+
+In a way, we want to query our transition labels to get only the information we are interested in.
+To this goal, we introduce a simple language
+%simple assertion language 
+that allows us to formulate detailed and partial queries about what happened in a single transition.
+
+First, we need to introduce the $flat$ function that takes a link chain and returns a simple string
+by eliminating all the channel matching pairs leaving just one channel per each pair:\\
+\[
+\begin{array}{lcl@{\hspace{0.5cm}}lcl@{\hspace{0.5cm}}lcl@{\hspace{0.5cm}}lcl}
+flat(\epsilon)&\defeq & \epsilon &
+flat(\link{\silent}{\beta}) & \defeq & \beta &
+flat(\link{\alpha}{\silent})& \defeq & \epsilon &
+flat(\link{\alpha}{\beta}) & \defeq &\beta \\
+\end{array}\]
+\[
+\begin{array}{lcl}
+flat(\link{\alpha}{\beta}\upsilon)& \defeq & \beta :: flat(\upsilon)\\
+\end{array}\\
+\]
+where  $::$ is the string concatenation operator.
+
+
+\noindent
+Now, we can introduce an assertion language that operates on simple strings
+and that combines regular expression operators with the classical $and$ and $or$ logical
+operators.
+
+
+\begin{definition}[Assertion language]
+\label{def:assetionl}
+Assertions are built from: 
+$$
+%B ::=  s~\mid~ \tilde{s}~\mid~ \hat{s} ~\mid~ \overline{s} ~\mid~  \underline{s} ~\mid~ F \oplus F  
+\begin{array}{lcl}
+\zeta' &::= & \epsilon  ~\mid~ \zeta::\zeta'\\ 
+re&::=& . ~\mid ~   (\zeta \textrm{-}\zeta)  ~\mid ~ \zeta' ~\mid ~ re::re\\
+re' &::= & 
+%(re')|(re')  ~\mid~
+[\zeta\dots\zeta]~\mid~ [\hat{}  re] ~\mid ~ re* ~\mid ~ re+ \\
+F &::=& re' ~\mid ~  F \vee F ~\mid ~  F \wedge F\\
+\end{array}
+$$
+%\noindent where $s \in {\cal C}$, and  $\oplus \in \{\wedge, \vee, \to \}$. 
+where $\zeta \in \{s, \tilde{s}, \hat{s}, \overline{s}, \underline{s} \}$ with  $s \in {\cal C}$.
+%, and  $\oplus \in \{\wedge, \vee \}$. 
+% \{\wedge, \vee, \to \}$. 
+\end{definition}
+
+$\zeta'$ is the set of  strings composed by characters in the set ${\cal C}$.
+Then, the dot "$.$" stands for any character, $\zeta_1 \textrm{-}\zeta_2$ is a shorthand for the string
+starting with $\zeta_1$ and ending with $\zeta_2$ and that in the  middle includes all the characters
+following the alphanumeric order.
+%The round brackets $(\zeta')$ build a single string  $\zeta'$, i.e. a non-separable sequence of characters.
+ The square brackets match one of the characters they contain.
+ The symbol $[\hat{} \dots]$, inside the square brackets excludes any of the characters they contain.
+ The star $*$ allows the previous character to be replicated zero or more times.
+ The plus symbol $+$ allows the previous character to be replicated at least one or more times.
+Then, we can combine the patterns build with the above constructors with the logic operators $\vee$ and
+$\wedge$.
+
+
+
+\begin{definition}[Semantics]\label{sec:semantics}
+Let  $\upsilon$ be  a transition label, and $F$ be an assertion.
+We define $\upsilon \entails F$ (read as the transition label $v$ satisfies the formula $F$) as: 
+\begin{itemize}
+ \item   $\upsilon \entails \zeta $ iff $\zeta \in flat(\upsilon)$. 
+ \item   $\upsilon \entails F_1 \wedge F_2$ iff   $\upsilon \entails F_1$  $\wedge$  $\upsilon \entails F_2$.
+\item   $ \upsilon \entails F_1 \vee F_2$ iff   $\upsilon \entails F_1$  $\vee$  $\upsilon \entails F_2$.
+\end{itemize}
+If it is not the case that $\upsilon \entails  F $, then we say that $F$ does not hold at $v$ and we write $\upsilon \not\entails F$. 
+\end{definition}
+
+
+%\begin{definition}[Semantics]\label{sec:semantics}
+%Let $\pi$ be a trace of transition labels, $v$ be  a transition label, and $F$ be an assertion.
+%We inductively define $\pi,v_i \entails F$ (read as the transition label $v$, which is at position $i$ of $\pi$ satisfies the formula $F$) as: 
+%\begin{itemize}
+% \item   $\pi, v_i \entails \zeta $ if $\zeta \in v_i$. 
+% \item   $\pi, v_i \entails F_1 \wedge F_2$ if   $\pi, v_i \entails F_1$  $\wedge$  $\pi, v_i \entails F_2$.
+%\item   $\pi, v_i \entails F_1 \vee F_2$ if   $\pi, v_i \entails F_1$  $\vee$  $\pi, v_i \entails F_2$.
+%\item   $\pi, v_i \entails F_1 \to F_2$ if   $\pi, v_i \entails F_1$  $\to$  $\pi, v_i \entails F_2$. 
+%\end{itemize}
+%If it is not the case vbthat $\pi, v_i \entails  F $, then we say that $F$ does not hold at $v_i$ and we write $\pi,v_i \not\entails F$. 
+%\end{definition}
+Our  language allows us to check if the simulation of a system (i.e. the transition labels, or in other words the trace of a simulation) 
+satisfies the properties of the following types:% that can be expressed using our assertion language. Some simple examples  follow:
+\begin{enumerate}
+\item Has the entity $s$ been used by rule $r$  as reagent ?
+\item Has the entity $s$ blocked the application of  rule $r$ ?
+\item Has the entity $s$ been produced by some rule ?
+\item Has the entity $s$ been produced by rule $p$ ?
+\item Has the entity $s$ been provided by the context ? 
+\item Has the rule $i$ been applied ? 
+%\item Has the entity $s$ been used by some rule as reagent ?
+%\item Has the entity $s$ blocked  the application of some rules ?
+%\item Has the entity $s$ been produced ?
+%\item Has the entity $s$ been provided by the context ?
+%\item Has the rule $i$ been applied ?
+\end{enumerate}
+The corresponding formulas are as follows:\\
+
+$
+\begin{array}{cl}
+1. & r[  s1 \dots sn ] *s[  s1 \dots sn ]* \\
+2. & r [ s \overline{s}]  r' \\
+3. & \tilde{s}\\
+4. & p[  \tilde{s1} \dots \tilde{sn} ] *\tilde{s}[  \tilde{s1} \dots \tilde{sn} ]* \\
+5. & \hat{s}\\
+6. &DA DECIDERE come
+\end{array}
+$\\
+ where $r'$ is next rule.
+
+Now, we introduce a slight modified version of the Hennessy Milner Logic (the Hennessy Milner link logic, HM-linkL)~\cite{}; due to the reasons we explained above, we do not want to look at the complete transition labels, thus we rely on our simple assertion language:
+\begin{definition}[HM-linkL]
+Let   $F$ be an assertion, then 
+the set of  HM-linkL formulae ${\cal G}$are built by the following syntax:\\
+$$
+G,H ::= {\tt t} ~\mid~ {\tt f} ~\mid~ G\wedge H ~\mid~ G \vee H ~\mid~ \langle F \rangle G ~\mid~ [F]G
+$$
+\end{definition}
+
+
+\begin{definition}[semantics of $G$]
+ We define $\llbracket G\rrbracket \subseteq {\cal P}$ by induction on the structure of $G \in {\cal G}$:%(read as the transition label $v$ satisfies the formula $F$) as: 
+\[
+\begin{array}{ccl@{\hspace{1cm}}ccl}
+ \llbracket {\tt t}\rrbracket &\defeq& {\cal P} &  \llbracket G\wedge H\rrbracket &\defeq&  \llbracket G\rrbracket  \cap \llbracket H\rrbracket  \\
+\llbracket {\tt f}\rrbracket& \defeq& \emptyset &
+  \llbracket G\vee H\rrbracket &\defeq&  \llbracket G\rrbracket  \cup \llbracket H\rrbracket \\
+%\item   $ v \entails F_1 \vee F_2$ iff   $v \entails F_1$  $\vee$  $v \entails F_2$.
+\end{array}
+\]
+\[
+\begin{array}{lcl}
+ \llbracket  \langle F \rangle G \rrbracket &\defeq& \{P \in {\cal P}: \exists P', v.P\xrightarrow{v}P' \mbox{ with } v \entails F \mbox{ and } P' \in  \llbracket  G \rrbracket\} \\
+ \llbracket [F]G \rrbracket &\defeq& \{P \in {\cal P}: \forall P',v.P\xrightarrow{v}P' \mbox{ implies } v \entails F \mbox{ and } P' \in  \llbracket  G \rrbracket\}
+\end{array}
+\]
+We write $P \vdash G$ ($P$ satisfies $G$) if and only if $P \in  \llbracket G \rrbracket$.
+\end{definition}
+
+Please recall that we have defined the behaviour of the contest in a non determinist way, thus 
+at each step, different possible sets of entities can be provided to the system. 
+%situations where in the same conditions, two alternative (mutually exclusive) behaviors can happen.
+
+%With an example, we  illustrate a possible (interesting) application of the implication in a query.
+%Let us consider the following rule that acts as follows: if reagent $a$ is present and inhibitor $b$ is absent,  either $c$ or $z$ can be produced. 
+%Typically, a non-deterministic model reflects incomplete knowledge of the real system.
+%
+%
+%
+%{\small
+%\[
+%\begin{array}{lcl}
+%P & \defeq& \startchain{\silent}\chainedlink{a_i}{\noact}\chainedlink{\noact}{a_o}\chainedlink{\overline{b}_i}{\noact}\chainedlink{\noact}{\overline{b}_o}
+%\chainedlink{r_2}{\noact}\chainedlink{\noact}{p_1}
+%\chainedlink{\widetilde{c}_i}{\noact}\chainedlink{\noact}{\widetilde{c}_o}\chainend{p_2}.P  \\
+%&&+\\
+% && \startchain{\silent}\chainedlink{a_i}{\noact}\chainedlink{\noact}{a_o}\chainedlink{\overline{b}_i}{\noact}\chainedlink{\noact}{\overline{b}_o}
+%\chainedlink{r_2}{\noact}\chainedlink{\noact}{p_1}
+%\chainedlink{\widetilde{z}_i}{\noact}\chainedlink{\noact}{\widetilde{z}_o}\chainend{p_2}.P  \\
+%&&+\\
+%&&\dots\\
+%\end{array}
+%\]
+%}
+%In this situation, a comparison between two models including the above rule,  based on the query $\tilde{z} \vee \underline{b} \rightarrow x$  can happen that one system always satisfies the query, and the other one not.
+%This difference could reveals that in the first system there is another rule producing $z$, i.e. biologically there is another path to produce $z$ that is activated in the actual system configuration:
+%{\small
+%\[
+%\begin{array}{lcl}
+%P & \defeq& \dots \\
+%&&+\\
+% && \startchain{\silent}\chainedlink{a_i}{\noact}\chainedlink{\noact}{a_o}\chainedlink{z_i}{\noact}\chainedlink{\noact}{z_o}\chainedlink{\overline{b}_i}{\noact}\chainedlink{\noact}{\overline{b}_o}
+%\chainedlink{r_2}{\noact}\chainedlink{\noact}{p_1}
+%\chainedlink{\widetilde{z}_i}{\noact}\chainedlink{\noact}{\widetilde{z}_o}\chainend{p_2}.P  \\
+%&&+\\
+%&&\dots\\
+%\end{array}
+%\]
+%}
+
+
+
+
+
+\begin{definition}[Biosimilarity  $ \sim_F $]
+A \emph{biosimulation} $\mathbf{R}_F$, with respect to the predicate $F$, is a binary relation over {\tt link}-calculus processes such that, if $P \mathrel{\mathbf{R}_F} Q$ then:
+%\begin{itemize}
+%\item 
+ \begin{center} %s$\exists \, v,v'$ s.t. 
+ $P \xrightarrow{v} P'$ with $v \entails F$ \, iff  \, $Q  \xrightarrow{v'} Q'$ with $v' \entails F$ and $P' \mathrel{\mathbf{R}_F} Q'$.
+ \end{center}
+%\item i$Q \xrightarrow{v} Q'$ with $v \entails F$ iff $\exists v',P'$ s.t.~$v \stretcheq v'$, $P  \xrightarrow{v'} P'$ with $v \entails F$. and $P' \mathrel{\mathbf{R}_{F}} Q'$.
+%\end{itemize}
+\noindent
+We let $ \sim_F $ denote the largest  biosimulation and we say that $P$ is \emph{biosimilar} to $Q$, with respect to $F$, if $P \sim_F Q$.
+\end{definition}
+
+
+
+

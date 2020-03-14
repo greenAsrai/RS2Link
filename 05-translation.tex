@@ -1,0 +1,451 @@
+% !TEX root = ./main_RS2L_LNCS.tex
+
+
+\section{From Reaction Systems to c\CNA}
+\label{sec:trans}
+Here we present a translation from Reaction Systems to c\CNA.
+The idea is to define separated processes for representing the behaviour of each entity, each reaction, 
+and for the provisioning of each entity by the context.
+
+\paragraph{Processes for entities.}
+Given an entity $s \in S$, we exploit four different names for the interactions over $s$:
+names $s_i$, $s_o$ are used to test the presence of $s$ in the system; names $\hat{s}_i$, $\hat{s}_o$ are used to test the provisioning of $s$ from the context;
+names $\tilde{s}_i$, $\tilde{s}_o$  are used to test the production of $s$ by some reaction; names $\overline{s}_i$, $\overline{s}_o$ are used to test the absence of $s$ from the context; and names $\underline{s}_i$, $\underline{s}_o$ are used to test the absence of $s$ in the system.
+We let $P_s$ be the process implementing the  presence of $s$ in the system, and $\overline{P_s}$ be the one for its absence.
+They can be seen as instances of the same template, which is given below. 
+
+\[
+\begin{array}{lcl@{\hskip 1cm}lcl}
+ P_s &\defeq & P(s,\tilde{s},\hat{s},\underline{s}) 
+ &
+ \overline{P_s}& \defeq & P(\overline{s},\tilde{s},\hat{s},\underline{s})
+\end{array}
+\]
+%{\color{red}
+%\[
+%\begin{array}{rcl}
+% P(s,\tilde{s},\hat{s},\underline{s}) & \defeq &\sum_{h_j,k_j\in\{0,1\}}
+%  (\startchain{s_i}\chainedlink{s_o}{\noact}\chainend{\noact})^{h_j} \ (\startchain{\tilde{s}_i}\chainedlink{\tilde{s}_o}{\noact}\chainend{\noact})^{k_j}\ \link{\hat{s}_i}{\hat{s}_o}.P_s\\
+%&&\ + \\
+%&&
+%\sum_{\scriptsize \begin{array}{l}h_j,k_j, \\ h'_j\in\{0,1\}\end{array}}
+%  (\startchain{s_i}\chainedlink{s_o}{\noact}\chainend{\noact})^{h_j} \ (\startchain{\tilde{s}_i}\chainedlink{\tilde{s}_o}{\noact}\chainend{\noact})^{k_j} \  \startchain{\tilde{s}_i}\chainedlink{\tilde{s}_o}{\noact}\chainend{\noact} \    (\startchain{s_i}\chainedlink{s_o}{\noact}\chainend{\noact})^{h'_j} \ \link{\underline{s}_i}{\underline{s}_o}.P_s \\
+%
+%%\sum_{R_1+R_2\geq 0}(\sum_{h,k \in[0,1]} 
+%%  (\startchain{s_i}\chainedlink{s_o}{\noact}\chainend{\noact})^h \ (\startchain{\tilde{s}_i}\chainedlink{\tilde{s}_o}{\noact}\chainend{\noact})^k)^{R_1} \startchain{\tilde{s}_i}\chainedlink{\tilde{s}_o}{\noact}\chainend{\noact} (\sum_{h ,k\in[0,1]}
+%%  (\startchain{s_i}\chainedlink{s_o}{\noact}\chainend{\noact})^h \ (\startchain{\tilde{s}_i}\chainedlink{\tilde{s}_o}{\noact}\chainend{\noact})^k)^{R_2} \link{\underline{s}_i}{\underline{s}_o}.P_s\\
+%&&\ +\\
+%&&\sum_{j\geq 0}(
+%  \startchain{s_i}\chainedlink{s_o}{\noact}\chainend{\noact})^j\ \ \link{\underline{s}_i}{\underline{s}_o}.\overline{P_s}
+%\end{array}
+%\]
+%}
+\[
+\begin{array}{rcl}
+ P(s,\tilde{s},\hat{s},\underline{s}) & \defeq &\sum_{h,k\geq 0}  
+  (\startchain{s_i}\chainedlink{s_o}{\noact}\chainend{\noact})^h \ \startchain{\hat{s}_i}\chainedlink{\hat{s}_o}{\noact}\chainend{\noact} (\startchain{\tilde{s}_i}\chainedlink{\tilde{s}_o}{\noact}\chainend{\noact})^k.P_s\\
+&&\ + \\
+&&
+\sum_{h\geq 0,k\geq 1}
+ (\startchain{s_i}\chainedlink{s_o}{\noact}\chainend{\noact})^h \ \startchain{\underline{s}_i}\chainedlink{\underline{s}_o}{\noact}\chainend{\noact}(\startchain{\tilde{s}_i}\chainedlink{\tilde{s}_o}{\noact}\chainend{\noact})^k.P_s\\
+&&\ +\\
+&&\sum_{h\geq 0}(\startchain{s_i}\chainedlink{s_o}{\noact}\chainend{\noact})^h \ \link{\underline{s}_i}{\underline{s}_o}.\overline{P_s}
+\end{array}
+\]
+The first line of $ P(s,\tilde{s},\hat{s},\underline{s})$ accounts for the case where $s$ is tested for presence by $h$ reactions and produced by $k$ reactions, while being provided by the context ($\link{\hat{s}_i}{\hat{s}_o}$).
+Thus, $s$ will be present at the next step (the continuation is $P_s$). Here $h$ and $k$ are not known a priori and therefore any
+combination is possible. By knowing the number of reactions that test $s$, we can bound the maximum 
+values of $h$ and $k$.
+The second line accounts for the analogous case where $s$ is not provided by the context ($\link{\underline{s}_i}{\underline{s}_o}$). 
+The condition $k\geq 1$ guarantees that $s$ will remain present (the continuation is $P_s$).
+%Here taking
+%$h = \sum_{j\geq0} h_j +h'_j$, $k = (\sum_{j \geq 0} k_j )  + 1$ guarantees that $s$ will be present in the next step. Please note that 
+The third line accounts for the case where $s$ is tested for presence, but it is neither produced nor provided by  the context. Therefore, in the next step $s$ will be absent in the system (the continuation is $\overline{P_s}$).
+Note that in the case of $\overline{P_s}$ the test for presence of $s$ in the system is just replaced by the test for its absence.
+%Process $P_s$ (and $\overline{P_s}$) offers link chain prefixes for all the possible
+% permutations of the solid links; nevertheless if the reactions, and their enumeration, is known
+% the code of $P_s$ can be drastically simplified.
+
+\paragraph{Processes for reactions.}
+We assume that each reaction $a$ is assigned a progressive number $j$.
+The process for reaction $aj=(R_j,I_j,P_j)$ must assert either the possibility to apply the reaction or its impossibility.
+The first case happens when all its reactants are present (the link $\link{s_i}{s_o}$ is requested for any $s\in R_j$) and all its inhibitors are absent (the link $\link{\overline{e}_i}{\overline{e}_o}$ is requested for any $e\in I_j$), then the product set is released (the link $\link{\tilde{c}_i}{\tilde{c}_o}$ is requested for any $c\in P_j$).
+The next case can happen for two reasons: one of the reactants is absent (the link $\link{\overline{s}_i}{\overline{s}_o}$ is requested for some $s\in R_j$) or one of the inhibitors is present (the link $\link{e_i}{e_o}$ is requested for some $e\in I_j$).
+The process is recursive so that reactions can be applied at any step.
+\[
+\begin{array}{lcl@{\quad}l}
+P_{aj}& \defeq & 
+ ^{r_j} \backslash  \blockchain{s_i}{s_o}{s \in R_j} \, \link{}{} \blockchain{\overline{e}_i}{\overline{e}_o}{e \in I_j} \, \chainedlink{r_{j+1}}{\noact}\chainedlink{\noact}{p_j}\link{}{} \blockchain{\tilde{c}_i}{\tilde{c}_o}{c \in P_j}\, \backslash_{p_{j+1}}.P_{aj} & \mbox{\small  \{$aj$ is applicable\}}\\
+&& + \ \\
+&& \sum_{s\in R_j}\startchain{r_j}\chainedlink{\overline{s}_i}{\noact}\chainedlink{\noact}{\overline{s}_o} \chainedlink{r_{j+1}}{\noact}\chainedlink{\noact}{p_{j}}\chainend{p_{j+1}}.P_{aj}  & \mbox{\small  \{$aj$ is not applicable\}}\\
+&&+\\
+&& \sum_{e\in I_j}\startchain{r_j}\chainedlink{e_i}{\noact} \chainedlink{\noact}{e_o} \chainedlink{r_{i+1}}{\noact}\chainedlink{\noact}{p_{j}}\chainend{p_{j+1}}.P_{aj}  & \mbox{\small \{$aj$ is not applicable\}}\\
+\end{array}
+\]
+
+\noindent
+We exploit names $r_j,p_j$ to join the chains provided by the application of all the reactions. 
+Channels $r_j$ and $r_{j+1}$ enclose the enabling/disabling condition of reaction $aj$.
+Channels $p_i$ and $p_{j+1}$ enclose the links related to the entities produced by $aj$.
+We will see that all the link chain labels of transitions follow the same schema: first we find all the reactions limited to the reactants and inhibitors (chained using $r_j$ channels), then all the supplies by the contexts (chained using $cxt_j$ channels, to be introduced next), and finally the products for all the reactions (chained using $p_j$ channels). 
+In the following there is an example explaining this schema.
+%\[
+%\begin{array}{lcl@{\qquad}l}
+%P_{aj}& \defeq & 
+% ^{r_j} \backslash  \blockchain{s_i}{s_o}{s \in R_j} \, \link{}{} \blockchain{\overline{e}_i}{\overline{e}_o}{e \in I_j} \, \link{}{}
+% \blockchain{\tilde{c}_i}{\tilde{c}_o}{c \in P_j}\, \backslash_{r_{j+1}}.P_{aj} & \mbox{\small  \{$aj$ is applicable\}}\\
+%&& + \ \\
+%&& \sum_{s\in R_j}\startchain{r_j}\chainedlink{\overline{s}_i}{\noact}\chainedlink{\noact}{\overline{s}_o} \chainend{r_{j+1}}.P_{aj}  & \mbox{\small  \{$aj$ is not applicable\}}\\
+%&&+\\
+%&& \sum_{e\in I_j}\startchain{r_j}\chainedlink{e_i}{\noact} \chainedlink{\noact}{e_o} \chainend{r_{i+1}}.P_{aj}  & \mbox{\small \{$aj$ is not applicable\}}\\
+%\end{array}
+%\]
+
+\paragraph{Processes for contexts.}
+For each entity $s \in S$, we introduce another process $Cxt_s$,  participating in each transition and saying if, the entity $s$ is provided by the context or not.
+As done for the reactions, we assume that entities are enumerated and use the names $cxt_j$ to concatenate
+the chains formed by the application of all the contexts. 
+For each entity $s$ with number $j$, at step $n >0$  there are two possible behaviours: 
+\[
+\begin{array}{lcl}
+Cxt^n &\defeq &
+%\left \{
+\begin{array}{ll}
+\sum _{j}^{cxt} \backslash  \blockchain{s_i}{s_o}{s \in Ij_n} \, \link{}{} \blockchain{\overline{e}_i}{\overline{e}_o}{e \in Oj_n} \,  \backslash_{p_1}. Cxt^{n+1}\\
+%+ \\
+% ^{cxt} \backslash  \blockchain{s_i}{s_o}{s \in I2_n} \, \link{}{} \blockchain{\overline{e}_i}{\overline{e}_o}{e \in Oj_n} \, \backslash_{p_1}
+% \chainedlink{\hat{s}_i}{\noact}\chainedlink{\noact}{\hat{s}_o}\chainend{p_1}. Cxt_{s}^{n+1} & \ \mbox{if the context provides $s$  at the $n$-th step}\\[5pt] 
+% \startchain{cxt_j}\chainedlink{\underline{s}_i}{\noact}\chainedlink{\noact}{\underline{s}_o}\chainend{cxt_{j+1}}.Cxt_s^{n+1} & \ \mbox{otherwise}
+%\end{array}\right.\\
+%Cxt_s & \defeq & Cxt_s^1\\
+\end{array}
+%\right.\\
+\end{array}
+\]
+
+
+%\[
+%\begin{array}{lcl}
+%Cxt_{s}^n &\defeq &
+%\left \{\begin{array}{ll}
+% \startchain{cxt_j}\chainedlink{\hat{s}_i}{\noact}\chainedlink{\noact}{\hat{s}_o}\chainend{cxt_{j+1}}. Cxt_{s}^{n+1} & \ \mbox{if the context provides $s$  at the $n$-th step}\\[5pt] 
+% \startchain{cxt_j}\chainedlink{\underline{s}_i}{\noact}\chainedlink{\noact}{\underline{s}_o}\chainend{cxt_{j+1}}.Cxt_s^{n+1} & \ \mbox{otherwise}
+%\end{array}\right.\\
+%Cxt_s & \defeq & Cxt_s^1\\
+%\end{array}
+%\]
+
+
+We only consider $Cxt^n$ with $n >0$, as the entities  that are present at step zero  are considered to be present in the initial system (process $P_s$ instead of $\overline{P_s}$).
+
+
+
+
+
+
+\begin{definition}[Translation]
+\label{def:trans}
+Let ${\cal A} = (S, A)$ be a RS, and let $\pi=(\gamma,\delta)$ be an extended interactive process in ${\cal A}$, with  $\gamma=\{C_i\}_{i\in\mathbb{N}}$. 
+We define its c\CNA~translation $\llbracket{\cal A},\gamma \rrbracket$ as follows: 
+\begin{center}$\llbracket{\cal A},\gamma \rrbracket = \restrict{reacts,ctxs,ents,prods}(\Pi_{s\in C_0}P_{s} | \Pi_{s \notin C_0}\overline{P_s} | \Pi_{a\in A} P_a| \Pi_{s\in S} Cxt_s)$,
+\end{center} 
+with  $reacts$ be the set of reaction names $r_j $, $cxts$ the set of context names $cxt_j$,  $ents$ the set of decorated entity names  $\{s_i,s_o,\hat{s}_i,\hat{s}_o,\tilde{s}_i,\tilde{s}_o,\overline{s}_i,\overline{s}_o,\underline{s}_i,\underline{s}_o| s \in S\}$, and  $prods$ be the set of names $p_j$ associated to each reaction. 
+In the following, we set $names = reacts\, \cup\, ctxs\, \cup\, ents\, \cup \, prods$.
+%For notational convenience, we fix that $r_1 = \silent$,  $r_{u+1} = cxt_1$ for $u$ the number of reacts, and $cxt_{w+1} = \silent$ for $w$ the number of entities.
+For notational convenience, we fix that $r_1 = \silent$,  $r_{u+1} = cxt_1$ for $u$ the number of reacts, and $cxt_{w+1} = p_1$ $p_{u+1}=\silent$ for $w$ the number of entities.
+\end{definition}
+ 
+
+%can be expressed depending on the actual behaviour of the system we want
+%simulate: it could be  recursive, mutually recursive, etc..
+%In the general case we can use a counter, $N$, that allows us to specify the behaviour of the context for the first $N$ steps of the system, i.e.  $CXT_s \defeq CXT_s(N)$ and the counter at each step decrements its values, until it arrive to a stable behaviour.
+
+
+It is important to observe that,   for each transition, our c\CNA \ encoding requires  all the processes $P_a$, with $a \in A$, and  $Cxt_s$ and  $P_s$, with $s \in S$,  be interacting in that transition.
+This is due to the fact that  all the channels $r_j$, $p_j$, $cxt_h$, and $s_{hi}$, and $s_{ho}$ are  restricted.
+Each reaction defines a pattern to be satisfied, i.e. each reaction inserts as many virtual links  as  the number of reactants, inhibitors, and products, as required by the corresponding reaction.
+
+ \begin{restatable}[]{lemma}{lemmastruct}
+ \label{lem:struct}
+%\begin{lemma}
+ %\label{lem:struct}
+  Let ${\cal A} = (S, A)$ be a RS and let $\pi=(\gamma,\delta)$ be an extended  interactive process in ${\cal A}$. Let $P=\llbracket{\cal A},\gamma\rrbracket$ its c\CNA~translation. If $exists$ $P'$ such that $t= (P \xrightarrow{\restrict{names}\upsilon} P')$ is a transition of $P$, then
+  \begin{enumerate}
+  \item for each reaction  $a_j \in A$, the corresponding channels $r_j$ and $p_j$ appear in  $\upsilon$; for each entity $s_h \in S$ (where $h$ is the identifying number of $s$), the corresponding channel $s_h$ (suitably decorated), and the corresponding channel $cxt_h$ appear in $\upsilon$; 
+  %processes $P_s$ (or $\overline{P_s}$) 
+%  for each  $Cxt_s$ are
+ %involved in the transition $t$;
+  \item for each reaction $a \in A$ and each entity $s \in S$, each virtual link offered by processes $P_a$ and $Cxt_s$ is  overlapped by exactly one solid link offered by  processes representing entities.
+  %each process $P_s $ (or its alternative version $\overline{P}_s$), with $s \in S$, participates at most  with one solid link for each process $P_a$, and with exactly one solid link for each process $Cxt_s$.%, if $s$ is a \emph{required element} of $A_j$ in $t$.
+ 
+  \end{enumerate}
+  \end{restatable}
+ 
+ 
+ \begin{example}\label{ex:backbone}
+ Let ${\cal A}$ be a RS whose specification contains two entities, $s1$ and $s2$, and, among the others, the reaction $a=(s1,\ , s1)$ that guarantees the presence of the  $s1$ in the system. Then, we assume an  extended interactive process $\pi=(\gamma,\delta)$ where the context $\gamma$ provides  $s1$ and $s2$.
+ %, for the first $n$ steps.
+ Our translation includes the processes:\\
+ \[
+ \begin{array}{lcllcl}
+ P_a &\defeq& \startchain{\silent}\chainedlink{s1_i}{\noact}\chainedlink{\noact}{s1_o}\chainedlink{r_2}{\noact} \chainedlink{\noact}{p_1}\chainedlink{\tilde{s1}_i}{\noact}\chainedlink{\noact}{\tilde{s1}_o}\chainend{p_2}.P_a + \dots; \\
+ P_{s1} &\defeq& \startchain{s1_i}\chainedlink{s1_o}{\noact}\chainedlink{\noact}{\hat{s1}_i}\chainedlink{\hat{s1}_o}{\noact}\chainedlink{\noact}{\tilde{s1}_i}\chainedlink{\tilde{s1}_o}.P_{s1} + \dots; &
+  P_{s2} &\defeq& \link{\hat{s2}_i}{\hat{s2}_o}.P_{s2} + \dots;\\
+ Cxt_{s1}& \defeq & \startchain{cxt_1}\chainedlink{\hat{s1}_i}{\noact}\chainedlink{\noact}{\hat{s1}_o}\chainend{cxt_2}.Cxt_{s1} &
+  Cxt _{s2} &\defeq& \startchain{cxt_2}\chainedlink{\hat{s2}_i}{\noact}\chainedlink{\noact}{\hat{s2}_o}\chainend{p_1}. Cxt_{s2}
+\end{array}
+\]  \\
+   Now, we assume that $s1$ is in the initial state of ${\cal A}$, and in Figure~\ref{fig:backbone} we show the  structure of a link chain label related to the execution of a transition of the c\CNA \ system: $\restrict{names} (P_{s1}|P_{s2}| P_a|\dots|Cxt_{s1}|Cxt_{s2})$. The yellow blocks are referred to the processes encoding the reactions ($P_a$, in our case) and the contexts ($Cxt_{s1}$ and $Cxt_{s2}$). As the figure puts in evidence, these two kinds of processes determine the structure of the link chain, from end to end, i.e. from the left $\silent$ to the right one. We could say that these processes form the \emph{backbone} of the interaction.
+   In contrast, the processes encoding the entities ($P_{s1}$, and $P_{s2}$, in our case) provides the
+    solid links to overlap the virtual links   of the backbone.
+ 
+  \begin{figure}[t]
+  \begin{tikzpicture}
+  \draw (0,1) -- (3,1) ;
+  \draw (4,1) -- (5,1) ;
+  \draw (0.5,0) -- (3.5,0);
+  \draw (4.5,0) -- (5.5,0) ;
+  \draw (0,1)--(0,0.5) -- (0.5,0.5) -- (0.5,0) -- (1.5,0) ;
+  \draw (0.25,0.75)  node[minimum size=0.495cm,fill=yellow] {${ \silent}$};
+  \draw (0.75,0.75)  node[minimum size=0.5cm,fill=yellow] {$\ $};
+  \draw (0.76,0.25)  node[minimum size=0.5cm,fill=yellow] {$\ $};
+  \draw (1.21,0.25)  node[minimum size=0.5cm,fill=yellow] {${\scriptscriptstyle s1_i}$};
+  
+  \draw (2,1) -- (2,0.5) -- (2.5,0.5) -- (2.5,0) -- (1.5,0)  -- (1.5,0.5) -- (1,0.5) -- (1,1);
+
+ \draw (1.25,0.75) node{$\noact$};%node[minimum size=0.5cm,draw,draw=white] {$\noact$};
+ \draw (2.25,0.25) node{$\noact$};
+ \draw (2.31,0.75)  node[minimum size=0.47cm,draw,fill=yellow, draw=yellow] {${\scriptscriptstyle s1_o}$};
+  \draw (2.75,0.75)  node[minimum size=0.48cm,draw,fill=yellow,yellow] {$\ $};
+  \draw (2.75,0.26)  node[minimum size=0.49cm,draw,fill=yellow,yellow] {$\ $};
+
+  \draw (3.245,0.25)  node[minimum size=0.475cm,draw,fill=yellow,draw=yellow] {${\scriptscriptstyle   r_2}$};
+  
+  \draw (3.75,0.5) node{$\dots$};
+  
+  \draw(3.5,0.5) -- (3.5,0);
+%%     \draw (3.25,0.75)  node[minimum size=0.5cm,draw,draw=white] {$\noact$};
+%%  \draw (3.75,0.75)  node[minimum size=0.5cm,draw,white] {$\ $};
+%%  \draw (3.75,0.25)  node[minimum size=0.5cm,draw,white] {$\ $};
+%%  \draw (4.25,0.25)  node[minimum size=0.5cm,draw,draw=white] {$\noact$};
+\draw  (4,1) --  (4,0.5) -- (4.5,0.5) -- (4.5,0)   (3.5,0.5) -- (3,0.5) -- (3,1);
+% \draw (3.25,0.75) node{$\noact$};%node[minimum size=0.5cm,draw,draw=white] {$\noact$};
+%  \draw (4.25,0.25) node{$\noact$};
+\draw (4.75,0.745)  node[minimum size=0.485cm,draw,fill=yellow,yellow] {$\ $};
+  \draw (4.38,0.75) node[minimum size=0.47cm,draw,fill=yellow, draw=yellow] 
+  {${\scriptscriptstyle  cxt_1}$};
+  
+  \draw (4.75,0.25)  node[minimum size=0.48cm,draw,fill=yellow,yellow] {$\ $};
+  \draw (5.2,0.255)  node[minimum size=0.485cm,draw,fill=yellow,draw=yellow] {${\scriptscriptstyle  \hat{s1}_i}$};
+  \draw(5,1) -- (5,0.5) -- (5.5,0.5) -- (5.5,0);
+   
+   \draw (5.75,0.5) node{$\dots$};
+   
+    \draw (6,1) -- (11.5,1) ;
+    \draw (7,1) -- (7,0.5) -- (7.5,0.5) -- (7.5,0);
+    \draw (6.5,0) -- (11.5,0);
+    \draw   (6,1)-- (6,0.5) -- (6.5,0.5) -- (6.5,0.5) -- (6.5,0) ;
+     \draw (6.75,0.75)  node[minimum size=0.47cm,fill=yellow, draw=yellow] {$\ $};
+ \draw (6.36,0.75) node[minimum size=0.475cm,draw,fill=yellow,draw=yellow] 
+ {${\scriptscriptstyle cxt_2}$};%node[minimum size=0.5cm,draw,draw=white] {$\noact$};
+   \draw (6.75,0.26)  node[minimum size=0.485cm,fill=yellow, draw=yellow] {$\ $};
+
+ \draw (7.20,0.25) node[minimum size=0.475cm,fill=yellow, draw=yellow] {${\scriptscriptstyle \hat{s2}_i}$};
+
+     \draw (7.3,0.75)   node{$\noact$};
+  \draw (7.75,0.75) node{$\ $};
+  \draw (7.76,0.26) node {$\ $};
+  \draw (8.25,0.26)  node {$\noact$ };
+
+  \draw (8.3,0.75)  node[minimum size=0.48cm,draw,fill=yellow, draw=yellow] {${\scriptscriptstyle \hat{s2}_o}$};
+  \draw (8,1)--(8,0.5)--(8.5,0.5) -- (8.5,0);
+ % \draw(9.5,0.5) --(9.5,0);
+  \draw (8.745,0.75)  node[minimum size=0.48cm,draw,fill=yellow,yellow] {$\ $};
+  \draw (8.75,0.26)  node[minimum size=0.48cm,draw,fill=yellow,yellow] {$\ $};
+ \draw (9.24,0.26)  node[minimum size=0.48cm,draw,fill=yellow,draw=yellow] {${\scriptscriptstyle p_1}$};
+ %\draw(9.5,0.5) --(9.5,0);
+    % \draw (9,1) -- (10,1) -- (10,0.5) -- (10.5,0.5) --  (10.5,0) -- (9.5,0)  (9.5,0.5) -- (9,0.5) -- (9,1);
+ \draw (9.24,0.75) node[minimum size=0.48cm,draw,fill=yellow,draw=yellow]{${\scriptscriptstyle p_1}$};%node[minimum size=0.5cm,draw,draw=white] {$\noact$};
+ \draw (10.22,0.26) node [minimum size=0.48cm,draw,fill=yellow,draw=yellow]{${\scriptscriptstyle \tilde{s1}_i}$};
+ \draw (9.74,0.745) node [minimum size=0.485cm,draw,fill=yellow,draw=yellow]{$\ $};
+ \draw (9.735,0.26) node [minimum size=0.48cm,draw,fill=yellow,draw=yellow]{$\ $};
+ \draw (10,1) -- (10,0.5) -- (10.5,0.5)--(10.5,0);
+  \draw (10.31,0.75)  node{$\noact$};
+  \draw (10.75,0.75)  node {$\ $};
+  \draw (10.75,0.26)  node{$\ $};
+ \draw (11.25,0.25)  node {$\noact$};
+   \draw (11,1) -- (11,0.5) -- (11.5,0.5) -- (11.5,0);% -- (10,0) -- (9,0) -- (9,0.5) -- (8.5,0.5) -- (8.5,1);
+    \draw (11,1) -- (11.5,1) -- (12,1) -- (12,0.5) -- (12.5,0.5)--(12.5,0)--(11.5,0);
+   %\draw (11.25,0.25)  node[minimum size=0.48cm,draw,fill=yellow,draw=yellow] {$\noact$};
+    \draw (11.31,0.75) node[minimum size=0.48cm,draw,fill=yellow,draw=yellow]{${\scriptscriptstyle \tilde{s1}_o}$};
+    \draw (11.75,0.26)node[minimum size=0.48cm,draw,fill=yellow,draw=yellow]{$\ $};
+      \draw (11.75,0.75)node[minimum size=0.48cm,draw,fill=yellow,draw=yellow]{$\ $};
+     \draw (12.2,0.25) node[minimum size=0.478cm,draw,fill=yellow,draw=yellow]{\;$\silent$\;  };
+  \end{tikzpicture}
+  \caption{The link chain structure arising from reactions and context processes.}
+   \label{fig:backbone}
+ \end{figure}
+ \end{example}
+
+ 
+ 
+% \begin{figure}[t]
+% \begin{tikzpicture}
+%   \draw (0,1) -- (5,1) ;
+%    \draw (0.5,0) -- (5.5,0) ;
+%   \draw (0,1)--(0,0.5) -- (0.5,0.5) -- (0.5,0) -- (1.5,0) ;
+%     \draw (0.25,0.75)  node[minimum size=0.495cm,fill=yellow] {${ \silent}$};
+% \draw (0.75,0.75)  node[minimum size=0.5cm,fill=yellow] {$\ $};
+%  \draw (0.76,0.25)  node[minimum size=0.5cm,fill=yellow] {$\ $};
+%  \draw (1.21,0.25)  node[minimum size=0.5cm,fill=yellow] {${\scriptscriptstyle s1_i}$};
+%%    \draw (1.25,0.75)  node[minimum size=0.5cm,draw,draw=white] {$\noact$};
+%%  \draw (1.75,0.75)  node[minimum size=0.5cm,draw,white] {$\ $};
+%%  \draw (1.75,0.25)  node[minimum size=0.5cm,draw,white] {$\ $};
+%%  \draw (2.25,0.25)  node[minimum size=0.5cm,draw,draw=white] {$\noact$};
+%  \draw (2,1) -- (2,0.5) -- (2.5,0.5) -- (2.5,0) -- (1.5,0)  -- (1.5,0.5) -- (1,0.5) -- (1,1);
+%
+% \draw (1.25,0.75) node{$\noact$};%node[minimum size=0.5cm,draw,draw=white] {$\noact$};
+%  \draw (2.25,0.25) node{$\noact$};
+%   \draw (2.31,0.75)  node[minimum size=0.47cm,draw,fill=yellow, draw=yellow] {${\scriptscriptstyle s1_o}$};
+%  \draw (2.75,0.75)  node[minimum size=0.48cm,draw,fill=yellow,yellow] {$\ $};
+%  \draw (2.75,0.26)  node[minimum size=0.49cm,draw,fill=yellow,yellow] {$\ $};
+%
+%  \draw (3.20,0.25)  node[minimum size=0.47cm,draw,fill=yellow,draw=yellow] {${\scriptscriptstyle  \tilde{s1}_i}$};
+%  
+%  
+%  \draw(3.5,0.5) -- (3.5,0);
+%%     \draw (3.25,0.75)  node[minimum size=0.5cm,draw,draw=white] {$\noact$};
+%%  \draw (3.75,0.75)  node[minimum size=0.5cm,draw,white] {$\ $};
+%%  \draw (3.75,0.25)  node[minimum size=0.5cm,draw,white] {$\ $};
+%%  \draw (4.25,0.25)  node[minimum size=0.5cm,draw,draw=white] {$\noact$};
+%\draw (3,1) -- (4,1) -- (4,0.5) -- (4.5,0.5) -- (4.5,0) -- (3.5,0)  (3.5,0.5) -- (3,0.5) -- (3,1);
+% \draw (3.25,0.75) node{$\noact$};%node[minimum size=0.5cm,draw,draw=white] {$\noact$};
+%  \draw (4.25,0.25) node{$\noact$};
+%  \draw (4.31,0.75)  node[minimum size=0.47cm,draw,fill=yellow, draw=yellow] {${ \scriptscriptstyle \tilde{s1}_o}$};
+%  \draw (4.75,0.745)  node[minimum size=0.48cm,draw,fill=yellow,yellow] {$\ $};
+%  \draw (4.75,0.25)  node[minimum size=0.48cm,draw,fill=yellow,yellow] {$\ $};
+%  \draw (5.24,0.255)  node[minimum size=0.485cm,draw,fill=yellow,draw=yellow] {${\scriptscriptstyle  r_2}$};
+%  \draw(5,1) -- (5,0.5) -- (5.5,0.5) -- (5.5,0);
+%   \draw (6,0.5) node{$\dots$};
+%    \draw (6.5,1) -- (11.5,1) ;
+%    \draw (7.5,1) -- (7.5,0.5) -- (8,0.5) -- (8,0);
+%    \draw (7,0) -- (12,0);
+%    \draw   (6.5,1)-- (6.5,0.5) -- (7,0.5) -- (7,0.5) -- (7,0) ;
+% \draw (6.77,0.75) node{$\noact$};%node[minimum size=0.5cm,draw,draw=white] {$\noact$};
+% \draw (7.77,0.25) node{$\noact$};
+%
+%     \draw (7.80,0.75)  node[minimum size=0.485cm,draw,fill=yellow, draw=yellow] {${\scriptscriptstyle  \tilde{s1}_o}$};
+%  \draw (8.25,0.75)  node[minimum size=0.485cm,draw,fill=yellow,yellow] {$\ $};
+%  \draw (8.26,0.26)  node[minimum size=0.495cm,draw,fill=yellow,yellow] {$\ $};
+%  \draw (8.75,0.26)  node[minimum size=0.49cm,draw,fill=yellow,draw=yellow] {${\scriptscriptstyle cxt_2}$ };
+%
+%  \draw (8.75,0.75)  node[minimum size=0.48cm,draw,fill=yellow, draw=yellow] {${\scriptscriptstyle cxt_2}$};
+%  \draw (9.25,0.75)  node[minimum size=0.48cm,draw,fill=yellow,yellow] {$\ $};
+%  \draw (9.25,0.26)  node[minimum size=0.48cm,draw,fill=yellow,yellow] {$\ $};
+% \draw (9.71,0.25)  node[minimum size=0.47cm,draw,fill=yellow,draw=yellow] {${\scriptscriptstyle \tilde{s2}_i}$};
+% \draw(10,0.5) --(10,0);
+%     \draw (9.5,1) -- (10.5,1) -- (10.5,0.5) -- (11,0.5) --  (11,0) -- (10,0)  (10,0.5) -- (9.5,0.5) -- (9.5,1);
+% \draw (9.75,0.75) node{$\noact$};%node[minimum size=0.5cm,draw,draw=white] {$\noact$};
+% \draw (10.75,0.25) node{$\noact$};
+%  \draw (10.81,0.75)  node[minimum size=0.47cm,draw,fill=yellow, draw=yellow] {${\scriptscriptstyle \tilde{s2}_o}$};
+%  \draw (11.25,0.75)  node[minimum size=0.48cm,draw,fill=yellow,yellow] {$\ $};
+%  \draw (11.25,0.26)  node[minimum size=0.49cm,draw,fill=yellow,yellow] {$\ $};
+% \draw (11.75,0.25)  node[minimum size=0.48cm,draw,fill=yellow,draw=yellow] {$\silent$};
+%   \draw (11.5,1) -- (11.5,0.5) -- (12,0.5) -- (12,0);% -- (10,0) -- (9,0) -- (9,0.5) -- (8.5,0.5) -- (8.5,1);
+%  \end{tikzpicture}
+%  \caption{The link chain structure arising from reactions and context processes.}
+%   \label{fig:backbone}
+% \end{figure}
+% \end{example}
+
+Example~\ref{ex:backbone}   outlines two different roles of the processes defining the translation of an interactive process: those processes encoding the reactions and the context provide the backbone of each transition, whereas the processes encoding the entities provide the resources needed for the communication to take place.
+ 
+With the next proposition, we analyse the structure of a c\CNA \ 
+process encoding of  a reactive process after one step transition.
+In the following four statements, for brevity, we let ${\cal A} = (S, A)$ be a RS, and let  $\pi=(\gamma,\delta)$ be an extended interactive process in $A$, with $\gamma=\{C_i\}_{i\in\mathbb{N}}$ and $\delta=\{D_i\}_{i\in\mathbb{N}}$. Moreover, we denote by $\pi^j$ the shift of $\pi$ starting at the $j$-th state sequence; formally we let $\pi^j=(\gamma^j,\delta^j)$ with
+$\gamma^j=\{C_i'\}_{i\in\mathbb{N}}$, $\delta^j=\{D_i'\}_{i\in\mathbb{N}}$ with 
+  $C_0'=C_j \cup D_j$, and   $C_i'=C_{i+j}$, $D_i'= D_{i+j}$ for any $i\geq 1$.
+
+ \begin{restatable}[Correctness 1]{proposition}{propcorruno}
+% \begin{proposition}(correctness 1)\\
+ \label{prop:corr1}
+% We define $\pi' = (\gamma',\delta')$ with $\gamma' = C_0',\dots,C_{n-1}'$ and $\delta' = D_0',\dots,D_{n-1}'$ as $C_0' = C_1 \cup D_1$,  and
+% $C_i' = C_{i+1}$, $D_{i}' = D_{i+1}$ with $ 1 \leq i < n$.
+ Let 
+ $P=\llbracket{\cal A},\gamma\rrbracket$ with\\
+$P  = \restrict{names} (\Pi_{a \in A}P_a| \Pi_{s \in S}Cxt_s | \Pi_{s \in C_0}P_s| \Pi_{s \notin C_0}\overline{P}_s)$.\\
+ If there exists  $P'$  such that $P \xrightarrow{v}P'$,  it holds that:\\
+  $v=\link{\silent}{\silent}\dots\link{\silent}{\silent}$ and \\
+ $P'= \restrict{names} (\Pi_{a \in A}P_a| \Pi_{s \in S}Cxt_s | \Pi_{s \in C_1 \cup D_1}P_s| \Pi_{s \notin C_1 \cup D_1}\overline{P}_s)$.\\
+Moreover, given $\pi^1=(\gamma^1,\delta^1)$, we have $P' = \llbracket {\cal A},\gamma^1\rrbracket$.
+ %\end{proposition}
+\end{restatable}
+ 
+% \begin{lemma}[correctness 1 {\color{red} Ma serve ??}]
+% \label{cor:complet1}
+% Let ${\cal A} = (S, A)$ be a rs, and let  $\pi=(\gamma,\delta)$ be an extended interactive process in $A$, with
+% $\gamma = C_0,\dots,C_t$, $\delta = D_0,\dots,D_t$, with $n \geq 0$. Let   $P=[|{\cal A},\gamma|]$ be  its c\CNA~translation. We define $\pi' = (\gamma',\delta')$ with $\gamma' = C_0',\dots,C_{n-1}'$ and $\delta' = D_0',\dots,D_{n-1}'$ as $C_0' = C_1 \cup D_1$,  and
+% $C_i' = C_{i+1}$, $D_{i}' = D_{i+1}$ with $ 1 \leq i < n$. Then,
+% if $\exists$ $P'$, $P''$ such that $P \xrightarrow{\link{\silent}{\silent}} P'$ and $P \xrightarrow{\link{\silent}{\silent}} P''$, then $P' = P''$.
+%\end{lemma}
+
+ 
+ 
+% \begin{proposition}[correctness2]
+% \label{prop:correctness1}
+% Let $P$ be a c\CNA \ process such that $\exists$ a $rs$ ${\cal A}$ and a $n$-step interactive process $\pi=(\gamma,\delta)$ with $\gamma =C_0,\dots,C_n$ and $\delta = D_0,\dots,D_n$ such that $P= [|{\cal A},\gamma|]$. 
+% %We set $\pi'=(\gamma',\delta')$ with $\gamma'=C_0',\dots,C_{n-1}'$,  $\delta'=D_0',\dots,D_{n-1}$,  where $C_0'= C_1 \cup D_1$, $C_i'= C_{i+1}$, $D_i=D_{i+1}'$,  and $1 \leq i < n$.
+%Then,   $\exists$ $P'$ and $\pi'=(\gamma',\delta')$ such that $P \xrightarrow{\link{\silent}{\silent}}P'$, $P' =[|{\cal A},\gamma'|]$.
+% \end{proposition} 
+\noindent
+Now, we extend the previous result to a series of transitions.
+ 
+ \begin{restatable}[Correctness 2]{corollary}{corrcorrdue} 
+% \begin{corollary}[correcteness2]
+ \label{corr:corr2}
+  Let $P = \llbracket{\cal A},\gamma\rrbracket$ and $j\geq 1$.
+%  Let $P$ a  c\CNA process such that exists a rs ${\cal A}$ and an extended  interactive process $\pi=(\gamma,\delta)$ with $\gamma =C_0,\dots,C_t$, $\delta = D_0,\dots,D_t$, with $t \geq 0$, such that $P= [|{\cal A},\gamma|]$. 
+If there exists  $P''$ such that $P \xrightarrow{\link{\silent}{\silent}\dots \link{\silent}{\silent}}^{j}P''$, then letting  $\pi^j=(\gamma^j,\delta^j)$ we have
+$P'' =\llbracket{\cal A},\gamma^j\rrbracket$.
+%such that $P=[|{\cal A}|]$, then if $P \rightarrow^* P'$, then $\exists$ ${\cal A'}$ such that ${\cal A}$  evolves in ${\cal A'}$ and $P'=[|{\cal A'}|]$.
+ \end{restatable}
+
+\noindent
+With the following propositions, we prove that, given a RS ${\cal A} = (S, A)$ and an extended  interactive process $\pi=(\gamma,\delta)$, then the $c\CNA$ process $\llbracket{\cal A},\gamma\rrbracket$ can simulate all the evolutions  of $\pi$. 
+
+ \begin{restatable}[Completeness 1]{proposition}{propcompluno} 
+% \begin{corollary}[correcteness2]
+ \label{prop:compl1}
+% \begin{proposition}[completeness1]
+ %\label{lem:compl2}
+Let   $P=\llbracket{\cal A},\gamma\rrbracket$ and $\pi^1 = (\gamma^1,\delta^1)$.
+% be the extended interactive process starting  at the next state sequence. 
+Then, 
+ % following holds:
+ %\begin{enumerate} 
+ %\item  
+  $P \xrightarrow{\link{\silent}{\silent}\dots \link{\silent}{\silent}} P'=\llbracket{\cal A},\gamma^1\rrbracket$.
+ %\item if $\exists$ $P'$, $P''$ such that $P \xrightarrow{\link{\silent}{\silent}} P'$ and $P \xrightarrow{\link{\silent}{\silent}} P''$, then $P' = P''$.
+ %\end{enumerate}
+% \end{proposition} 
+\end{restatable}
+
+\noindent
+Now, we extend the previous result to a series of transitions.
+ 
+\begin{restatable}[Completeness 2]{corollary}{corrcompldue} 
+% \begin{corollary}[correcteness2]
+ \label{corr:compl2}
+% \begin{corollary}[completeness2]
+ %\label{prop:completeness}
+Let $P=\llbracket{\cal A},\gamma\rrbracket$ and  $\pi^j= (\gamma^j,\delta^j)$.  
+Then, $P \xrightarrow{\link{\silent}{\silent}\dots\link{\silent}{\silent}}^j P''=\llbracket{\cal A},\gamma^j\rrbracket$.  
+ \end{restatable}
+
+ 
+% 
+% \begin{proposition}[correctness]
+% Let $P$ a c\CNA\  process such that exists a reaction system ${\cal A}$ such that $P=[|{\cal A}|]$, then if $P \rightarrow P'$, then $\exists$ ${\cal A'}$ such that ${\cal A}$  evolves in ${\cal A'}$ in one step and $P'=[|{\cal A'}|]$.
+% \end{proposition}
+ 
+  
