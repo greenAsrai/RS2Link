@@ -23,31 +23,31 @@ We assume that $\{e_1\}|\{e_2\}= \{e_1,e_2\}$
 \
 \AxiomC{} 
 \RightLabel{\scriptsize(\textit{Ent})}
-\UnaryInfC{$\{e\}  \xrightarrow{\emptyset,(\emptyset,\emptyset,\emptyset)} \emptyset$} 
+\UnaryInfC{$\{e\}  \xrightarrow{\{e\},(\emptyset,\emptyset,\emptyset)} \emptyset$} 
 \end{prooftree} 
 \end{center}
 \begin{center} 
 \begin{prooftree} 
-\AxiomC{$R \subseteq R'$} %\mbox{($\ell$ {\em only} solid link in $s$)}
-\AxiomC{$R' \cap I = \emptyset$}
+\AxiomC{} %\mbox{($\ell$ {\em only} solid link in $s$)}
+\AxiomC{}
 %\AxiomC{}
 \RightLabel{\scriptsize(\textit{Pro})}
-\BinaryInfC{$R',(R,I,P)  \xrightarrow{\emptyset,(R,I,P)}(R,I,P)|P $}
+\BinaryInfC{$(R,I,P)  \xrightarrow{\emptyset,(R,I,P)}(R,I,P)|P $}
 \end{prooftree} 
 \end{center}
 \begin{center} 
 \begin{prooftree} 
 \AxiomC{$e \in I$}
 \RightLabel{\scriptsize(\textit{Hin1})}
-\UnaryInfC{$\{e\}\cup R',( R,I,P) \xrightarrow{\emptyset,(\emptyset,\{e\},\emptyset)} (R,I,P)$}
+\UnaryInfC{$(R,I,P) \xrightarrow{\emptyset,(\{e\},\emptyset,\emptyset)} (R,I,P)$}
 %\DisplayProof
 \end{prooftree} 
 \end{center}
 \begin{center} 
 \begin{prooftree}
-\AxiomC{$e \notin R'$}
+\AxiomC{$e \in R$}
 \RightLabel{\scriptsize(\textit{Hin2})}
-\UnaryInfC{$R',(\{e\} \cup R,I,P) \xrightarrow{\emptyset,(\{e\},\emptyset,\emptyset)}(R, I,P)$} 
+\UnaryInfC{$(R,I,P) \xrightarrow{\emptyset,(\emptyset,\{e\},\emptyset)}(R, I,P)$} 
 %\DisplayProof
 \
 %\AxiomC{$P \xrightarrow{v} P'$} 
@@ -71,6 +71,15 @@ We assume that $\{e_1\}|\{e_2\}= \{e_1,e_2\}$
 \RightLabel{\scriptsize(\textit{Rel})}
 \TrinaryInfC{$ K_1|K_2\xrightarrow{E_1\cup E_2,(R_1\cup R_2,I_1\cup I_2,P_1\cup P_2)} 
 K'_1|K'_2$}
+\end{prooftree} 
+\end{center}
+
+\begin{center} 
+\begin{prooftree} 
+\AxiomC{$K \xrightarrow{E,(R,I,P)} K'$}
+\AxiomC{$R \subseteq E$}
+\RightLabel{\scriptsize(\textit{Sys})}
+\BinaryInfC{$ [K]\xrightarrow{E,(R,I,P)} [K']$}
 \end{prooftree} 
 \end{center}
 \caption{SOS semantics of the reaction system configurations.}
