@@ -4,10 +4,10 @@
 
 Natural Computing is an emerging area of research which has two main 
 aspects: human designed computing inspired by nature, and computation 
-performed in nature. Reaction Systems (RSs)~\cite{BEMR11} are a 
+performed in nature. Reaction Systems (RSs)~\cite{BEMR11} are 
 % model of
 % formal computation 
-rewriting formalism
+a rewriting formalism
 %model 
 inspired by the way biochemical reactions take place in living 
 cells.  
@@ -45,10 +45,31 @@ correspondence than any available in the literature, such as the one in~\cite{B1
  This allowed us to easily encode calculi for biology equipped with membranes, as in~\cite{BodeiBBC14}.
 Process calculi have been used successfully to model
 biological processes, see~\cite{BBDFH18} for a recent survey.
-We illustrate our embedding by means of some simple basic examples,
-and then we consider a more complex example, by modeling a RS 
-representing a regulatory network for \emph{lac} operon, presented in~\cite{CMMBM12}. We also show that our embedding preserves the main
+We illustrate our embedding by means of some examples coming
+both from the computer science and the biological field.
+%and then we consider a more complex example, by modeling a RS 
+%representing a regulatory network for \emph{lac} operon, presented in~\cite{CMMBM12}. 
+We also show that our embedding preserves the main
 features of RSs, and prove its correctness and completeness.
+Then, we present a methodology for verifying formally
+properties of reaction systems. The classical notion of bisimulation for 
+process algebras allows to consider equivalent two processes
+where one process can simulate all the actions executed 
+by the other one and viceversa. In this paper we define a new
+notion of bisimilarity which takes into account the characteristics
+of biological systems. We define a new {\em bio-simulation} having in mind
+the possibility that two interacting systems may be compared w.r.t.
+a subset of the possible biological actions. This is useful for concentrating 
+on the sub-model that one may need to study for a specific study or application,
+without getting lost in the complexity of the full biological system, or network.
+Besides bio-simulation, we define a completely new and simple assertion language,
+which allows to specify properties of the reaction systems to be verified.
+The classical logic of Hennessy-Milner~\cite{HM80} is a powerful
+formalism for specifying properties of labeled transition systems, 
+and we show that our assertions allow us to specify formulas 
+that extend this logic to the case of complex labels.
+Our formulas allow to abstract from some of the labels.
+
 Our main contributions are as follows:
 \begin{itemize}
 \item the behaviour of the context, for each single 
@@ -67,6 +88,9 @@ provide, are then provided by a second RS;
 \item as our translation results in  a  c\CNA \ system, from
 each state only one transition can be generated, thus the c\CNA \
 computation is fully deterministic.
+\item we define an assertion language to specify local properties of 
+reaction systems
+\item we show that our assertions extend to our framework the Hennessy-Milner logic.
 \end{itemize}
 
 The main drawback of our proposal, is that the c\CNA \ translation is
@@ -85,7 +109,7 @@ Section~\ref{sec:discussion} show that
 the interaction between RSs can help to model new scenarios.
 \paragraph{Related work}
 We are not aware of any inference rules for the RS; it seems not the case
-that a deterministic behavior, as the one of the RS, once the initial state is 
+that a deterministic behaviour, as the one of the RS, once the initial state is 
 fixed, could be defined by inference rules that classically are applied 
 to define non-deterministic transition systems.
 The reversible computation paradigm for RS extends the RS framework  by
@@ -94,6 +118,19 @@ goal a set of inference rules for rewriting logic has been
 defined in~\cite{10.1007/978-3-319-73359-3_3}
 to exactly keep trace of those elements that  dissolve in the next 
 computation step.
+
+
+This paper is an extended version of paper~\cite{BBF19}.
+There are several major differences w.r.t. paper cite{BBF19}, as follows:
+\begin{itemize}
+\item here we present several new examples to illustrate our framework,
+and give more detailed explanations
+\item we define the bio-simulation of two reaction systems
+\item we define an assertion language to specify the properties of reaction systems
+\item we show that our assertion language allows to specify properties extending to our
+framework the Hennessy-Milner logic
+\item we give full proofs of our results
+\end{itemize}
  
 \paragraph{Structure of the paper.} Section \ref{sec:rs} 
 describes RSs and their semantics (interactive processes).
@@ -102,8 +139,12 @@ its operational semantics.
 Section \ref{sec:trans} defines the embedding of RSs in
 c\CNA \ processes and shows some simple examples to illustrate 
 it.
-Section \ref{ex:lactose} shows a more complex example taken from
-the literature on RSs and illustrating a \emph{lac} operon.
+%Section \ref{ex:lactose} shows a more complex example taken from
+%the literature on RSs and illustrating a \emph{lac} operon.
+Section~\ref{Bio-simulation} presents a methodology for verifying formally
+properties of reaction systems, presents an assertion language
+to express properties and shows the relationship
+with the logic of Hennessy and Milner.
 Section~\ref{sec:discussion} presents some features and 
 advantages of our embedding for the compositionality of RSs.
 Finally, Section~\ref{sec:conclusion}
