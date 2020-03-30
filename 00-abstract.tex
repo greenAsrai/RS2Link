@@ -17,7 +17,7 @@ systems interact with the environment represented by the context, and
 pose problems of implementation, as it is a new computation model. 
 In this paper we consider the {\tt link}-calculus, which allows to model 
 multiparty interaction in concurrent systems, and show that it allows to
-embed reaction systems, by representing the behaviour of each entity and
+embed reaction systems in a modular way, by representing the behaviour of each entity and
 preserving faithfully their features. 
 We show the correctness and completeness 
 of our embedding.
@@ -26,12 +26,12 @@ a few examples expressing computer science
 and biological applications.
 %how to embed a \emph{lac} operon 
 %regulatory network. 
-We then modify the classical notion (in concurrency) of bisimulation
-making it more suitable for proving properties of reaction systems, in our
-framework.
-We define a new assertion language, which allows to specify
-the properties to be verified, and show that it extends Hennessy-Milner logic
-to our framework.
+On top of the LTS semantics for reaction systems provided by our framework, 
+we then adapt the classical notion (in concurrency) of bisimulation
+to make it more suitable for studying properties of reaction systems.
+In particular, we define a new assertion language based on regular expressions, 
+which allows to specify the properties of interest, and use it to extend Hennessy-Milner logic
+to our framework. Interestingly, the novel notion of bisimilarity and logical equivalence that are defined parametrically on some assertion of interest are proved to coincide, like in the classical case.
 Finally, our methodology can contribute to increase the expressiveness
 of reaction systems, by exploiting the interaction among 
 different reaction systems.
