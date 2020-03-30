@@ -92,7 +92,7 @@ in such a way that the mutated entity
 $s'$ can  take part to only a subset of rules requiring entity $s$;
 \item we show that with a little coding effort, two RSs can
 communicate; i.e.  a subset of those entities that the context  can
-provide, are then provided by a second RS;
+provide, are then provided by a second RS.
 \end{itemize}
 
 The main drawback of our proposal, is that the c\CNA \ translation is
@@ -110,7 +110,8 @@ Example~\ref{ex:twoRS} and more in general the discussion in
 Section~\ref{sec:discussion} show that 
 the interaction between RSs can help to model new scenarios.
 
-\paragraph{Related work}
+\paragraph{Related work.}
+
 Process calculi have been used successfully to model
 biological processes, see~\cite{BBDFH18} for a recent survey.
 We are not aware of any inference rules for the RS; it seems not the case
@@ -125,19 +126,21 @@ to exactly keep trace of those elements that  dissolve in the next
 computation step.
 
 
-This paper is an extended version of paper~\cite{BBF19}.
-There are several major differences w.r.t. paper cite{BBF19}, as follows:
+A preliminary version of this paper appeared in~\cite{BBF19}.
+There are several major differences w.r.t. the paper~\cite{BBF19}, which is here extended as follows:
 \begin{itemize}
 \item here we present several new examples to illustrate our framework,
-and give more detailed explanations
-\item we define the bio-simulation of two reaction systems
-\item we define an assertion language to specify the properties of reaction systems
+and give more detailed explanations about its use;
+\item we introduce an assertion language to specify the properties of reaction systems;
+\item we define the notion of bio-simulation to relate reaction systems and compare their behaviours;
 \item we show that our assertion language allows to specify properties extending to our
-framework the Hennessy-Milner logic
-\item we give full proofs of our results
+framework the Hennessy-Milner logic;
+\item proofs of main results are included here.
 \end{itemize}
  
-\paragraph{Structure of the paper.} Section \ref{sec:rs} 
+\paragraph{Structure of the paper.} 
+
+Section \ref{sec:rs} 
 describes RSs and their semantics (interactive processes).
 Section \ref{sec:ccna} describes briefly the c\CNA \ process algebra and
 its operational semantics.
@@ -146,10 +149,8 @@ c\CNA \ processes and shows some simple examples to illustrate
 it.
 %Section \ref{ex:lactose} shows a more complex example taken from
 %the literature on RSs and illustrating a \emph{lac} operon.
-Section~\ref{Bio-simulation} presents a methodology for verifying formally
-properties of reaction systems, presents an assertion language
-to express properties and shows the relationship
-with the logic of Hennessy and Milner.
+Section~\ref{sec:biosimulation} presents a methodology for the formal verification of
+properties of reaction systems that are expressed in a novel assertion language.
 Section~\ref{sec:discussion} presents some features and 
 advantages of our embedding for the compositionality of RSs.
 Finally, Section~\ref{sec:conclusion}
