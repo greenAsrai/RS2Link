@@ -1,0 +1,113 @@
+% !TEX root = ./main_RS2L_LNCS.tex
+\subsection{Bio-simulation at work}
+
+%By using a simple example, 
+We will show how bio-simulation works. For the sake of space, we consider a  very simple
+ example with only two reactions. 
+%Section~\ref{subsec:toy}, with only two reactions:
+Reaction $P_1$ requires $G$  to produce $C$; reaction $P_2$
+requires $C$ to produce $G$; here we do not consider inhibitors.  
+Now, we set two systems defined by the same two reactions, with the two different initial configuration, and with two different context definitions.
+The two reactions work as follows:
+\[
+\begin{array}{lcl}
+P_1 & \defeq &\startchain{\silent}\chainedlink{G_i}{\noact}\chainedlink{\noact}{G_o}
+					        \chainedlink{r_{2}}{\noact}\chainedlink{\noact}{p_1}
+					        \chainedlink{\tilde{C}_i}{\noact}\chainedlink{\noact}{\tilde{C}_o}
+			\chainend{p_{2}}.P_1  \   \
+			 +\ 
+					\ \  \startchain{\silent}\chainedlink{\overline{G}_i}{\noact}\chainedlink{\noact}{\overline{G}_o}\chainedlink{r_{2}}{\noact}\chainedlink{\noact}{p_1} \chainend{p_{2}}.P_1\\
+					P_2 & \defeq &\startchain{r_2}\chainedlink{C_i}{\noact}\chainedlink{\noact}{C_o}
+					        \chainedlink{cxt}{\noact}\chainedlink{\noact}{p_2}
+					        \chainedlink{\tilde{G}_i}{\noact}\chainedlink{\noact}{\tilde{G}_o}
+			\chainend{\silent}.P_2  \   \
+			 +\ 
+					\ \  \startchain{r_2}\chainedlink{\overline{C}_i}{\noact}\chainedlink{\noact}{\overline{C}_o}\chainedlink{cxt}{\noact}\chainedlink{\noact}{p_2} \chainend{\silent}.P_2
+			\end{array}
+\]
+The two contexts,  follows:\\
+\[
+\begin{array}{lcl}
+Cxt_1 & \defeq &\startchain{cxt}\chainedlink{\hat{C}_i}{\noact}\chainedlink{\noact}{\hat{C}_o}\chainend{p_1}.Cxt_1 \ \ 			                      +\ \  
+                              \startchain{cxt}\chainedlink{\underline{C}_i}{\noact}\chainedlink{\noact}{\underline{C}_o}\chainend{p_1}.Cxt_1 \\
+                              \\
+                              Cxt_2 & \defeq &\startchain{cxt}\chainedlink{\hat{G}_i}{\noact}\chainedlink{\noact}{\hat{G}_o}\chainend{p_1}.Cxt_2 \ \ 			                      +\ \  
+                              \startchain{cxt}\chainedlink{\underline{G}_i}{\noact}\chainedlink{\noact}{\underline{G}_o}\chainend{p_1}.Cxt_2
+\end{array}
+\]
+
+The definition of the processes encoding $G$ and $C$ is similar, and it is given in a parametric way:
+\[
+\begin{array}{lcl @{\hspace{0.5cm}}lcl}
+P(G) &\defeq&\link{G_i}{G_o}.\overline{P}(G)\   & \overline{P}(G)&\defeq&\link{\overline{G}_i}{\overline{G}_o} \link{\noact}{\noact}\link{\tilde{G}_i}{\tilde{G}_o}P(G) \ \ 			                      
+\end{array}
+\]
+and we have $P_G \defeq P(G)$, $P_C \defeq P(C)$.\\
+Then, the initial configuration of system $Sys_1$ includes $C$ and not $G$ and the context can only provide $G$,
+the initial configuration of system $Sys_2$ includes $G$ and not $C$ and the context can only provide $C$:
+\[
+\begin{array}{lcl@{\hspace{0.5cm}}lcl}
+Sys_1 & \defeq & P_1 \mid P_2 \mid P_G \mid \overline{P}_C \mid Cxt_1 &
+Sys_2 & \defeq & P_1 \mid P_2 \mid \overline{P}_G \mid P_C \mid Cxt_2\\
+\end{array}
+\]
+
+
+
+The Fig~\ref{fig:ltss} shows the labelled transition system of $Sys_1$, with initial state only  containing  $G$,  and the transition system of $Sys_2$, with initial only containing $C$, limited to the complete
+and solid labels, where
+{\tiny \[
+\begin{array}{lcl@{\hspace{0.3cm}} lcl}
+\ell_1 &\defeq & \startchain{\silent}\chainedlink{G_i}{\bf G_i}\chainedlink{\bf G_o}{ G_o}\chainedlink{r_2}{r_2}\chainedlink{\overline{C}_i}{\bf \overline{C}_i}\chainedlink{\bf \overline{C}_o}{\overline{C}_o}
+\chainedlink{cxt}{cxt}\chainedlink{\hat{C}_i}{\bf \hat{C}_i}\chainedlink{\bf \hat{C}_o}{\hat{C}_o}
+\chainedlink{p_1}{p_1}\chainedlink{\tilde{C}_i}{\bf \tilde{C}_i}\chainedlink{\bf \tilde{C}_o}{\tilde{C}_o}\chainedlink{p_2}{p_2}\chainend{\silent}
+&
+\ell'_1 &\defeq & \startchain{\silent}\chainedlink{G_i}{\bf G_i}\chainedlink{\bf G_o}{ G_o}\chainedlink{r_2}{r_2}\chainedlink{\overline{C}_i}{\bf \overline{C}_i}\chainedlink{\bf \overline{C}_o}{\overline{C}_o}
+\chainedlink{cxt}{cxt}\chainedlink{\underline{C}_i}{\bf \underline{C}_i}\chainedlink{\bf \underline{C}_o}{\underline{C}_o}
+\chainedlink{p_1}{p_1}\chainedlink{\tilde{C}_i}{\bf \tilde{C}_i}\chainedlink{\bf \tilde{C}_o}{\tilde{C}_o}\chainedlink{p_2}{p_2}\chainend{\silent}\\
+\ell_2 &\defeq & \startchain{\silent}\chainedlink{\overline{G}_i}{\bf \overline{G}_i}\chainedlink{\bf \overline{G}_o}{ \overline{G}_o}\chainedlink{r_2}{r_2}\chainedlink{C_i}{\bf C_i}\chainedlink{\bf C_o}{C_o}
+\chainedlink{cxt}{cxt}\chainedlink{\hat{C}_i}{\bf \hat{C}_i}\chainedlink{\bf \hat{C}_o}{\hat{C}_o}
+\chainedlink{p_1}{p_1}\chainedlink{p_2}{p_2}\chainedlink{\tilde{G}_i}{\bf \tilde{G}_i}\chainedlink{\bf \tilde{G}_o}{\tilde{G}_o}\chainend{\silent}
+&
+\ell'_2 &\defeq &  \startchain{\silent}\chainedlink{\overline{G}_i}{\bf \overline{G}_i}\chainedlink{\bf \overline{G}_o}{ \overline{G}_o}\chainedlink{r_2}{r_2}\chainedlink{C_i}{\bf C_i}\chainedlink{\bf C_o}{C_o}
+\chainedlink{cxt}{cxt}\chainedlink{\underline{C}_i}{\bf \underline{C}_i}\chainedlink{\bf \underline{C}_o}{\underline{C}_o}
+\chainedlink{p_1}{p_1}\chainedlink{p_2}{p_2}\chainedlink{\tilde{G}_i}{\bf \tilde{G}_i}\chainedlink{\bf \tilde{G}_o}{\tilde{G}_o}\chainend{\silent}
+\end{array}
+\]
+\[
+\begin{array}{lcl @{\hspace{0.3cm}}lcl}
+\ell_3 & \defeq &  \startchain{\silent}\chainedlink{G_i}{\bf G_i}\chainedlink{\bf G_o}{G_o}\chainedlink{r_2}{r_2}\chainedlink{C_i}{\bf C_i}\chainedlink{\bf C_o}{C_o}
+\chainedlink{cxt}{cxt}\chainedlink{\hat{C}_i}{\bf \hat{C}_i}\chainedlink{\bf \hat{C}_o}{\hat{C}_o}
+\chainedlink{p_1}{p_1}\chainedlink{\tilde{G}_i}{\bf \tilde{G}_i}\chainedlink{\bf \tilde{G}_o}{\tilde{G}_o}\chainedlink{p_2}{p_2}\chainedlink{\tilde{G}_i}{\bf \tilde{G}_i}\chainedlink{\bf \tilde{G}_o}{\tilde{G}_o}\chainend{\silent}
+\\
+\ell'_3 & \defeq &  \startchain{\silent}\chainedlink{G_i}{\bf G_i}\chainedlink{\bf G_o}{G_o}\chainedlink{r_2}{r_2}\chainedlink{C_i}{\bf C_i}\chainedlink{\bf C_o}{C_o}
+\chainedlink{cxt}{cxt}\chainedlink{\underline{C}_i}{\bf \underline{C}_i}\chainedlink{\bf \underline{C}_o}{\underline{C}_o}
+\chainedlink{p_1}{p_1}\chainedlink{\tilde{G}_i}{\bf \tilde{G}_i}\chainedlink{\bf \tilde{G}_o}{\tilde{G}_o}\chainedlink{p_2}{p_2}\chainedlink{\tilde{G}_i}{\bf \tilde{G}_i}\chainedlink{\bf \tilde{G}_o}{\tilde{G}_o}\chainend{\silent}
+\end{array}
+\]
+}
+The labels $\flat_i$ $\flat'_i$, with $i \in \{1,2,3\}$ can be obtained by labels $\ell_i,\ell'_i$ by substituting $G$ with $C$ and viceversa, respectively.
+\\
+Now, it easy to check that $Sys_1$ and $Sys_2$ are biosimilar if we check the property $F$ saying that $G$ and $C$ are simultaneously  produced in $Sys_1$ if and only if 
+$G$ and $C$ are simultaneously  produced in $Sys_2$, formally:
+$Sys_1 \sim_F Sys_2$ with $F= \star :: \tilde{G}_i :: \star \wedge  \star :: \tilde{C}_i :: \star $.
+On the contrary, $Sys_1 \not \sim_{F'} Sys_2$  with $F' =  \star :: \tilde{C}_i :: \star $, 
+because it happens that both  transition labels $\ell_1$  and $\ell_2$, in $Sys_1$, record the production of $C$, whereas 
+transition labels $\flat_1$ and $\flat'_2$ do not.
+\begin{figure}\label{fig:ltss}
+\[
+\begin{array}{cc}
+\xymatrix@R-1pc{
+*+[o][F-]{G} \ar@/ ^/[d]^{\ell_1} \ar@/_/[d]^{\ell'_1} \\
+*+[o][F-]{C} \ar@/^2pc/[u]^{\ell_2} \ar@/^/[dr]^{\ell'_2} \\ %\ar@(r,u)[]_a\
+& *+[o][F-]{GC}\ar@(d,l)^{\ell_3}\ar@(u,r)^{\ell'_3}
+}
+&
+\xymatrix@R-1pc{
+*+[o][F-]{C} \ar@/ ^/[d]^{\flat_1} \ar@/_/[d]^{\flat'_1} \\
+*+[o][F-]{G} \ar@/^2pc/[u]^{\flat_2} \ar@/^/[dr]^{\flat'_2} \\ 
+& *+[o][F-]{GC}\ar@(d,l)^{\flat_3}\ar@(u,r)^{\flat'_3}
+}\\
+Sys_1 & Sys_2
+\end{array}
+\]\end{figure}

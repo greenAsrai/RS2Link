@@ -110,22 +110,26 @@ the other cases (providing both $a$ and $b$ or neither of them) leads the system
 Now, we assume that we have an initial configuration containing the entities $q$ and $b$ (with$\tilde{q},\tilde{w},\tilde{a},\tilde{b}$ grouping all the possibile decorations for these names):
 \[
 \begin{array}{lcl}
-Sys  \defeq \ \restrict{r1,r2,r3,r4,\tilde{q},\tilde{w},\tilde{a},\tilde{b}} (P_q \mid \overline{P}_w  \mid  P_a  \mid \overline{P}_b  \mid  P_1  \mid  P_2  \mid  P_3  \mid P_4  \mid Cxt).
+Sys  \defeq \ %\restrict{r1,r2,r3,r4,\tilde{q},\tilde{w},\tilde{a},\tilde{b}}
+ P_q \mid \overline{P}_w  \mid  P_a  \mid \overline{P}_b  \mid  P_1  \mid  P_2  \mid  P_3  \mid P_4  \mid Cxt.
 \end{array}
 \] 
 Then only the second reaction can be applied, and the label transition follows
 {\small
 \[
 \begin{array}{l}
-\restrict{r1,r2,r3,r4,\tilde{q},\tilde{w},\tilde{a},\tilde{b}}\\
- (\startchain{\silent}\chainedlink{\overline{a}_i}{\bf  \overline{a}_i}\chainedlink{\bf \overline{a}_o}{\overline{a}_o}\chainedlink{r_2}{r_2}\chainedlink{q_i}{\bf q_i}\chainedlink{\bf q_i}{q_i}\chainedlink{b_i}{\bf b_i}\chainedlink{\bf b_i}{b_i}\chainedlink{\overline{w}_i}{\bf \overline{w}_i}\chainedlink{\bf \overline{w}_o}{\overline{w}_o}\chainedlink{\overline{a}_i}{\bf \overline{a}_i}\chainedlink{\bf \overline{a}_o}{\overline{a}_o}\chainedlink{r_3}{r_3}\chainedlink{\overline{a}_i}{\bf \overline{a}_i}\chainedlink{\bf \overline{a}_o}{\overline{a}_o}\chainedlink{r_4}{r_4}\chainedlink{\overline{w}_i}{\bf \overline{w}_i}\chainedlink{\bf \overline{w}_o}{\overline{w}_o}\chainedlink{cxt}{cxt}\chainedlink{\hat{a}_i}{\bf \hat{a}_i}\chainedlink{\bf \hat{a}_o}{\hat{a}_o}\chainedlink{\underline{b}_i}{\bf \underline{b}_i}\chainedlink{\bf \underline{b}_o}{\underline{b}_o}\chainedlink{p_1}{p_1}\chainedlink{p_2}{p_2}\chainedlink{\tilde{w}_i}{\bf \tilde{w}_i}\chainedlink{\bf \tilde{w}_o}{\tilde{w}_o}\chainedlink{p_3}{p_3}\chainedlink{p_4}{p_4}\chainend{\silent})
+%\restrict{r1,r2,r3,r4,\tilde{q},\tilde{w},\tilde{a},\tilde{b}}\\
+ \startchain{\silent}\chainedlink{\overline{a}_i}{\bf  \overline{a}_i}\chainedlink{\bf \overline{a}_o}{\overline{a}_o}\chainedlink{r_2}{r_2}\chainedlink{q_i}{\bf q_i}\chainedlink{\bf q_i}{q_i}\chainedlink{b_i}{\bf b_i}\chainedlink{\bf b_i}{b_i}\chainedlink{\overline{w}_i}{\bf \overline{w}_i}\chainedlink{\bf \overline{w}_o}{\overline{w}_o}\chainedlink{\overline{a}_i}{\bf \overline{a}_i}\chainedlink{\bf \overline{a}_o}{\overline{a}_o}\chainedlink{r_3}{r_3}\chainedlink{\overline{a}_i}{\bf \overline{a}_i}\chainedlink{\bf \overline{a}_o}{\overline{a}_o}\chainedlink{r_4}{r_4}\chainedlink{\overline{w}_i}{\bf \overline{w}_i}\chainedlink{\bf \overline{w}_o}{\overline{w}_o}\chainedlink{cxt}{cxt}\chainedlink{\hat{a}_i}{\bf \hat{a}_i}\chainedlink{\bf \hat{a}_o}{\hat{a}_o}\chainedlink{\underline{b}_i}{\bf \underline{b}_i}\chainedlink{\bf \underline{b}_o}{\underline{b}_o}\chainedlink{p_1}{p_1}\chainedlink{p_2}{p_2}\chainedlink{\tilde{w}_i}{\bf \tilde{w}_i}\chainedlink{\bf \tilde{w}_o}{\tilde{w}_o}\chainedlink{p_3}{p_3}\chainedlink{p_4}{p_4}\chainend{\silent}
 \end{array}
 \]}
 The parts in bold are provided by the entity processes, the other parts are provided by the processes encoding the reactions and by the process encoding the context (starting at $cxt$ and ended at $p_1$.
 In the label we can read that the rules $1$ and $4$ have been not executed as the entity $a$ is absent, 
 the rule $3$ has been not applied as the entity $w$ is absent, then only rule $2$ has been applied, and then it has produced entity $w$. Also, in the next state the context will provide entity $a$ and will not entity $b$.
 
-\subsection{A  biological toy example}
+\subsection{A  biological toy example}\label{subsec:toy}
+Hereafter, we only take into account transitions whose labels are solid, i.e. they do not contain 
+virtual links, and   complete, i.e. thy starts and ends with the $\silent$ symbol.\\
+
 Here we consider a biological toy example where a gene $a$  codes for a protein $T$ when molecules 
 $G$ is present and $C$ is absent, and in the opposite situation $a$ codes for protein $T'$.
 This behavior is encoded in rules $1$ and $2$.
@@ -247,7 +251,8 @@ Now, the context follow can non deterministically provide the entities: $C$, $G$
 Now, to show a possible composition of a transition label, we assume an system where the entities $a$, $T'$, and $G$ are present:
 \[
 \begin{array}{lcl}
-Sys &\defeq &\restrict{\tilde{C},\tilde{G},\tilde{F}, \tilde{T},\tilde{T'}}( P_a\mid P_C\mid P_G\mid \overline{P}_F \mid \overline{P}_T \mid P_{T'} \mid P_1 \mid P_2 \mid P_3 \mid P_4)
+Sys &\defeq &%\restrict{\tilde{C},\tilde{G},\tilde{F}, \tilde{T},\tilde{T'}}(
+P_a\mid \overline{P}_C\mid P_G\mid \overline{P}_F \mid \overline{P}_T \mid P_{T'} \mid P_1 \mid P_2 \mid P_3 \mid P_4
 \end{array}
 \]
 In the above configuration, reactions $1$ and $3$ can be applied, and also we assume that the context will provide the entity $F$, that will be available in the target configuration.
@@ -255,8 +260,8 @@ The transition label appears as:
 \[
 \tiny
 \begin{array}{l}
-\restrict{r1,r2,r3,r4,a,\tilde{C},\tilde{G},\tilde{F},\tilde{T},\tilde{T'}}\\
- (\startchain{\silent}\chainedlink{a_i}{\bf  a_i}\chainedlink{\bf a_o}{a_o}
+%\restrict{r1,r2,r3,r4,a,\tilde{C},\tilde{G},\tilde{F},\tilde{T},\tilde{T'}}\\
+ \startchain{\silent}\chainedlink{a_i}{\bf  a_i}\chainedlink{\bf a_o}{a_o}
  \chainedlink{G_i}{\bf  G_i}\chainedlink{\bf G_o}{G_o}
  \chainedlink{\overline{C}_i}{\bf \overline{C}_i}\chainedlink{\bf \overline{C}_o}{\overline{C}_o}
  \chainedlink{r_2}{r_2}\chainedlink{G_i}{\bf G_i}\chainedlink{\bf G_o}{G_o}
@@ -265,7 +270,7 @@ The transition label appears as:
 \chainedlink{\underline{G}_i}{\bf \underline{G}_i}\chainedlink{\bf \underline{G}_o}{\underline{G}_o}
 \chainedlink{\hat{F}_i}{\bf \hat{F}_i}\chainedlink{\bf \hat{F}_o}{\hat{F}_o}\chainedlink{p_1}{p_1} 
  \chainedlink{\tilde{T}_i}{\bf \tilde{T}_i}\chainedlink{\bf \tilde{T}_o}{\tilde{T}_o}
-  \chainedlink{p_2}{p_2}\chainedlink{p_3}{p_3}\chainedlink{p_4}{p_4} \chainedlink{\tilde{G}_i}{\bf \tilde{G}_i}\chainedlink{\bf \tilde{G}_o}{\tilde{G}_o} \chainend{\silent})
+  \chainedlink{p_2}{p_2}\chainedlink{p_3}{p_3}\chainedlink{p_4}{p_4} \chainedlink{\tilde{G}_i}{\bf \tilde{G}_i}\chainedlink{\bf \tilde{G}_o}{\tilde{G}_o} \chainend{\silent}
 \end{array}
 \]
 

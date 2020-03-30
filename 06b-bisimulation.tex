@@ -54,17 +54,19 @@ As detailed before, in the following we assume that: (i) the context can be non-
 
 \subsection{Assertion language}
 
-To simplify the query language, we first introduce a function that takes a solid link chain and returns a simple string by eliminating all the channel matching pairs leaving just one channel per each pair. This transformation is harmless, in the sense that it retains all the information in the chain, because it is applied to solid chains only. The function $\mathit{flat}$ is defined inductively as follows:
+To simplify the query language, we first introduce a function that takes a solid link chain and returns a simple string by eliminating all the channel matching pairs leaving just one channel per each pair. This transformation is harmless, in the sense that it retains all the information in the chain, because it is applied to solid chains only. We let $\gamma$ range over by the set $\{\beta,\beta_j,\tilde{\beta}_j,\hat{\beta}_j,\overline{\beta}_j, \underline{\beta}_j \mid \beta \in \mathcal{C}\wedge j \in \{i,o\}\}$, i.e. $\gamma$ ranges over names $\mathcal{C}$ possible decorated.
+The function $\mathit{flat}$ is defined inductively as follows:
 \[
 \begin{array}{lcl@{\hspace{0.5cm}}lcl@{\hspace{0.5cm}}lcl@{\hspace{0.5cm}}lcl}
 \mathit{flat}(\epsilon)&\defeq & \epsilon &
-\mathit{flat}(\link{\silent}{\beta}) & \defeq & \beta &
-\mathit{flat}(\link{\alpha}{\silent})& \defeq & \epsilon &
-\mathit{flat}(\link{\alpha}{\beta}) & \defeq &\beta \\
+\mathit{flat}(\link{\gamma}{\gamma'}) &  \defeq & \left \{ \begin{array}{cl} \epsilon & \mathrm{if } (\gamma = \beta_i \wedge \gamma = \beta_o)  \vee \gamma = \silent\\
+\gamma' & \mathrm{otw }  \end{array} \right. &
+%\mathit{flat}(\link{\alpha}{\silent})& \defeq & \epsilon &
+%\mathit{flat}(\link{\alpha}{\beta}) & \defeq &\beta \\
 \end{array}\]
 \[
 \begin{array}{lcl}
-\mathit{flat}(\link{\alpha}{\beta}\upsilon)& \defeq & \beta :: \mathit{flat}(\upsilon)\\
+\mathit{flat}(\link{\gamma}{\gamma'}\upsilon)& \defeq & \mathit{flat}(\link{\gamma}{\gamma'}):: \mathit{flat}(\upsilon)\\
 \end{array}\\
 \]
 where  $::$ is the usual string concatenation operator.
