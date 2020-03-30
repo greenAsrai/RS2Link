@@ -55,21 +55,21 @@ The set $S$ is called the \emph{background set} of ${\cal A}$, its elements are 
 they represent molecular substances (e.g., atoms, ions, molecules) that may be present
 in the states of a biochemical system.
 % modeled by $A$. 
-The set $A$ is the set of \emph{reactions} of $A$.
+The set $A$ is the set of \emph{reactions} of $\mathcal{A}$.
 Since $S$ is finite, so is $A$: 
 we denote by $|A|$ the number of reactions in $A$.
 
 \begin{definition}[Reaction Result]
-Let $T$ be a finite set.
+Let $W$ be a finite subset of $S$.
 \begin{enumerate}
-\item Let $a$ be a reaction. Then $a$ is enabled by $T$, denoted by $en_a(T)$, 
-if $R_a \subseteq T$
-and $I_a \cap T = \emptyset$. The result of $a$ on $T$, denoted by $res_a(T)$, 
+\item Let $a$ be a reaction in $S$. Then $a$ is enabled by $W$, denoted by $\mathit{en}_a(W)$, 
+if $R_a \subseteq W$
+and $I_a \cap W = \emptyset$. The result of $a$ on $W$, denoted by $\mathit{res}_a(W)$, 
 is defined by:
-$res_a(T) =P_a$, if $en_a(T)$, and $res_a(T) = \emptyset$ otherwise.
-\item Let $A$ be a finite set of reactions. The result of $A$ on $T$, denoted 
-by $res_A(T)$,  is defined
-by: $res_A(T) = \bigcup_{a \in A} res_a(T)$.
+$\mathit{res}_a(W) =P_a$, if $\mathit{en}_a(W)$, and $\mathit{res}_a(W) = \emptyset$ otherwise.
+\item Let $A$ be a finite set of reactions. The result of $A$ on $W$, denoted 
+by $\mathit{res}_A(W)$,  is defined
+by: $\mathit{res}_A(W) = \bigcup_{a \in A} \mathit{res}_a(W)$.
 \end{enumerate}
 \end{definition}
 
@@ -79,7 +79,7 @@ by: $res_A(T) = \bigcup_{a \in A} res_a(T)$.
 %{\bf Important Assumptions}\\
 The theory of Reaction Systems is based on the following assumptions.
 \begin{itemize}
-\item {\bf No permanency.} An entity of a set $T$ vanishes unless it is sustained 
+\item {\bf No permanency.} An entity of a set $W$ vanishes unless it is sustained 
 by a reaction. This reflects the fact that a living cell would die for lack 
 of energy, without chemical reactions.
 \item {\bf No counting.} The basic model of RSs is very abstract and 
@@ -114,7 +114,7 @@ $ \gamma=\{C_i\}_{i\in[0,n]}$  and $\delta=\{D_i\}_{i\in[0,n]} $
 where 
 $ C_{i}, D_{i}  \subseteq S$ for any $i\in[0,n]$, $D_0 = \emptyset$, and 
 %$C_0,\dots, C_n, D_0,\dots, D_n  \subseteq S$, $D_0 = \emptyset$, and 
-$D_i =  res_{\cal A}(D_{i-1} \cup C_{i-1})$ for any $i \in [1,n]$.
+$D_i =  \mathit{res}_{A}(D_{i-1} \cup C_{i-1})$ for any $i \in [1,n]$.
 % $i \in \{1,\dots, n\}$.
 \end{definition}
 
@@ -132,7 +132,7 @@ is called a \emph{state sequence}.
 %
 Each state $W_{i}$ in a state sequence
 is the union of two sets: the context $C_{i}$
-at step $i$ and the result of the previous step.
+at step $i$ and the result $D_i=\mathit{res}_{A}(W_{i-1})$ from the previous step.
 
 %\begin{definition}[State Sequence]
 %\label{def:statesequence}
@@ -157,9 +157,24 @@ infinite sequences.
 Let ${\cal A}=(S,A)$ be a RS, and let $\pi =(\gamma,\delta)$  be an  $n$-step interactive process,
 with $ \gamma=\{C_i\}_{i\in[0,n]}$ and  $\delta=\{D_i\}_{i\in[0,n]}$
 %, $\delta= D_0, \dots D_n$.
-Then, let $\pi'= (\gamma',\delta')$ be the extended interactive process of  $\pi =(\gamma,\delta)$,
-defined as $  \gamma'=\{C_i'\}_{i\in\mathbb{N}}$, $\delta'=\{D_i'\}_{i\in\mathbb{N}}$, where
- $C_j' = C_j$ for $j\in[0,n]$ and $C_j' =\emptyset$ for $j>n$,   $D_0' = D_0$ and  $D_j' = res_A(D_{j-1}' \cup C_{j-1}')$ for $j\geq 1$.
+Then, we let $\pi^\infty= (\gamma^\infty,\delta^\infty)$ be the extended interactive process of  $\pi$,
+defined as $  \gamma^\infty=\{C_i'\}_{i\in\mathbb{N}}$, $\delta^\infty=\{D_i'\}_{i\in\mathbb{N}}$, where:
+$$
+C'_j = \left\{
+\begin{array}{ll}
+C_j & \mbox{if $j\in[0,n]$}\\
+\emptyset & \mbox{otherwise ($j>n$)}
+\end{array}
+\right.
+\qquad
+D'_j = \left\{
+\begin{array}{ll}
+D_0 & \mbox{if $j=0$}\\
+\mathit{res}_A(D_{j-1}' \cup C_{j-1}') & \mbox{otherwise ($j\geq 1$)}
+\end{array}
+\right.
+$$
+% $C_j' = C_j$ for $j\in[0,n]$ and $C_j' =\emptyset$ for $j>n$,   $D_0' = D_0$ and  $D_j' = \mathit{res}_A(D_{j-1}' \cup C_{j-1}')$ for $j\geq 1$.
 \end{definition}
 
 
