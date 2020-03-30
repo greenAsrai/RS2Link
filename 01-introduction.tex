@@ -37,20 +37,20 @@ In this paper, we present an encoding from RSs,
 to the open multiparty process algebra c\CNA,\footnote{After `chained Core Network 
 Algebra'.} a variant of the {\tt link}-calculus~\cite{BodeiBB12,BBB17} without name mobility.
 This formalism allows several processes to synchronise and 
-communicate altogether, at the same time, with a new communicating
+communicate altogether, at the same time, with a new interaction
 mechanism based on links and link chains. 
-Our initial motivation for introducing this mechanism was to encode
+The initial motivation for introducing this mechanism was to encode
 Mobile Ambients~\cite{CardelliG00}, getting a much stronger operational
 correspondence than any available in the literature, such as the one in~\cite{B16}.
- This allowed us to easily encode calculi for biology equipped with membranes, as in~\cite{BodeiBBC14}.
-Process calculi have been used successfully to model
-biological processes, see~\cite{BBDFH18} for a recent survey.
+Later it was shown that the {\tt link}-calculus allowed one to easily encode calculi for biology equipped with membranes, as in~\cite{BodeiBBC14}.
+
 We illustrate our embedding by means of some examples coming
 both from the computer science and the biological field.
 %and then we consider a more complex example, by modeling a RS 
 %representing a regulatory network for \emph{lac} operon, presented in~\cite{CMMBM12}. 
 We also show that our embedding preserves the main
 features of RSs, and prove its correctness and completeness.
+
 Then, we present a methodology for verifying formally
 properties of reaction systems. The classical notion of bisimulation for 
 process algebras allows to consider equivalent two processes
@@ -62,13 +62,15 @@ the possibility that two interacting systems may be compared w.r.t.
 a subset of the possible biological actions. This is useful for concentrating 
 on the sub-model that one may need to study for a specific study or application,
 without getting lost in the complexity of the full biological system, or network.
-Besides bio-simulation, we define a completely new and simple assertion language,
-which allows to specify properties of the reaction systems to be verified.
-The classical logic of Hennessy-Milner~\cite{HM80} is a powerful
+The notion of bio-simulation relies on a new and simple assertion language,
+which allows to focus on some properties of the reaction systems to be verified.
+In fact, bio-similarity is parametric on a given assertion of interest.
+The we prove that the well-known logical characterization of bisimilarity in terms of Hennessy-Milner Logic~\cite{HM80} (HML)
+can be extended to the case of bio-similarity by tailoring HML formulas to
+the same assertion of interest used in bio-similarity.  As HML is a powerful
 formalism for specifying properties of labeled transition systems, 
-and we show that our assertions allow us to specify formulas 
-that extend this logic to the case of complex labels.
-Our formulas allow to abstract from some of the labels.
+its variant considered here looks a suitable option to specify formulas 
+over complex labels by abstracting from unnecessary details.
 
 Our main contributions are as follows:
 \begin{itemize}
@@ -77,20 +79,20 @@ entity,
 %\footnote{Entities that belong to the `domain' of a RS.}
 can be
 specified in a recursive way as an ordinary process;
-\item we can express the behaviour of entity mutation,
+\item along the same lines, non-deterministic contexts can be seamlessly expressed in our setting; 
+\item when deterministic contexts are considered, the c\CNA \
+computation is deterministic.
+\item we define an assertion language to specify local properties of 
+reaction systems and exploit it to define a novel notion of behavioural equivalence for reaction systems, called bio-similarity;
+\item we show that our assertions extend can be used to extend the Hennessy-Milner logic to our framework, in such a way that logical equivalence of processes coincide with bio-similarity;
+\item we sketch how one can express the behaviour of entity mutation,
 %change the behaviour of  each single entity $s$  in a
 %way that a mutation $s'$ can be expressed; 
 in such a way that the mutated entity
 $s'$ can  take part to only a subset of rules requiring entity $s$;
-\item with a little coding effort, two RSs can
+\item we show that with a little coding effort, two RSs can
 communicate; i.e.  a subset of those entities that the context  can
 provide, are then provided by a second RS;
-\item as our translation results in  a  c\CNA \ system, from
-each state only one transition can be generated, thus the c\CNA \
-computation is fully deterministic.
-\item we define an assertion language to specify local properties of 
-reaction systems
-\item we show that our assertions extend to our framework the Hennessy-Milner logic.
 \end{itemize}
 
 The main drawback of our proposal, is that the c\CNA \ translation is
@@ -107,7 +109,10 @@ defined can be complex and expressive.
 Example~\ref{ex:twoRS} and more in general the discussion in 
 Section~\ref{sec:discussion} show that 
 the interaction between RSs can help to model new scenarios.
+
 \paragraph{Related work}
+Process calculi have been used successfully to model
+biological processes, see~\cite{BBDFH18} for a recent survey.
 We are not aware of any inference rules for the RS; it seems not the case
 that a deterministic behaviour, as the one of the RS, once the initial state is 
 fixed, could be defined by inference rules that classically are applied 
