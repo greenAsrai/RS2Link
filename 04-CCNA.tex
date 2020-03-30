@@ -99,7 +99,7 @@ Briefly: rule (\textit{Sum}) selects one alternative and puts as label a possibl
 synchronises interactions (it cannot be applied when $\merges{v}{v'}$ is not defined).
 
 \begin{example}
-As some simple examples, consider the recursive process definitions $H \defeq \link{a}{b}.\link{a}{c}.H$ and $K \defeq \link{a}{b}.K + \link{a}{c}.K$: the former is some sort of forwarder that alternates between providing a link from $a$ to $b$ and to $c$ ; the latter is a nondeterministic forwarder that at each step can link $a$ to $b$ or to $c$. 
+As some simple examples, consider the recursive process definitions $H \defeq \link{a}{b}.\link{a}{c}.H$ and $K \defeq \link{a}{b}.K + \link{a}{c}.K$: the former is some sort of forwarder that alternates between providing a link from $a$ to $b$ and to $c$; the latter is a nondeterministic forwarder that at each step can link $a$ to $b$ or to $c$. 
 \end{example}
 
 Analogously to \CNA, the operational semantics of c\CNA\ satisfies the so called Accordion Lemma: whenever $P \xrightarrow{v} P'$ and $v'\blackstretcheq v$ then $P \xrightarrow{v'} P'$.

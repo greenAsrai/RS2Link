@@ -54,19 +54,31 @@ As detailed before, in the following we assume that: (i) the context can be non-
 
 \subsection{Assertion language}
 
-To simplify the query language, we first introduce a function that takes a solid link chain and returns a simple string by eliminating all the channel matching pairs leaving just one channel per each pair. This transformation is harmless, in the sense that it retains all the information in the chain, because it is applied to solid chains only. We let $\gamma$ range over by the set $\{\beta,\beta_j,\tilde{\beta}_j,\hat{\beta}_j,\overline{\beta}_j, \underline{\beta}_j \mid \beta \in \mathcal{C}\wedge j \in \{i,o\}\}$, i.e. $\gamma$ ranges over names $\mathcal{C}$ possible decorated.
+To simplify the query language, we first introduce a function that takes a solid link chain and returns a simple string by eliminating all the channel matching pairs leaving just one channel per each pair. This transformation is harmless, in the sense that it retains all the information in the chain, because it is applied to solid chains only. Below we denote by $\mathit{decs} = \{ s, \overline{s}, \widetilde{s},\widehat{s},\underline{s}~|~ s\in S\}$ the set of decorated names (without subscripts $_i$ and $_o$).
 The function $\mathit{flat}$ is defined inductively as follows:
+%\[
+%\begin{array}{lcl@{\hspace{0.5cm}}lcl@{\hspace{0.5cm}}lcl@{\hspace{0.5cm}}lcl}
+%\mathit{flat}(\epsilon)&\defeq & \epsilon &
+%\mathit{flat}(\link{\gamma}{\gamma'}) &  \defeq & \left \{ \begin{array}{cl} \epsilon & \mathrm{if } (\gamma = \beta_i \wedge \gamma = \beta_o)  \vee \gamma = \silent\\
+%\gamma' & \mathrm{otw }  \end{array} \right. &
+%%\mathit{flat}(\link{\alpha}{\silent})& \defeq & \epsilon &
+%%\mathit{flat}(\link{\alpha}{\beta}) & \defeq &\beta \\
+%\end{array}\]
+
 \[
-\begin{array}{lcl@{\hspace{0.5cm}}lcl@{\hspace{0.5cm}}lcl@{\hspace{0.5cm}}lcl}
-\mathit{flat}(\epsilon)&\defeq & \epsilon &
-\mathit{flat}(\link{\gamma}{\gamma'}) &  \defeq & \left \{ \begin{array}{cl} \epsilon & \mathrm{if } (\gamma = \beta_i \wedge \gamma = \beta_o)  \vee \gamma = \silent\\
-\gamma' & \mathrm{otw }  \end{array} \right. &
-%\mathit{flat}(\link{\alpha}{\silent})& \defeq & \epsilon &
-%\mathit{flat}(\link{\alpha}{\beta}) & \defeq &\beta \\
-\end{array}\]
+\mathit{flat}(\epsilon)\defeq \epsilon 
+\qquad
+\mathit{flat}(\link{\alpha}{\beta}) \defeq 
+\left \{ \begin{array}{ll} 
+\beta & \mbox{if $\beta\in \mathit{reacts}\cup\{\mathit{cxt}\}\cup\mathit{prods}$}\\
+\gamma & \mbox{if $\beta=\gamma_i$ with $\gamma\in\mathit{decs}$}\\
+\epsilon & \mbox{otherwise}  
+\end{array} \right. 
+\]
+
 \[
 \begin{array}{lcl}
-\mathit{flat}(\link{\gamma}{\gamma'}\upsilon)& \defeq & \mathit{flat}(\link{\gamma}{\gamma'}):: \mathit{flat}(\upsilon)\\
+\mathit{flat}(\link{\alpha}{\beta}\upsilon)& \defeq & \mathit{flat}(\link{\alpha}{\beta}):: \mathit{flat}(\upsilon)\\
 \end{array}\\
 \]
 where  $::$ is the usual string concatenation operator.
