@@ -153,9 +153,13 @@ $$
 \triangleq
  \restrict{\mathit{names}}(\Pi_{s\in C_0}P_{s} ~|~ \Pi_{s \notin C_0}\overline{P_s} ~|~ \Pi_{a\in A} P_a ~|~  \mathit{Cxt}^1)
 $$
-where $\mathit{names} = \mathit{reacts}\, \cup\, \mathit{ctxs}\, \cup\, \mathit{ents}\, \cup \, \mathit{prods}$, with  $\mathit{reacts}$ be the set of reaction names $r_j $, $\mathit{cxts}$ the set of context names $\{\mathit{cxt}\}$,  $\mathit{ents}$ the set of decorated entity names  $\{s_i,s_o,\widehat{s}_i,\widehat{s}_o,\widetilde{s}_i,\widetilde{s}_o,\overline{s}_i,\overline{s}_o,\underline{s}_i,\underline{s}_o| s \in S\}$, and  $\mathit{prods}$ be the set of names for production $p_j$ associated to each reaction. 
+where $\mathit{names} = \mathit{reacts}\, \cup\, \mathit{ents}\, \cup \, \mathit{prods}\, \cup\, \{cxt\}$, with  $\mathit{reacts}$ be the set of reaction names $r_j $, $\mathit{cxts}$ the set of context names $\{\mathit{cxt}\}$,  $\mathit{ents}$ the set of decorated entity names  $\{s_i,s_o,\widehat{s}_i,\widehat{s}_o,\widetilde{s}_i,\widetilde{s}_o,\overline{s}_i,\overline{s}_o,\underline{s}_i,\underline{s}_o| s \in S\}$, and  $\mathit{prods}$ be the set of names for production $p_j$ associated to each reaction. 
 %For notational convenience, we fix that $r_1 = \silent$,  $r_{u+1} = cxt_1$ for $u$ the number of reacts, and $cxt_{w+1} = \silent$ for $w$ the number of entities.
-For notational convenience, we fix that $r_1 = \silent$,  $r_{u+1} = \mathit{cxt}$ and $p_{u+1}=\silent$  for $u$ the number of reacts.
+{\color{red} For technical reasons, we introduce the process $Init \defeq \link{\silent}{r_1}.Init$
+to allow the name $r_1$ to be matched; also, 
+for notational convenience, we fix that 
+%$r_1 = \silent$,
+$r_{u+1} = \mathit{cxt}$ and $p_{u+1}=\silent$,  for $u$ the number of reacts.}
 \end{definition}
  
 
@@ -188,20 +192,29 @@ Each reaction defines a pattern to be satisfied, i.e. each reaction inserts as m
   \end{restatable}
  
  
- \begin{example}\label{ex:backbone}
- Let ${\cal A}$ be a RS whose specification contains two entities, $s1$ and $s2$, and, among the others, the reaction $a=(s1,\ , s1)$ that guarantees the presence of the  $s1$ in the system. Then, we assume an  extended interactive process $\pi=(\gamma,\delta)$ where the context $\gamma$ provides  $s1$ and $s2$.
+{\color{red} \begin{example}\label{ex:backbone}
+ Let ${\cal A}$ be a RS whose specification contains two entities, $s1$ and $s2$, and the reactions $r_1=(s1,\ , s2)$ and $r_2 = (s2, \ , s1)$ that produce $s2$ if $s1$ is present and $s1$ if $s2$ is present. For simplicity we do not consider inhibitors. Then, we assume an  extended interactive process $\pi=(\gamma,\delta)$ where the context $\gamma$ provides  $s1$ and $s2$.
  %, for the first $n$ steps.
- Our translation includes the processes:\\
+ Our translation follows:\\% includes the processes:\\
  \[
- \begin{array}{lcllcl}
- P_a &\defeq& \startchain{\silent}\chainedlink{s1_i}{\noact}\chainedlink{\noact}{s1_o}\chainedlink{r_2}{\noact} \chainedlink{\noact}{p_1}\chainedlink{\tilde{s1}_i}{\noact}\chainedlink{\noact}{\tilde{s1}_o}\chainend{p_2}.P_a + \dots; \\
- P_{s1} &\defeq& \startchain{s1_i}\chainedlink{s1_o}{\noact}\chainedlink{\noact}{\hat{s1}_i}\chainedlink{\hat{s1}_o}{\noact}\chainedlink{\noact}{\tilde{s1}_i}\chainedlink{\tilde{s1}_o}.P_{s1} + \dots; &
-  P_{s2} &\defeq& \link{\hat{s2}_i}{\hat{s2}_o}.P_{s2} + \dots;\\
- Cxt_{s1}& \defeq & \startchain{cxt_1}\chainedlink{\hat{s1}_i}{\noact}\chainedlink{\noact}{\hat{s1}_o}\chainend{cxt_2}.Cxt_{s1} &
-  Cxt _{s2} &\defeq& \startchain{cxt_2}\chainedlink{\hat{s2}_i}{\noact}\chainedlink{\noact}{\hat{s2}_o}\chainend{p_1}. Cxt_{s2}
+ \begin{array}{l@{\hspace{-0.009cm}}c@{\hspace{-0.009cm}}ll@{\hspace{-0.009cm}}c@{\hspace{-0.009cm}}l}
+ P_{r_1} &\defeq& \startchain{r_1}\chainedlink{s1_i}{\noact}\chainedlink{\noact}{s1_o}\chainedlink{r_2}{\noact} \chainedlink{\noact}{p_1}\chainedlink{\tilde{s2}_i}{\noact}\chainedlink{\noact}{\tilde{s2}_o}\chainend{p_2}.P_{r_1} + \dots; & 
+   P_{s2} &\defeq& \startchain{\hat{s2}_i}\chainedlink{\hat{s2}_o}{\noact}
+   \chainedlink{\noact} {\tilde{s2}_i}\chainend{\tilde{s2}_o}.P_{s2} + \dots;\\
+  P_{r_2} &\defeq& \startchain{r_2}\chainedlink{\overline{s2}_i}{\noact}\chainedlink{\noact}{\overline{s2}_o}\chainedlink{cxt}{\noact} \chainedlink{\noact}{p_2}\chainend{\silent}.P_{r_2} + \dots; &
+ P_{s1} &\defeq& \startchain{s1_i}\chainedlink{s1_o}{\noact}\chainedlink{\noact}{\hat{s1}_i}\chainend{\hat{s1}_o}
+ %{\noact}\chainedlink{\noact}{\tilde{s1}_i}\chainedlink{\tilde{s1}_o}
+ .P_{s1} + \dots; \\
+ Cxt& \defeq & \startchain{cxt}\chainedlink{\hat{s1}_i}{\noact}\chainedlink{\noact}{\hat{s1}_o}
+  \chainedlink{\hat{s2}_i}{\noact}\chainedlink{\noact}{\hat{s2}_o}\chainend{p_1}.Cxt\\
+
+  %Cxt& \defeq & \startchain{cxt}\chainedlink{\hat{s1}_i}{\noact}\chainedlink{\noact}{\hat{s1}_o}
+  %\chainedlink{\hat{s2}_i}{\noact}\chainedlink{\noact}{\hat{s2}_o}\chainend{p_1}.Cxt
+ %Cxt_{s1}& \defeq & \startchain{cxt_1}\chainedlink{\hat{s1}_i}{\noact}\chainedlink{\noact}{\hat{s1}_o}\chainend{cxt_2}.Cxt_{s1} &
+ % Cxt _{s2} &\defeq& \startchain{cxt_2}\chainedlink{\hat{s2}_i}{\noact}\chainedlink{\noact}{\hat{s2}_o}\chainend{p_1}. Cxt_{s2}
 \end{array}
 \]  \\
-   Now, we assume that $s1$ is in the initial state of ${\cal A}$, and in Figure~\ref{fig:backbone} we show the  structure of a link chain label related to the execution of a transition of the c\CNA \ system: $\restrict{names} (P_{s1}|P_{s2}| P_a|\dots|Cxt_{s1}|Cxt_{s2})$. The yellow blocks are referred to the processes encoding the reactions ($P_a$, in our case) and the contexts ($Cxt_{s1}$ and $Cxt_{s2}$). As the figure puts in evidence, these two kinds of processes determine the structure of the link chain, from end to end, i.e. from the left $\silent$ to the right one. We could say that these processes form the \emph{backbone} of the interaction.
+   Now, we assume that $s1$ only is in the initial state of ${\cal A}$; for clarity we partially specify the {\tt link}-calculus code of the processes. In Figure~\ref{fig:backbone} we show the  structure of a link chain label related to the execution of a transition of the c\CNA \ system: $\restrict{names} (Init | P_{s1}|P_{s2}| P_a|\dots|Cxt)$. The yellow blocks are referred to process $Init$, and the processes encoding the reactions ($P_{r_1}$, in our case) and the context ($Cxt$). As the figure puts in evidence, these two kinds of processes determine the structure of the link chain, from end to end, i.e. from the left $\silent$ to the right one. We could say that these processes form the \emph{backbone} of the interaction.
    In contrast, the processes encoding the entities ($P_{s1}$, and $P_{s2}$, in our case) provides the
     solid links to overlap the virtual links   of the backbone.
  
@@ -239,7 +252,7 @@ Each reaction defines a pattern to be satisfied, i.e. each reaction inserts as m
 %  \draw (4.25,0.25) node{$\noact$};
 \draw (4.75,0.745)  node[minimum size=0.485cm,draw,fill=yellow,yellow] {$\ $};
   \draw (4.38,0.75) node[minimum size=0.47cm,draw,fill=yellow, draw=yellow] 
-  {${\scriptscriptstyle  cxt_1}$};
+  {${\scriptscriptstyle  cxt \ }$};
   
   \draw (4.75,0.25)  node[minimum size=0.48cm,draw,fill=yellow,yellow] {$\ $};
   \draw (5.2,0.255)  node[minimum size=0.485cm,draw,fill=yellow,draw=yellow] {${\scriptscriptstyle  \hat{s1}_i}$};
@@ -247,122 +260,73 @@ Each reaction defines a pattern to be satisfied, i.e. each reaction inserts as m
    
    \draw (5.75,0.5) node{$\dots$};
    
-    \draw (6,1) -- (11.5,1) ;
-    \draw (7,1) -- (7,0.5) -- (7.5,0.5) -- (7.5,0);
-    \draw (6.5,0) -- (11.5,0);
+    \draw (6,1) -- (10,1) ;
+ %   \draw (7,1) -- (7,0.5) -- (7.5,0.5) -- (7.5,0);
+    \draw (6.5,0) -- (10.5,0);
     \draw   (6,1)-- (6,0.5) -- (6.5,0.5) -- (6.5,0.5) -- (6.5,0) ;
      \draw (6.75,0.75)  node[minimum size=0.47cm,fill=yellow, draw=yellow] {$\ $};
  \draw (6.36,0.75) node[minimum size=0.475cm,draw,fill=yellow,draw=yellow] 
- {${\scriptscriptstyle cxt_2}$};%node[minimum size=0.5cm,draw,draw=white] {$\noact$};
+ {${\scriptscriptstyle \hat{s2}_o \ }$};%node[minimum size=0.5cm,draw,draw=white] {$\noact$};
    \draw (6.75,0.26)  node[minimum size=0.485cm,fill=yellow, draw=yellow] {$\ $};
 
- \draw (7.20,0.25) node[minimum size=0.475cm,fill=yellow, draw=yellow] {${\scriptscriptstyle \hat{s2}_i}$};
-
-     \draw (7.3,0.75)   node{$\noact$};
-  \draw (7.75,0.75) node{$\ $};
-  \draw (7.76,0.26) node {$\ $};
-  \draw (8.25,0.26)  node {$\noact$ };
-
-  \draw (8.3,0.75)  node[minimum size=0.48cm,draw,fill=yellow, draw=yellow] {${\scriptscriptstyle \hat{s2}_o}$};
-  \draw (8,1)--(8,0.5)--(8.5,0.5) -- (8.5,0);
- % \draw(9.5,0.5) --(9.5,0);
-  \draw (8.745,0.75)  node[minimum size=0.48cm,draw,fill=yellow,yellow] {$\ $};
-  \draw (8.75,0.26)  node[minimum size=0.48cm,draw,fill=yellow,yellow] {$\ $};
- \draw (9.24,0.26)  node[minimum size=0.48cm,draw,fill=yellow,draw=yellow] {${\scriptscriptstyle p_1}$};
+% \draw (7.20,0.25) node[minimum size=0.475cm,fill=yellow, draw=yellow] {${\scriptscriptstyle{p_1}} \ 
+\draw (7.20,0.25)  node[minimum size=0.475cm,draw,fill=yellow,draw=yellow] {${\scriptscriptstyle p_1}$};
+\draw (7.2,0.74) node[minimum size=0.48cm,draw,fill=yellow,draw=yellow]{${\scriptscriptstyle p_1}$};
+\draw (7.6,0.74)  node[minimum size=0.48cm,draw,fill=yellow, draw=yellow] {$ \ $};
+\draw (7.6,0.25)  node[minimum size=0.48cm,draw,fill=yellow, draw=yellow] {$ \ $};
+\draw (8.14,0.25)  node[minimum size=0.475cm,draw,fill=yellow,draw=yellow] {${\scriptscriptstyle \tilde{s1}_i}$};
+ \draw (8.14,0.75) node{$\noact$};%node[minimum size=0.5cm,draw,draw=white] {$\noact$};
+ \draw (9.24,0.25) node{$\noact$};
+  \draw (7.85,1) -- (7.85,0.5) ;
+   \draw (7.85,0.5) -- (8.45,0.5) ;
+      \draw  (8.45,0.5) --(8.45,0) ;
+       \draw  (8.93,1) --(8.93,0.5) ;
+        \draw  (8.93,0.5) --(9.5,0.5) ;
+             \draw  (9.49,0.5) --(9.49,0) ;
+         \draw  (9.49,0.5) --(9.49,0) ;
+         \draw(10.0,1) -- (10.0,0.5);
+          \draw(10,0.52) -- (10.48,0.52);
+          \draw(10.48,0.52)--(10.49,0);
+%  $};
+%
+%%     \draw (7.3,0.75)   node{$\noact$};
+%%  \draw (7.75,0.75) node{$\ $};
+%%  \draw (7.76,0.26) node {$\ $};
+%%  \draw (8.25,0.26)  node {$\noact$ };
+%
+%  \draw (8.3,0.75)  node[minimum size=0.48cm,draw,fill=yellow, draw=yellow] {${\scriptscriptstyle \hat{s2}_o}$};
+%  \draw (8,1)--(8,0.5)--(8.5,0.5) -- (8.5,0);
+% % \draw(9.5,0.5) --(9.5,0);
+%  \draw (8.745,0.75)  node[minimum size=0.48cm,draw,fill=yellow,yellow] {$\ $};
+%  \draw (8.75,0.26)  node[minimum size=0.48cm,draw,fill=yellow,yellow] {$\ $};
+ %\draw (9.24,0.26)  node[minimum size=0.48cm,draw,fill=yellow,draw=yellow] {${\scriptscriptstyle p_1}$};
  %\draw(9.5,0.5) --(9.5,0);
     % \draw (9,1) -- (10,1) -- (10,0.5) -- (10.5,0.5) --  (10.5,0) -- (9.5,0)  (9.5,0.5) -- (9,0.5) -- (9,1);
- \draw (9.24,0.75) node[minimum size=0.48cm,draw,fill=yellow,draw=yellow]{${\scriptscriptstyle p_1}$};%node[minimum size=0.5cm,draw,draw=white] {$\noact$};
- \draw (10.22,0.26) node [minimum size=0.48cm,draw,fill=yellow,draw=yellow]{${\scriptscriptstyle \tilde{s1}_i}$};
+ \draw (9.24,0.75) node[minimum size=0.48cm,draw,fill=yellow,draw=yellow]{${\scriptscriptstyle \tilde{s1}_o}$};%node[minimum size=0.5cm,draw,draw=white] {$\noact$};
+ 
+ \draw (10.22,0.26) node [minimum size=0.48cm,draw,fill=yellow,draw=yellow]{$\silent $};
+%{${\scriptscriptstyle \tilde{s1}_i}$};
  \draw (9.74,0.745) node [minimum size=0.485cm,draw,fill=yellow,draw=yellow]{$\ $};
  \draw (9.735,0.26) node [minimum size=0.48cm,draw,fill=yellow,draw=yellow]{$\ $};
- \draw (10,1) -- (10,0.5) -- (10.5,0.5)--(10.5,0);
-  \draw (10.31,0.75)  node{$\noact$};
-  \draw (10.75,0.75)  node {$\ $};
-  \draw (10.75,0.26)  node{$\ $};
- \draw (11.25,0.25)  node {$\noact$};
-   \draw (11,1) -- (11,0.5) -- (11.5,0.5) -- (11.5,0);% -- (10,0) -- (9,0) -- (9,0.5) -- (8.5,0.5) -- (8.5,1);
-    \draw (11,1) -- (11.5,1) -- (12,1) -- (12,0.5) -- (12.5,0.5)--(12.5,0)--(11.5,0);
+ %  \draw (10.8,0.5) node{$\dots$};
+% \draw (10,1) -- (10,0.5) -- (10.5,0.5)--(10.5,0);
+  %\draw (10.31,0.75)  node{$\noact$};
+%  \draw (10.75,0.75)  node {$\ $};
+%  \draw (10.75,0.26)  node{$\ $};
+% \draw (11.25,0.25)  node {$\noact$};
+%   \draw (11,1) -- (11,0.5) -- (11.5,0.5) -- (11.5,0);% -- (10,0) -- (9,0) -- (9,0.5) -- (8.5,0.5) -- (8.5,1);
+%    \draw (11,1) -- (11.5,1) -- (12,1) -- (12,0.5) -- (12.5,0.5)--(12.5,0)--(11.5,0);
    %\draw (11.25,0.25)  node[minimum size=0.48cm,draw,fill=yellow,draw=yellow] {$\noact$};
-    \draw (11.31,0.75) node[minimum size=0.48cm,draw,fill=yellow,draw=yellow]{${\scriptscriptstyle \tilde{s1}_o}$};
-    \draw (11.75,0.26)node[minimum size=0.48cm,draw,fill=yellow,draw=yellow]{$\ $};
-      \draw (11.75,0.75)node[minimum size=0.48cm,draw,fill=yellow,draw=yellow]{$\ $};
-     \draw (12.2,0.25) node[minimum size=0.478cm,draw,fill=yellow,draw=yellow]{\;$\silent$\;  };
+%    \draw (11.31,0.75) node[minimum size=0.48cm,draw,fill=yellow,draw=yellow]{${\scriptscriptstyle \tilde{s1}_o}$};
+%    \draw (11.75,0.26)node[minimum size=0.48cm,draw,fill=yellow,draw=yellow]{$\ $};
+%      \draw (11.75,0.75)node[minimum size=0.48cm,draw,fill=yellow,draw=yellow]{$\ $};
+%     \draw (12.2,0.25) node[minimum size=0.478cm,draw,fill=yellow,draw=yellow]{\;$\silent$\;  };
   \end{tikzpicture}
   \caption{The link chain structure arising from reactions and context processes.}
    \label{fig:backbone}
  \end{figure}
  \end{example}
-
- 
- 
-% \begin{figure}[t]
-% \begin{tikzpicture}
-%   \draw (0,1) -- (5,1) ;
-%    \draw (0.5,0) -- (5.5,0) ;
-%   \draw (0,1)--(0,0.5) -- (0.5,0.5) -- (0.5,0) -- (1.5,0) ;
-%     \draw (0.25,0.75)  node[minimum size=0.495cm,fill=yellow] {${ \silent}$};
-% \draw (0.75,0.75)  node[minimum size=0.5cm,fill=yellow] {$\ $};
-%  \draw (0.76,0.25)  node[minimum size=0.5cm,fill=yellow] {$\ $};
-%  \draw (1.21,0.25)  node[minimum size=0.5cm,fill=yellow] {${\scriptscriptstyle s1_i}$};
-%%    \draw (1.25,0.75)  node[minimum size=0.5cm,draw,draw=white] {$\noact$};
-%%  \draw (1.75,0.75)  node[minimum size=0.5cm,draw,white] {$\ $};
-%%  \draw (1.75,0.25)  node[minimum size=0.5cm,draw,white] {$\ $};
-%%  \draw (2.25,0.25)  node[minimum size=0.5cm,draw,draw=white] {$\noact$};
-%  \draw (2,1) -- (2,0.5) -- (2.5,0.5) -- (2.5,0) -- (1.5,0)  -- (1.5,0.5) -- (1,0.5) -- (1,1);
-%
-% \draw (1.25,0.75) node{$\noact$};%node[minimum size=0.5cm,draw,draw=white] {$\noact$};
-%  \draw (2.25,0.25) node{$\noact$};
-%   \draw (2.31,0.75)  node[minimum size=0.47cm,draw,fill=yellow, draw=yellow] {${\scriptscriptstyle s1_o}$};
-%  \draw (2.75,0.75)  node[minimum size=0.48cm,draw,fill=yellow,yellow] {$\ $};
-%  \draw (2.75,0.26)  node[minimum size=0.49cm,draw,fill=yellow,yellow] {$\ $};
-%
-%  \draw (3.20,0.25)  node[minimum size=0.47cm,draw,fill=yellow,draw=yellow] {${\scriptscriptstyle  \tilde{s1}_i}$};
-%  
-%  
-%  \draw(3.5,0.5) -- (3.5,0);
-%%     \draw (3.25,0.75)  node[minimum size=0.5cm,draw,draw=white] {$\noact$};
-%%  \draw (3.75,0.75)  node[minimum size=0.5cm,draw,white] {$\ $};
-%%  \draw (3.75,0.25)  node[minimum size=0.5cm,draw,white] {$\ $};
-%%  \draw (4.25,0.25)  node[minimum size=0.5cm,draw,draw=white] {$\noact$};
-%\draw (3,1) -- (4,1) -- (4,0.5) -- (4.5,0.5) -- (4.5,0) -- (3.5,0)  (3.5,0.5) -- (3,0.5) -- (3,1);
-% \draw (3.25,0.75) node{$\noact$};%node[minimum size=0.5cm,draw,draw=white] {$\noact$};
-%  \draw (4.25,0.25) node{$\noact$};
-%  \draw (4.31,0.75)  node[minimum size=0.47cm,draw,fill=yellow, draw=yellow] {${ \scriptscriptstyle \tilde{s1}_o}$};
-%  \draw (4.75,0.745)  node[minimum size=0.48cm,draw,fill=yellow,yellow] {$\ $};
-%  \draw (4.75,0.25)  node[minimum size=0.48cm,draw,fill=yellow,yellow] {$\ $};
-%  \draw (5.24,0.255)  node[minimum size=0.485cm,draw,fill=yellow,draw=yellow] {${\scriptscriptstyle  r_2}$};
-%  \draw(5,1) -- (5,0.5) -- (5.5,0.5) -- (5.5,0);
-%   \draw (6,0.5) node{$\dots$};
-%    \draw (6.5,1) -- (11.5,1) ;
-%    \draw (7.5,1) -- (7.5,0.5) -- (8,0.5) -- (8,0);
-%    \draw (7,0) -- (12,0);
-%    \draw   (6.5,1)-- (6.5,0.5) -- (7,0.5) -- (7,0.5) -- (7,0) ;
-% \draw (6.77,0.75) node{$\noact$};%node[minimum size=0.5cm,draw,draw=white] {$\noact$};
-% \draw (7.77,0.25) node{$\noact$};
-%
-%     \draw (7.80,0.75)  node[minimum size=0.485cm,draw,fill=yellow, draw=yellow] {${\scriptscriptstyle  \tilde{s1}_o}$};
-%  \draw (8.25,0.75)  node[minimum size=0.485cm,draw,fill=yellow,yellow] {$\ $};
-%  \draw (8.26,0.26)  node[minimum size=0.495cm,draw,fill=yellow,yellow] {$\ $};
-%  \draw (8.75,0.26)  node[minimum size=0.49cm,draw,fill=yellow,draw=yellow] {${\scriptscriptstyle cxt_2}$ };
-%
-%  \draw (8.75,0.75)  node[minimum size=0.48cm,draw,fill=yellow, draw=yellow] {${\scriptscriptstyle cxt_2}$};
-%  \draw (9.25,0.75)  node[minimum size=0.48cm,draw,fill=yellow,yellow] {$\ $};
-%  \draw (9.25,0.26)  node[minimum size=0.48cm,draw,fill=yellow,yellow] {$\ $};
-% \draw (9.71,0.25)  node[minimum size=0.47cm,draw,fill=yellow,draw=yellow] {${\scriptscriptstyle \tilde{s2}_i}$};
-% \draw(10,0.5) --(10,0);
-%     \draw (9.5,1) -- (10.5,1) -- (10.5,0.5) -- (11,0.5) --  (11,0) -- (10,0)  (10,0.5) -- (9.5,0.5) -- (9.5,1);
-% \draw (9.75,0.75) node{$\noact$};%node[minimum size=0.5cm,draw,draw=white] {$\noact$};
-% \draw (10.75,0.25) node{$\noact$};
-%  \draw (10.81,0.75)  node[minimum size=0.47cm,draw,fill=yellow, draw=yellow] {${\scriptscriptstyle \tilde{s2}_o}$};
-%  \draw (11.25,0.75)  node[minimum size=0.48cm,draw,fill=yellow,yellow] {$\ $};
-%  \draw (11.25,0.26)  node[minimum size=0.49cm,draw,fill=yellow,yellow] {$\ $};
-% \draw (11.75,0.25)  node[minimum size=0.48cm,draw,fill=yellow,draw=yellow] {$\silent$};
-%   \draw (11.5,1) -- (11.5,0.5) -- (12,0.5) -- (12,0);% -- (10,0) -- (9,0) -- (9,0.5) -- (8.5,0.5) -- (8.5,1);
-%  \end{tikzpicture}
-%  \caption{The link chain structure arising from reactions and context processes.}
-%   \label{fig:backbone}
-% \end{figure}
-% \end{example}
+}
 
 Example~\ref{ex:backbone}   outlines two different roles of the processes defining the translation of an interactive process: those processes encoding the reactions and the context provide the backbone of each transition, whereas the processes encoding the entities provide the resources needed for the communication to take place.
  
@@ -386,7 +350,7 @@ $$
  \item
   $v=\link{\silent}{\silent}\dots\link{\silent}{\silent}$, and
   \item 
- $P'= \restrict{\mathit{names}} (\Pi_{a \in A}P_a~|~ \mathit{Cxt}^2 ~|~ \Pi_{s \in C_1 \cup D_1}P_s| \Pi_{s \notin C_1 \cup D_1}\overline{P}_s)$.
+ $P'= \restrict{\mathit{names}} (Init | \Pi_{a \in A}P_a~|~ \mathit{Cxt}^2 ~|~ \Pi_{s \in C_1 \cup D_1}P_s| \Pi_{s \notin C_1 \cup D_1}\overline{P}_s)$.
  \end{enumerate}
 Moreover, given $\pi^1=(\gamma^1,\delta^1)$, we have $P' = \llbracket {\cal A},\gamma^1\rrbracket$.
  %\end{proposition}

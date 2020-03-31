@@ -1,12 +1,12 @@
 
 
-\documentclass{llncs}
-\pagestyle{plain}
+\documentclass{elsarticle}
+%\pagestyle{plain}
 
 \usepackage{lineno,hyperref}
 \modulolinenumbers[5]
 
-%\journal{Theoretical Computer Science}
+\journal{Theoretical Computer Science}
 
 %\usepackage{amsmath,amsthm,amssymb,amsfonts,thmtools,thm-restate}
 \usepackage{amsmath,amssymb,amsfonts,thmtools,thm-restate}
@@ -43,21 +43,21 @@
 %\usepackage{numcompress}\bibliographystyle{model6-num-names}
 
 %% `Elsevier LaTeX' style
-%\bibliographystyle{elsarticle-num}
+\bibliographystyle{elsarticle-num}
 %%%%%%%%%%%%%%%%%%%%%%%
 
 
 %% Authors' packages, macros, environments
 %%%%%%%%%%%%%%%%%%%%%%%
 \input{macros}
-% \newtheorem{theorem}{Theorem}
-% \newtheorem{lemma}[theorem]{Lemma}
-% \newtheorem{proposition}[theorem]{Proposition}
-% \newtheorem{corollary}[theorem]{Corollary}
-% \newdefinition{definition}[theorem]{Definition}
-% \newdefinition{remark}[theorem]{Remark}
-% \newdefinition{example}[theorem]{Example}
-%\newproof{proof}{Proof}
+ \newtheorem{theorem}{Theorem}
+ \newtheorem{lemma}[theorem]{Lemma}
+ \newtheorem{proposition}[theorem]{Proposition}
+ \newtheorem{corollary}[theorem]{Corollary}
+ \newdefinition{definition}[theorem]{Definition}
+ \newdefinition{remark}[theorem]{Remark}
+ \newdefinition{example}[theorem]{Example}
+\newproof{proof}{Proof}
 %%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%% REDUCE VERTICAL SPACING FOR FLOATING FIGURES
@@ -73,7 +73,7 @@
 
 \begin{document}
 
-%\begin{frontmatter}
+\begin{frontmatter}
 
 \title{Enhancing reaction systems:\\ a process algebraic approach}
 %\title{Embedding Reaction Systems into {\tt link}-calculus}
@@ -81,54 +81,58 @@
 %% Group authors per affiliation:
 
 
-% \author[uniss]{Linda Brodo\corref{cor}}
-% \ead{brodo@uniss.it}
-% 
-% \author[unipi]{Roberto Bruni}
-% \ead{bruni@di.unipi.it}
-% 
-% \author[unisi]{Moreno Falaschi}
-% \ead{falaschi@unisi.it}
-% 
-% \address[unipi]{Dipartimento di Informatica, Universit\`{a} di Pisa, Italy}
-% \address[uniss]{di Scienze economiche e aziendali,   Universit\`a di Sassari, Italy}
-% \address[unisi]{Dipartimento di Ingegneria,   Universit\`a di Siena, Italy}
-% 
+ \author[uniss]{Linda Brodo\corref{cor}}
+ \ead{brodo@uniss.it}
+ 
+ \author[unipi]{Roberto Bruni}
+ \ead{bruni@di.unipi.it}
+ 
+ \author[unisi]{Moreno Falaschi}
+ \ead{falaschi@unisi.it}
+ 
+ \address[unipi]{Dipartimento di Informatica, Universit\`{a} di Pisa, Italy}
+ \address[uniss]{di Scienze Economiche e Aziendali,   Universit\`a di Sassari, Italy}
+ \address[unisi]{Dipartimento di Ingegneria,   Universit\`a di Siena, Italy}
+ 
 % \cortext[cor]{Corresponding Author}
 
 
-\author{ Linda Brodo\inst{1} \and Roberto Bruni\inst{2} \and Moreno 
-Falaschi\inst{3}}
-\institute{Dipartimento di Scienze economiche e aziendali,
-          Universit\`a di Sassari, Italy\\
-	   %\email{brodo@uniss.it.} 
-	   \and
-	   Dipartimento di Informatica,
-	   Universit\`{a} di Pisa, Italy\\
-	   %\email{bruni@di.unipi.it.} 
-	   \and
-           Dipartimento di Ingegneria dell'Informazione e Scienze Matematiche\\
-           Universit\`a di Siena, Italy
-           %\\
-           %\email{moreno.falaschi@unisi.it.}
-	   }
-	   %\date{}
-\maketitle
-
-
-%\end{frontmatter}
-
-\linenumbers
+%\author{ Linda Brodo\inst{1} \and Roberto Bruni\inst{2} \and Moreno 
+%Falaschi\inst{3}}
+%\institute{Dipartimento di Scienze economiche e aziendali,
+%          Universit\`a di Sassari, Italy\\
+%	   %\email{brodo@uniss.it.} 
+%	   \and
+%	   Dipartimento di Informatica,
+%	   Universit\`{a} di Pisa, Italy\\
+%	   %\email{bruni@di.unipi.it.} 
+%	   \and
+%           Dipartimento di Ingegneria dell'Informazione e Scienze Matematiche\\
+%           Universit\`a di Siena, Italy
+%           %\\
+%           %\email{moreno.falaschi@unisi.it.}
+%	   }
+%	   %\date{}
+%\maketitle
 
 \begin{abstract}
 \input{00-abstract}
 \end{abstract}
 
-\begin{keywords}
- process algebras, 
- reaction systems,
- multi-party interaction 
-\end{keywords}
+\begin{keyword}
+process algebras \sep reaction systems \sep assertion language \sep HM-logic
+\end{keyword}
+
+\end{frontmatter}
+
+\linenumbers
+
+
+%\begin{keywords}
+% process algebras, 
+% reaction systems,
+% multi-party interaction 
+%\end{keywords}
 
 \input{01-introduction}
 \input{02-ReactionSystem}
