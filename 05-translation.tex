@@ -7,7 +7,7 @@ Here we present a translation from Reaction Systems to c\CNA.
 The idea is to define separated processes for representing the behaviour of each entity, each reaction, 
 and for the provisioning of each entity by the context.
 
-\paragraph{Processes for entities.}
+\paragraph{Processes for entities}
 Given an entity $s \in S$, we exploit four different names for the interactions over $s$:
 names $s_i$, $s_o$ are used to test the presence of $s$ in the system; names $\widehat{s}_i$, $\widehat{s}_o$ are used to test the provisioning of $s$ from the context;
 names $\widetilde{s}_i$, $\widetilde{s}_o$  are used to test the production of $s$ by some reaction; names $\overline{s}_i$, $\overline{s}_o$ are used to test the absence of $s$ in the system; and names $\underline{s}_i$, $\underline{s}_o$ are used to test the absence of $s$ from the context.
@@ -66,7 +66,7 @@ Note that in the case of $\overline{P_s}$ the test for presence of $s$ in the sy
 % permutations of the solid links; nevertheless if the reactions, and their enumeration, is known
 % the code of $P_s$ can be drastically simplified.
 
-\paragraph{Processes for reactions.}
+\paragraph{Processes for reactions}
 We assume that each reaction $a$ is assigned a progressive number $j$.
 The process for reaction $aj=(R_j,I_j,P_j)$ must assert either the possibility to apply the reaction or its impossibility.
 The first case happens when all its reactants are present (the link $\link{s_i}{s_o}$ is requested for any $s\in R_j$) and all its inhibitors are absent (the link $\link{\overline{e}_i}{\overline{e}_o}$ is requested for any $e\in I_j$), then the product set is released (the link $\link{\widetilde{c}_i}{\widetilde{c}_o}$ is requested for any $c\in P_j$).
@@ -101,7 +101,7 @@ In the following there is an example explaining this schema.
 %\end{array}
 %\]
 
-\paragraph{Processes for contexts.}
+\paragraph{Processes for contexts}
 The context can vary at each step $n$ and for each entity $s \in S$, the context must say if the entity is provided or not. Let us denote by $C_n$ the context at step $n$, i.e. the set of entities that are made available. Correspondingly, we introduce another process $\mathit{Cxt}^n$ defined as follows:
 \[
 \begin{array}{lcl}
