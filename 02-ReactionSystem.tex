@@ -177,6 +177,9 @@ $$
 % $C_j' = C_j$ for $j\in[0,n]$ and $C_j' =\emptyset$ for $j>n$,   $D_0' = D_0$ and  $D_j' = \mathit{res}_A(D_{j-1}' \cup C_{j-1}')$ for $j\geq 1$.
 \end{definition}
 
+Given an extended interactive process $\pi =(\gamma,\delta)$, we denote by $\pi^k$ the shift of $\pi$ starting at the $k$-th state sequence; formally we let $\pi^k=(\gamma^k,\delta^k)$ with
+$\gamma^k=\{C_i'\}_{i\in\mathbb{N}}$, $\delta^k=\{D_i'\}_{i\in\mathbb{N}}$ with 
+  $C_0'=C_k \cup D_k$, $D'_0 = \emptyset$, and   $C_i'=C_{i+k}$, $D_i'= D_{i+k}$ for any $i\geq 1$.
 
 
 
