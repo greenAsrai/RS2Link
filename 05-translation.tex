@@ -16,9 +16,9 @@ They can be seen as instances of the same template, which is given below.
 
 \[
 \begin{array}{lcl@{\hskip 1cm}lcl}
- P_s &\defeq & P(s,\widetilde{s},\widehat{s},\underline{s}) 
+ P_s &\defeq & E(s,\widetilde{s},\widehat{s},\underline{s}) 
  &
- \overline{P_s}& \defeq & P(\overline{s},\widetilde{s},\widehat{s},\underline{s})
+ \overline{P_s}& \defeq & E(\overline{s},\widetilde{s},\widehat{s},\underline{s})
 \end{array}
 \]
 %{\color{red}
@@ -42,7 +42,7 @@ They can be seen as instances of the same template, which is given below.
 %}
 \[
 \begin{array}{rcl}
- P(s,\widetilde{s},\widehat{s},\underline{s}) & \defeq &\sum_{h,k\geq 0}  
+ E(s,\widetilde{s},\widehat{s},\underline{s}) & \defeq &\sum_{h,k\geq 0}  
   (\startchain{s_i}\chainedlink{s_o}{\noact}\chainend{\noact})^h \ \startchain{\widehat{s}_i}\chainedlink{\widehat{s}_o}{\noact}\chainend{\noact} (\startchain{\widetilde{s}_i}\chainedlink{\widetilde{s}_o}{\noact}\chainend{\noact})^k.P_s\\
 &&\ + \\
 &&
@@ -52,7 +52,7 @@ They can be seen as instances of the same template, which is given below.
 &&\sum_{h\geq 0}(\startchain{s_i}\chainedlink{s_o}{\noact}\chainend{\noact})^h \ \link{\underline{s}_i}{\underline{s}_o}.\overline{P_s}
 \end{array}
 \]
-The first line of $ P(s,\widetilde{s},\widehat{s},\underline{s})$ accounts for the case where $s$ is tested for presence by $h$ reactions and produced by $k$ reactions, while being provided by the context ($\link{\widehat{s}_i}{\widehat{s}_o}$).
+The first line of $ E(s,\widetilde{s},\widehat{s},\underline{s})$ accounts for the case where $s$ is tested for presence by $h$ reactions and produced by $k$ reactions, while being provided by the context ($\link{\widehat{s}_i}{\widehat{s}_o}$).
 Thus, $s$ will be present at the next step (the continuation is $P_s$). Here $h$ and $k$ are not known a priori and therefore any
 combination is possible. By knowing the number of reactions that test $s$, we can bound the maximum 
 values of $h$ and $k$.
@@ -161,7 +161,7 @@ We define its c\CNA~translation $\llbracket{\cal A},\gamma \rrbracket$ as follow
 $$
 \llbracket{\cal A},\gamma \rrbracket 
 \triangleq
- \restrict{\mathit{names}}(I~|~\Pi_{s\in C_0}P_{s} ~|~ \Pi_{s \notin C_0}\overline{P_s} ~|~ \Pi_{a\in A} P_a ~|~  \mathit{Cxt}^1)
+ \restrict{\mathit{names}}\left(I ~|~ \prod_{a\in A} P_a ~|~  \mathit{Cxt}^1 ~|~\prod_{s\in C_0}P_{s} ~|~ \prod_{s \notin C_0}\overline{P_s}\right)
 $$
 where $\mathit{names} = \mathit{reacts}\, \cup\, \mathit{ents}\, \cup \, \mathit{prods}\, \cup\, \{cxt\}$. 
 %For notational convenience, we fix that $r_1 = \silent$,  $r_{u+1} = cxt_1$ for $u$ the number of reacts, and $cxt_{w+1} = \silent$ for $w$ the number of entities.
@@ -204,7 +204,7 @@ The topmost restriction $\restrict{\mathit{names}}$ appearing in the process $\l
 Since all names appearing in any prefix of $\llbracket{\cal A},\gamma\rrbracket$ are restricted, in the transition $\llbracket{\cal A},\gamma\rrbracket \xrightarrow{\restrict{\mathit{names}}\upsilon} P'$ it means that the observation $\restrict{\mathit{names}}\upsilon$ has the form $\link{\silent}{\silent}\dots\link{\silent}{\silent}$, i.e., it is silent, and that $\upsilon$ is solid. Later on we will be interested in reasoning about the actual chain $\upsilon$ used in the transition.  It has the peculiarity to start and end with silent actions and to include all names in $\mathit{reacts}\cup\mathit{prods}\cup\{\mathit{cxt}\}$. As a matter of notation we call such chain $\upsilon$ \emph{complete} (solid and with $\silent$ actions at the extremes). We will then use $\llparenthesis{\cal A},\gamma\rrparenthesis$ to refer to the encoding without topmost name restrictions, i.e.,
 $$
 \llparenthesis{\cal A},\gamma\rrparenthesis \defeq 
-I~|~\Pi_{s\in C_0}P_{s} ~|~ \Pi_{s \notin C_0}\overline{P_s} ~|~ \Pi_{a\in A} P_a ~|~  \mathit{Cxt}^1
+I~|~ \prod_{a\in A} P_a ~|~  \mathit{Cxt}^1~|~\prod_{s\in C_0}P_{s} ~|~ \prod_{s \notin C_0}\overline{P_s} 
 $$
 and will write $P\xRightarrow{\upsilon} P'$ to mean that $P\xrightarrow{\upsilon} P'$ with $\upsilon$ complete.
 
@@ -465,14 +465,14 @@ In the following four statements, for brevity, we let ${\cal A} = (S, A)$ be a R
 % $C_i' = C_{i+1}$, $D_{i}' = D_{i+1}$ with $ 1 \leq i < n$.
  Let 
  $P=\llbracket{\cal A},\gamma\rrbracket$ with
-$$P  = \restrict{\mathit{names}} (I~|~\Pi_{a \in A}P_a ~|~ \mathit{Cxt}^1 ~|~ \Pi_{s \in C_0}P_s ~|~ \Pi_{s \notin C_0}\overline{P}_s).
+$$P  = \restrict{\mathit{names}} \left(I~|~\prod_{a \in A}P_a ~|~ \mathit{Cxt}^1 ~|~ \prod_{s \in C_0}P_s ~|~ \prod_{s \notin C_0}\overline{P}_s\right).
 $$
  If there exists  $P'$  such that $P \xrightarrow{v}P'$,  it holds that:
  \begin{enumerate}
  \item
   $v=\link{\silent}{\silent}\dots\link{\silent}{\silent}$, and
   \item 
- $P'= \restrict{\mathit{names}} (I~|~\Pi_{a \in A}P_a~|~ \mathit{Cxt}^2 ~|~ \Pi_{s \in C_1 \cup D_1}P_s| \Pi_{s \notin C_1 \cup D_1}\overline{P}_s)$.
+ $P'= \restrict{\mathit{names}} \left(I~|~\prod_{a \in A}P_a~|~ \mathit{Cxt}^2 ~|~ \prod_{s \in C_1 \cup D_1}P_s| \prod_{s \notin C_1 \cup D_1}\overline{P}_s\right)$.
  \end{enumerate}
 Moreover, given $\pi^1=(\gamma^1,\delta^1)$, we have $P' = \llbracket {\cal A},\gamma^1\rrbracket$.
  %\end{proposition}
