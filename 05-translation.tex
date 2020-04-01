@@ -139,7 +139,17 @@ The context can vary at each step $n$ and for each entity $s \in S$, the context
 
 We only consider $\mathit{Cxt}^n$ with $n >0$, as the entities  that are present at step zero  are considered to be present in the initial system (if $s\in C_0$ the process $P_s$ will be present initially, otherwise $\overline{P_s}$ will be present).
 
-
+In the following use the following conventions for denoting different categories of names:
+\begin{itemize}
+\item
+$\mathit{decs} \defeq \{ s, \overline{s}, \widetilde{s},\widehat{s},\underline{s}~|~ s\in S\}$ is the set of names for decorated entities;
+\item
+$\mathit{ents} \defeq \{ d_i, d_o~|~ d\in \mathit{decs}\}$ is the set names for entities;
+\item
+$\mathit{reacts}\defeq \{r_1,...,r_u\}$ is the set of reaction names associated with each reaction $aj$;
+\item 
+$\mathit{prods}\defeq \{p_1,...,p_u\}$ is the set of names for production $p_j$, associated with  reaction $aj$.
+\end{itemize}
 
 
 
@@ -153,13 +163,13 @@ $$
 \triangleq
  \restrict{\mathit{names}}(I~|~\Pi_{s\in C_0}P_{s} ~|~ \Pi_{s \notin C_0}\overline{P_s} ~|~ \Pi_{a\in A} P_a ~|~  \mathit{Cxt}^1)
 $$
-where $\mathit{names} = \mathit{reacts}\, \cup\, \mathit{ents}\, \cup \, \mathit{prods}\, \cup\, \{cxt\}$, with  $\mathit{reacts}$ be the set of reaction names $r_j $, $\mathit{cxts}$ the set of context names $\{\mathit{cxt}\}$,  $\mathit{ents}$ the set of decorated entity names  $\{s_i,s_o,\widehat{s}_i,\widehat{s}_o,\widetilde{s}_i,\widetilde{s}_o,\overline{s}_i,\overline{s}_o,\underline{s}_i,\underline{s}_o| s \in S\}$, and  $\mathit{prods}$ be the set of names for production $p_j$ associated to each reaction. 
+where $\mathit{names} = \mathit{reacts}\, \cup\, \mathit{ents}\, \cup \, \mathit{prods}\, \cup\, \{cxt\}$. 
 %For notational convenience, we fix that $r_1 = \silent$,  $r_{u+1} = cxt_1$ for $u$ the number of reacts, and $cxt_{w+1} = \silent$ for $w$ the number of entities.
-{\color{red} For technical reasons, we introduce the init process $I \defeq \link{\silent}{r_1}.I$
-to allow the name $r_1$ to be matched; also, 
+For technical reasons, we introduce the init process $I \defeq \link{\silent}{r_1}.I$
+to allow the name $r_1$ to be matched at the start of any chain; also, 
 for notational convenience, we fix that 
 %$r_1 = \silent$,
-$r_{u+1} = \mathit{cxt}$ and $p_{u+1}=\silent$,  for $u$ the number of reacts.}
+$r_{u+1} = \mathit{cxt}$ and $p_{u+1}=\silent$,  for $u$ the cardinality of $\mathit{reacts}$.
 \end{definition}
  
 
@@ -185,28 +195,28 @@ Each reaction defines a pattern to be satisfied, i.e. each reaction inserts as m
   %processes $P_s$ (or $\overline{P_s}$) 
 %  for each  $Cxt_s$ are
  %involved in the transition $t$;
-  \item for each reaction $a \in A$ and each entity $s \in S$, each virtual link offered by processes $P_a$ and $\mathit{Cxt}^n$ is  overlapped by exactly one solid link offered by  processes representing entities.
+  \item for each reaction $a \in A$ and each entity $s \in S$, each virtual link offered by processes $P_a$ and $\mathit{Cxt}^1$ is  overlapped by exactly one solid link offered by  processes representing entities.
   %each process $P_s $ (or its alternative version $\overline{P}_s$), with $s \in S$, participates at most  with one solid link for each process $P_a$, and with exactly one solid link for each process $Cxt_s$.%, if $s$ is a \emph{required element} of $A_j$ in $t$.
  
   \end{enumerate}
   \end{restatable}
  
  
-{\color{red} \begin{example}\label{ex:backbone}
- Let ${\cal A}$ be a RS whose specification contains two entities, $s1$ and $s2$, and the reactions $r_1=(s1,\ , s2)$ and $r_2 = (s2, \ , s1)$ that produce $s2$ if $s1$ is present and $s1$ if $s2$ is present. For simplicity we do not consider inhibitors. Then, we assume an  extended interactive process $\pi=(\gamma,\delta)$ where the context $\gamma$ provides  $s1$ and $s2$.
- %, for the first $n$ steps.
- Our translation follows:\\% includes the processes:\\
+\begin{example}\label{ex:backbone}
+ Let ${\cal A}$ be a RS whose specification contains two entities, $s1$ and $s2$, and the reactions $r_1=(s1,\ , s2)$ and $r_2 = (s2, \ , s1)$ that produce $s2$ if $s1$ is present and $s1$ if $s2$ is present. For simplicity we do not consider inhibitors, but the reader can assume a void inhibitor is present in both reactions. Then, we assume an  extended interactive process $\pi=(\gamma,\delta)$ where the context $\gamma$ provides  $s1$ and $s2$ at every step, but we assume that only $s1$ is initially present. The corresponding c\CNA \ process is: 
+$$\restrict{\mathit{names}} (~I ~|~ P_{s1}~|~\overline{P}_{s2}~|~ P_{r1}~|~P_{r2}~|~\mathit{Cxt})$$
+ where:
  \[
  \begin{array}{l@{\hspace{-0.009cm}}c@{\hspace{-0.009cm}}ll@{\hspace{-0.009cm}}c@{\hspace{-0.009cm}}l}
- P_{r_1} &\defeq& \startchain{r_1}\chainedlink{s1_i}{\noact}\chainedlink{\noact}{s1_o}\chainedlink{r_2}{\noact} \chainedlink{\noact}{p_1}\chainedlink{\tilde{s2}_i}{\noact}\chainedlink{\noact}{\tilde{s2}_o}\chainend{p_2}.P_{r_1} + \dots; & 
-   P_{s2} &\defeq& \startchain{\hat{s2}_i}\chainedlink{\hat{s2}_o}{\noact}
-   \chainedlink{\noact} {\tilde{s2}_i}\chainend{\tilde{s2}_o}.P_{s2} + \dots;\\
-  P_{r_2} &\defeq& \startchain{r_2}\chainedlink{\overline{s2}_i}{\noact}\chainedlink{\noact}{\overline{s2}_o}\chainedlink{cxt}{\noact} \chainedlink{\noact}{p_2}\chainend{\silent}.P_{r_2} + \dots; &
- P_{s1} &\defeq& \startchain{s1_i}\chainedlink{s1_o}{\noact}\chainedlink{\noact}{\hat{s1}_i}\chainend{\hat{s1}_o}
+ P_{r_1} &\defeq& \startchain{r_1}\chainedlink{s1_i}{\noact}\chainedlink{\noact}{s1_o}\chainedlink{r_2}{\noact} \chainedlink{\noact}{p_1}\chainedlink{\widetilde{s2}_i}{\noact}\chainedlink{\noact}{\widetilde{s2}_o}\chainend{p_2}.P_{r_1} + \dots; & 
+   P_{s1} &\defeq& \startchain{s1_i}\chainedlink{s1_o}{\noact}\chainedlink{\noact}{\widehat{s1}_i}\chainend{\widehat{s1}_o}
  %{\noact}\chainedlink{\noact}{\tilde{s1}_i}\chainedlink{\tilde{s1}_o}
- .P_{s1} + \dots; \\
- Cxt& \defeq & \startchain{cxt}\chainedlink{\hat{s1}_i}{\noact}\chainedlink{\noact}{\hat{s1}_o}
-  \chainedlink{\hat{s2}_i}{\noact}\chainedlink{\noact}{\hat{s2}_o}\chainend{p_1}.Cxt\\
+ .P_{s1} + \dots; \\   
+  P_{r_2} &\defeq& \dots + \startchain{r_2}\chainedlink{\overline{s2}_i}{\noact}\chainedlink{\noact}{\overline{s2}_o}\chainedlink{cxt}{\noact} \chainedlink{\noact}{p_2}\chainend{\silent}.P_{r_2} + \dots; &
+  \overline{P}_{s2} &\defeq& \startchain{\overline{s2}_i}\chainedlink{\overline{s2}_o}{\noact}
+   \chainedlink{\noact} {\widetilde{s2}_i}\chainend{\widetilde{s2}_o}.P_{s2} + \dots;\\
+ Cxt& \defeq & \startchain{cxt}\chainedlink{\widehat{s1}_i}{\noact}\chainedlink{\noact}{\widehat{s1}_o}
+  \chainedlink{\widehat{s2}_i}{\noact}\chainedlink{\noact}{\widehat{s2}_o}\chainend{p_1}.Cxt\\
 
   %Cxt& \defeq & \startchain{cxt}\chainedlink{\hat{s1}_i}{\noact}\chainedlink{\noact}{\hat{s1}_o}
   %\chainedlink{\hat{s2}_i}{\noact}\chainedlink{\noact}{\hat{s2}_o}\chainend{p_1}.Cxt
@@ -214,9 +224,9 @@ Each reaction defines a pattern to be satisfied, i.e. each reaction inserts as m
  % Cxt _{s2} &\defeq& \startchain{cxt_2}\chainedlink{\hat{s2}_i}{\noact}\chainedlink{\noact}{\hat{s2}_o}\chainend{p_1}. Cxt_{s2}
 \end{array}
 \]  \\
-   Now, we assume that $s1$ only is in the initial state of ${\cal A}$; for clarity we partially specify the {\tt link}-calculus code of the processes. In Figure~\ref{fig:backbone} we show the  structure of a link chain label related to the execution of a transition of the c\CNA \ system: $\restrict{names} (I | P_{s1}|P_{s2}| P_a|\dots|Cxt)$. The yellow blocks are referred to init process $I$, and the processes encoding the reactions, $P_{r_1}$ and $P_{r_2}$, and the context $Cxt$. As the figure puts in evidence, these two kinds of processes determine the structure of the link chain, from end to end, i.e. from the left $\silent$ to the right one. We could say that these processes form the \emph{backbone} of the interaction.
-   In contrast, the processes encoding the entities, $P_{s1}$,  $P_{s2}$, provides the
-    solid links to overlap the virtual links   of the backbone.
+For clarity we show the code of the processes just in part, to focus on the prefixes that will be involved in the first transition of the system. In Figure~\ref{fig:backbone} we show the  structure of a link chain label related to the execution of such a transition. The yellow blocks are referred to init process $I$, to the processes encoding the reactions, $P_{r_1}$ and $P_{r_2}$, and to the context $\mathit{Cxt}$. As the figure puts in evidence, these two kinds of processes determine the structure of the link chain, from end to end, i.e. from the left $\silent$ to the right one. We could say that these processes form the \emph{backbone} of the interaction.
+   In contrast, the processes encoding the entities, $P_{s1}$,  $\overline{P}_{s2}$, provides the
+    solid links to be merged with the virtual links of the backbone (i.e. to be plugged in the backbone).
  
   \begin{figure}[t]
   \begin{tikzpicture}
@@ -328,7 +338,7 @@ Each reaction defines a pattern to be satisfied, i.e. each reaction inserts as m
    \label{fig:backbone}
  \end{figure}
  \end{example}
-}
+
 
 Example~\ref{ex:backbone}   outlines two different roles of the processes defining the translation of an interactive process: those processes encoding the reactions and the context provide the backbone of each transition, whereas the processes encoding the entities provide the resources needed for the communication to take place.
  
