@@ -2,7 +2,7 @@
 \section{Examples}
 \label{ex:examples}
 Hereafter, we only take into account transitions whose labels are solid, i.e. they do not contain 
-virtual links, and   complete, i.e. thy starts and ends with the $\silent$ symbol.\\
+virtual links, and   complete, i.e. they starts and ends with the $\silent$ symbol.\\
 
 \subsection{Labelled transition system}
 This example is inspired by the example in~\cite{BEMR11}, where
@@ -63,7 +63,9 @@ P_2 & \defeq & P_2(q,b,w,a,w) &P_4 & \defeq & P_4(w,b,q,a,q)
 \end{array}
 \]
 \noindent
-and we put $r_1 = \silent$, $r_5 = cxt$ and  $p_5 = \silent$.
+and we put 
+%$r_1 = \silent$, 
+$r_5 = cxt$ and  $p_5 = \silent$.
 
 \paragraph{Encoding of the entities.}
 As for reactions, also the encoding of the entities is given in a parametric way.
@@ -113,25 +115,31 @@ Now, we assume that we have an initial configuration containing the entities $q$
 \[
 \begin{array}{lcl}
 Sys  \defeq \ %\restrict{r1,r2,r3,r4,\tilde{q},\tilde{w},\tilde{a},\tilde{b}}
- P_q \mid \overline{P}_w  \mid  P_a  \mid \overline{P}_b  \mid  P_1  \mid  P_2  \mid  P_3  \mid P_4  \mid Cxt.
+ I\mid P_q \mid \overline{P}_w  \mid  P_a  \mid \overline{P}_b  \mid  P_1  \mid  P_2  \mid  P_3  \mid P_4  \mid Cxt.
 \end{array}
 \] 
-Then only the second reaction can be applied, and the label transition follows
-{\small
+Then, only the second reaction can be applied, and the label transition $\ell$ follows
+{\tiny
 \[
 \begin{array}{l}
+\ell = \\
 %\restrict{r1,r2,r3,r4,\tilde{q},\tilde{w},\tilde{a},\tilde{b}}\\
- \startchain{\silent}\chainedlink{\overline{a}_i}{\bf  \overline{a}_i}\chainedlink{\bf \overline{a}_o}{\overline{a}_o}\chainedlink{r_2}{r_2}\chainedlink{q_i}{\bf q_i}\chainedlink{\bf q_i}{q_i}\chainedlink{b_i}{\bf b_i}\chainedlink{\bf b_i}{b_i}\chainedlink{\overline{w}_i}{\bf \overline{w}_i}\chainedlink{\bf \overline{w}_o}{\overline{w}_o}\chainedlink{\overline{a}_i}{\bf \overline{a}_i}\chainedlink{\bf \overline{a}_o}{\overline{a}_o}\chainedlink{r_3}{r_3}\chainedlink{\overline{a}_i}{\bf \overline{a}_i}\chainedlink{\bf \overline{a}_o}{\overline{a}_o}\chainedlink{r_4}{r_4}\chainedlink{\overline{w}_i}{\bf \overline{w}_i}\chainedlink{\bf \overline{w}_o}{\overline{w}_o}\chainedlink{cxt}{cxt}\chainedlink{\hat{a}_i}{\bf \hat{a}_i}\chainedlink{\bf \hat{a}_o}{\hat{a}_o}\chainedlink{\underline{b}_i}{\bf \underline{b}_i}\chainedlink{\bf \underline{b}_o}{\underline{b}_o}\chainedlink{p_1}{p_1}\chainedlink{p_2}{p_2}\chainedlink{\tilde{w}_i}{\bf \tilde{w}_i}\chainedlink{\bf \tilde{w}_o}{\tilde{w}_o}\chainedlink{p_3}{p_3}\chainedlink{p_4}{p_4}\chainend{\silent}
+ \startchain{\silent}\chainedlink{r_1}{r_1}
+ \chainedlink{\overline{a}_i}{\bf  \overline{a}_i}\chainedlink{\bf \overline{a}_o}{\overline{a}_o}\chainedlink{r_2}{r_2}\chainedlink{q_i}{\bf q_i}\chainedlink{\bf q_i}{q_i}\chainedlink{b_i}{\bf b_i}\chainedlink{\bf b_i}{b_i}\chainedlink{\overline{w}_i}{\bf \overline{w}_i}\chainedlink{\bf \overline{w}_o}{\overline{w}_o}\chainedlink{\overline{a}_i}{\bf \overline{a}_i}\chainedlink{\bf \overline{a}_o}{\overline{a}_o}\chainedlink{r_3}{r_3}\chainedlink{\overline{a}_i}{\bf \overline{a}_i}\chainedlink{\bf \overline{a}_o}{\overline{a}_o}\chainedlink{r_4}{r_4}\chainedlink{\overline{w}_i}{\bf \overline{w}_i}\chainedlink{\bf \overline{w}_o}{\overline{w}_o}\chainedlink{cxt}{cxt}\chainedlink{\hat{a}_i}{\bf \hat{a}_i}\chainedlink{\bf \hat{a}_o}{\hat{a}_o}\chainedlink{\underline{b}_i}{\bf \underline{b}_i}\chainedlink{\bf \underline{b}_o}{\underline{b}_o}\chainedlink{p_1}{p_1}\chainedlink{p_2}{p_2}\chainedlink{\tilde{w}_i}{\bf \tilde{w}_i}\chainedlink{\bf \tilde{w}_o}{\tilde{w}_o}\chainedlink{p_3}{p_3}\chainedlink{p_4}{p_4}\chainend{\silent}
 \end{array}
 \]}
 The parts in bold are provided by the entity processes, the other parts are provided by the processes encoding the reactions and by the process encoding the context (starting at $cxt$ and ended at $p_1$.
 In the label we can read that the rules $1$ and $4$ have been not executed as the entity $a$ is absent, 
-the rule $3$ has been not applied as the entity $w$ is absent, then only rule $2$ has been applied, and then it has produced entity $w$. Also, in the next state the context will provide entity $a$ and will not entity $b$.
+the rule $3$ has been not applied as the entity $w$ is absent, then only rule $2$ has been applied, and then it has produced entity $w$. Also,  the context provides entity $a$, that will be available in the next state, and not entity $b$.
+Now, to let the label more readable, we apply the function $flat(\ell)$ to it, obtaining a more readable and easily processing character sequence:
+\[
+r_1~\overline{a}~r_2~q~b~\overline{w}~\overline{a}~r_3~\overline{a}~r_4~\overline{w}~cxt~\hat{a}~\underline{b}~p_1~p_2~\tilde{w}~p_3~p_4~\silent\]
+
 
 \subsection{A  biological toy example}\label{subsec:toy}
 
-
-Here we consider a biological toy example where a gene $a$  codes for a protein $T$ when molecules 
+\noindent
+We consider a biological toy example where a gene $a$  codes for a protein $T$ when molecules 
 $G$ is present and $C$ is absent, and in the opposite situation $a$ codes for protein $T'$.
 This behavior is encoded in rules $1$ and $2$.
 Then, rule three codes for the production of $C$ when proteins $T$ and $F$ are present, and $T'$ absent;
@@ -160,7 +168,7 @@ P_n'(C) &\defeq &  \startchain{r_n}\chainedlink{C_i}{\noact}\chainedlink{\noact}
 %			&& \startchain{r_n}\chainedlink{\overline{b}_i}{\noact}\chainedlink{\noact}{\overline{b}_o}\chainedlink{r_{n+1}}{\noact}\chainedlink{\noact}{p_n}\chainend{p_{n+1}}.P_n(q,b,w,a,q) \ + \  \startchain{r_n}\chainedlink{a_i}{\noact}\chainedlink{\noact}{a_o}\chainedlink{r_{n+1}}{\noact}\chainedlink{\noact}{p_n} \chainend{p_{n+1}}.P_n(q,b,w,a,q) 
 \end{array}
 \]
-
+\noindent
 Then we have 
 \[
 \begin{array}{lcl @{\hspace{0.5cm}}lcl @{\hspace{0.5cm}}lcl }
@@ -179,7 +187,7 @@ P_4 & \defeq &\startchain{r_4}\chainedlink{T'_i}{\noact}\chainedlink{\noact}{T'_
 \end{array}
 \]
 \noindent
-and we put $r_1 = \silent$.
+%and we put $r_1 = \silent$.
 \paragraph{Encoding of the entities.}
 As for reactions, also the encoding of the entities is given in a parametric way.
 Here we differentiate three types of encodings: (1) for the entities that are not  provided by the context and  can be produced by the reactions; (2) for the entities that can be provided by the context and can be  produced by the reactions; (3) for the entities that are only provided by the context.\\
@@ -253,25 +261,28 @@ Now, to show a possible composition of a transition label, we assume an system w
 \[
 \begin{array}{lcl}
 Sys &\defeq &%\restrict{\tilde{C},\tilde{G},\tilde{F}, \tilde{T},\tilde{T'}}(
-P_a\mid \overline{P}_C\mid P_G\mid \overline{P}_F \mid \overline{P}_T \mid P_{T'} \mid P_1 \mid P_2 \mid P_3 \mid P_4
+I\mid P_a\mid \overline{P}_C\mid P_G\mid \overline{P}_F \mid \overline{P}_T \mid P_{T'} \mid P_1 \mid P_2 \mid P_3 \mid P_4 \mid Cxt
 \end{array}
 \]
 In the above configuration, reactions $1$ and $3$ can be applied, and also we assume that the context will provide the entity $F$, that will be available in the target configuration.
-The transition label appears as:
+Instead of showing the transition label, we give give the string generated by the function $flat$:\
+%The transition label appears as:
 \[
 \tiny
 \begin{array}{l}
 %\restrict{r1,r2,r3,r4,a,\tilde{C},\tilde{G},\tilde{F},\tilde{T},\tilde{T'}}\\
- \startchain{\silent}\chainedlink{a_i}{\bf  a_i}\chainedlink{\bf a_o}{a_o}
- \chainedlink{G_i}{\bf  G_i}\chainedlink{\bf G_o}{G_o}
- \chainedlink{\overline{C}_i}{\bf \overline{C}_i}\chainedlink{\bf \overline{C}_o}{\overline{C}_o}
- \chainedlink{r_2}{r_2}\chainedlink{G_i}{\bf G_i}\chainedlink{\bf G_o}{G_o}
-\chainedlink{r_3}{r_3}\chainedlink{T'_i}{\bf T'_i}\chainedlink{\bf T'_o}{T'_o}\chainedlink{r_4}{r_4}\chainedlink{T'_i}{\bf T'_i}\chainedlink{\bf T'_o}{T'_o}\chainedlink{\overline{F}_i}{\bf \overline{F}_i}\chainedlink{\bf \overline{F}_o}{\overline{F}_o}\chainedlink{cxt}{cxt}
-\chainedlink{\underline{C}_i}{\bf \underline{C}_i}\chainedlink{\bf \underline{C}_o}{\underline{C}_o}
-\chainedlink{\underline{G}_i}{\bf \underline{G}_i}\chainedlink{\bf \underline{G}_o}{\underline{G}_o}
-\chainedlink{\hat{F}_i}{\bf \hat{F}_i}\chainedlink{\bf \hat{F}_o}{\hat{F}_o}\chainedlink{p_1}{p_1} 
- \chainedlink{\tilde{T}_i}{\bf \tilde{T}_i}\chainedlink{\bf \tilde{T}_o}{\tilde{T}_o}
-  \chainedlink{p_2}{p_2}\chainedlink{p_3}{p_3}\chainedlink{p_4}{p_4} \chainedlink{\tilde{G}_i}{\bf \tilde{G}_i}\chainedlink{\bf \tilde{G}_o}{\tilde{G}_o} \chainend{\silent}
+% \startchain{\silent}\chainedlink{a_i}{\bf  a_i}\chainedlink{\bf a_o}{a_o}
+% \chainedlink{G_i}{\bf  G_i}\chainedlink{\bf G_o}{G_o}
+% \chainedlink{\overline{C}_i}{\bf \overline{C}_i}\chainedlink{\bf \overline{C}_o}{\overline{C}_o}
+% \chainedlink{r_2}{r_2}\chainedlink{G_i}{\bf G_i}\chainedlink{\bf G_o}{G_o}
+%\chainedlink{r_3}{r_3}\chainedlink{T'_i}{\bf T'_i}\chainedlink{\bf T'_o}{T'_o}\chainedlink{r_4}{r_4}\chainedlink{T'_i}{\bf T'_i}\chainedlink{\bf T'_o}{T'_o}\chainedlink{\overline{F}_i}{\bf \overline{F}_i}\chainedlink{\bf \overline{F}_o}{\overline{F}_o}\chainedlink{cxt}{cxt}
+%\chainedlink{\underline{C}_i}{\bf \underline{C}_i}\chainedlink{\bf \underline{C}_o}{\underline{C}_o}
+%\chainedlink{\underline{G}_i}{\bf \underline{G}_i}\chainedlink{\bf \underline{G}_o}{\underline{G}_o}
+%\chainedlink{\hat{F}_i}{\bf \hat{F}_i}\chainedlink{\bf \hat{F}_o}{\hat{F}_o}\chainedlink{p_1}{p_1} 
+% \chainedlink{\tilde{T}_i}{\bf \tilde{T}_i}\chainedlink{\bf \tilde{T}_o}{\tilde{T}_o}
+%  \chainedlink{p_2}{p_2}\chainedlink{p_3}{p_3}\chainedlink{p_4}{p_4} \chainedlink{\tilde{G}_i}{\bf \tilde{G}_i}\chainedlink{\bf \tilde{G}_o}{\tilde{G}_o} \chainend{\silent}
+r_1~ a~G~\overline{C}~ r_2~ G~ r_3~T'~r_4~T'~\overline{F}~cxt~\underline{C}~\underline{G}~\hat{F}~p_1~p_2~p_3~\tilde{G}~\silent
+
 \end{array}
 \]
 

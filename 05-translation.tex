@@ -151,11 +151,11 @@ We define its c\CNA~translation $\llbracket{\cal A},\gamma \rrbracket$ as follow
 $$
 \llbracket{\cal A},\gamma \rrbracket 
 \triangleq
- \restrict{\mathit{names}}(\Pi_{s\in C_0}P_{s} ~|~ \Pi_{s \notin C_0}\overline{P_s} ~|~ \Pi_{a\in A} P_a ~|~  \mathit{Cxt}^1)
+ \restrict{\mathit{names}}(I~|~\Pi_{s\in C_0}P_{s} ~|~ \Pi_{s \notin C_0}\overline{P_s} ~|~ \Pi_{a\in A} P_a ~|~  \mathit{Cxt}^1)
 $$
 where $\mathit{names} = \mathit{reacts}\, \cup\, \mathit{ents}\, \cup \, \mathit{prods}\, \cup\, \{cxt\}$, with  $\mathit{reacts}$ be the set of reaction names $r_j $, $\mathit{cxts}$ the set of context names $\{\mathit{cxt}\}$,  $\mathit{ents}$ the set of decorated entity names  $\{s_i,s_o,\widehat{s}_i,\widehat{s}_o,\widetilde{s}_i,\widetilde{s}_o,\overline{s}_i,\overline{s}_o,\underline{s}_i,\underline{s}_o| s \in S\}$, and  $\mathit{prods}$ be the set of names for production $p_j$ associated to each reaction. 
 %For notational convenience, we fix that $r_1 = \silent$,  $r_{u+1} = cxt_1$ for $u$ the number of reacts, and $cxt_{w+1} = \silent$ for $w$ the number of entities.
-{\color{red} For technical reasons, we introduce the process $Init \defeq \link{\silent}{r_1}.Init$
+{\color{red} For technical reasons, we introduce the init process $I \defeq \link{\silent}{r_1}.I$
 to allow the name $r_1$ to be matched; also, 
 for notational convenience, we fix that 
 %$r_1 = \silent$,
@@ -214,8 +214,8 @@ Each reaction defines a pattern to be satisfied, i.e. each reaction inserts as m
  % Cxt _{s2} &\defeq& \startchain{cxt_2}\chainedlink{\hat{s2}_i}{\noact}\chainedlink{\noact}{\hat{s2}_o}\chainend{p_1}. Cxt_{s2}
 \end{array}
 \]  \\
-   Now, we assume that $s1$ only is in the initial state of ${\cal A}$; for clarity we partially specify the {\tt link}-calculus code of the processes. In Figure~\ref{fig:backbone} we show the  structure of a link chain label related to the execution of a transition of the c\CNA \ system: $\restrict{names} (Init | P_{s1}|P_{s2}| P_a|\dots|Cxt)$. The yellow blocks are referred to process $Init$, and the processes encoding the reactions ($P_{r_1}$, in our case) and the context ($Cxt$). As the figure puts in evidence, these two kinds of processes determine the structure of the link chain, from end to end, i.e. from the left $\silent$ to the right one. We could say that these processes form the \emph{backbone} of the interaction.
-   In contrast, the processes encoding the entities ($P_{s1}$, and $P_{s2}$, in our case) provides the
+   Now, we assume that $s1$ only is in the initial state of ${\cal A}$; for clarity we partially specify the {\tt link}-calculus code of the processes. In Figure~\ref{fig:backbone} we show the  structure of a link chain label related to the execution of a transition of the c\CNA \ system: $\restrict{names} (I | P_{s1}|P_{s2}| P_a|\dots|Cxt)$. The yellow blocks are referred to init process $I$, and the processes encoding the reactions, $P_{r_1}$ and $P_{r_2}$, and the context $Cxt$. As the figure puts in evidence, these two kinds of processes determine the structure of the link chain, from end to end, i.e. from the left $\silent$ to the right one. We could say that these processes form the \emph{backbone} of the interaction.
+   In contrast, the processes encoding the entities, $P_{s1}$,  $P_{s2}$, provides the
     solid links to overlap the virtual links   of the backbone.
  
   \begin{figure}[t]
@@ -263,10 +263,12 @@ Each reaction defines a pattern to be satisfied, i.e. each reaction inserts as m
     \draw (6,1) -- (10,1) ;
  %   \draw (7,1) -- (7,0.5) -- (7.5,0.5) -- (7.5,0);
     \draw (6.5,0) -- (10.5,0);
-    \draw   (6,1)-- (6,0.5) -- (6.5,0.5) -- (6.5,0.5) -- (6.5,0) ;
+    \draw   (5.99,1)-- (5.99,0.5) -- (6.5,0.5) -- (6.5,0.5) -- (6.5,0) ;
+    \
      \draw (6.75,0.75)  node[minimum size=0.47cm,fill=yellow, draw=yellow] {$\ $};
  \draw (6.36,0.75) node[minimum size=0.475cm,draw,fill=yellow,draw=yellow] 
- {${\scriptscriptstyle \hat{s2}_o \ }$};%node[minimum size=0.5cm,draw,draw=white] {$\noact$};
+ {${\scriptscriptstyle \hat{s2}_o \ }$};
+ %node[minimum size=0.5cm,draw,draw=white] {$\noact$};
    \draw (6.75,0.26)  node[minimum size=0.485cm,fill=yellow, draw=yellow] {$\ $};
 
 % \draw (7.20,0.25) node[minimum size=0.475cm,fill=yellow, draw=yellow] {${\scriptscriptstyle{p_1}} \ 
@@ -343,14 +345,14 @@ $\gamma^j=\{C_i'\}_{i\in\mathbb{N}}$, $\delta^j=\{D_i'\}_{i\in\mathbb{N}}$ with
 % $C_i' = C_{i+1}$, $D_{i}' = D_{i+1}$ with $ 1 \leq i < n$.
  Let 
  $P=\llbracket{\cal A},\gamma\rrbracket$ with
-$$P  = \restrict{\mathit{names}} (\Pi_{a \in A}P_a ~|~ \mathit{Cxt}^1 ~|~ \Pi_{s \in C_0}P_s ~|~ \Pi_{s \notin C_0}\overline{P}_s).
+$$P  = \restrict{\mathit{names}} (I~|~\Pi_{a \in A}P_a ~|~ \mathit{Cxt}^1 ~|~ \Pi_{s \in C_0}P_s ~|~ \Pi_{s \notin C_0}\overline{P}_s).
 $$
  If there exists  $P'$  such that $P \xrightarrow{v}P'$,  it holds that:
  \begin{enumerate}
  \item
   $v=\link{\silent}{\silent}\dots\link{\silent}{\silent}$, and
   \item 
- $P'= \restrict{\mathit{names}} (Init | \Pi_{a \in A}P_a~|~ \mathit{Cxt}^2 ~|~ \Pi_{s \in C_1 \cup D_1}P_s| \Pi_{s \notin C_1 \cup D_1}\overline{P}_s)$.
+ $P'= \restrict{\mathit{names}} (I~|~\Pi_{a \in A}P_a~|~ \mathit{Cxt}^2 ~|~ \Pi_{s \in C_1 \cup D_1}P_s| \Pi_{s \notin C_1 \cup D_1}\overline{P}_s)$.
  \end{enumerate}
 Moreover, given $\pi^1=(\gamma^1,\delta^1)$, we have $P' = \llbracket {\cal A},\gamma^1\rrbracket$.
  %\end{proposition}
@@ -417,10 +419,46 @@ Let $P=\llbracket{\cal A},\gamma\rrbracket$ and  $\pi^j= (\gamma^j,\delta^j)$.
 Then, $P \xrightarrow{\link{\silent}{\silent}\dots\link{\silent}{\silent}}^j P''=\llbracket{\cal A},\gamma^j\rrbracket$.  
  \end{restatable}
 
+
+
+\paragraph{The flat function}
+For technical reasons, our transition labels are quite verbose; then, to simplify their processing, we introduce a function that takes a solid link chain and returns a simple string by eliminating all the channel matching pairs leaving just one channel per each pair. This transformation is harmless, in the sense that it retains all the information in the chain, because it is applied to solid chains only. Below we denote by $\mathit{decs} = \{ s, \overline{s}, \widetilde{s},\widehat{s},\underline{s}~|~ s\in S\}$ the set of decorated names (without subscripts $_i$ and $_o$).
+The function $\mathit{flat}$ is defined inductively as follows:
+%\[
+%\begin{array}{lcl@{\hspace{0.5cm}}lcl@{\hspace{0.5cm}}lcl@{\hspace{0.5cm}}lcl}
+%\mathit{flat}(\epsilon)&\defeq & \epsilon &
+%\mathit{flat}(\link{\gamma}{\gamma'}) &  \defeq & \left \{ \begin{array}{cl} \epsilon & \mathrm{if } (\gamma = \beta_i \wedge \gamma = \beta_o)  \vee \gamma = \silent\\
+%\gamma' & \mathrm{otw }  \end{array} \right. &
+%%\mathit{flat}(\link{\alpha}{\silent})& \defeq & \epsilon &
+%%\mathit{flat}(\link{\alpha}{\beta}) & \defeq &\beta \\
+%\end{array}\]
+
+\[
+\mathit{flat}(\epsilon)\defeq \epsilon 
+\qquad
+\mathit{flat}(\link{\alpha}{\beta}) \defeq 
+\left \{ \begin{array}{ll} 
+\beta & \mbox{if $\beta\in \mathit{reacts}\cup\{\mathit{cxt}\}\cup\mathit{prods}$}\\
+\gamma & \mbox{if $\beta=\gamma_i$ with $\gamma\in\mathit{decs}$}\\
+\epsilon & \mbox{otherwise}  
+\end{array} \right. 
+\]
+
+\[
+\begin{array}{lcl}
+\mathit{flat}(\link{\alpha}{\beta}\upsilon)& \defeq & \mathit{flat}(\link{\alpha}{\beta}):: \mathit{flat}(\upsilon)\\
+\end{array}\\
+\]
+where  $::$ is the usual string concatenation operator.
+
+
  
 % 
 % \begin{proposition}[correctness]
 % Let $P$ a c\CNA\  process such that exists a reaction system ${\cal A}$ such that $P=[|{\cal A}|]$, then if $P \rightarrow P'$, then $\exists$ ${\cal A'}$ such that ${\cal A}$  evolves in ${\cal A'}$ in one step and $P'=[|{\cal A'}|]$.
 % \end{proposition}
+ 
+ 
+ 
  
   
