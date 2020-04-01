@@ -29,7 +29,7 @@ In our chained {\tt link}-calculus encoding, $q$, $w$, $a$, and $b$ became the $
 3 \  &(\{w,a\},\{b\},q) & 4\ &(\{w,b\},\{a\},w)\\ 
 \end{array}
 \]
-\paragraph{Encoding of the rules.}
+\paragraph{Encoding of the rules}
 The encoding of the rules for reactions is  given in a parametric way:
 \[
 \begin{array}{lcl}
@@ -65,7 +65,7 @@ P_2 & \defeq & P_2(q,b,w,a,w) &P_4 & \defeq & P_4(w,b,q,a,q)
 \noindent
 and we put $r_1 = \silent$, $r_5 = cxt$ and  $p_5 = \silent$.
 
-\paragraph{Encoding of the entities.}
+\paragraph{Encoding of the entities}
 As for reactions, also the encoding of the entities is given in a parametric way.
 Here we differentiate the encoding for the entities that are not provided by the context and that can be produced by the reactions, and the ones that can be provided by the context and that are not produced by the reactions.\\
 Here, the entities $p$ and $w$ that are not provided by the context:
@@ -109,7 +109,7 @@ Cxt &\defeq &  \startchain{cxt}\chainedlink{\hat{a}_i}{\noact}\chainedlink{\noac
 \]
 We model the context to always offer either  $a$ or $b$, and no both the entities. The reason is that in
 the other cases (providing both $a$ and $b$ or neither of them) leads the system to be stuck.\\
-Now, we assume that we have an initial configuration containing the entities $q$ and $b$ (with$\tilde{q},\tilde{w},\tilde{a},\tilde{b}$ grouping all the possibile decorations for these names):
+Now, we assume that we have an initial configuration containing the entities $q$ and $b$ (with $\tilde{q},\tilde{w},\tilde{a},\tilde{b}$ grouping all the possibile decorations for these names):
 \[
 \begin{array}{lcl}
 Sys  \defeq \ %\restrict{r1,r2,r3,r4,\tilde{q},\tilde{w},\tilde{a},\tilde{b}}
@@ -136,7 +136,9 @@ $G$ is present and $C$ is absent, and in the opposite situation $a$ codes for pr
 This behavior is encoded in rules $1$ and $2$.
 Then, rule three codes for the production of $C$ when proteins $T$ and $F$ are present, and $T'$ absent;
 rule four codes for the production of $G$ when  proteins $T'$ is present and $F$ is absent.
-\paragraph{Encoding of the rules.}
+
+\paragraph{Encoding of the rules}
+
 The encoding of the rules for reactions is  given in a parametric way:
 \[
 \begin{array}{lcl}
@@ -180,7 +182,9 @@ P_4 & \defeq &\startchain{r_4}\chainedlink{T'_i}{\noact}\chainedlink{\noact}{T'_
 \]
 \noindent
 and we put $r_1 = \silent$.
-\paragraph{Encoding of the entities.}
+
+\paragraph{Encoding of the entities}
+
 As for reactions, also the encoding of the entities is given in a parametric way.
 Here we differentiate three types of encodings: (1) for the entities that are not  provided by the context and  can be produced by the reactions; (2) for the entities that can be provided by the context and can be  produced by the reactions; (3) for the entities that are only provided by the context.\\
 Here, the entities $T$ and $T'$ that can be produced by the reactions and that are not provided by the context:

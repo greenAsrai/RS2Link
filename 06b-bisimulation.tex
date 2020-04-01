@@ -23,7 +23,7 @@ programs is indistinguishable, in the case of biological systems the classical b
 In fact, in a biological soup, a high number of interactions occur every seconds, and generally, biologists
 are only interested to analyse a small subset of them.
 
-For this reason, we propose an alternative notion of bisimulation, that hereafter we call \emph{biosimulation},
+For this reason, we propose an alternative notion of bisimulation, that hereafter we call \emph{bio-simulation},
 that allows us  to compare two biological systems by restricting the observation to only the limited events of interest.
 This allows one to tailor the equivalence to different applications and purposes. 
 
@@ -181,10 +181,12 @@ $\star :: r_j :: ? :: r_{j+1} :: \star$
 \end{enumerate}
 where in 1, 2, 6 we exploit the fact that in a reaction $(R,I,P)$ the sets $R$ of reactants and  $I$ of inhibitors are non empty, so that if there is only one symbol between the occurrence of $r_j$ and $r_{j+1}$ it means the reaction $r_j$ has not been applied. Viceversa, if the reaction $r_j$ has been applied the occurrence of $r_j$ must be followed by at least one of the symbols in $\{s_1,...,s_n\}$ and then by at least one of the symbols in $\{\overline{s}_1,...,\overline{s}_n\}$.
 
-The notion of biosimulation builds on the above language of assertions to parameterize the induced equivalence on the property of interest. 
+\subsection{Bio-similarity and bio-logical equivalence}
+
+The notion of bio-simulation builds on the above language of assertions to parameterize the induced equivalence on the property of interest. 
 Please recall that we have defined the behaviour of the contest in a non determinist way, thus 
 at each step, different possible sets of entities can be provided to the system and different sets of reaction can be enabled/disabled. 
-Biosimulation can thus be used to compare the behaviour of different systems that share some of the reactions or entities or also to compare the behaviour of the same set of reaction rules when different contexts are provided.
+Bio-simulation can thus be used to compare the behaviour of different systems that share some of the reactions or entities or also to compare the behaviour of the same set of reaction rules when different contexts are provided.
 
 
 %situations where in the same conditions, two alternative (mutually exclusive) behaviors can happen.
@@ -230,8 +232,8 @@ Biosimulation can thus be used to compare the behaviour of different systems tha
 
 
 
-\begin{definition}[Biosimilarity  $ \sim_F $]
-Given an assertion $F$, a \emph{biosimulation} $\mathbf{R}_F$ that respects $F$ is a binary relation over {\tt link}-calculus processes such that, if $P \mathrel{\mathbf{R}_F} Q$ then:
+\begin{definition}[Bio-similarity  $ \sim_F $]
+Given an assertion $F$, a \emph{bio-simulation} $\mathbf{R}_F$ that respects $F$ is a binary relation over {\tt link}-calculus processes such that, if $P \mathrel{\mathbf{R}_F} Q$ then:
  \begin{itemize} 
  \item
  for any $v,P'$ such that 
@@ -242,11 +244,11 @@ Given an assertion $F$, a \emph{biosimulation} $\mathbf{R}_F$ that respects $F$ 
 \end{itemize}
 %\item i$Q \xrightarrow{v} Q'$ with $v \entails F$ iff $\exists v',P'$ s.t.~$v \stretcheq v'$, $P  \xrightarrow{v'} P'$ with $v \entails F$. and $P' \mathrel{\mathbf{R}_{F}} Q'$.
 %\end{itemize}
-We let $ \sim_F $ denote the largest  biosimulation and we say that $P$ is \emph{biosimilar} to $Q$, with respect to $F$, if $P \sim_F Q$.
+We let $ \sim_F $ denote the largest  bio-simulation and we say that $P$ is \emph{bio-similar} to $Q$, with respect to $F$, if $P \sim_F Q$.
 \end{definition}
 
 \begin{remark}
-An alternative way to look at a biosimulation that respects $F$ is to define it as an ordinary bisimulation over the transition system labelled over $\{F,\neg F\}$ obtained by transforming each transition $P \xrightarrow{v} P'$ such that $v\entails F$ into $P \xrightarrow{F} P'$ and  each transition $P \xrightarrow{v} P'$ such that $v\not\entails F$ into $P \xrightarrow{\neg F} P'$.
+An alternative way to look at a bio-simulation that respects $F$ is to define it as an ordinary bisimulation over the transition system labelled over $\{F,\neg F\}$ obtained by transforming each transition $P \xrightarrow{v} P'$ such that $v\entails F$ into $P \xrightarrow{F} P'$ and  each transition $P \xrightarrow{v} P'$ such that $v\not\entails F$ into $P \xrightarrow{\neg F} P'$.
 \end{remark}
 
 Now, we introduce a slightly modified version of the Hennessy Milner Logic~\cite{}, called bioHML; due to the reasons we explained above, we do not want to look at the complete transition labels, thus we rely on our simple assertion language to make it parametric to the assertion $F$ of interest:
@@ -290,7 +292,7 @@ We write $P \entails G$ ($P$ satisfies $G$) if and only if $P \in  \llbracket G 
 We let $\mathcal{L}_F$ be the set of all bioHML formulas that respects $F$ and 
 we say that two processes $P,Q$ are bio-logically equivalent w.r.t. $F$, written $P \equiv_{\mathcal{L}_F}Q$, when $P$ and $Q$ satisfy the exactly the same bioHML formulas in $\mathcal{L}_F$, i.e. when for any $G\in \mathcal{L}_F$ we have $P \entails G\ \Leftrightarrow Q \entails G$.
 
-Finally, we extend the classical result establishing the correspondence between the logical equivalence induced by HML with bisimilarity for proving that biosimilarity coincides with bio-logical equivalence.
+Finally, we extend the classical result establishing the correspondence between the logical equivalence induced by HML with bisimilarity for proving that bio-similarity coincides with bio-logical equivalence.
 
 \begin{theorem}
 $\sim_F\ =\ \equiv_{\mathcal{L}_F}$
