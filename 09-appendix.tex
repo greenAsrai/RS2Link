@@ -211,76 +211,98 @@ Then, all the processes $I$, $P_a$, $P_s$ (or $\overline{P_s}$), and $\mathit{Cx
  Now,
 by Definition~\ref{def:trans} and by Lemma~\ref{lem:struct}.1, all the  channels $r_j,p_j$, with
  $j \in [1,\dots,u]$, and $cxt_h$, with $h \in [1, \dots, w]$, and all the annotated versions of 
- $s_i$, $s_o$ are restricted. Also, processes $Cxt_s$ always requires the 
- interaction with $P_s$ on either on channels $\hat{s}_i$, $\hat{s}_o$ or on channels 
+ $s_i$, $s_o$ are restricted. Also, processes $\mathit{Cxt}$ always requires the 
+ interaction with $P_s$ on either on channels $\widehat{s}_i$, $\widehat{s}_o$ or on channels 
  $\underline{s}_i$, $\underline{s}_o$.
- It derives that all the processes: $P_a$  (coding the behaviour of reaction $a \in A$), $P_s$ (coding the behaviour of entity $s \in S$), and $Cxt_s$ (coding the behaviour of the context regarding the entity $s$) have been involved in the transition. 
-We have the following cases:
+ It derives that all the processes: $P_a$  (coding the behaviour of reaction $a \in A$), $P_s$ (coding the behaviour of entity $s \in S$), and $\mathit{Cxt}$ (coding the behaviour of the context regarding all the entities) have been involved in the transition. 
+
+For any process $P_{aj}$ encoding a reaction $aj$ we have the following cases:
 \begin{description}
-\item[(a)] processes $P_a$ encoding a reaction $a$,  with serial  number $j$, producing the entity $s$ provide a code of this type:
+\item[(a)] 
+if $aj$ is applicable and it produces the entity $s$,  
+the process $P_{aj}$ provides a code of this type:
 %By Lemma~\ref{lem:compl1}, all the processes $A_j$, and $Cxt_h$ participated in the tr
 %The code executed by any process encoding rule $R_i$ producing $e$ is 
-$P_a\defeq \link{r_j}{\dots}\chainedlink{r_{j+1}}{\noact}\chainedlink{\noact}{p_j}\link{}{\dots}\chainedlink{\tilde{s}_i}{\noact}\chainedlink{\noact}{\dots}\link{\tilde{s}_o}{\dots} \chainend{p_{j+1}}.P_a $;
-\item[(b)] processes $P_a$ encoding a reaction $a$, with serial number $j$, consuming the entity $s$
-% without producing it, 
-provide a code of this type: 
-$P_a\defeq \link{r_j}{\dots}\chainedlink{s_i}{\noact}\chainedlink{\noact}{}\link{s_o}{\dots} \chainedlink{r_{j+1}}{\noact}\chainedlink{\noact}{p_j}\link{}{\dots}\link{}{p_{j+1}}.P_a $;
-\item[(c)]  processes $P_a$ encoding a reaction $a$, with serial number $j$, requiring the absence of the entity $s$ provide a code of this type: \\
-$P_a\defeq \link{r_j}{\dots}\chainedlink{\overline{s}_i}{\noact}\chainedlink{\noact}{}\link{\overline{s}_o}{\dots} \chainedlink{r_{j+1}}{\noact}\chainedlink{\noact}{p_j}\link{}{\dots}\link{}{p_{j+1}}.P_a $;
-\item[(d)] processes $P_a$ encoding a reaction $a$ (that cannot be applied), with serial number $j$, 
-execute a code  capturing either the absence of one of its reactants (case 1), or the presence  of one of its inhibitors (case 2):
+$$P_{aj}\defeq \link{r_j}{\dots}\chainedlink{r_{j+1}}{\noact}\chainedlink{\noact}{p_j}\link{}{\dots}\chainedlink{\widetilde{s}_i}{\noact}\chainedlink{\noact}{\dots}\link{\widetilde{s}_o}{\dots} \chainend{p_{j+1}}.P_{aj} ;$$
+
+\item[(b)] 
+ if $aj$ is applicable and it  consumes the entity $s$,
+ the process $P_{aj}$ provides a code of this type: 
+$$P_{aj}\defeq \link{r_j}{\dots}\chainedlink{s_i}{\noact}\chainedlink{\noact}{}\link{s_o}{\dots} \chainedlink{r_{j+1}}{\noact}\chainedlink{\noact}{p_j}\link{}{\dots}\link{}{p_{j+1}}.P_{aj} ;$$
+
+\item[(c)]  
+ if $aj$ is applicable and it requires the absence of the entity $s$,
+ the process $P_{aj}$  provides a code of this type: 
+$$P_{aj}\defeq \link{r_j}{\dots}\chainedlink{\overline{s}_i}{\noact}\chainedlink{\noact}{}\link{\overline{s}_o}{\dots} \chainedlink{r_{j+1}}{\noact}\chainedlink{\noact}{p_j}\link{}{\dots}\link{}{p_{j+1}}.P_{aj} ;$$
+
+\item[(d)] 
+ if $aj$ is not applicable,
+the process $P_{aj}$ executes a code  capturing either the absence of one of its reactants (case 1), or the presence  of one of its inhibitors (case 2):
 \begin{enumerate}
-\item $P_a\defeq \link{r_j}{\dots}\chainedlink{\overline{s}_i}{\noact}\chainedlink{\noact}{}\link{\overline{s}_o}{\dots} \chainedlink{r_{j+1}}{\noact}\chainedlink{\noact}{p_j}\link{}{\dots}\link{}{p_{j+1}}.P_a $.
-\item $P_a\defeq \link{r_j}{\dots}\chainedlink{s_i}{\noact}\chainedlink{\noact}{}\link{s_o}{\dots} \chainedlink{r_{j+1}}{\noact}\chainedlink{\noact}{p_j}\link{}{\dots}\link{}{p_{j+1}} .P_a $.
+\item $P_{aj}\defeq \link{r_j}{\dots}\chainedlink{\overline{s}_i}{\noact}\chainedlink{\noact}{}\link{\overline{s}_o}{\dots} \chainedlink{r_{j+1}}{\noact}\chainedlink{\noact}{p_j}\link{}{\dots}\link{}{p_{j+1}}.P_{aj} $;
+\item $P_{aj}\defeq \link{r_j}{\dots}\chainedlink{s_i}{\noact}\chainedlink{\noact}{}\link{s_o}{\dots} \chainedlink{r_{j+1}}{\noact}\chainedlink{\noact}{p_j}\link{}{\dots}\link{}{p_{j+1}} .P_{aj}$.
 \end{enumerate}
 \end{description}
 %It is worth nothing that there could be other processes $P_a$ encoding  a reaction $a \in A$ that do not
 %involve the entity $s$.\\
-Now, we consider the structure of the process $Cxt_s = Cxt^0_s$. By Definition~\ref{def:trans}, $Cxt^0_s$ is the unique process encoding the behaviour of the context regulating the supply of $s$. 
-The code of the process $Cxt^t_s$, with $t \geq 0$, has the following structure: 
+Now, we consider the structure of the process $\mathit{Cxt}^1$. 
+By Definition~\ref{def:trans}, $Cxt^1$ is the unique process encoding the behaviour of the context regulating the supply of any entity. 
+
 \begin{description}
-\item[(e)] $Cxt^i_s \defeq  \startchain{cxt_h}\chainedlink{\hat{s}_i}{\noact}\chainedlink{\noact}{\hat{s}_o}\chainend{cxt_{h+1}}. Cxt^{i+1}_{s}$, if $s \in C_{i+1}$;
-\item[(f)] $Cxt^i_s \defeq  \startchain{cxt_h}\chainedlink{\underline{s}_i}{\noact}\chainedlink{\noact}{\underline{s}_o}\chainend{cxt_{h+1}}. Cxt^{i+1}_{s}$, if $s \notin C_{i+1}$;
-%\item[(e)] $Cxt_{s}^1 \defeq \startchain{cxt_h}\chainedlink{\hat{s}_i}{\noact}\chainedlink{\noact}{\hat{s}_o}\chainend{cxt_{h+1}}. Cxt_{s}^{2}$, if  $s \in C_1$ (and hence $s \in C_0')$;
-%\item[(f)] $Cxt_{s}^1 \defeq \startchain{cxt_h}\chainedlink{\underline{s}_i}{\noact}\chainedlink{\noact}{\underline{s}_o}\chainend{cxt_{h+1}}. Cxt_{s}^{2}$, if  $s \notin C_1$.
+\item[(e)] 
+The code of the process $Cxt^1$ that provides $s$ and not $e$ has the following structure: 
+$$
+\mathit{Cxt}^1 \defeq
+\link{\mathit{cxt}}{\dots}
+\chainedlink{\widehat{s}_i}{\noact}\chainedlink{\noact}{}\link{\widehat{s}_o}{\dots} 
+\chainedlink{\underline{e}_i}{\noact}\chainedlink{\noact}{}\link{\underline{e}_o}{\dots} 
+\chainend{p_{1}}. \mathit{Cxt}^{2} .
+$$
 \end{description}
 
 
-%$R_j \defeq \startchain{rule_j}\chainedlink{e_i}{\noact}\chainedlink{\noact}{e_o}\chainedlink{\overline{e'}_i}{\noact} \chainedlink{\noact}{\overline{e'}_o}\chainedlink{\tilde{e''}_i}{\noact}\chainedlink{\noact}{\tilde{e''}_o} \chainend{rule_{j+1}}.R_j + \dots$, with $e',e''\neq e $.\\
+%$R_j \defeq \startchain{rule_j}\chainedlink{e_i}{\noact}\chainedlink{\noact}{e_o}\chainedlink{\overline{e'}_i}{\noact} \chainedlink{\noact}{\overline{e'}_o}\chainedlink{\widetilde{e''}_i}{\noact}\chainedlink{\noact}{\widetilde{e''}_o} \chainend{rule_{j+1}}.R_j + \dots$, with $e',e''\neq e $.\\
 %The code executed by any rule $j$ not requiring $e$ is $R_j \defeq \startchain{rule_j}\chainedlink{e_i}{\noact}\chainedlink{\noact}{e_o} \chainend{rule_{j+1}}.R_j + \dots$.\\
 \noindent
 The code executed by  $P_s$ has the following structure:
 \begin{description}
-\item[(g)] $P_s \defeq  \sum_{h,k\geq0}(\startchain{s_i}\chainedlink{s_o}{\noact}\chainend{\noact}) ^h\, \startchain{\hat{s}_i}\chainedlink{\hat{s}_o}{\noact}\chainend{\noact}
- (\startchain{\tilde{s}_i}\chainedlink{\tilde{s}_o}{\noact}\chainend{\noact})^k\,.P_s $, if $s \in C_{i+1}$;
-% \underbrace{ \startchain{s_i}\chainedlink{s_o}{\noact}\chainedlink{\noact}{s_i}\chainedlink{s_o}{\noact}\chainend{\noact}...}_{v\ times}\underbrace{ \startchain{\tilde{s}_i}\chainedlink{\tilde{s}_o}{\noact}\chainedlink{\noact}{\tilde{s}_i}\chainedlink{\tilde{s}_o}{\noact}\chainend{\noact}...}_{z\ times}\link{\hat{s}_i}{\hat{s}_o}.P_s $, if $s \in C_{i+1}$;
-%\item[()] $P_s \defeq  \underbrace{ \startchain{s_i}\chainedlink{s_o}{\noact}\chainedlink{\noact}{s_i}\chainedlink{s_o}{\noact}\chainend{\noact}...}_{v\ times}\link{\hat{s}_i}{\hat{s}_o}.P_s $, if $s \in C_1$ %(and hence $s \in C_0'$)
-\item[(h)] $P_s \defeq \sum_{h \geq 0,k\geq 1}(\startchain{s_i}\chainedlink{s_o}{\noact}\chainend{\noact})^h\ \startchain{\underline{s}_i}\chainedlink{\underline{s}_o}{\noact}\chainend{\noact} (\startchain{\tilde{s}_i}\chainedlink{\tilde{s}_o}{\noact}\chainend{\noact})^k
+\item[(f)] 
+$P_s \defeq  \sum_{h,k\geq0}(\startchain{s_i}\chainedlink{s_o}{\noact}\chainend{\noact}) ^h\, \startchain{\widehat{s}_i}\chainedlink{\widehat{s}_o}{\noact}\chainend{\noact}
+ (\startchain{\widetilde{s}_i}\chainedlink{\widetilde{s}_o}{\noact}\chainend{\noact})^k\,.P_s $, if $s \in C_{i+1}$;
+% \underbrace{ \startchain{s_i}\chainedlink{s_o}{\noact}\chainedlink{\noact}{s_i}\chainedlink{s_o}{\noact}\chainend{\noact}...}_{v\ times}\underbrace{ \startchain{\widetilde{s}_i}\chainedlink{\widetilde{s}_o}{\noact}\chainedlink{\noact}{\widetilde{s}_i}\chainedlink{\widetilde{s}_o}{\noact}\chainend{\noact}...}_{z\ times}\link{\widehat{s}_i}{\widehat{s}_o}.P_s $, if $s \in C_{i+1}$;
+%\item[()] $P_s \defeq  \underbrace{ \startchain{s_i}\chainedlink{s_o}{\noact}\chainedlink{\noact}{s_i}\chainedlink{s_o}{\noact}\chainend{\noact}...}_{v\ times}\link{\widehat{s}_i}{\widehat{s}_o}.P_s $, if $s \in C_1$ %(and hence $s \in C_0'$)
+\item[(g)] 
+$P_s \defeq \sum_{h \geq 0,k\geq 1}(\startchain{s_i}\chainedlink{s_o}{\noact}\chainend{\noact})^h\ \startchain{\underline{s}_i}\chainedlink{\underline{s}_o}{\noact}\chainend{\noact} (\startchain{\widetilde{s}_i}\chainedlink{\widetilde{s}_o}{\noact}\chainend{\noact})^k
 .P_s$, if $s \not\in C_{i+1}$
-% \underbrace{ \startchain{s_i}\chainedlink{s_o}{\noact}\chainedlink{\noact}{s_i}\chainedlink{s_o}{\noact}\chainend{\noact}...}_{v\ times}\underbrace{ \startchain{\tilde{s}_i}\chainedlink{\tilde{s}_o}{\noact}\chainedlink{\noact}{\tilde{s}_i}\chainedlink{\tilde{s}_o}{\noact}\chainend{\noact}...}_{z >0 \ times}\link{\underline{s}_i}{\underline{s}_o}.P_s$, if $s \in C_{i+1}$
-\item[(i)] $P_s \defeq  \sum_{h\geq0} (\startchain{s_i}\chainedlink{s_o}{\noact}\chainend{\noact})^h
+% \underbrace{ \startchain{s_i}\chainedlink{s_o}{\noact}\chainedlink{\noact}{s_i}\chainedlink{s_o}{\noact}\chainend{\noact}...}_{v\ times}\underbrace{ \startchain{\widetilde{s}_i}\chainedlink{\widetilde{s}_o}{\noact}\chainedlink{\noact}{\widetilde{s}_i}\chainedlink{\widetilde{s}_o}{\noact}\chainend{\noact}...}_{z >0 \ times}\link{\underline{s}_i}{\underline{s}_o}.P_s$, if $s \in C_{i+1}$
+\item[(h)] 
+$P_s \defeq  \sum_{h\geq0} (\startchain{s_i}\chainedlink{s_o}{\noact}\chainend{\noact})^h
 %{s_i}\chainedlink{s_o}{\noact}\chainend{\noact}...}_{v\ times}
 \link{\underline{s}_i}{\underline{s}_o}.\overline{P}_s$, if $s \notin C_{i+1}$
 \end{description}
 where, by Lemma~\ref{lem:struct}.2, $h$ is the number of reactions requiring the presence of $s$ plus possibly some reactions not requiring $s$; and $k$ is the number of reactions producing $s$.
-The code executed by  $\overline{P}_s$ has the following structure:
-\begin{description}
-\item[(g')] $\overline{P}_s \defeq  \sum_{h,k\geq 0}(\startchain{\overline{s}_i}\chainedlink{\overline{s}_o}{\noact}\chainend{\noact})^h  \, \startchain{\hat{s}_i}\chainedlink{\hat{s}_o}{\noact}\chainend{\noact}
- (\startchain{\tilde{s}_i}\chainedlink{\tilde{s}_o}{\noact}\chainend{\noact})^k\,.P_s $, if $s \in C_{i+1}$;
-% \underbrace{ \startchain{\overline{s}_i}\chainedlink{\overline{s}_o}{\noact}\chainedlink{\noact}{\overline{s}_i}\chainedlink{\overline{s}_o}{\noact}\chainend{\noact}...}_{v\ times}\underbrace{ \startchain{\tilde{s}_i}\chainedlink{\tilde{s}_o}{\noact}\chainedlink{\noact}{\tilde{s}_i}\chainedlink{\tilde{s}_o}{\noact}\chainend{\noact}...}_{z\ times}\link{\hat{s}_i}{\hat{s}_o}.P_s $, if $s \in C_{i+1}$;
-%\item[()] $P_s \defeq  \underbrace{ \startchain{s_i}\chainedlink{s_o}{\noact}\chainedlink{\noact}{s_i}\chainedlink{s_o}{\noact}\chainend{\noact}...}_{v\ times}\link{\hat{s}_i}{\hat{s}_o}.P_s $, if $s \in C_1$ %(and hence $s \in C_0'$)
-\item[(h')] $\overline{P}_s \defeq  \sum_{h \geq 0,k\geq 1} (\startchain{\overline{s}_i}\chainedlink{\overline{s}_o}{\noact}\chainend{\noact})^h\ \startchain{\underline{s}_i}\chainedlink{\underline{s}_o}{\noact}\chainend{\noact} (\startchain{\tilde{s}_i}\chainedlink{\tilde{s}_o}{\noact}\chainend{\noact})^k.P_s$, if $s \notin C_{i+1}$
 
-% \underbrace{ \startchain{\overline{s}_i}\chainedlink{\overline{s}_o}{\noact}\chainedlink{\noact}{\overline{s}_i}\chainedlink{\overline{s}_o}{\noact}\chainend{\noact}...}_{v\ times}\underbrace{ \startchain{\tilde{s}_i}\chainedlink{\tilde{s}_o}{\noact}\chainedlink{\noact}{\tilde{s}_i}\chainedlink{\tilde{s}_o}{\noact}\chainend{\noact}...}_{z >0 \ times}\link{\underline{s}_i}{\underline{s}_o}.P_s$, if $s \in C_{i+1}$
-\item[(i')] $\overline{P}_s \defeq  \sum_{h \geq 0}(\startchain{\overline{s}_i}\chainedlink{\overline{s}_o}{\noact}\chainend{\noact})^h\,\link{\underline{s}_i}{\underline{s}_o}.\overline{P}_s$, if $s \notin C_{i+1}$
+Similarly, the code executed by  $\overline{P}_s$ has the following structure:
+\begin{description}
+\item[(f')] 
+$\overline{P}_s \defeq  \sum_{h,k\geq 0}(\startchain{\overline{s}_i}\chainedlink{\overline{s}_o}{\noact}\chainend{\noact})^h  \, \startchain{\widehat{s}_i}\chainedlink{\widehat{s}_o}{\noact}\chainend{\noact}
+ (\startchain{\widetilde{s}_i}\chainedlink{\widetilde{s}_o}{\noact}\chainend{\noact})^k\,.P_s $, if $s \in C_{i+1}$;
+% \underbrace{ \startchain{\overline{s}_i}\chainedlink{\overline{s}_o}{\noact}\chainedlink{\noact}{\overline{s}_i}\chainedlink{\overline{s}_o}{\noact}\chainend{\noact}...}_{v\ times}\underbrace{ \startchain{\widetilde{s}_i}\chainedlink{\widetilde{s}_o}{\noact}\chainedlink{\noact}{\widetilde{s}_i}\chainedlink{\widetilde{s}_o}{\noact}\chainend{\noact}...}_{z\ times}\link{\widehat{s}_i}{\widehat{s}_o}.P_s $, if $s \in C_{i+1}$;
+%\item[()] $P_s \defeq  \underbrace{ \startchain{s_i}\chainedlink{s_o}{\noact}\chainedlink{\noact}{s_i}\chainedlink{s_o}{\noact}\chainend{\noact}...}_{v\ times}\link{\widehat{s}_i}{\widehat{s}_o}.P_s $, if $s \in C_1$ %(and hence $s \in C_0'$)
+\item[(g')] 
+$\overline{P}_s \defeq  \sum_{h \geq 0,k\geq 1} (\startchain{\overline{s}_i}\chainedlink{\overline{s}_o}{\noact}\chainend{\noact})^h\ \startchain{\underline{s}_i}\chainedlink{\underline{s}_o}{\noact}\chainend{\noact} (\startchain{\widetilde{s}_i}\chainedlink{\widetilde{s}_o}{\noact}\chainend{\noact})^k.P_s$, if $s \notin C_{i+1}$
+
+% \underbrace{ \startchain{\overline{s}_i}\chainedlink{\overline{s}_o}{\noact}\chainedlink{\noact}{\overline{s}_i}\chainedlink{\overline{s}_o}{\noact}\chainend{\noact}...}_{v\ times}\underbrace{ \startchain{\widetilde{s}_i}\chainedlink{\widetilde{s}_o}{\noact}\chainedlink{\noact}{\widetilde{s}_i}\chainedlink{\widetilde{s}_o}{\noact}\chainend{\noact}...}_{z >0 \ times}\link{\underline{s}_i}{\underline{s}_o}.P_s$, if $s \in C_{i+1}$
+\item[(h')] 
+$\overline{P}_s \defeq  \sum_{h \geq 0}(\startchain{\overline{s}_i}\chainedlink{\overline{s}_o}{\noact}\chainend{\noact})^h\,\link{\underline{s}_i}{\underline{s}_o}.\overline{P}_s$, if $s \notin C_{i+1}$
 \end{description}
  \noindent
-where, by Lemma~\ref{lem:struct}.2, $h$ is the number of reactions requiring the absence of $s$ plus possibly some reactions  requiring $s$; and $k$ is the number of reactions producing $s$.\\
+where, by Lemma~\ref{lem:struct}.2, $h$ is the number of reactions requiring the absence of $s$ plus possibly some reactions  requiring $s$; and $k$ is the number of reactions producing $s$.
  
-\noindent 
+ 
 It is worth nothing that, depending on the presence ($P_s$) or the absence ($\overline{P}_s$) of each entity $s$, for each process $P_a$ (encoding a reaction $a$) the choice between the execution of the reaction code (points {\bf (a)}, {\bf (b)}, {\bf (c)}) or  the code expressing that reaction $a$ is not applicable (point {\bf (d)}) is deterministic.
-Also, the building of the code of processes $Cxt_s$ (points {\bf (e)}, {\bf (f)}), follows the evolution of $\gamma$.
-It derives that the trend followed by the processes $P_s$ (or $\overline{P}_s$) is also deterministic (points {\bf (g)}, {\bf (h)}, {\bf (i)} or {\bf (g')}, {\bf (h')}, {\bf (i')}), leading to $P' = \llbracket {\cal A},\gamma^1\rrbracket$.
+Also, the building of the code of process $\mathit{Cxt}$ (points {\bf (e)}, {\bf (f)}), is univocally determined by the evolution of $\gamma$.
+It derives that the trend followed by the processes $P_s$ (or $\overline{P}_s$) is also deterministic (points {\bf (f)}, {\bf (g)}, {\bf (h)} or {\bf (f')}, {\bf (g')}, {\bf (h')}), leading to $P' = \llbracket {\cal A},\gamma^1\rrbracket$.
  \end{proof}
  
 %  \begin{corollary}[correctness 1]
@@ -337,13 +359,16 @@ It derives that the trend followed by the processes $P_s$ (or $\overline{P}_s$) 
 %%such that $P=[|{\cal A}|]$, then if $P \rightarrow^* P'$, then $\exists$ ${\cal A'}$ such that ${\cal A}$  evolves in ${\cal A'}$ and $P'=[|{\cal A'}|]$.
 % \end{corollary}
 \begin{proof}
-We proceed by induction on the transition number $j \geq 0$.\\
+We proceed by induction on the transition number $j \geq 0$.
 % case $j=0$\\
 % It is enough to set $C_0' = C_0 \cup D_0$ and $P' =P$.\\
- case $j=1$\\
- This case falls into the case of Proposition~\ref{prop:corr1}.\\
- case $j>1$\\
-By inductive hypothesis, it holds that $\exists$ $P'$ such that $P \xrightarrow{\link{\silent}{\silent}\dots \link{\silent}{\silent}}^{j-1} P'$ and $P' = \llbracket{\cal A},\gamma^{j-1}\rrbracket$.\\
+\begin{description}
+\item[base case $j=1$:]
+ This case falls into the case of Proposition~\ref{prop:corr1}.
+\item[inductive case:]
+We assume, by inductive hypothesis, that $\exists P'$ such that 
+$$P \xrightarrow{\link{\silent}{\silent}\dots \link{\silent}{\silent}}^{j-1} P'$$ 
+and $P' = \llbracket{\cal A},\gamma^{j-1}\rrbracket$.
 %, with $1 \leq  i < t-1$.\\
 As $P'$ is the encoding of an extended interactive process, by Proposition~\ref{prop:corr1}, it exists $P''$  such that $P' \xrightarrow{\link{\silent}{\silent}\dots\link{\silent}{\silent}} P''$,
  and $P'' = \llbracket{\cal A},\gamma^j\rrbracket$. 
@@ -351,6 +376,7 @@ As $P'$ is the encoding of an extended interactive process, by Proposition~\ref{
  %unique, and by Lemma~\ref{lem:compl2}.1 $P' = [|{\cal A},\gamma'|]$. 
 %By Proposition~\ref{prop:corr1}, we know that  $C_0''=C_1' \cup D_1'$, $C_i''= C_{i+1}'$,
 % and $D_i'' = D_{i+1}'$.  And we are done, as $C_0''=C_1' \cup D_1' = C_j \cup D_j$, $C_i''= C_{i+1}' = C_{i+j}$,  and $D_i'' = D_{i+1}'= D_{i+j}$.
+\end{description}
 \end{proof}
 
 %\noindent
@@ -480,16 +506,16 @@ P_{glucose} &\defeq &
 \[
 \boxed{
 \begin{array}{lcl@{\qquad}lcl}
-P_A&\defeq &\startchain{\tilde{A_i}}\chainedlink{\tilde{A_o}}{\noact}\chainedlink{\noact}{\underline{A_i}}\chainend{\underline{A_o}}.P_A\ + \
+P_A&\defeq &\startchain{\widetilde{A_i}}\chainedlink{\widetilde{A_o}}{\noact}\chainedlink{\noact}{\underline{A_i}}\chainend{\underline{A_o}}.P_A\ + \
 \link{\underline{A_i}}{\underline{A_o}}.\overline{P_A}
 &
-P_y&\defeq &\startchain{\tilde{y_i}}\chainedlink{\tilde{y_o}}{\noact}\chainedlink{\noact}{\underline{y_i}}\chainend{\underline{y_o}}.P_y\ + \
+P_y&\defeq &\startchain{\widetilde{y_i}}\chainedlink{\widetilde{y_o}}{\noact}\chainedlink{\noact}{\underline{y_i}}\chainend{\underline{y_o}}.P_y\ + \
 \link{\underline{y_i}}{\underline{y_o}}.\overline{P_y}
 \\
-\overline{P_A} &\defeq &\startchain{\tilde{A_i}}\chainedlink{\tilde{A_o}}{\noact}\chainedlink{\noact}{\underline{A_i}}\chainend{\underline{A_o}}.\overline{P_A}\ + \
+\overline{P_A} &\defeq &\startchain{\widetilde{A_i}}\chainedlink{\widetilde{A_o}}{\noact}\chainedlink{\noact}{\underline{A_i}}\chainend{\underline{A_o}}.\overline{P_A}\ + \
 \link{\underline{A_i}}{\underline{A_o}}.\overline{P_A}
 &
-\overline{P_y} &\defeq &\startchain{\tilde{y_i}}\chainedlink{\tilde{y_o}}{\noact}\chainedlink{\noact}{\underline{y_i}}\chainend{\underline{y_o}}.\overline{P_y}\ + \
+\overline{P_y} &\defeq &\startchain{\widetilde{y_i}}\chainedlink{\widetilde{y_o}}{\noact}\chainedlink{\noact}{\underline{y_i}}\chainend{\underline{y_o}}.\overline{P_y}\ + \
 \link{\underline{y_i}}{\underline{y_o}}.\overline{P_y}
 \end{array}}
 \]
