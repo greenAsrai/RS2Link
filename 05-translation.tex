@@ -190,12 +190,12 @@ Each reaction defines a pattern to be satisfied, i.e. each reaction inserts as m
  %\label{lem:struct}
   Let ${\cal A} = (S, A)$ be a RS and let $\pi=(\gamma,\delta)$ be an extended  interactive process in ${\cal A}$. Let $P=\llbracket{\cal A},\gamma\rrbracket$ its c\CNA~translation. If $exists$ $P'$ such that $t= (P \xrightarrow{\restrict{\mathit{names}}\upsilon} P')$ is a transition of $P$, then
   \begin{enumerate}
-  \item for each reaction  $a_j \in A$, the corresponding channels $r_j$ and $p_j$ appear in  $\upsilon$; for each entity $s \in S$, the corresponding channel $s$ (suitably decorated) appear in $\upsilon$; 
+  \item for each reaction  $aj \in A$, the corresponding channels $r_j$ and $p_j$ appear in  $\upsilon$; for each entity $s \in S$, the corresponding channel $s$ (suitably decorated) appear in $\upsilon$; 
   the channel $\mathit{cxt}$ appears in $\upsilon$;
   %processes $P_s$ (or $\overline{P_s}$) 
 %  for each  $Cxt_s$ are
  %involved in the transition $t$;
-  \item for each reaction $a \in A$ and each entity $s \in S$, each virtual link offered by processes $P_a$ and $\mathit{Cxt}^1$ is  overlapped by exactly one solid link offered by  processes representing entities.
+  \item for each reaction $aj \in A$ and each entity $s \in S$, each virtual link offered by processes $P_a$ and $\mathit{Cxt}$ is  overlapped by exactly one solid link offered by  processes representing entities.
   %each process $P_s $ (or its alternative version $\overline{P}_s$), with $s \in S$, participates at most  with one solid link for each process $P_a$, and with exactly one solid link for each process $Cxt_s$.%, if $s$ is a \emph{required element} of $A_j$ in $t$.
   \end{enumerate}
   \end{restatable}
@@ -207,6 +207,15 @@ $$
 I~|~ \prod_{a\in A} P_a ~|~  \mathit{Cxt}^1~|~\prod_{s\in C_0}P_{s} ~|~ \prod_{s \notin C_0}\overline{P_s} 
 $$
 and will write $P\xRightarrow{\upsilon} P'$ to mean that $P\xrightarrow{\upsilon} P'$ with $\upsilon$ complete.
+
+The following Corollary immediately follows from Lemma~\ref{lem:struct}.
+
+\begin{corollary}
+Let ${\cal A} = (S, A)$ be a RS and let $\pi=(\gamma,\delta)$ be an extended  interactive process in ${\cal A}$. 
+Let $Q=\llparenthesis{\cal A},\gamma\rrparenthesis$ and $P= \llbracket{\cal A},\gamma\rrbracket = \restrict{\mathit{names}}Q$. 
+Then $P \xrightarrow{\restrict{\mathit{names}}\upsilon} P'$ iff $Q \xRightarrow{\upsilon} Q'$ and $P'=\restrict{\mathit{names}}Q'$.
+\end{corollary}
+
 
 \begin{example}\label{ex:backbone}
  Let ${\cal A}$ be a RS whose specification contains two entities, $s1$ and $s2$, and the reactions $r_1=(s1,\ , s2)$ and $r_2 = (s2, \ , s1)$ that produce $s2$ if $s1$ is present and $s1$ if $s2$ is present. For simplicity we do not consider inhibitors, but the reader can assume a void inhibitor is present in both reactions. Then, we assume an  extended interactive process $\pi=(\gamma,\delta)$ where the context $\gamma$ provides  $s1$ and $s2$ at every step, but we assume that only $s1$ is initially present. The corresponding c\CNA \ process is $\llbracket{\cal A},\gamma\rrbracket \defeq \restrict{\mathit{names}} \llparenthesis{\cal A},\gamma\rrparenthesis$, with 

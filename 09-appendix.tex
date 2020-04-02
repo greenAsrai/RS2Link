@@ -173,13 +173,16 @@ In this section we report the proofs for the results in Section~\ref{sec:trans}.
 \begin{proof}
   We prove the two items separately:
   \begin{enumerate}
-\item by Definition~\ref{def:trans}, all the names $r_j,p_j$; all the names $s_i,s_o$, in all their annotated versions, and all the names $cxt_h$, are restricted. 
-Moreover, the only prefixes that start with $\silent$ are those associated to reaction $a_1$ (as $r_1=\silent$) and the only prefixes that end with $\silent$ are those associated to reaction $a_u$ (as $p_{u+1} = \silent$, where $u$ is the number of reactions).
-Thus all the prefixes associated with reactions and contexts must be concatenated (remember that $r_{u+1} = cxt_1$ and $cxt_{w+1}=p_1$, where $w$ is the number of entities), forming the backbone of the label.
-Since all context processes are involved, then all entities processes are also involved.
-Then, all the processes $P_a$, $P_s$ (or $\overline{P_s}$), and $Cxt_h$  must participate to each transition.
- \item for each reaction $aj \in A$, the c\CNA \ code of  $P_{aj}$ leaves one virtual link between two solid links of the types $\link{r_j}{\dots} \chainedlink{s_{i}}{\noact}\chainedlink{\noact}{s_{o}}\link{}{\dots}\link{}{r_{j+1}} ^{\dots}\link{p_j}{\dots}\link{}{p_{j+1}}$. Then, it derives that the process $P_{s}$, encoding the behaviour of entity $s$, can participate by filling the virtual link in the above transition by only offering one solid link of the type $\link{s_{i}}{s_{o}}$. In fact, there is no other way to generate a solid chain from $s_{i}$ to $s_{o}$.
- The same reasoning holds for the processes $Cxt_h$ and for all the annotated versions of $s_i,s_o$.
+\item by Definition~\ref{def:trans}, all the names that appear in the prefixes of any subprocess are in the set $\mathit{names}$ and thus restricted. 
+They include all the reaction names $r_j$, all the production names $p_j$, all the entity names $s_i,s_o$, in all their decorated versions, and the name $\mathit{cxt}$. 
+Therefore the chain $\upsilon$ must start and end with a $\silent$ action and cannot contain virtual links.
+The only prefix that starts with $\silent$ is the one of the recursive init process $I$ (prefix $\link{\silent}{r_1}$) and the only prefixes that end with $\silent$ are those associated to reaction $a_u$ (as we have assumed that $p_{u+1} = \silent$, where $u$ is the number of reactions).
+Then each prefix that starts with $r_j$ involves $p_j$ and $r_{j+1}$.
+Thus all the prefixes associated with reactions must be concatenated and also the prefix associated with the context (remember that $r_{u+1} = \mathit{cxt}$), forming the backbone of the label.
+Since the context processes is involved, then all entities processes are also involved.
+Then, all the processes $I$, $P_a$, $P_s$ (or $\overline{P_s}$), and $\mathit{Cxt}$  must participate to each transition.
+ \item for each reaction $aj \in A$, the c\CNA \ code of  $P_{aj}$ leaves one virtual link between two solid links of the types $\link{r_j}{\dots} \chainedlink{s_{i}}{\noact}\chainedlink{\noact}{s_{o}}\link{}{\dots}\link{}{r_{j+1}} ^{\dots}\link{p_j}{\dots}\link{}{p_{j+1}}$. Then, it derives that the process $P_{s}$, encoding the behaviour of entity $s$, can participate by filling the virtual link in the above transition by only offering one solid link of the form $\link{s_{i}}{s_{o}}$. In fact, there is no other way to generate a solid chain from $s_{i}$ to $s_{o}$.
+ The same reasoning holds for the processes $\mathit{Cxt}$ and for all the decorated versions of $s_i,s_o$.
 % $P_{s_1}$ can not participate with a link chain, as by juxtaposing  $\link{s_{1i}}{s_{1o}}$, not valid
  %link chains would be generated.
    \end{enumerate}
