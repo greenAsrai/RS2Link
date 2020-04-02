@@ -251,7 +251,7 @@ We let $ \sim_F $ denote the largest  bio-simulation and we say that $P$ is \emp
 An alternative way to look at a bio-simulation that respects $F$ is to define it as an ordinary bisimulation over the transition system labelled over $\{F,\neg F\}$ obtained by transforming each transition $P \xrightarrow{v} P'$ such that $v\entails F$ into $P \xrightarrow{F} P'$ and  each transition $P \xrightarrow{v} P'$ such that $v\not\entails F$ into $P \xrightarrow{\neg F} P'$.
 \end{remark}
 
-Now, we introduce a slightly modified version of the Hennessy Milner Logic~\cite{}, called bioHML; due to the reasons we explained above, we do not want to look at the complete transition labels, thus we rely on our simple assertion language to make it parametric to the assertion $F$ of interest:
+Now, we introduce a slightly modified version of the Hennessy Milner Logic~\cite{HM80}, called bioHML; due to the reasons we explained above, we do not want to look at the complete transition labels, thus we rely on our simple assertion language to make it parametric to the assertion $F$ of interest:
 \begin{definition}[bioHML]
 Let   $F$ be an assertion, then 
 the set of bioHML formulas $G$ that respects $F$ are built by the following syntax:
