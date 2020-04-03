@@ -49,13 +49,14 @@ both from the computer science and the biological field.
 %and then we consider a more complex example, by modeling a RS 
 %representing a regulatory network for \emph{lac} operon, presented in~\cite{CMMBM12}. 
 We also show that our embedding preserves the main
-features of RSs, and prove its correctness and completeness.
+features of RSs, and prove its correctness and completeness
+from the operational semantics viewpoint.
 
 Then, we present a methodology for verifying formally
 properties of reaction systems. The classical notion of bisimulation for 
-process algebras allows to consider equivalent two processes
+process algebras allows to consider two processes as equivalent 
 where one process can simulate all the actions executed 
-by the other one and viceversa. In this paper we define a new
+by the other one and vice versa. In this paper we define a new
 notion of bisimilarity which takes into account the characteristics
 of biological systems. We define a new {\em bio-simulation} having in mind
 the possibility that two interacting systems may be compared w.r.t.
@@ -65,7 +66,7 @@ without getting lost in the complexity of the full biological system, or network
 The notion of bio-simulation relies on a new and simple assertion language,
 which allows to focus on some properties of the reaction systems to be verified.
 In fact, bio-similarity is parametric on a given assertion of interest.
-The we prove that the well-known logical characterization of bisimilarity in terms of Hennessy-Milner Logic~\cite{HM80} (HML)
+Then we prove that the well-known logical characterisation of bisimilarity in terms of Hennessy-Milner Logic~\cite{HM80} (HML)
 can be extended to the case of bio-similarity by tailoring HML formulas to
 the same assertion of interest used in bio-similarity.  As HML is a powerful
 formalism for specifying properties of labeled transition systems, 
@@ -78,27 +79,29 @@ Our main contributions are as follows:
 entity,
 %\footnote{Entities that belong to the `domain' of a RS.}
 can be
-specified in a recursive way as an ordinary process;
+specified in a recursive way, as ordinary processes;
 \item along the same lines, non-deterministic contexts can be seamlessly expressed in our setting; 
 \item when deterministic contexts are considered, the c\CNA \
-computation is deterministic.
+computation is deterministic and mimics the evolution of the corresponding RS;
 \item we define an assertion language to specify local properties of 
 reaction systems and exploit it to define a novel notion of behavioural equivalence for reaction systems, called bio-similarity;
-\item we show that our assertions extend can be used to extend the Hennessy-Milner logic to our framework, in such a way that logical equivalence of processes coincide with bio-similarity;
+\item we show that our assertions can be used to extend the Hennessy-Milner logic to our framework, in such a way that logical equivalence of processes coincide with bio-similarity;
 \item we sketch how one can express the behaviour of entity mutation,
 %change the behaviour of  each single entity $s$  in a
 %way that a mutation $s'$ can be expressed; 
 in such a way that the mutated entity
 $s'$ can  take part to only a subset of rules requiring entity $s$;
-\item we show that with a little coding effort, two RSs can
-communicate; i.e.  a subset of those entities that the context  can
-provide, are then provided by a second RS.
+\item we show that with a little coding effort, our encoding allows two RSs to
+communicate; i.e. we can model scenarios where a subset of those entities that the context  can
+provide, are instead provided by a second RS.
 \end{itemize}
 
 The main drawback of our proposal, is that the c\CNA \ translation is
 verbose. Nevertheless it is clear that our
 translation can be automatised by means of a proper front-end in
-an implementation of the {\tt link}-calculus.
+an implementation of the {\tt link}-calculus. 
+The examples that we propose also show that some optimisations are possible
+to reduce the coding when suitable assumptions are made about the provision of entities.
 
 As we have remarked, in our translation, Reaction Systems 
 get the ability to interact between them in a synchronized manner. 
@@ -114,7 +117,7 @@ the interaction between RSs can help to model new scenarios.
 
 Process calculi have been used successfully to model
 biological processes, see~\cite{BBDFH18} for a recent survey.
-We are not aware of any inference rules for the RS; it seems not the case
+We are not aware of any SOS operational semantics for the RS; it seems not the case
 that a deterministic behaviour, as the one of the RS, once the initial state is 
 fixed, could be defined by inference rules that classically are applied 
 to define non-deterministic transition systems.
@@ -135,7 +138,7 @@ and give more detailed explanations about its use;
 \item we define the notion of bio-simulation to relate reaction systems and compare their behaviours;
 \item we show that our assertion language allows to specify properties extending to our
 framework the Hennessy-Milner logic;
-\item proofs of main results are included here.
+\item we include here all proofs of main results.
 \end{itemize}
  
 \paragraph{Structure of the paper} 
