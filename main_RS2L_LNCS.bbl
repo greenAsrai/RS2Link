@@ -48,6 +48,12 @@ C.~Bodei, L.~Brodo, R.~Gori, F.~Levi, A.~Bernini, and D.~Hermith.
   counting information.
 \newblock {\em Theoretical Computer Science}, 696:11--51, 2017.
 
+\bibitem{10.1007/978-3-319-73359-3_3}
+A.~Bogdan and C.~Gabriel.
+\newblock Controlled reversibility in reaction systems.
+\newblock In M.~Gheorghe, G.~Rozenberg, A.~Salomaa, and Z.~Claudio, editors,
+  {\em Membrane Computing}. Springer International Publishing, 2018.
+
 \bibitem{BEMR11}
 R.~Brijder, A.~Ehrenfeucht, M.~Main, and G.~Rozenberg.
 \newblock A tour of reaction systems.
