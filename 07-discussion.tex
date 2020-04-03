@@ -104,18 +104,16 @@ First, we translate the reaction in $rs1$:
 Please note, that prefixes of process $P_{a_1}$ end with the channel name $a_2$, as the link chain is now connected with the  reaction of  $rs2$.
 The translation for the entities follows.
 \[
-\begin{array}{lclcl@{\qquad}lclcl}
-\llbracket s \rrbracket &\defeq &P_{s}&\defeq &\startchain{{\color{blue}s_i}}\chainedlink{{\color{blue}s_o}}{\noact}\chainedlink{\noact}{{\color{blue}\hat{s}_i}}\chainend{{\color{blue}\hat{s}_o}}.P_{s} + \startchain{s_i}\chainend{s_o}.\overline{P_{s}}
-&
+\begin{array}{lclcl}
+\llbracket s \rrbracket &\defeq &P_{s} &\defeq & \startchain{{\color{blue}s_i}}\chainedlink{{\color{blue}s_o}}{\noact}\chainedlink{\noact}{{\color{blue}\hat{s}_i}}\chainend{{\color{blue}\hat{s}_o}}.P_{s} + \startchain{s_i}\chainend{s_o}.\overline{P_{s}}\\
+&& \overline{P_{s}}&\defeq &\startchain{\overline{s}_i}\chainedlink{\overline{s}_o}{\noact}\chainedlink{\noact}{\hat{s}_i}\chainend{\hat{s}_o}.P_{s}+\startchain{\overline{s}_i}\chainend{\overline{s}_i}.\overline{P_{s}}\\
 %\begin{array}{lclclll}
-\llbracket x \rrbracket &\defeq& P_{x}&\defeq &\startchain{\tilde{x}_i}\chainend{\tilde{x}_o}.P_{x} +  \startchain{dx_i}\chainend{dx_o}.\overline{P_{x}}\\
+\llbracket x \rrbracket &\defeq & P_{x}& \defeq &\startchain{\tilde{x}_i}\chainend{\tilde{x}_o}.P_{x} +  \startchain{dx_i}\chainend{dx_o}.\overline{P_{x}}\\
 %\\
 %&&\overline{P_{s2}}&\defeq &\startchain{\overline{s2}}\chainedlink{\overline{s2}}{\noact}\chainedlink{\noact}{\tilde{s2}}\chainend{\tilde{s2}}.P_{s2} +
 %\startchain{\overline{s2}}\chainend{\overline{s2}}.\overline{P_{s2}}\\
 %\\
 %\\
-&&\overline{P_{s}}&\defeq &\startchain{\overline{s}_i}\chainedlink{\overline{s}_o}{\noact}\chainedlink{\noact}{\hat{s}_i}\chainend{\hat{s}_o}.P_{s}+\startchain{\overline{s}_i}\chainend{\overline{s}_i}.\overline{P_{s}}
-&
 && \overline{P_{x}}&\defeq &\startchain{{\color{gray}\tilde{x}_i}}\chainend{{\color{gray}\tilde{x}_o}}.P_{x} +  \startchain{dx_i}\chainend{dx_o}.\overline{P_{x}}\\
 %\end{array}
 %\]
@@ -160,19 +158,19 @@ In the translation of the entities in  $rs2$, we introduce the mechanism that al
 $s$ ($ss$ in $rs2$) to be provided in $rs1$. Every time $ss$ is produced in $rs2$,  a virtual link is
 created to synchronise with $rs1$   on link $\link{\hat{s}_i}{\hat{s}_o}$:
 \[
-\begin{array}{lclcl@{\qquad} lclcl}
+\begin{array}{lclcl}
 \llbracket ss \rrbracket& \defeq& P_{ss}&\defeq &\startchain{\tilde{ss}_i}\chainedlink{\hat{s}_i}{\noact}\chainedlink{\noact}{\hat{s}_o}\chainend{\tilde{ss}_o}.P_{ss}+
-\startchain{dss_i}   \chainend{dss_o}.\overline{P_{ss}}
-&
-\llbracket y\rrbracket&\defeq & P_{y}&\defeq &\startchain{{\color{gray}y_i}}\chainend{{\color{gray}y_o}}.\overline{P_{y}} \\
+\startchain{dss_i}   \chainend{dss_o}.\overline{P_{ss}} \\
+
+
 %\end{array}
 %\]
 %\[
 %\begin{array}{lcllcl}
 &&\overline{P_{ss}}&\defeq &\startchain{{\color{red}\tilde{ss}_i}}\chainedlink{{\color{red}\hat{s}_i}}{{\color{blue}\noact}}\chainedlink{{\color{blue}\noact}}{{\color{red}\hat{s}_o}}\chainend{{\color{red}\tilde{ss}_o}}.P_{ss}
 +
-\startchain{dss_i}\chainend{dss_o}.\overline{P_{ss}}
-&
+\startchain{dss_i}\chainend{dss_o}.\overline{P_{ss}}\\
+\llbracket y\rrbracket&\defeq & P_{y}&\defeq &\startchain{{\color{gray}y_i}}\chainend{{\color{gray}y_o}}.\overline{P_{y}} \\
 &&\overline{P_{y}}&\defeq &
 %\startchain{\overline{y}_i}\chainedlink{\overline{y}_o}{\noact}\chainedlink{\noact}{\tilde{y}_i}\chainend{\tilde{y}_o}.P_{y}
 %+ 
