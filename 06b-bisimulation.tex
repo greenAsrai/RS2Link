@@ -379,7 +379,7 @@ $$
 \forall R,S.\ R \sim_F S \wedge R\entails H \Rightarrow S \entails H
 $$
 We need to prove that $Q\entails G$.
-If there is no $\upsilon\entails \chi$ such that $Q\xRightarrow{\upsilon}Q'$ for some $Q'$ then 
+If there is no $\upsilon\entails \chi$ such that $Q\xRightarrow{\upsilon}Q'$ for some $Q'$, then 
  $Q\entails [\chi] H=G$ trivially.
 For any $\upsilon,Q'$ such that $Q\xRightarrow{\upsilon}Q'$ with $\upsilon\entails \chi$, then as $P\sim_F Q$ there must exist $w,P'$ such that $P\xRightarrow{w}P'$ with $w\entails \chi$ and $P'\sim_F Q'$. Since $P\entails G=[\chi] H$ then it must be $P'\entails H$. Since $P'\sim_F Q'$, by inductive hypothesis $Q'\entails H$. Hence $Q\entails [\chi] H = G$.
 \end{itemize}
