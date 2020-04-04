@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.1.15)  4 APR 2020 11:33
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.1.15)  4 APR 2020 15:26
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -993,16 +993,13 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
  [2] [3])
 (./02-ReactionSystem.tex [4] [5]) (./04-CCNA.tex
 
-LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 36.
-
-
-LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 39.
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 37.
 
 
 LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 40.
 
 
-LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 44.
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 41.
 
 
 LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 45.
@@ -1011,11 +1008,14 @@ LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 45.
 LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 46.
 
 
-LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 48.
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 47.
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 49.
 
 [6]
 
-LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 106.
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 107.
 
 
 \myBox1=\box62
@@ -1023,7 +1023,7 @@ LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 106.
 \myCenter1=\dimen306
 \myScoreEnd1=\dimen307
 
-LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 125.
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 126.
 
 
 \myBox2=\box63
@@ -1032,10 +1032,7 @@ LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 125.
 \myScoreEnd2=\dimen310
 [7]
 
-LaTeX Font Warning: Command \tiny invalid in math mode on input line 208.
-
-
-LaTeX Font Warning: Command \tiny invalid in math mode on input line 212.
+LaTeX Font Warning: Command \tiny invalid in math mode on input line 209.
 
 
 LaTeX Font Warning: Command \tiny invalid in math mode on input line 213.
@@ -1044,13 +1041,16 @@ LaTeX Font Warning: Command \tiny invalid in math mode on input line 213.
 LaTeX Font Warning: Command \tiny invalid in math mode on input line 214.
 
 
-LaTeX Font Warning: Command \tiny invalid in math mode on input line 214.
+LaTeX Font Warning: Command \tiny invalid in math mode on input line 215.
 
 
-LaTeX Font Warning: Command \tiny invalid in math mode on input line 225.
+LaTeX Font Warning: Command \tiny invalid in math mode on input line 215.
 
 
 LaTeX Font Warning: Command \tiny invalid in math mode on input line 226.
+
+
+LaTeX Font Warning: Command \tiny invalid in math mode on input line 227.
 
 ) (./05-translation.tex [8]
 
@@ -1118,13 +1118,13 @@ Overfull \hbox (9.33502pt too wide) in paragraph at lines 261--262
 
 [21]
 Package hyperref Info: bookmark level for unknown theorem defaults to 0 on inpu
-t line 324.
- [22]) (./06c-bioSimExample.tex [23]
+t line 329.
+) (./06c-bioSimExample.tex
 Underfull \hbox (badness 10000) in paragraph at lines 35--37
 
  []
 
-
+[22]
 Overfull \hbox (2.24857pt too wide) in paragraph at lines 53--57
 \OT1/cmr/m/n/10 and we have $\OML/cmm/m/it/10 P[] \U/msa/m/n/10 , \OML/cmm/m/it
 /10 P\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 G\OT1/cmr/m/n/10 )$, $\OML/cmm/m/it/10 P
@@ -1134,32 +1134,32 @@ r/m/n/10 )$, then $[][] \U/msa/m/n/10 , [][]\OMS/cmsy/m/n/10 n[]\OML/cmm/m/it/1
 \OT1/cmr/m/n/10 ,
  []
 
-[24] <xymatrix 2x3 336> <xymatrix 2x3 336>) (./07-discussion.tex [25] [26]
-Underfull \hbox (badness 10000) in paragraph at lines 195--198
+<xymatrix 2x3 336> <xymatrix 2x3 336>) (./07-discussion.tex [23] [24]
+Underfull \hbox (badness 10000) in paragraph at lines 196--199
 
  []
 
-) (./08-conclusion.tex) (./main_RS2L_LNCS.bbl [27] [28]) (./09-appendix.tex
-[29] [30] [31] [32]
+) (./08-conclusion.tex [25]) (./main_RS2L_LNCS.bbl [26] [27])
+(./09-appendix.tex [28] [29] [30] [31]
 Underfull \hbox (badness 10000) in paragraph at lines 449--462
 
  []
 
-) [33]
+[32]) [33]
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 157.
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 157.
  (./main_RS2L_LNCS.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 157.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 157.
 Package rerunfilecheck Info: File `main_RS2L_LNCS.out' has not changed.
-(rerunfilecheck)             Checksum: 9A521B7182EF66F75510D2CA99A757DB;1135.
+(rerunfilecheck)             Checksum: 36C469373ABBEDBF542128D2F5A4756F;1067.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 157.
  ) 
 Here is how much of TeX's memory you used:
- 23260 strings out of 492163
- 405265 string characters out of 6125306
- 531645 words of memory out of 5000000
- 26893 multiletter control sequences out of 15000+600000
+ 23265 strings out of 492163
+ 405367 string characters out of 6125306
+ 531794 words of memory out of 5000000
+ 26897 multiletter control sequences out of 15000+600000
  21286 words of font info for 87 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  60i,19n,60p,3225b,1063s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1201,10 +1201,10 @@ fonts/type1/public/amsfonts/symbols/msbm7.pfb></usr/local/texlive/2019/texmf-di
 st/fonts/type1/public/stmaryrd/stmary10.pfb></usr/local/texlive/2019/texmf-dist
 /fonts/type1/public/xypic/xyatip10.pfb></usr/local/texlive/2019/texmf-dist/font
 s/type1/public/xypic/xybtip10.pfb>
-Output written on main_RS2L_LNCS.pdf (33 pages, 511805 bytes).
+Output written on main_RS2L_LNCS.pdf (33 pages, 510784 bytes).
 PDF statistics:
- 644 PDF objects out of 1000 (max. 8388607)
- 565 compressed objects within 6 object streams
- 183 named destinations out of 1000 (max. 500000)
- 157 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 643 PDF objects out of 1000 (max. 8388607)
+ 564 compressed objects within 6 object streams
+ 184 named destinations out of 1000 (max. 500000)
+ 149 words of extra memory for PDF output out of 10000 (max. 10000000)
 
