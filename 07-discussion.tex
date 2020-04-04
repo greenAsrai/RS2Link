@@ -106,8 +106,8 @@ Please note, that prefixes of process $P_{a_1}$ end with the channel name $a_2$,
 The translation for the entities follows.
 \[
 \begin{array}{lclcl}
-\llbracket s \rrbracket &\defeq &P_{s} &\defeq & \startchain{{\color{blue}s_i}}\chainedlink{{\color{blue}s_o}}{\noact}\chainedlink{\noact}{{\color{blue}\hat{s}_i}}\chainend{{\color{blue}\hat{s}_o}}.P_{s} + \startchain{s_i}\chainend{s_o}.\overline{P_{s}}\\
-&& \overline{P_{s}}&\defeq &\startchain{\overline{s}_i}\chainedlink{\overline{s}_o}{\noact}\chainedlink{\noact}{\hat{s}_i}\chainend{\hat{s}_o}.P_{s}+\startchain{\overline{s}_i}\chainend{\overline{s}_i}.\overline{P_{s}}\\
+\llbracket s \rrbracket &\defeq &P_{s} &\defeq & \startchain{{\color{blue}s_i}}\chainedlink{{\color{blue}s_o}}{\noact}\chainedlink{\noact}{{\color{blue}\widehat{s}_i}}\chainend{{\color{blue}\widehat{s}_o}}.P_{s} + \startchain{s_i}\chainend{s_o}.\overline{P_{s}}\\
+&& \overline{P_{s}}&\defeq &\startchain{\overline{s}_i}\chainedlink{\overline{s}_o}{\noact}\chainedlink{\noact}{\widehat{s}_i}\chainend{\widehat{s}_o}.P_{s}+\startchain{\overline{s}_i}\chainend{\overline{s}_i}.\overline{P_{s}}\\
 %\begin{array}{lclclll}
 \llbracket x \rrbracket &\defeq & P_{x}& \defeq &\startchain{\tilde{x}_i}\chainend{\tilde{x}_o}.P_{x} +  \startchain{dx_i}\chainend{dx_o}.\overline{P_{x}}\\
 %\\
@@ -157,10 +157,10 @@ The translation for the $rs2$ follows.
 \noindent
 In the translation of the entities in  $rs2$, we introduce the mechanism that allows the entity
 $s$ ($ss$ in $rs2$) to be provided in $rs1$. Every time $ss$ is produced in $rs2$,  a virtual link is
-created to synchronise with $rs1$   on link $\link{\hat{s}_i}{\hat{s}_o}$:
+created to synchronise with $rs1$   on link $\link{\widehat{s}_i}{\widehat{s}_o}$:
 \[
 \begin{array}{lclcl}
-\llbracket ss \rrbracket& \defeq& P_{ss}&\defeq &\startchain{\tilde{ss}_i}\chainedlink{\hat{s}_i}{\noact}\chainedlink{\noact}{\hat{s}_o}\chainend{\tilde{ss}_o}.P_{ss}+
+\llbracket ss \rrbracket& \defeq& P_{ss}&\defeq &\startchain{\tilde{ss}_i}\chainedlink{\widehat{s}_i}{\noact}\chainedlink{\noact}{\widehat{s}_o}\chainend{\tilde{ss}_o}.P_{ss}+
 \startchain{dss_i}   \chainend{dss_o}.\overline{P_{ss}} \\
 
 
@@ -168,7 +168,7 @@ created to synchronise with $rs1$   on link $\link{\hat{s}_i}{\hat{s}_o}$:
 %\]
 %\[
 %\begin{array}{lcllcl}
-&&\overline{P_{ss}}&\defeq &\startchain{{\color{red}\tilde{ss}_i}}\chainedlink{{\color{red}\hat{s}_i}}{{\color{blue}\noact}}\chainedlink{{\color{blue}\noact}}{{\color{red}\hat{s}_o}}\chainend{{\color{red}\tilde{ss}_o}}.P_{ss}
+&&\overline{P_{ss}}&\defeq &\startchain{{\color{red}\tilde{ss}_i}}\chainedlink{{\color{red}\widehat{s}_i}}{{\color{blue}\noact}}\chainedlink{{\color{blue}\noact}}{{\color{red}\widehat{s}_o}}\chainend{{\color{red}\tilde{ss}_o}}.P_{ss}
 +
 \startchain{dss_i}\chainend{dss_o}.\overline{P_{ss}}\\
 \llbracket y\rrbracket&\defeq & P_{y}&\defeq &\startchain{{\color{gray}y_i}}\chainend{{\color{gray}y_o}}.\overline{P_{y}} \\
@@ -190,8 +190,8 @@ We now assume that the initial system is $S \defeq \restrict{names}(P_{a_1}|P_{a
 only entities $s$ and $y$ are present. Now, the only possible transition has  the following label (that we report without restriction):
 \[
 \startchain{\silent}\chainedlink{s_i}{{\color{blue}s_i}}\chainedlink{{\color{blue}s_o}}{s_o}\chainedlink{\tilde{x}_i}{{\color{gray}\tilde{x}_i}}\chainedlink{{\color{gray}\tilde{x}_o}}{\tilde{x}_o} \chainedlink{a_2}{a_2}\chainedlink{y_i}{ {\color{gray}y_i}}\chainedlink{{\color{gray}y_o}}{y_o}\chainedlink{\tilde{ss}_i}{{\color{red}\tilde{ss}_i}}
-\chainedlink{{\color{red}\hat{s}_i}}{{\color{blue}\hat{s}_i}}
-\chainedlink{{\color{blue}\hat{s}_o}}{{\color{red}\hat{s}_o}}
+\chainedlink{{\color{red}\widehat{s}_i}}{{\color{blue}\widehat{s}_i}}
+\chainedlink{{\color{blue}\widehat{s}_o}}{{\color{red}\widehat{s}_o}}
 \chainedlink{{\color{red}\tilde{ss}_o}}{\tilde{ss}_o}\chainend{\silent},
 \]
 where the black links belong to the prefixes of $P_{a_1}$, and $P_{a_2}$, the blue links belong to $P_s$, the gray links belong to $P_y$, and $\overline{P_x}$ and the red links belong to $\overline{P_{ss}}$.
