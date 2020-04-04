@@ -173,7 +173,7 @@ In the label we can read that the rules $1$ and $4$ have been not executed becau
 the rule $3$ has been not applied because the entity $w$ is absent, then only rule $2$ has been applied, and it has produced the entity $w$. Also,  the context provides entity $a$, that will be available in the next state, and not the entity $b$.
 Now, to let the label more readable, we show the result of the application of the function $flat(\cdot)$ to it:
 \[
-r_1~\overline{a}~r_2~q~b~\overline{w}~\overline{a}~r_3~\overline{a}~r_4~\overline{w}~\mathit{cxt}~\widehat{a}~\underline{b}~p_1~p_2~\widetilde{w}~p_3~p_4~\silent\]
+r_1~\overline{a}~r_2~q~b~\overline{w}~\overline{a}~r_3~\overline{a}~r_4~\overline{w}~\mathit{cxt}~\widehat{a}~\underline{b}~p_1~p_2~\widetilde{w}~p_3~p_4\]
 
 
 \subsection{A  biological toy example}\label{subsec:toy}
@@ -327,7 +327,7 @@ Instead of showing the complete transition label, we give its flattened version 
 %\chainedlink{\widehat{F}_i}{\bf \widehat{F}_i}\chainedlink{\bf \widehat{F}_o}{\widehat{F}_o}\chainedlink{p_1}{p_1} 
 % \chainedlink{\widetilde{T}_i}{\bf \widetilde{T}_i}\chainedlink{\bf \widetilde{T}_o}{\widetilde{T}_o}
 %  \chainedlink{p_2}{p_2}\chainedlink{p_3}{p_3}\chainedlink{p_4}{p_4} \chainedlink{\widetilde{G}_i}{\bf \widetilde{G}_i}\chainedlink{\bf \widetilde{G}_o}{\widetilde{G}_o} \chainend{\silent}
-r_1~ a~G~\overline{C}~ r_2~ G~ r_3~T'~r_4~T'~\overline{F}~cxt~\underline{C}~\underline{G}~\widehat{F}~p_1~\widetilde{T}~p_2~p_3~p_4~\widetilde{G}~\silent
+r_1~ a~G~\overline{C}~ r_2~ G~ r_3~T'~r_4~T'~\overline{F}~cxt~\underline{C}~\underline{G}~\widehat{F}~p_1~\widetilde{T}~p_2~p_3~p_4~\widetilde{G}
 \]
 The original label can then be reconstructed just applying the function $\mathit{unflat}(\cdot)$ to the string above.
 

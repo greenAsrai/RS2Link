@@ -53,7 +53,7 @@ features of RSs, and prove its correctness and completeness
 from the operational semantics viewpoint.
 
 Then, we present a methodology for verifying formally
-properties of reaction systems. The classical notion of bisimulation for 
+properties of Reaction Systems. The classical notion of bisimulation for 
 process algebras allows to consider two processes as equivalent 
 where one process can simulate all the actions executed 
 by the other one and vice versa. In this paper we define a new
@@ -61,16 +61,16 @@ notion of bisimilarity which takes into account the characteristics
 of biological systems. We define a new {\em bio-simulation} having in mind
 the possibility that two interacting systems may be compared w.r.t.
 a subset of the possible biological actions. This is useful for concentrating 
-on the sub-model that one may need to study for a specific study or application,
+on the sub-model that one may need to consider for a specific study or application,
 without getting lost in the complexity of the full biological system, or network.
 The notion of bio-simulation relies on a new and simple assertion language,
-which allows to focus on some properties of the reaction systems to be verified.
+which allows to focus on some properties of the Reaction Systems to be verified.
 In fact, bio-similarity is parametric on a given assertion of interest.
 Then we prove that the well-known logical characterisation of bisimilarity in terms of Hennessy-Milner Logic~\cite{HM80} (HML)
 can be extended to the case of bio-similarity by tailoring HML formulas to
 the same assertion of interest used in bio-similarity.  As HML is a powerful
 formalism for specifying properties of labeled transition systems, 
-its variant considered here looks a suitable option to specify formulas 
+its variant introduced here looks a suitable option to specify formulas 
 over complex labels by abstracting from unnecessary details.
 
 Our main contributions are as follows:
@@ -84,7 +84,7 @@ specified in a recursive way, as ordinary processes;
 \item when deterministic contexts are considered, the c\CNA \
 computation is deterministic and mimics the evolution of the corresponding RS;
 \item we define an assertion language to specify local properties of 
-reaction systems and exploit it to define a novel notion of behavioural equivalence for reaction systems, called bio-similarity;
+Reaction Systems and exploit it to define a novel notion of behavioural equivalence for Reaction Systems, called bio-similarity;
 \item we show that our assertions can be used to extend the Hennessy-Milner logic to our framework, in such a way that logical equivalence of processes coincide with bio-similarity;
 \item we sketch how one can express the behaviour of entity mutation,
 %change the behaviour of  each single entity $s$  in a
@@ -134,8 +134,8 @@ There are several major differences w.r.t. the paper~\cite{BBF19}, which is here
 \begin{itemize}
 \item here we present several new examples to illustrate our framework,
 and give more detailed explanations about its use;
-\item we introduce an assertion language to specify the properties of reaction systems;
-\item we define the notion of bio-simulation to relate reaction systems and compare their behaviours;
+\item we introduce an assertion language to specify the properties of Reaction Systems;
+\item we define the notion of bio-simulation to relate Reaction Systems and compare their behaviours;
 \item we show that our assertion language allows to specify properties extending to our
 framework the Hennessy-Milner logic;
 \item we include here all proofs of main results.
@@ -154,7 +154,7 @@ Section~\ref{ex:examples} presents a couple of examples with computer science an
 %Section \ref{ex:lactose} shows a more complex example taken from
 %the literature on RSs and illustrating a \emph{lac} operon.
 Section~\ref{sec:biosimulation} presents a methodology for the formal verification of
-properties of reaction systems that are expressed in a novel assertion language.
+properties of Reaction Systems that are expressed in a novel assertion language.
 Section~\ref{sec:discussion} presents some features and 
 advantages of our embedding for the compositionality of RSs.
 Finally, Section~\ref{sec:conclusion}

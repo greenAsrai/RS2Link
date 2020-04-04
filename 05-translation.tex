@@ -75,7 +75,7 @@ The process is recursive so that reactions can be applied at any step.
 \[
 \begin{array}{lcl@{\quad}l}
 P_{aj} \defeq \\ 
- ^{r_j} \backslash  \blockchain{s_i}{s_o}{s \in R_j} \, \link{}{} \blockchain{\overline{e}_i}{\overline{e}_o}{e \in I_j} \, \chainedlink{r_{j+1}}{\noact}\chainedlink{\noact}{p_j}\link{}{} \blockchain{\widetilde{c}_i}{\widetilde{c}_o}{c \in P_j}\, \backslash_{p_{j+1}}.P_{aj} & \mbox{\small  \{$aj$ is applicable\}}\\
+ ^{r_j} \backslash  \blockchain{s_i}{s_o}{s \in R_j} \link{}{} \blockchain{\overline{e}_i}{\overline{e}_o}{e \in I_j} \chainedlink{r_{j+1}}{\noact}\chainedlink{\noact}{p_j}\link{}{} \blockchain{\widetilde{c}_i}{\widetilde{c}_o}{c \in P_j} \backslash_{p_{j+1}}.P_{aj} & \mbox{\small  \{$aj$ is applicable\}}\\
  + \ \\
  \sum_{s\in R_j}\startchain{r_j}\chainedlink{\overline{s}_i}{\noact}\chainedlink{\noact}{\overline{s}_o} \chainedlink{r_{j+1}}{\noact}\chainedlink{\noact}{p_{j}}\chainend{p_{j+1}}.P_{aj}  & \mbox{\small  \{$aj$ is not applicable\}}\\
 +\\
@@ -146,7 +146,7 @@ $\mathit{decs} \defeq \{ s, \overline{s}, \widetilde{s},\widehat{s},\underline{s
 \item
 $\mathit{ents} \defeq \{ d_i, d_o~|~ d\in \mathit{decs}\}$ is the set names for entities;
 \item
-$\mathit{reacts}\defeq \{r_1,...,r_u\}$ is the set of reaction names associated with each reaction $aj$;
+$\mathit{reacts}\defeq \{r_1,...,r_u\}$ is the set of reaction names $r_j$ associated with each reaction $aj$;
 \item 
 $\mathit{prods}\defeq \{p_1,...,p_u\}$ is the set of names for production $p_j$, associated with  reaction $aj$.
 \end{itemize}
@@ -201,12 +201,19 @@ Each reaction defines a pattern to be satisfied, i.e. each reaction inserts as m
   \end{restatable}
 
 The topmost restriction $\restrict{\mathit{names}}$ appearing in the process $\llbracket{\cal A},\gamma\rrbracket$ serves to guarantee that all names appearing in a link of the chain labelling a transition are matched.
-Since all names appearing in any prefix of $\llbracket{\cal A},\gamma\rrbracket$ are restricted, in the transition $\llbracket{\cal A},\gamma\rrbracket \xrightarrow{\restrict{\mathit{names}}\upsilon} P'$ it means that the observation $\restrict{\mathit{names}}\upsilon$ has the form $\link{\silent}{\silent}\dots\link{\silent}{\silent}$, i.e., it is silent, and that $\upsilon$ is solid. Later on we will be interested in reasoning about the actual chain $\upsilon$ used in the transition.  It has the peculiarity to start and end with silent actions and to include all names in $\mathit{reacts}\cup\mathit{prods}\cup\{\mathit{cxt}\}$. As a matter of notation we call such chain $\upsilon$ \emph{complete} (solid and with $\silent$ actions at the extremes). We will then use $\llparenthesis{\cal A},\gamma\rrparenthesis$ to refer to the encoding without topmost name restrictions, i.e.,
+Since all names appearing in any prefix of $\llbracket{\cal A},\gamma\rrbracket$ are restricted, in the transition $\llbracket{\cal A},\gamma\rrbracket \xrightarrow{\restrict{\mathit{names}}\upsilon} P'$ it means that the observation $\restrict{\mathit{names}}\upsilon$ has the form $\link{\silent}{\silent}\dots\link{\silent}{\silent}$, i.e., it is silent, and that $\upsilon$ is solid. Later on we will be interested in reasoning about the actual chain $\upsilon$ used in the transition.  It has the peculiarity to start and end with silent actions and to include all names in $\mathit{reacts}\cup\mathit{prods}\cup\{\mathit{cxt}\}$. As a matter of notation we call such chain $\upsilon$ \emph{complete}. 
+
+\begin{definition}[Complete Chain]
+A chain $\upsilon$ is called \emph{complete} if it is solid (i.e., it contains no virtual link) and has silent actions $\silent$ at its extremes.
+We  write $P\xRightarrow{\upsilon} P'$ to mean that $P\xrightarrow{\upsilon} P'$ with $\upsilon$ complete.
+\end{definition}
+
+We will then use $\llparenthesis{\cal A},\gamma\rrparenthesis$ to refer to the encoding without topmost name restrictions, i.e.,
 $$
 \llparenthesis{\cal A},\gamma\rrparenthesis \defeq 
-I~|~ \prod_{a\in A} P_a ~|~  \mathit{Cxt}^1~|~\prod_{s\in C_0}P_{s} ~|~ \prod_{s \notin C_0}\overline{P_s} 
+I~|~ \prod_{a\in A} P_a ~|~  \mathit{Cxt}^1~|~\prod_{s\in C_0}P_{s} ~|~ \prod_{s \notin C_0}\overline{P_s} .
 $$
-and will write $P\xRightarrow{\upsilon} P'$ to mean that $P\xrightarrow{\upsilon} P'$ with $\upsilon$ complete.
+and will focus on the complete transitions of $\llparenthesis{\cal A},\gamma\rrparenthesis$.
 
 The following Corollary immediately follows from Lemma~\ref{lem:struct}.
 
@@ -456,7 +463,7 @@ $$
 \right.
 $$
 $$
-\mathit{unflat}(x_1\dots x_n) \defeq\ ^{\silent}\backslash \mathit{unflat}(x_1) \backslash \dots \backslash \mathit{unflat}(x_1) \backslash_{\silent}
+\mathit{unflat}(x_1\dots x_n) \defeq\ ^{\silent}\backslash \mathit{unflat}(x_1) \backslash \dots \backslash \mathit{unflat}(x_n) \backslash_{\silent}
 $$
 
 It is immediate to check that for any complete label $\upsilon$ of our processes we have
