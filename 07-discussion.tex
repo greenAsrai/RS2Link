@@ -5,27 +5,28 @@
 \label{sec:discussion}
 
 Our encoding increases the expressivity of  RS  concerning:
-the behaviour of the context, the possibility of alternative behaviour of
-mutated entities, the communication between two different reaction systems.
+%the behaviour of the context, 
+the possibility of alternative behaviour of
+mutated entities, and  the communication between two different reaction systems.
 It is important to note that our encoding guarantees that from each state, 
 in the  c\CNA \ transition system, only one transition comes out, 
 as the dynamics is totally deterministic.
 
-\subsection{Recursive contexts}
-In RS, the behaviour of the context is finite. For the first $n$ steps, it is specified 
- which are the entities that are provided from the context. 
-Using c\CNA\ we can describe in a natural way the behaviour of the context in a recursive way. 
-Then, the context behaviour would not necessarily end after $n$ steps,
-and  could be infinite.
-For example, in an extended interactive process, we may want that the entity $s$ is 
-intermittently provided by the context every two steps: 
-\[
-\begin{array}{lcll}
-Cxt_s & \defeq &  \startchain{cxt_j}\chainedlink{\hat{s}_i}{\noact}\chainedlink{\noact}{\hat{s}_o}\chainend{cxt_{j+1}}.Cxt_{s'}, &\mbox{ context provides $s$;} \\
-Cxt_{s'} & \defeq & \startchain{cxt_j}\chainedlink{\underline{s}_i}{\noact}\chainedlink{\noact}{\underline{s}_o}\chainend{cxt_{j+1}}.Cxt_{s''},& \mbox{ context doesn't provide $s$;} \\
-Cxt_{s''} & \defeq & \startchain{cxt_j}\chainedlink{\underline{s}_i}{\noact}\chainedlink{\noact}{\underline{s}_o}\chainend{cxt_{j+1}}.Cxt_{s}, & \mbox{ context doesn't provide $s$.} \\
-\end{array}
-\]
+%\subsection{Recursive contexts}
+%In RS, the behaviour of the context is finite. For the first $n$ steps, it is specified 
+% which are the entities that are provided from the context. 
+%Using c\CNA\ we can describe in a natural way the behaviour of the context in a recursive way. 
+%Then, the context behaviour would not necessarily end after $n$ steps,
+%and  could be infinite.
+%For example, in an extended interactive process, we may want that the entity $s$ is 
+%intermittently provided by the context every two steps: 
+%\[
+%\begin{array}{lcll}
+%Cxt_s & \defeq &  \startchain{cxt_j}\chainedlink{\hat{s}_i}{\noact}\chainedlink{\noact}{\hat{s}_o}\chainend{cxt_{j+1}}.Cxt_{s'}, &\mbox{ context provides $s$;} \\
+%Cxt_{s'} & \defeq & \startchain{cxt_j}\chainedlink{\underline{s}_i}{\noact}\chainedlink{\noact}{\underline{s}_o}\chainend{cxt_{j+1}}.Cxt_{s''},& \mbox{ context doesn't provide $s$;} \\
+%Cxt_{s''} & \defeq & \startchain{cxt_j}\chainedlink{\underline{s}_i}{\noact}\chainedlink{\noact}{\underline{s}_o}\chainend{cxt_{j+1}}.Cxt_{s}, & \mbox{ context doesn't provide $s$.} \\
+%\end{array}
+%\]
 
 \subsection{Mutating entities} 
 In RS, when an entity is present, it can potentially be involved in each reactions where it is required.

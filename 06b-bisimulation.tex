@@ -171,11 +171,11 @@ $\star :: r_j :: [ s_1,...,s_n ]^* :: s_i :: [  s_1,...,s_n ]^* :: [  \overline{
 \item
 $\star :: r_j :: [s_i, \overline{s}_i] :: r_{j+1} :: \star$
 \item
-$\star :: p_j :: [  \mathit{ents} ]^* :: \tilde{s}_i :: \star$
+$\star :: p_j :: [  \mathit{ents} ]^* :: \widetilde{s}_i :: \star$
 \item
-$\star :: \tilde{s}_i :: \star$
+$\star :: \widetilde{s}_i :: \star$
 \item
-$\star :: \hat{s}_i :: \star$
+$\star :: \widehat{s}_i :: \star$
 \item
 $\star :: r_j :: ? :: r_{j+1} :: \star$
 \end{enumerate}
@@ -320,85 +320,89 @@ we say that two processes $P,Q$ are bio-logically equivalent w.r.t. $F$, written
 
 Finally, we extend the classical result establishing the correspondence between the logical equivalence induced by HML with bisimilarity for proving that bio-similarity coincides with bio-logical equivalence.
 
-\begin{theorem}
+
+
+\begin{restatable}[Correspondence]{theorem}{theocorr}
+%\begin{theorem}
 $\sim_F\ =\ \equiv_{\mathcal{L}_F}$
-\end{theorem}
-\begin{proof}
-The proof is just an adaptation of the classical result. The two implications are proved separately.
-\begin{description}
-\item[$\sim_F\ \subseteq\ \equiv_{\mathcal{L}_F}$:]
-Given any two processes $P\sim_F Q$ we need to prove that for any bioHML formula $G$ we have $P\entails G$ iff $Q\entails G$. 
-Without loss of generality, we prove that $P\entails G$ implies $Q\entails G$.
-The proof is by structural induction on $G$.
-\begin{itemize}
-\item 
-if $G={\tt t}$, then $Q\entails G$.
-
-\item
-if $G={\tt f}$, then the assumption $P\entails G$ is false and the implication holds.
-
-\item
-if $G=G_1 \wedge G_2$ we take as inductive hypotheses that
-$$
-\begin{array}{l}
-\forall R,S.\ R \sim_F S \wedge R\entails G_1 \Rightarrow S \entails G_1\\
-\forall R,S.\ R \sim_F S \wedge R\entails G_2 \Rightarrow S \entails G_2
-\end{array}
-$$
-We need to prove that $Q\entails G$.
-Since $P\entails G=G_1 \wedge G_2$ we have $P\entails G_1$ and $P\entails G_2$.
-Since $P\sim_F Q$, by inductive hypotheses we get $Q\entails G_1$ and $Q\entails G_2$.
-Hence $Q\entails G_1 \wedge G_2=G$.
-
-
-\item
-if $G=G_1 \vee G_2$  we take as inductive hypotheses that
-$$
-\begin{array}{l}
-\forall R,S.\ R \sim_F S \wedge R\entails G_1 \Rightarrow S \entails G_1\\
-\forall R,S.\ R \sim_F S \wedge R\entails G_2 \Rightarrow S \entails G_2
-\end{array}
-$$
-We need to prove that $Q\entails G$.
-Since $P\entails G=G_1 \vee G_2$ we have $P\entails G_1$ or $P\entails G_2$.
-If $P\entails G_1$, since $P\sim_F Q$, by inductive hypotheses we get $Q\entails G_1$ and thus $Q\entails G_1 \vee G_2=G$.
-If $P\entails G_2$, since $P\sim_F Q$, by inductive hypotheses we get $Q\entails G_2$ and thus $Q\entails G_1 \vee G_2=G$.
-
-\item
-if $G=\langle\chi\rangle H$ we take as inductive hypothesis that
-$$
-\forall R,S.\ R \sim_F S \wedge R\entails H \Rightarrow S \entails H
-$$
-We need to prove that $Q\entails G$.
-Since $P\entails \langle\chi\rangle H$ it means that there exists $\upsilon, P'$ such that $P\xRightarrow{\upsilon} P'$ with $\upsilon\entails \chi$ and $P'\entails H$.
-Since $P\sim_F Q$, there exists $w,Q'$ such that $Q\xRightarrow{w} Q'$ with $w\entails \chi$ and $P'\sim_F Q'$. Then, by inductive hypothesis, $Q'\entails H$ and thus $Q\entails \langle\chi\rangle H=G$.
-
-\item
-if $G=[\chi] H$ we take as inductive hypothesis that
-$$
-\forall R,S.\ R \sim_F S \wedge R\entails H \Rightarrow S \entails H
-$$
-We need to prove that $Q\entails G$.
-If there is no $\upsilon\entails \chi$ such that $Q\xRightarrow{\upsilon}Q'$ for some $Q'$, then 
- $Q\entails [\chi] H=G$ trivially.
-For any $\upsilon,Q'$ such that $Q\xRightarrow{\upsilon}Q'$ with $\upsilon\entails \chi$, then as $P\sim_F Q$ there must exist $w,P'$ such that $P\xRightarrow{w}P'$ with $w\entails \chi$ and $P'\sim_F Q'$. Since $P\entails G=[\chi] H$ then it must be $P'\entails H$. Since $P'\sim_F Q'$, by inductive hypothesis $Q'\entails H$. Hence $Q\entails [\chi] H = G$.
-\end{itemize}
-
-\item[$\equiv_{\mathcal{L}_F}\ \subseteq\ \sim_F$:]
-We prove that $\equiv_{\mathcal{L}_F}$ is a bio-simulation and thus included in $\sim_F$.
-Take two generic processes $P\equiv_{\mathcal{L}_F} Q$ and suppose $P\xRightarrow{\upsilon}P'$ for some $\upsilon,P'$. 
-\begin{itemize}
-\item
-If $\upsilon \entails F$ we want to prove that there exists some $w,Q'$ such that $Q\xRightarrow{w}Q'$, with $w\entails F$ and $P'\equiv_{\mathcal{L}_F} Q'$.
-
-Towards a contradiction, assume that we cannot find such $w,Q'$.
-
-If there is no transition $Q\xRightarrow{w}Q'$ such that $w\entails F$, then the bioHML formula $G \defeq \langle F\rangle{\tt t}$ is such that $P\entails G$ and $Q\not\entails G$, contradicting the assumption $P\equiv_{\mathcal{L}_F} Q$.
-
-Otherwise, let $\mathcal{Q}\defeq \{Q'~\mid~\exists w.\ Q\xRightarrow{w}Q' \ \wedge\ w\entails F\}$ be the set of processes reachable from $Q$ via a transition with a (complete) label that satisfies $F$. Since our processes are with guarded recursion, the set $\mathcal{Q}$ is finite. Let $\mathcal{Q} = \{Q'_1,...,Q'_n\}$. By hypothesis all processes in $\mathcal{Q}$ must not be bio-logically equivalent to $P'$, hence for any $i\in[1,n]$ there exists a bioHML formula $G_i$ such that $P'\entails G_i$ and $Q'_i\not\entails G_i$ (if it was the opposite, $P'\not\entails G_i$ and $Q'_i\entails G_i$, we can use the converse formulas). But then the formula $G\defeq \langle F\rangle(G_1\wedge\dots\wedge G_n)$ is such that $P\entails G$ and $Q\not\entails G$, contradicting the assumption $P\equiv_{\mathcal{L}_F} Q$.
-
-\item
-If $\upsilon \not\entails F$ then the proof is analogous to the previous case and thus omitted.
-\end{itemize}
-\end{description}
-\end{proof}
+%\end{theorem}
+\end{restatable}
+%\begin{proof}
+%The proof is just an adaptation of the classical result. The two implications are proved separately.
+%\begin{description}
+%\item[$\sim_F\ \subseteq\ \equiv_{\mathcal{L}_F}$:]
+%Given any two processes $P\sim_F Q$ we need to prove that for any bioHML formula $G$ we have $P\entails G$ iff $Q\entails G$. 
+%Without loss of generality, we prove that $P\entails G$ implies $Q\entails G$.
+%The proof is by structural induction on $G$.
+%\begin{itemize}
+%\item 
+%if $G={\tt t}$, then $Q\entails G$.
+%
+%\item
+%if $G={\tt f}$, then the assumption $P\entails G$ is false and the implication holds.
+%
+%\item
+%if $G=G_1 \wedge G_2$ we take as inductive hypotheses that
+%$$
+%\begin{array}{l}
+%\forall R,S.\ R \sim_F S \wedge R\entails G_1 \Rightarrow S \entails G_1\\
+%\forall R,S.\ R \sim_F S \wedge R\entails G_2 \Rightarrow S \entails G_2
+%\end{array}
+%$$
+%We need to prove that $Q\entails G$.
+%Since $P\entails G=G_1 \wedge G_2$ we have $P\entails G_1$ and $P\entails G_2$.
+%Since $P\sim_F Q$, by inductive hypotheses we get $Q\entails G_1$ and $Q\entails G_2$.
+%Hence $Q\entails G_1 \wedge G_2=G$.
+%
+%
+%\item
+%if $G=G_1 \vee G_2$  we take as inductive hypotheses that
+%$$
+%\begin{array}{l}
+%\forall R,S.\ R \sim_F S \wedge R\entails G_1 \Rightarrow S \entails G_1\\
+%\forall R,S.\ R \sim_F S \wedge R\entails G_2 \Rightarrow S \entails G_2
+%\end{array}
+%$$
+%We need to prove that $Q\entails G$.
+%Since $P\entails G=G_1 \vee G_2$ we have $P\entails G_1$ or $P\entails G_2$.
+%If $P\entails G_1$, since $P\sim_F Q$, by inductive hypotheses we get $Q\entails G_1$ and thus $Q\entails G_1 \vee G_2=G$.
+%If $P\entails G_2$, since $P\sim_F Q$, by inductive hypotheses we get $Q\entails G_2$ and thus $Q\entails G_1 \vee G_2=G$.
+%
+%\item
+%if $G=\langle\chi\rangle H$ we take as inductive hypothesis that
+%$$
+%\forall R,S.\ R \sim_F S \wedge R\entails H \Rightarrow S \entails H
+%$$
+%We need to prove that $Q\entails G$.
+%Since $P\entails \langle\chi\rangle H$ it means that there exists $\upsilon, P'$ such that $P\xRightarrow{\upsilon} P'$ with $\upsilon\entails \chi$ and $P'\entails H$.
+%Since $P\sim_F Q$, there exists $w,Q'$ such that $Q\xRightarrow{w} Q'$ with $w\entails \chi$ and $P'\sim_F Q'$. Then, by inductive hypothesis, $Q'\entails H$ and thus $Q\entails \langle\chi\rangle H=G$.
+%
+%\item
+%if $G=[\chi] H$ we take as inductive hypothesis that
+%$$
+%\forall R,S.\ R \sim_F S \wedge R\entails H \Rightarrow S \entails H
+%$$
+%We need to prove that $Q\entails G$.
+%If there is no $\upsilon\entails \chi$ such that $Q\xRightarrow{\upsilon}Q'$ for some $Q'$, then 
+% $Q\entails [\chi] H=G$ trivially.
+%For any $\upsilon,Q'$ such that $Q\xRightarrow{\upsilon}Q'$ with $\upsilon\entails \chi$, then as $P\sim_F Q$ there must exist $w,P'$ such that $P\xRightarrow{w}P'$ with $w\entails \chi$ and $P'\sim_F Q'$. Since $P\entails G=[\chi] H$ then it must be $P'\entails H$. Since $P'\sim_F Q'$, by inductive hypothesis $Q'\entails H$. Hence $Q\entails [\chi] H = G$.
+%\end{itemize}
+%
+%\item[$\equiv_{\mathcal{L}_F}\ \subseteq\ \sim_F$:]
+%We prove that $\equiv_{\mathcal{L}_F}$ is a bio-simulation and thus included in $\sim_F$.
+%Take two generic processes $P\equiv_{\mathcal{L}_F} Q$ and suppose $P\xRightarrow{\upsilon}P'$ for some $\upsilon,P'$. 
+%\begin{itemize}
+%\item
+%If $\upsilon \entails F$ we want to prove that there exists some $w,Q'$ such that $Q\xRightarrow{w}Q'$, with $w\entails F$ and $P'\equiv_{\mathcal{L}_F} Q'$.
+%
+%Towards a contradiction, assume that we cannot find such $w,Q'$.
+%
+%If there is no transition $Q\xRightarrow{w}Q'$ such that $w\entails F$, then the bioHML formula $G \defeq \langle F\rangle{\tt t}$ is such that $P\entails G$ and $Q\not\entails G$, contradicting the assumption $P\equiv_{\mathcal{L}_F} Q$.
+%
+%Otherwise, let $\mathcal{Q}\defeq \{Q'~\mid~\exists w.\ Q\xRightarrow{w}Q' \ \wedge\ w\entails F\}$ be the set of processes reachable from $Q$ via a transition with a (complete) label that satisfies $F$. Since our processes are with guarded recursion, the set $\mathcal{Q}$ is finite. Let $\mathcal{Q} = \{Q'_1,...,Q'_n\}$. By hypothesis all processes in $\mathcal{Q}$ must not be bio-logically equivalent to $P'$, hence for any $i\in[1,n]$ there exists a bioHML formula $G_i$ such that $P'\entails G_i$ and $Q'_i\not\entails G_i$ (if it was the opposite, $P'\not\entails G_i$ and $Q'_i\entails G_i$, we can use the converse formulas). But then the formula $G\defeq \langle F\rangle(G_1\wedge\dots\wedge G_n)$ is such that $P\entails G$ and $Q\not\entails G$, contradicting the assumption $P\equiv_{\mathcal{L}_F} Q$.
+%
+%\item
+%If $\upsilon \not\entails F$ then the proof is analogous to the previous case and thus omitted.
+%\end{itemize}
+%\end{description}
+%\end{proof}

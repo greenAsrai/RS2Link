@@ -96,8 +96,8 @@ First we define the parametric process
 % P_i(s1,s2) & \defeq & \startchain{r_i}\chainedlink{s1_i}{\noact}\chainedlink{\noact}{s1_o}
 %\chainedlink{\tilde{s2}_i}{\noact}\chainedlink{\noact}{\tilde{s2}_o}\chainend{r_{i+1}}.P_i(s1,s2)\\
  P_i(s1,s2) & \defeq & \startchain{r_i}\chainedlink{s1_i}{\noact}\chainedlink{\noact}{s1_o}
- \chainedlink{r_{i+1}}{\noact}\chainedlink{\noact}{p_{i}}\chainedlink{\tilde{s2}_i}{\noact}
-\chainedlink{\noact}{\tilde{s2}_o}\chainend{p_{i+1}}.P_i(s1,s2)\\
+ \chainedlink{r_{i+1}}{\noact}\chainedlink{\noact}{p_{i}}\chainedlink{\widetilde{s2}_i}{\noact}
+\chainedlink{\noact}{\widetilde{s2}_o}\chainend{p_{i+1}}.P_i(s1,s2)\\
 \end{array}
 \]
 Then, we let $P_{a1}\defeq P_1(lacI,I)$,  $P_{a3} \defeq P_3(cya,cAMP)$, and $P_{a4} \defeq P_4(crp,CAP)$.
@@ -146,9 +146,9 @@ P_{a6} & \defeq& \startchain{r_{6}}\chainedlink{lac_i}{\noact}\chainedlink{\noac
 \chainedlink{cAMP_i}{\noact}\chainedlink{\noact}{cAMP_o}\chainedlink{\overline{I\textrm{-}OP}_i}{\noact}
 \chainedlink{\noact}{\overline{I\textrm{-}OP}_o}\chainedlink{cxt_1}{\noact}
 \chainedlink{\noact}{p_6}
-\chainedlink{\tilde{z}_i}{\noact}\chainedlink{\noact}{\tilde{z}_o}
-\chainedlink{\tilde{y}_i}{\noact}\chainedlink{\noact}{\tilde{y}_o}
-\chainedlink{\tilde{A}_i}{\noact}\chainedlink{\noact}{\tilde{A}_o}
+\chainedlink{\widetilde{z}_i}{\noact}\chainedlink{\noact}{\widetilde{z}_o}
+\chainedlink{\widetilde{y}_i}{\noact}\chainedlink{\noact}{\widetilde{y}_o}
+\chainedlink{\widetilde{A}_i}{\noact}\chainedlink{\noact}{\widetilde{A}_o}
 \chainend{\silent}.P_{a6}\\
 %P_{a6} & \defeq& \startchain{r_{6}}\chainedlink{lac_i}{\noact}\chainedlink{\noact}{lac_o}
 %\chainedlink{cAMP_i}{\noact}\chainedlink{\noact}{cAMP_o}\chainedlink{\overline{I\textrm{-}OP}_i}{\noact}
@@ -199,7 +199,7 @@ P_{lacI}&\defeq& \link{lacI_i}{lacI_o}.P_{lacI} &
 \end{array}\]
 For the entities always produced (i.e. not present only at the first step), we  provide a  parametric
 definition  
-$P_e(s) \defeq  \startchain{s_i}\chainedlink{s_o}{\noact}\chainedlink{\noact}{\tilde{s}_i}\chainend{\tilde{s}_o}.P_e(s) +  \startchain{\tilde{s_i}}\chainend{\tilde{s}_o} .P_e(s) $.\\
+$P_e(s) \defeq  \startchain{s_i}\chainedlink{s_o}{\noact}\chainedlink{\noact}{\widetilde{s}_i}\chainend{\widetilde{s}_o}.P_e(s) +  \startchain{\widetilde{s_i}}\chainend{\widetilde{s}_o} .P_e(s) $.\\
 % There are four entities of the first type: $P_d(lac)$, $P_d(cya)$, $P_d(crp)$, $P_d(lacI)$.
  There are three entities of the second type:  $$P_{cAMP}\defeq P_e(cAMP) \qquad P_{CAP} \defeq P_e(CAP)\qquad P_I \defeq P_e(I).$$
 
@@ -255,10 +255,10 @@ The  process $P_{glucose}$ is similar to $P_{lactose}$ and tested for absence by
 The entity $z$ can only be produced by rule $a_6$, while it is never provided by the context. Moreover, there is no rule for testing its presence or absence.
 \[
 \begin{array}{lcl@{\qquad\qquad}lcl}
-P_z&\defeq &\startchain{\tilde{z_i}}\chainedlink{\tilde{z_o}}{\noact}\chainedlink{\noact}{\underline{z_i}}\chainend{\underline{z_o}}.P_z\ + \
+P_z&\defeq &\startchain{\widetilde{z_i}}\chainedlink{\widetilde{z_o}}{\noact}\chainedlink{\noact}{\underline{z_i}}\chainend{\underline{z_o}}.P_z\ + \
 \link{\underline{z_i}}{\underline{z_o}}.\overline{P_z}
 &
-\overline{P_z} &\defeq &\startchain{\tilde{z_i}}\chainedlink{\tilde{z_o}}{\noact}\chainedlink{\noact}{\underline{z_i}}\chainend{\underline{z_o}}.\overline{P_z}\ + \
+\overline{P_z} &\defeq &\startchain{\widetilde{z_i}}\chainedlink{\widetilde{z_o}}{\noact}\chainedlink{\noact}{\underline{z_i}}\chainend{\underline{z_o}}.\overline{P_z}\ + \
 \link{\underline{z_i}}{\underline{z_o}}.\overline{P_z}\\\end{array}
 \]
 \noindent
@@ -325,8 +325,8 @@ $$
 \begin{array}{rcl}
 v' & = & \link{\silent}{lac_i}\dots \link{lac_o}{cAMP-CAP_i}\dots \startchain{\overline{I-OP}_o}
 \chainedlink{cxt_1}{\dots}\startchain{\underline{glucose}_o}\chainedlink{p_1}{p_1}
-\chainedlink{\dots}{p_6}\chainedlink{\tilde{z}_i}{\tilde{z}_i}\chainedlink{\tilde{z}_o}{\tilde{z}_o}
-\chainedlink{\tilde{y}_i}{\tilde{y}_i}\chainedlink{\tilde{y}_o}{\tilde{y}_o}\chainedlink{\tilde{A}_i}{\tilde{A}_i}\chainedlink{\tilde{A}_o}{\tilde{A}_o}\chainend{\silent}\\[5pt]
+\chainedlink{\dots}{p_6}\chainedlink{\widetilde{z}_i}{\widetilde{z}_i}\chainedlink{\widetilde{z}_o}{\widetilde{z}_o}
+\chainedlink{\widetilde{y}_i}{\widetilde{y}_i}\chainedlink{\widetilde{y}_o}{\widetilde{y}_o}\chainedlink{\widetilde{A}_i}{\widetilde{A}_i}\chainedlink{\widetilde{A}_o}{\widetilde{A}_o}\chainend{\silent}\\[5pt]
 %\chainend{cxt_1}\dots \link{\underline{glucose}_o}{\silent}\\[5pt]
 lacOp'' & \defeq & \restrict{names} (\Pi_{i =1}^{6} P_{ai} | \Pi_{s \in AP'} P_s |   \Pi_{s \in S \backslash AP'} \overline{P}_s| CXT)
 \end{array}
