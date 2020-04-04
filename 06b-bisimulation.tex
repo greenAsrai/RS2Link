@@ -86,7 +86,7 @@ As detailed before, in the following we assume that: (i) the context can be non-
 
 Next, we introduce an assertion language that operates on simple strings
 and that combines regular expression operators with conjunction and disjunction.
-
+In the following we let $\mathit{syms} = \mathit{decs}\cup\mathit{reacts}\cup\mathit{prods}\cup\{\mathit{cxt}\}$ be the set of symbolic names used in our assertion language.
 
 \begin{definition}[Assertion language]
 \label{def:assetionl}
@@ -110,32 +110,32 @@ F \wedge F
 \end{array}
 $$
 %\noindent where $s \in {\cal C}$, and  $\oplus \in \{\wedge, \vee, \to \}$. 
-where $\alpha \in \mathit{names}$ and $N\subseteq \mathit{names}$.
+where $\alpha \in \mathit{syms}$ and $N\subseteq \mathit{syms}$.
 %, and  $\oplus \in \{\wedge, \vee \}$. 
 % \{\wedge, \vee, \to \}$. 
 \end{definition}
 
-Roughly, a \emph{singleton} assertion $\zeta$ denotes either a string composed by a single symbol $\alpha$ (one of the symbols in the set $\mathit{names}$ for denoting a particular entity, rule, production or context), or
-the wildcard $?$ that stands for any symbol, or the pattern $[N]$ that stands for any of the strings composed by a single symbol in the set $N$. Clearly $?$  is just a shorthand for $[\mathit{names}]$.
+Roughly, a \emph{singleton} assertion $\zeta$ denotes either a string composed by a single symbol $\alpha$ (one of the symbols in the set $\mathit{syms}$ for denoting a particular entity, rule, production or context), or
+the wildcard $?$ that stands for any symbol, or the pattern $[N]$ that stands for any of the strings composed by a single symbol in the set $N$. Clearly $?$  is just a shorthand for $[\mathit{syms}]$.
 We write $\mathbf{0}$ for $[\emptyset]$ and $[s_1,...,s_n]$ instead of $[\{s_1,...,s_n\}]$. 
 
 An \emph{assertion} $F$ is either the empty string $\epsilon$, a singleton assertion $\zeta$, the concatenation of two assertions $F_1::F_2$, the replication of $F$ for 1 or more times $F^+$, the replication of $F$ for 0 or more times $F^*$, the disjunction of two assertions $F_1 \vee F_2$ or their conjunction $F_1 \wedge F_2$. We write $\star$ as an abbreviation of $?^*$.
 
-An assertion denotes a set of strings over the alphabet $\mathit{names}$ as expected.
+An assertion denotes a set of strings over the alphabet $\mathit{syms}$ as expected.
 
 \begin{definition}[Semantics of assertions]
- We define $\llbracket F\rrbracket \subseteq\wp(\mathit{names}^*)$ by induction on the structure of $F$: 
+ We define $\llbracket F\rrbracket \subseteq\wp(\mathit{syms}^*)$ by induction on the structure of $F$: 
 \[
-\begin{array}{rcl}
- \llbracket \alpha \rrbracket &\defeq&  \{\alpha\} \\
- \llbracket ? \rrbracket &\defeq&   \mathit{names}\\
- \llbracket [N]\rrbracket &\defeq&   N\\
- \llbracket \epsilon \rrbracket &\defeq&  \{\epsilon\} \\
- \llbracket F_1::F_2 \rrbracket &\defeq& \{\omega_1 :: \omega_2~\mid~ \omega_1 \in \llbracket F_1 \rrbracket \wedge \omega_2 \in \llbracket F_2 \rrbracket\}  \\
- \llbracket F^+ \rrbracket &\defeq& \llbracket F \rrbracket^+  \\
- \llbracket F^* \rrbracket &\defeq& \llbracket F \rrbracket^*  \\
- \llbracket  F_1 \vee F_2 \rrbracket &\defeq& \llbracket  F_1\rrbracket \cup \llbracket  F_2\rrbracket  \\
- \llbracket  F_1 \wedge F_2 \rrbracket &\defeq& \llbracket F_1 \rrbracket \cap \llbracket F_2\rrbracket 
+\begin{array}{rcl@{\hspace{1cm}}rcl}
+ \llbracket \epsilon \rrbracket &\defeq&  \{\epsilon\}
+ & \llbracket F_1::F_2 \rrbracket &\defeq& \{\omega_1 :: \omega_2~\mid~ \omega_1 \in \llbracket F_1 \rrbracket \wedge \omega_2 \in \llbracket F_2 \rrbracket\}  \\
+ \llbracket \alpha \rrbracket &\defeq&  \{\alpha\} 
+ & \llbracket F^+ \rrbracket &\defeq& \llbracket F \rrbracket^+  \\
+ \llbracket ? \rrbracket &\defeq&   \mathit{syms}
+ & \llbracket F^* \rrbracket &\defeq& \llbracket F \rrbracket^*  \\
+ \llbracket [N]\rrbracket &\defeq&   N
+ & \llbracket  F_1 \vee F_2 \rrbracket &\defeq& \llbracket  F_1\rrbracket \cup \llbracket  F_2\rrbracket  \\
+ &&&\llbracket  F_1 \wedge F_2 \rrbracket &\defeq& \llbracket F_1 \rrbracket \cap \llbracket F_2\rrbracket 
 \end{array}
 \]
 \end{definition}

@@ -1,130 +1,141 @@
 \begin{thebibliography}{10}
-
-\bibitem{Az17}
-S.~Azimi.
-\newblock Steady states of constrained reaction systems.
-\newblock {\em Theor. Comput. Sci.}, 701(C):20--26, 2017.
-
-\bibitem{ABP14}
-S.~Azimi, B.~Iancu, and I.~Petre.
-\newblock Reaction system models for the heat shock response.
-\newblock {\em Fundamenta Informaticae}, 131(3-4):299--312, 2014.
-
-\bibitem{BarbutiGLM16}
-R.~Barbuti, R.~Gori, F.~Levi, and P.~Milazzo.
-\newblock Investigating dynamic causalities in reaction systems.
-\newblock {\em Theor. Comput. Sci.}, 623:114--145, 2016.
-
-\bibitem{BMMT08}
-R.~Barbuti, A.~Maggiolo-Schettini, P.~Milazzo, and A.~Troina.
-\newblock Bisimulations in calculi modelling membranes.
-\newblock {\em Formal Aspects of Computing}, 20(4):351--377, 2008.
-
-\bibitem{BBDFH18}
-A.~Bernini, L.~Brodo, P.~Degano, M.~Falaschi, and D.~Hermith.
-\newblock Process calculi for biological processes.
-\newblock {\em Natural Computing}, 17(2):345--373, 2018.
-
-\bibitem{BodeiBB12}
-C.~Bodei, L.~Brodo, and R.~Bruni.
-\newblock Open multiparty interaction.
-\newblock In {\em Recent Trends in Algebraic Development Techniques, 21st
-  International Workshop, {WADT} 2012}, volume 7841 of {\em Lecture Notes in
-  Computer Science}, pages 1--23. Springer, 2012.
-
-\bibitem{BBB17}
-C.~Bodei, L.~Brodo, and R.~Bruni.
-\newblock A formal approach to open multiparty interactions.
-\newblock {\em Theoretical Computer Science}, 763:38--65, 2019.
-
-\bibitem{BodeiBBC14}
-C.~Bodei, L.~Brodo, R.~Bruni, and D.~Chiarugi.
-\newblock A flat process calculus for nested membrane interactions.
-\newblock {\em Sci. Ann. Comp. Sci.}, 24(1):91--136, 2014.
-
-\bibitem{BBGLBH2017}
-C.~Bodei, L.~Brodo, R.~Gori, F.~Levi, A.~Bernini, and D.~Hermith.
-\newblock A static analysis for {B}rane {C}alculi providing global occurrence
-  counting information.
-\newblock {\em Theoretical Computer Science}, 696:11--51, 2017.
-
-\bibitem{10.1007/978-3-319-73359-3_3}
-A.~Bogdan and C.~Gabriel.
-\newblock Controlled reversibility in reaction systems.
-\newblock In M.~Gheorghe, G.~Rozenberg, A.~Salomaa, and Z.~Claudio, editors,
-  {\em Membrane Computing}. Springer International Publishing, 2018.
+\expandafter\ifx\csname url\endcsname\relax
+  \def\url#1{\texttt{#1}}\fi
+\expandafter\ifx\csname urlprefix\endcsname\relax\def\urlprefix{URL }\fi
+\expandafter\ifx\csname href\endcsname\relax
+  \def\href#1#2{#2} \def\path#1{#1}\fi
 
 \bibitem{BEMR11}
-R.~Brijder, A.~Ehrenfeucht, M.~Main, and G.~Rozenberg.
-\newblock A tour of reaction systems.
-\newblock {\em International Journal of Foundations of Computer Science},
-  22(07):1499--1517, 2011.
-
-\bibitem{B16}
-L.~Brodo.
-\newblock On the expressiveness of pi-calculus for encoding mobile ambients.
-\newblock {\em Mathematical Structures in Computer Science}, 28(2):202--240,
-  2018.
-
-\bibitem{BrodoO17}
-L.~Brodo and C.~Olarte.
-\newblock Symbolic semantics for multiparty interactions in the link-calculus.
-\newblock In {\em Proc.~of {SOFSEM}'17}, volume 10139 of {\em Lecture Notes in
-  Computer Science}, pages 62--75. Springer, 2017.
-
-\bibitem{CardelliG00}
-L.~Cardelli and A.~D. Gordon.
-\newblock Mobile ambients.
-\newblock {\em Theoretical Computer Science}, 240(1):177--213, 2000.
-
-\bibitem{CTTV15}
-L.~Cardelli, M.~Tribastone, M.~Tschaikowski, and A.~Vandin.
-\newblock Forward and backward bisimulations for chemical reaction networks.
-\newblock In {\em 26th International Conference on Concurrency Theory, CONCUR
-  2015}, volume~42, pages 226--239. Schloss Dagstuhl- Leibniz-Zentrum fur
-  Informatik GmbH, Dagstuhl Publishing, 2015.
-
-\bibitem{CFHOT15}
-D.~Chiarugi, M.~Falaschi, D.~Hermith, C.~Olarte, and L.~Torella.
-\newblock Modelling non-markovian dynamics in biochemical reactions.
-\newblock {\em {BMC} Systems Biology}, 9({S-3}):S8, 2015.
-
-\bibitem{CMMBM12}
-L.~Corolli, C.~Maj, F.~Marinia, D.~Besozzi, and G.~Mauri.
-\newblock An excursion in reaction systems: From computer science to biology.
-\newblock {\em Theoretical Computer Science}, 454:95--108, 2012.
-
-\bibitem{GC03}
-A.~Gordon and L.~Cardelli.
-\newblock Equational properties of mobile ambients.
-\newblock {\em Mathematical Structures in Computer Science}, 13(3):371--408,
-  june 2003.
+R.~Brijder, A.~Ehrenfeucht, M.~Main, G.~Rozenberg, A tour of reaction systems,
+  International Journal of Foundations of Computer Science 22~(07) (2011)
+  1499--1517.
 
 \bibitem{MPR15}
-A.~M\c{e}ski, W.~Penczek, and G.~Rozenberg.
-\newblock Model checking temporal properties of reaction systems.
-\newblock {\em Information Sciences}, 313:22--42, 2015.
+A.~M\c{e}ski, W.~Penczek, G.~Rozenberg, Model checking temporal properties of
+  reaction systems, Information Sciences 313 (2015) 22--42.
+\newblock \href {https://doi.org/10.1016/j.ins.2015.03.048}
+  {\path{doi:10.1016/j.ins.2015.03.048}}.
 
-\bibitem{10.1007/3-540-55719-9_114}
-R.~Milner and D.~Sangiorgi.
-\newblock Barbed bisimulation.
-\newblock In W.~Kuich, editor, {\em Automata, Languages and Programming}, pages
-  685--695, Berlin, Heidelberg, 1992. Springer Berlin Heidelberg.
+\bibitem{ABP14}
+S.~Azimi, B.~Iancu, I.~Petre, Reaction system models for the heat shock
+  response, Fundamenta Informaticae 131~(3-4) (2014) 299--312.
+\newblock \href {https://doi.org/10.3233/FI-2014-1016}
+  {\path{doi:10.3233/FI-2014-1016}}.
+
+\bibitem{CMMBM12}
+L.~Corolli, C.~Maj, F.~Marinia, D.~Besozzi, G.~Mauri, An excursion in reaction
+  systems: From computer science to biology, Theoretical Computer Science 454
+  (2012) 95--108.
+
+\bibitem{Az17}
+S.~Azimi, Steady states of constrained reaction systems, Theor. Comput. Sci.
+  701~(C) (2017) 20--26.
+\newblock \href {https://doi.org/10.1016/j.tcs.2017.03.047}
+  {\path{doi:10.1016/j.tcs.2017.03.047}}.
+
+\bibitem{BarbutiGLM16}
+R.~Barbuti, R.~Gori, F.~Levi, P.~Milazzo, Investigating dynamic causalities in
+  reaction systems, Theor. Comput. Sci. 623 (2016) 114--145.
 
 \bibitem{OY16}
-F.~Okubo and T.~Yokomori.
-\newblock The computational capability of chemical reaction automata.
-\newblock {\em Natural Computing}, 15(2):215--224, 2016.
+F.~Okubo, T.~Yokomori, \href{https://doi.org/10.1007/s11047-015-9504-7}{The
+  computational capability of chemical reaction automata}, Natural Computing
+  15~(2) (2016) 215--224.
+\newblock \href {https://doi.org/10.1007/s11047-015-9504-7}
+  {\path{doi:10.1007/s11047-015-9504-7}}.
+\newline\urlprefix\url{https://doi.org/10.1007/s11047-015-9504-7}
+
+\bibitem{BodeiBB12}
+C.~Bodei, L.~Brodo, R.~Bruni, Open multiparty interaction, in: Recent Trends in
+  Algebraic Development Techniques, 21st International Workshop, {WADT} 2012,
+  Vol. 7841 of Lecture Notes in Computer Science, Springer, 2012, pp. 1--23.
+
+\bibitem{BBB17}
+C.~Bodei, L.~Brodo, R.~Bruni, A formal approach to open multiparty
+  interactions, Theoretical Computer Science 763 (2019) 38--65.
+
+\bibitem{CardelliG00}
+L.~Cardelli, A.~D. Gordon, Mobile ambients, Theoretical Computer Science
+  240~(1) (2000) 177--213.
+
+\bibitem{B16}
+L.~Brodo, On the expressiveness of pi-calculus for encoding mobile ambients,
+  Mathematical Structures in Computer Science 28~(2) (2018) 202--240.
+
+\bibitem{BodeiBBC14}
+C.~Bodei, L.~Brodo, R.~Bruni, D.~Chiarugi, A flat process calculus for nested
+  membrane interactions, Sci. Ann. Comp. Sci. 24~(1) (2014) 91--136.
+
+\bibitem{HM80}
+M.~Hennessy, R.~Milner, On observing nondeterminism and concurrency, in:
+  J.~de~Bakker, J.~van Leeuwen (Eds.), Automata, Languages and Programming,
+  Vol.~85 of Lecture Notes in Computer Science, Springer Berlin Heidelberg,
+  Berlin, Heidelberg, 1980, pp. 299--309.
+
+\bibitem{BBDFH18}
+A.~Bernini, L.~Brodo, P.~Degano, M.~Falaschi, D.~Hermith, Process calculi for
+  biological processes, Natural Computing 17~(2) (2018) 345--373.
+
+\bibitem{10.1007/978-3-319-73359-3_3}
+A.~Bogdan, C.~Gabriel, Controlled reversibility in reaction systems, in:
+  M.~Gheorghe, G.~Rozenberg, A.~Salomaa, Z.~Claudio (Eds.), Membrane Computing,
+  Springer International Publishing, 2018, pp. 40--53.
+
+\bibitem{BBF19}
+L.~Brodo, R.~Bruni, M.~Falaschi, Embedding reaction systems into link-calculus,
+  in: M.~Alvim, K.~Chatzikokolakis, C.~Olarte, F.~Valencia (Eds.), The Art of
+  Modelling Computational Systems: A Journey from Logic and Concurrency to
+  Security and Privacy, Vol. 11760 of Lecture Notes in Computer Science,
+  Springer Berlin, 2019, pp. 68--85.
+
+\bibitem{WBB13}
+J.~D. Watson, T.~A. Baker, S.~P. Bell, Molecular Biology of the Gene, Pearson
+  Education, USA, 2013.
+
+\bibitem{10.1007/3-540-55719-9_114}
+R.~Milner, D.~Sangiorgi, Barbed bisimulation, in: W.~Kuich (Ed.), Automata,
+  Languages and Programming, Springer Berlin Heidelberg, Berlin, Heidelberg,
+  1992, pp. 685--695.
+
+\bibitem{GC03}
+A.~Gordon, L.~Cardelli, Equational properties of mobile ambients, Mathematical
+  Structures in Computer Science 13~(3) (2003) 371--408.
+
+\bibitem{BMMT08}
+R.~Barbuti, A.~Maggiolo-Schettini, P.~Milazzo, A.~Troina, Bisimulations in
+  calculi modelling membranes, Formal Aspects of Computing 20~(4) (2008)
+  351--377.
+
+\bibitem{CTTV15}
+L.~Cardelli, M.~Tribastone, M.~Tschaikowski, A.~Vandin, Forward and backward
+  bisimulations for chemical reaction networks, in: 26th International
+  Conference on Concurrency Theory, CONCUR 2015, Vol.~42, Schloss Dagstuhl-
+  Leibniz-Zentrum fur Informatik GmbH, Dagstuhl Publishing, 2015, pp. 226--239.
+\newblock \href {https://doi.org/10.4230/LIPIcs.CONCUR.2015.226}
+  {\path{doi:10.4230/LIPIcs.CONCUR.2015.226}}.
+
+\bibitem{BrodoO17}
+L.~Brodo, C.~Olarte, Symbolic semantics for multiparty interactions in the
+  link-calculus, in: Proc.~of {SOFSEM}'17, Vol. 10139 of Lecture Notes in
+  Computer Science, Springer, 2017, pp. 62--75.
 
 \bibitem{tool}
-C.~Olarte.
-\newblock Si{LV}er: Symbolic links verifier, Dec. 2018.
-\newblock \url{http://subsell.logic.at/links/links-web/index.html}.
+C.~Olarte, Si{LV}er: Symbolic links verifier,
+  \url{http://subsell.logic.at/links/links-web/index.html} (Dec. 2018).
+
+\bibitem{CFHOT15}
+D.~Chiarugi, M.~Falaschi, D.~Hermith, C.~Olarte, L.~Torella, Modelling
+  non-markovian dynamics in biochemical reactions, {BMC} Systems Biology
+  9~({S-3}) (2015) S8.
 
 \bibitem{OCHF16}
-C.~Olarte, D.~Chiarugi, M.~Falaschi, and D.~Hermith.
-\newblock A proof theoretic view of spatial and temporal dependencies in
-  biochemical systems.
-\newblock {\em Theor. Comput. Sci.}, 641:25--42, 2016.
+C.~Olarte, D.~Chiarugi, M.~Falaschi, D.~Hermith, A proof theoretic view of
+  spatial and temporal dependencies in biochemical systems, Theor. Comput. Sci.
+  641 (2016) 25--42.
+
+\bibitem{BBGLBH2017}
+C.~Bodei, L.~Brodo, R.~Gori, F.~Levi, A.~Bernini, D.~Hermith, A static analysis
+  for {B}rane {C}alculi providing global occurrence counting information,
+  Theoretical Computer Science 696 (2017) 11--51.
 
 \end{thebibliography}
