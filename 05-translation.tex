@@ -232,12 +232,12 @@ I ~|~ P_{s1}~|~\overline{P}_{s2}~|~ P_{r1}~|~P_{r2}~|~\mathit{Cxt}
 $$
  where:
  \[
- \begin{array}{l@{\hspace{-0.009cm}}c@{\hspace{-0.009cm}}ll@{\hspace{-0.009cm}}c@{\hspace{-0.009cm}}l}
- P_{r_1} &\defeq& \startchain{r_1}\chainedlink{s1_i}{\noact}\chainedlink{\noact}{s1_o}\chainedlink{r_2}{\noact} \chainedlink{\noact}{p_1}\chainedlink{\widetilde{s2}_i}{\noact}\chainedlink{\noact}{\widetilde{s2}_o}\chainend{p_2}.P_{r_1} + \dots;  & 
+ \begin{array}{rcl}
+ P_{r_1} &\defeq& \startchain{r_1}\chainedlink{s1_i}{\noact}\chainedlink{\noact}{s1_o}\chainedlink{r_2}{\noact} \chainedlink{\noact}{p_1}\chainedlink{\widetilde{s2}_i}{\noact}\chainedlink{\noact}{\widetilde{s2}_o}\chainend{p_2}.P_{r_1} + \dots;   \\
+  P_{r_2} &\defeq& \dots + \startchain{r_2}\chainedlink{\overline{s2}_i}{\noact}\chainedlink{\noact}{\overline{s2}_o}\chainedlink{\mathit{cxt}}{\noact} \chainedlink{\noact}{p_2}\chainend{\silent}.P_{r_2} + \dots; \\
    P_{s1} &\defeq& \startchain{s1_i}\chainedlink{s1_o}{\noact}\chainedlink{\noact}{\widehat{s1}_i}\chainend{\widehat{s1}_o}
  %{\noact}\chainedlink{\noact}{\tilde{s1}_i}\chainedlink{\tilde{s1}_o}
- .P_{s1} + \dots; \\   
-  P_{r_2} &\defeq& \dots + \startchain{r_2}\chainedlink{\overline{s2}_i}{\noact}\chainedlink{\noact}{\overline{s2}_o}\chainedlink{\mathit{cxt}}{\noact} \chainedlink{\noact}{p_2}\chainend{\silent}.P_{r_2} + \dots; \\
+ .P_{s1} + \dots; \\
   \overline{P}_{s2} &\defeq& \startchain{\overline{s2}_i}\chainedlink{\overline{s2}_o}{\noact}
    \chainedlink{\noact} {\widehat{s2}_i}\chainedlink{\widehat{s2}_o}{\noact}\chainedlink{\noact} {\widetilde{s2}_i}\chainend{\widetilde{s2}_o}.P_{s2} + \dots;\\
  \mathit{Cxt}& \defeq & \startchain{\mathit{cxt}}\chainedlink{\widehat{s1}_i}{\noact}\chainedlink{\noact}{\widehat{s1}_o}
@@ -274,6 +274,31 @@ For clarity of exposition, we show the code of the processes just in part, to fo
  }
  P'
  $$
+ 
+ Since the chain in the transition label is complete we can also write
+  $$
+ \llparenthesis{\cal A},\gamma\rrparenthesis \xRightarrow{
+ \startchain{\silent}
+ \chainedlink{r_1}{r_1}
+ \chainedlink{s1_i}{s1_i}
+ \chainedlink{s1_o}{s1_o}
+ \chainedlink{r_2}{r_2}
+ \chainedlink{\overline{s2}_i}{\overline{s2}_i}
+ \chainedlink{\overline{s2}_o}{\overline{s2}_o}
+ \chainedlink{\mathit{cxt}}{\mathit{cxt}}
+ \chainedlink{\widehat{s1}_i}{\widehat{s1}_i}
+ \chainedlink{\widehat{s1}_o}{\widehat{s1}_o}
+  \chainedlink{\widehat{s2}_i}{\widehat{s2}_i}
+  \chainedlink{\widehat{s2}_o}{\widehat{s2}_o}
+  \chainedlink{p_1}{p_1}
+  \chainedlink{\widetilde{s2}_i}{\widetilde{s2}_i}
+  \chainedlink{\widetilde{s2}_o}{\widetilde{s2}_o}
+  \chainedlink{p_2}{p_2}
+  \chainend{\silent}
+ }
+ P'
+ $$
+
  
   \begin{figure}[t]
   \begin{tikzpicture}

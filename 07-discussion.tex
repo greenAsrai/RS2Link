@@ -6,7 +6,7 @@
 
 Our encoding increases the expressivity of  RS  concerning:
 the behaviour of the context, the possibility of alternative behaviour of
-mutated entities, the communication between two different reaction systems.
+mutated entities, the communication between two different Reaction Systems.
 It is important to note that our encoding guarantees that from each state, 
 in the  c\CNA \ transition system, only one transition comes out, 
 as the dynamics is totally deterministic.
@@ -41,7 +41,7 @@ Technically, in both cases it is enough to add one more non
 deterministic choice in the code of $P_{a1}$ and $P_{a2}$. 
 
 
-\subsection{Communicating reaction systems} 
+\subsection{Communicating Reaction Systems} 
 We sketch how it is possible to program two RSs encodings, in a way that 
 the entities that usually come from context of one RS will be provided instead from the other RS. 
 
@@ -66,7 +66,7 @@ $a_1=(s,\ , x)$ & $a_2=(y,\  ,s)$\\
 %$r1_2=(\ , s2,s1)$ & $r2_2=(s1,\ ,s3)$\\
 \hline 
 \end{tabular}
-\caption{The two reaction systems $rs1$ and $rs2$.}
+\caption{The two Reaction Systems $rs1$ and $rs2$.}
 \label{tab:rules}
 \end{table}
  \noindent
@@ -196,7 +196,7 @@ only entities $s$ and $y$ are present. Now, the only possible transition has  th
 where the black links belong to the prefixes of $P_{a_1}$, and $P_{a_2}$, the blue links belong to $P_s$, the gray links belong to $P_y$, and $\overline{P_x}$ and the red links belong to $\overline{P_{ss}}$.
 After the execution, the entity $s$ is still present in $rs1$ as it has been provided by $rs2$.\\
 
-As we have briefly sketched, our model of two \emph{communicating reaction systems} 
+As we have briefly sketched, our model of two \emph{communicating Reaction Systems} 
 can enable the study of the behaviour of one RS
 in relation to another one.
 In Example~\ref{ex:twoRS} describing  the behaviour of the \emph{lac} operon,
