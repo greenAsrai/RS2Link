@@ -35,7 +35,9 @@ To this goal, we introduce a simple language
 %simple assertion language 
 that allows us to formulate detailed and partial queries about what happened in a single transition.
 
-For example we would like to express properties about each step of the simulation of a system like the following:
+For instance we would like to express properties about each step of the simulation of a system like in the following:
+
+\begin{example} \label{properties_ex}
 \begin{enumerate}
 \item Has the entity $s_i$ been used by rule $r_j$ as reagent?
 \item Has the entity $s_i$ blocked the application of  rule $r_j$?
@@ -49,6 +51,7 @@ For example we would like to express properties about each step of the simulatio
 %\item Has the entity $s$ been provided by the context ?
 %\item Has the rule $i$ been applied ?
 \end{enumerate}
+\end{example}
 
 As detailed before, in the following we assume that: (i) the context can be non-deterministic, otherwise it makes little sense to rely on bisimulation to observe the branching structure of system dynamics; (ii) we are interested in observing the names of the entities involved in the transitions and also the rules that have been applied, thus we assume top level restrictions are absent and rely on solid transitions only (with leftmost and rightmost silent actions).
 
@@ -163,7 +166,7 @@ Given two transition labels $v,w$ we write $v\equiv_F w$ if $v \entails F\ \Left
 %If it is not the case vbthat $\pi, v_i \entails  F $, then we say that $F$ does not hold at $v_i$ and we write $\pi,v_i \not\entails F$. 
 %\end{definition}
 
-The corresponding formulas to the sample queries listed above are as follows:\\
+The formulas corresponding to the sample queries listed in Example~\ref{properties_ex} are as follows:
 
 \begin{enumerate}
 \item
