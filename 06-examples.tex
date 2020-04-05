@@ -54,7 +54,7 @@ P_n(q,b,w,a,q) & \defeq & \pi_n(q,b,w,a,q).P_n(q,b,w,a,q)  \\
 					        \chainedlink{\overline{a}_i}{\noact}\chainedlink{\noact}{\overline{a}_o}
 					        \chainedlink{r_{n+1}}{\noact}\chainedlink{\noact}{p_n}
 					        \chainedlink{\widetilde{q}_i}{\noact}\chainedlink{\noact}{\widetilde{q}_o}
-			\chainend{p_{n+1}}\\
+			\chainend{p_{n+1}}\\[6pt]
 \pi'_n(x) &\defeq &  \startchain{r_n}\chainedlink{x_i}{\noact}\chainedlink{\noact}{x_o}\chainedlink{r_{n+1}}{\noact}\chainedlink{\noact}{p_n} \chainend{p_{n+1}} 
 % \ + \   \startchain{r_n}\chainedlink{w_i}{\noact}\chainedlink{\noact}{w_o}\chainedlink{r_{n+1}}{\noact}\chainedlink{\noact}{p_n} \chainend{p_{n+1}}.P_n(q,b,w,a,q) \\
 %			&&+\\
@@ -209,7 +209,7 @@ where
                                                      \chainedlink{\overline{C}_i}{\noact}\chainedlink{\noact}{\overline{C}_o}
 					        \chainedlink{r_{n+1}}{\noact}\chainedlink{\noact}{p_n}
 					        \chainedlink{\widetilde{T}_i}{\noact}\chainedlink{\noact}{\widetilde{T}_o}
-			\chainend{p_{n+1}}\\
+			\chainend{p_{n+1}}\\[6pt]
 \pi'_n(x) &\defeq &  \startchain{r_n}\chainedlink{x_i}{\noact}\chainedlink{\noact}{x_o}\chainedlink{r_{n+1}}{\noact}\chainedlink{\noact}{p_n} \chainend{p_{n+1}} 
 % \ + \   \startchain{r_n}\chainedlink{w_i}{\noact}\chainedlink{\noact}{w_o}\chainedlink{r_{n+1}}{\noact}\chainedlink{\noact}{p_n} \chainend{p_{n+1}}.P_n(q,b,w,a,q) \\
 %			&&+\\
@@ -260,7 +260,7 @@ P_T & \defeq & P(T,\widetilde{T})& \overline{P}_T & \defeq & P(\overline{T},\wid
 \overline{P}_{T',\widetilde{T'}}& \defeq & P(\overline{T'},\widetilde{T'})\\\
 \end{array}
 \]
-Here, the entities that can be produced by the reactions and that can be  provided by the context:
+The entities that can be produced by the reactions and that can be  provided by the context are as follows:
 \[
 \begin{array}{lcl @{\hspace{1cm}}lcl}
 P(C,\widehat{C},\underline{C},\widetilde{C}) & \defeq &  \sum_{h=0}^1 (\startchain{C_i}\chainedlink{C_o}{\noact}\chainend{\noact})^h\ \link{\widehat{C}_i}{\widehat{C}_o} (\startchain{\noact}\chainedlink{\noact}{\widetilde{C}_i}\chainend{\widetilde{C}_o})^h.   P(C,\widehat{C},\underline{C},\widetilde{C})\\
@@ -278,17 +278,17 @@ P(C,\widehat{C},\underline{C},\widetilde{C}) & \defeq &  \sum_{h=0}^1 (\startcha
 Then, we have
 \[
 \begin{array}{lcl @{\hspace{1cm}}lcl@{\hspace{0.4cm}}lcl@{\hspace{0.4cm}}lcl}
-P_C & \defeq &  P(C,\widehat{C},\underline{C},\widetilde{C})&  P_G& \defeq &   P(G,\widehat{G},\underline{G},\widetilde{G}) \\
+P_C & \defeq &  P(C,\widehat{C},\underline{C},\widetilde{C})&  P_G& \defeq &   P(G,\widehat{G},\underline{G},\widetilde{G}) \\[6pt]
 \overline{P}_C & \defeq &  P(\overline{C},\widehat{C},\underline{C},\widetilde{C}) & 
 \overline{P}_G& \defeq &   P(\overline{G},\widehat{G},\underline{G},\widetilde{G})\\
 \end{array}
 \]
 
-Here, the encoding of the entity $F$ that can be provided by the context:
+The encoding of the entity $F$ that can be provided by the context follows:
 \[
 \begin{array}{lcllcl}
 P_F&\defeq & \sum_{h=0}^1 (\startchain{F_i}\chainedlink{F_o}{\noact}\chainend{\noact})^h\ \link{\widehat{F}_i}{\widehat{F}_o}.P_F
-& +  && \sum_{h=0}^1 (\startchain{F_i}\chainedlink{F_o}{\noact}\chainend{\noact})^h. \link{\underline{F}_i}{\underline{F}_o}.\overline{P}_F \\
+& +  && \sum_{h=0}^1 (\startchain{F_i}\chainedlink{F_o}{\noact}\chainend{\noact})^h. \link{\underline{F}_i}{\underline{F}_o}.\overline{P}_F \\[6pt]
 \overline{P}_F&\defeq & \sum_{h=0}^1 (\startchain{\overline{F}_i}\chainedlink{\overline{F}_o}{\noact}\chainend{\noact})^h\ \link{\widehat{F}_i}{\widehat{F}_o}.P_F
 & +  && \sum_{h=0}^1 (\startchain{\overline{F}_i}\chainedlink{\overline{F}_o}{\noact}\chainend{\noact})^h. \link{\underline{F}_i}{\underline{F}_o}.\overline{P}_F \\
 %\overline{P} (q)&\defeq &  \sum_{h=0}^1 (\startchain{\overline{T}_i}\chainedlink{\overline{T}_o}{\noact}\chainend{\noact})^h\link{\widetilde{T}_i}{\widetilde{T}_o}.P(q)\\
