@@ -52,9 +52,11 @@ They can be seen as instances of the same template, which is given below.
 &&\sum_{h\geq 0}(\startchain{s_i}\chainedlink{s_o}{\noact}\chainend{\noact})^h \ \link{\underline{s}_i}{\underline{s}_o}.\overline{P_s}
 \end{array}
 \]
+
 The first line of $ E(s,\widetilde{s},\widehat{s},\underline{s})$ accounts for the case where $s$ is tested for presence by $h$ reactions and produced by $k$ reactions, while being provided by the context ($\link{\widehat{s}_i}{\widehat{s}_o}$).
 Thus, $s$ will be present at the next step (the continuation is $P_s$). Here $h$ and $k$ are not known a priori and therefore any
-combination is possible. By knowing the number of reactions that test $s$, we can bound the maximum 
+combination is possible. 
+In practice, by knowing the number of reactions that test $s$, we can bound the maximum 
 values of $h$ and $k$.
 The second line accounts for the analogous case where $s$ is not provided by the context ($\link{\underline{s}_i}{\underline{s}_o}$). 
 The condition $k\geq 1$ guarantees that $s$ will remain present (the continuation is $P_s$).
@@ -83,7 +85,6 @@ P_{aj} \defeq \\
 \end{array}
 \]
 
-\noindent
 We exploit names $r_j,p_j$ to join the chains provided by the application of all the reactions. 
 Channels $r_j$ and $r_{j+1}$ enclose the enabling/disabling condition of reaction $aj$.
 Channels $p_i$ and $p_{j+1}$ enclose the links related to the entities produced by $aj$.
@@ -107,7 +108,7 @@ The context can vary at each step $n$ and for each entity $s \in S$, the context
 \begin{array}{lcl}
 \mathit{Cxt}^n &\defeq &
 %\left \{
-^{cxt} \backslash  \blockchain{s_i}{s_o}{s \in C_n} \, \link{}{} \blockchain{\overline{e}_i}{\overline{e}_o}{e \not\in C_n} \,  \backslash_{p_1}. \mathit{Cxt}^{n+1}
+^{cxt} \backslash  \blockchain{s_i}{s_o}{s \in C_n}  \link{}{} \blockchain{\overline{e}_i}{\overline{e}_o}{e \not\in C_n}   \backslash_{p_1}. \mathit{Cxt}^{n+1}
 %+ \\
 % ^{cxt} \backslash  \blockchain{s_i}{s_o}{s \in I2_n} \, \link{}{} \blockchain{\overline{e}_i}{\overline{e}_o}{e \in Oj_n} \, \backslash_{p_1}
 % \chainedlink{\hat{s}_i}{\noact}\chainedlink{\noact}{\hat{s}_o}\chainend{p_1}. Cxt_{s}^{n+1} & \ \mbox{if the context provides $s$  at the $n$-th step}\\[5pt] 
@@ -213,7 +214,7 @@ $$
 \llparenthesis{\cal A},\gamma\rrparenthesis \defeq 
 I~|~ \prod_{a\in A} P_a ~|~  \mathit{Cxt}^1~|~\prod_{s\in C_0}P_{s} ~|~ \prod_{s \notin C_0}\overline{P_s} .
 $$
-and will focus on the complete transitions of $\llparenthesis{\cal A},\gamma\rrparenthesis$.
+and we will focus on the complete transitions of $\llparenthesis{\cal A},\gamma\rrparenthesis$.
 
 The following Corollary immediately follows from Lemma~\ref{lem:struct}.
 
@@ -247,7 +248,8 @@ $$
  %Cxt_{s1}& \defeq & \startchain{cxt_1}\chainedlink{\hat{s1}_i}{\noact}\chainedlink{\noact}{\hat{s1}_o}\chainend{cxt_2}.Cxt_{s1} &
  % Cxt _{s2} &\defeq& \startchain{cxt_2}\chainedlink{\hat{s2}_i}{\noact}\chainedlink{\noact}{\hat{s2}_o}\chainend{p_1}. Cxt_{s2}
 \end{array}
-\]  \\
+\] 
+
 For clarity of exposition, we show the code of the processes just in part, to focus on the prefixes that will be involved in the first transition of the system. In Figure~\ref{fig:backbone} we show the  structure of a link chain label related to the execution of such a transition. The yellow blocks are referred to init process $I$, to the processes encoding the reactions, $P_{r_1}$ and $P_{r_2}$, and to the context $\mathit{Cxt}$. As the figure puts in evidence, these two kinds of processes determine the structure of the link chain, from end to end, i.e. from the left $\silent$ to the right one. We could say that these processes form the \emph{backbone} of the interaction.
    In contrast, the processes encoding the entities, $P_{s1}$,  $\overline{P}_{s2}$, provide the
     solid links to be merged with the virtual links of the backbone (i.e. to be plugged in the backbone).
@@ -415,7 +417,7 @@ Example~\ref{ex:backbone}   outlines two different roles of the processes defini
 
 \paragraph{The flat function}
 For technical reasons, our transition labels are quite verbose; then, to simplify their processing, we introduce a function that takes a solid link chain and returns a simple string by eliminating all the channel matching pairs leaving just one placeholder for them. This transformation is harmless, in the sense that it retains all the information in the chain, because it is applied to complete chains only. 
-The function $\mathit{flat}$ is defined inductively as follows:
+The function $\mathit{flat}(\cdot)$ is defined inductively as follows:
 %\[
 %\begin{array}{lcl@{\hspace{0.5cm}}lcl@{\hspace{0.5cm}}lcl@{\hspace{0.5cm}}lcl}
 %\mathit{flat}(\epsilon)&\defeq & \epsilon &
@@ -535,7 +537,7 @@ Moreover, given $\pi^1=(\gamma^1,\delta^1)$, we have $P' = \llbracket {\cal A},\
 % %We set $\pi'=(\gamma',\delta')$ with $\gamma'=C_0',\dots,C_{n-1}'$,  $\delta'=D_0',\dots,D_{n-1}$,  where $C_0'= C_1 \cup D_1$, $C_i'= C_{i+1}$, $D_i=D_{i+1}'$,  and $1 \leq i < n$.
 %Then,   $\exists$ $P'$ and $\pi'=(\gamma',\delta')$ such that $P \xrightarrow{\link{\silent}{\silent}}P'$, $P' =[|{\cal A},\gamma'|]$.
 % \end{proposition} 
-\noindent
+
 Now, we extend the previous result to a series of transitions.
  
  \begin{restatable}[Correctness 2]{corollary}{corrcorrdue} 
@@ -568,7 +570,7 @@ Then,
 % \end{proposition} 
 \end{restatable}
 
-\noindent
+
 Now, we extend the previous result to a series of transitions.
  
 \begin{restatable}[Completeness 2]{corollary}{corrcompldue} 

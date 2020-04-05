@@ -35,9 +35,8 @@ To this goal, we introduce a simple language
 %simple assertion language 
 that allows us to formulate detailed and partial queries about what happened in a single transition.
 
-For instance we would like to express properties about each step of the simulation of a system like in the following:
-
 \begin{example} \label{properties_ex}
+For instance we would like to express properties about each step of the bio-simulation of a system like the ones below:
 \begin{enumerate}
 \item Has the entity $s_i$ been used by rule $r_j$ as reagent?
 \item Has the entity $s_i$ blocked the application of  rule $r_j$?
@@ -89,7 +88,7 @@ As detailed before, in the following we assume that: (i) the context can be non-
 
 Next, we introduce an assertion language that operates on simple strings
 and that combines regular expression operators with conjunction and disjunction.
-In the following we let $\mathit{syms} = \mathit{decs}\cup\mathit{reacts}\cup\mathit{prods}\cup\{\mathit{cxt}\}$ be the set of symbolic names used in our assertion language.
+We let $\mathit{syms} = \mathit{decs}\cup\mathit{reacts}\cup\mathit{prods}\cup\{\mathit{cxt}\}$ be the set of symbolic names used in our assertion language.
 
 \begin{definition}[Assertion Language]
 \label{def:assetionl}
@@ -166,8 +165,8 @@ Given two transition labels $v,w$ we write $v\equiv_{\mathsf{F}} w$ if $v \entai
 %If it is not the case vbthat $\pi, v_i \entails  F $, then we say that $F$ does not hold at $v_i$ and we write $\pi,v_i \not\entails F$. 
 %\end{definition}
 
+\begin{example}
 The formulas corresponding to the sample queries listed in Example~\ref{properties_ex} are as follows:
-
 \begin{enumerate}
 \item
 $\star :: r_j :: [ s_1,...,s_n ]^* :: s_i :: [  s_1,...,s_n ]^* :: [  \overline{s}_1,...,\overline{s}_n ]^+ :: \star$
@@ -183,6 +182,7 @@ $\star :: \widehat{s}_i :: \star$
 $\star :: r_j :: ? :: r_{j+1} :: \star$
 \end{enumerate}
 where in 1, 2, 6 we exploit the fact that in a reaction $(R,I,P)$ the sets $R$ of reactants and  $I$ of inhibitors are non empty, so that if there is only one symbol between the occurrence of $r_j$ and $r_{j+1}$ it means the reaction $r_j$ has not been applied. Viceversa, if the reaction $r_j$ has been applied the occurrence of $r_j$ must be followed by at least one of the symbols in $\{s_1,...,s_n\}$ and then by at least one of the symbols in $\{\overline{s}_1,...,\overline{s}_n\}$.
+\end{example}
 
 \subsection{Bio-similarity and bio-logical equivalence}
 
@@ -247,12 +247,13 @@ Given an assertion $\mathsf{F}$, a \emph{bio-simulation} $\mathbf{R}_{\mathsf{F}
 \end{itemize}
 %\item i$Q \xrightarrow{v} Q'$ with $v \entails F$ iff $\exists v',P'$ s.t.~$v \stretcheq v'$, $P  \xrightarrow{v'} P'$ with $v \entails F$. and $P' \mathrel{\mathbf{R}_{F}} Q'$.
 %\end{itemize}
+
 We let $ \sim_{\mathsf{F}} $ denote the largest  bio-simulation and we say that $P$ is \emph{bio-similar} to $Q$, with respect to $\mathsf{F}$, if $P \sim_{\mathsf{F}} Q$.
 \end{definition}
 
 \begin{remark}
 Please remember that the notation $P \xRightarrow{v} P'$ refers to ordinary transitions $P \xrightarrow{v} P'$ where $v$ is a complete chain (solid and with $\silent$ actions at the extremes).
-It should not be confused with the notation for weak transitions commonly found in the literature on process algebras.
+The double arrow notation should not be confused with the notation for weak transitions commonly found in the literature on process algebras.
 \end{remark}
 
 \begin{remark}
@@ -297,6 +298,7 @@ As usual, the semantics of a bioHML formula is the set of processes that satisfy
  \llbracket [\chi]\mathsf{G} \rrbracket &\defeq& \{P \in {\cal P}: \forall v,P'.\ P\xRightarrow{v}P' \mbox{ implies } v \entails \chi \mbox{ and } P' \in  \llbracket  \mathsf{G} \rrbracket\}
 \end{array}
 \]
+
 We write $P \entails \mathsf{G}$ ($P$ satisfies $\mathsf{G}$) if and only if $P \in  \llbracket \mathsf{G} \rrbracket$.
 \end{definition}
 
