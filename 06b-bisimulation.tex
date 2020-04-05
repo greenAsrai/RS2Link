@@ -102,14 +102,14 @@ $$
 ? ~\mid ~ 
 [N]
 \\
-F & ::= & 
+\mathsf{F} & ::= & 
 \epsilon ~\mid ~ 
 \zeta ~\mid ~ 
-F::F ~\mid ~ 
-F^+ ~\mid ~ 
-F^* ~\mid ~ 
-F \vee F ~\mid ~ 
-F \wedge F
+\mathsf{F}::\mathsf{F} ~\mid ~ 
+\mathsf{F}^+ ~\mid ~ 
+\mathsf{F}^* ~\mid ~ 
+\mathsf{F} \vee \mathsf{F} ~\mid ~ 
+\mathsf{F} \wedge \mathsf{F}
 \end{array}
 $$
 %\noindent where $s \in {\cal C}$, and  $\oplus \in \{\wedge, \vee, \to \}$. 
@@ -122,23 +122,23 @@ Roughly, a \emph{singleton} assertion $\zeta$ denotes either a string composed b
 the wildcard $?$ that stands for any symbol, or the pattern $[N]$ that stands for any of the strings composed by a single symbol in the set $N$. Clearly $?$  is just a shorthand for $[\mathit{syms}]$.
 We write $\mathbf{0}$ for $[\emptyset]$ and $[s_1,...,s_n]$ instead of $[\{s_1,...,s_n\}]$. 
 
-An \emph{assertion} $F$ is either the empty string $\epsilon$, a singleton assertion $\zeta$, the concatenation of two assertions $F_1::F_2$, the replication of $F$ for 1 or more times $F^+$, the replication of $F$ for 0 or more times $F^*$, the disjunction of two assertions $F_1 \vee F_2$ or their conjunction $F_1 \wedge F_2$. We write $\star$ as an abbreviation of $?^*$.
+An \emph{assertion} $\mathsf{F}$ is either the empty string $\epsilon$, a singleton assertion $\zeta$, the concatenation of two assertions $\mathsf{F}_1::\mathsf{F}_2$, the replication of $\mathsf{F}$ for 1 or more times $\mathsf{F}^+$, the replication of $\mathsf{F}$ for 0 or more times $\mathsf{F}^*$, the disjunction of two assertions $\mathsf{F}_1 \vee \mathsf{F}_2$ or their conjunction $\mathsf{F}_1 \wedge \mathsf{F}_2$. We write $\star$ as an abbreviation of $?^*$.
 
 An assertion denotes a set of strings over the alphabet $\mathit{syms}$ as expected.
 
 \begin{definition}[Semantics of Assertions]
- We define $\llbracket F\rrbracket \subseteq\wp(\mathit{syms}^*)$ by induction on the structure of $F$: 
+ We define $\llbracket \mathsf{F}\rrbracket \subseteq\wp(\mathit{syms}^*)$ by induction on the structure of $\mathsf{F}$: 
 \[
 \begin{array}{rcl@{\hspace{1cm}}rcl}
  \llbracket \epsilon \rrbracket &\defeq&  \{\epsilon\}
- & \llbracket F_1::F_2 \rrbracket &\defeq& \{\omega_1 :: \omega_2~\mid~ \omega_1 \in \llbracket F_1 \rrbracket \wedge \omega_2 \in \llbracket F_2 \rrbracket\}  \\
+ & \llbracket \mathsf{F}_1::\mathsf{F}_2 \rrbracket &\defeq& \{\omega_1 :: \omega_2~\mid~ \omega_1 \in \llbracket \mathsf{F}_1 \rrbracket \wedge \omega_2 \in \llbracket \mathsf{F}_2 \rrbracket\}  \\
  \llbracket \alpha \rrbracket &\defeq&  \{\alpha\} 
- & \llbracket F^+ \rrbracket &\defeq& \llbracket F \rrbracket^+  \\
+ & \llbracket \mathsf{F}^+ \rrbracket &\defeq& \llbracket \mathsf{F} \rrbracket^+  \\
  \llbracket ? \rrbracket &\defeq&   \mathit{syms}
- & \llbracket F^* \rrbracket &\defeq& \llbracket F \rrbracket^*  \\
+ & \llbracket \mathsf{F}^* \rrbracket &\defeq& \llbracket \mathsf{F} \rrbracket^*  \\
  \llbracket [N]\rrbracket &\defeq&   N
- & \llbracket  F_1 \vee F_2 \rrbracket &\defeq& \llbracket  F_1\rrbracket \cup \llbracket  F_2\rrbracket  \\
- &&&\llbracket  F_1 \wedge F_2 \rrbracket &\defeq& \llbracket F_1 \rrbracket \cap \llbracket F_2\rrbracket 
+ & \llbracket  \mathsf{F}_1 \vee \mathsf{F}_2 \rrbracket &\defeq& \llbracket  \mathsf{F}_1\rrbracket \cup \llbracket  \mathsf{F}_2\rrbracket  \\
+ &&&\llbracket  \mathsf{F}_1 \wedge \mathsf{F}_2 \rrbracket &\defeq& \llbracket \mathsf{F}_1 \rrbracket \cap \llbracket \mathsf{F}_2\rrbracket 
 \end{array}
 \]
 \end{definition}
@@ -147,12 +147,12 @@ An assertion denotes a set of strings over the alphabet $\mathit{syms}$ as expec
 
 
 \begin{definition}[Satisfaction as Membership]\label{sec:semantics}
-Let  $\upsilon$ be  a transition label, and $F$ be an assertion.
-We write $\upsilon \entails F$ (read as the transition label $v$ satisfies the assertion $F$) 
-if $\mathit{flat}(\upsilon)\in \llbracket F\rrbracket$, otherwise we write $\upsilon \not\entails F$ (or also $\upsilon \entails \neg F$) and say that $F$ does not hold at $v$. 
+Let  $\upsilon$ be  a transition label, and $\mathsf{F}$ be an assertion.
+We write $\upsilon \entails \mathsf{F}$ (read as the transition label $v$ satisfies the assertion $\mathsf{F}$) 
+if $\mathit{flat}(\upsilon)\in \llbracket \mathsf{F}\rrbracket$, otherwise we write $\upsilon \not\entails \mathsf{F}$ (or also $\upsilon \entails \neg \mathsf{F}$) and say that $\mathsf{F}$ does not hold at $v$. 
 \end{definition}
 
-Given two transition labels $v,w$ we write $v\equiv_F w$ if $v \entails F\ \Leftrightarrow\ w \entails F$, i.e. if both $v,w$ satisfy $F$ or they do not.
+Given two transition labels $v,w$ we write $v\equiv_{\mathsf{F}} w$ if $v \entails \mathsf{F}\ \Leftrightarrow\ w \entails \mathsf{F}$, i.e. if both $v,w$ satisfy $\mathsf{F}$ or they do not.
 
 %\begin{definition}[Semantics]\label{sec:semantics}
 %Let $\pi$ be a trace of transition labels, $v$ be  a transition label, and $F$ be an assertion.
@@ -235,19 +235,19 @@ Bio-simulation can thus be used to compare the behaviour of different systems th
 
 
 
-\begin{definition}[Bio-similarity  $ \sim_F $]
-Given an assertion $F$, a \emph{bio-simulation} $\mathbf{R}_F$ that respects $F$ is a binary relation over c\CNA \  processes such that, whenever $P~\mathrel{\mathbf{R}_F}~Q$ then:
+\begin{definition}[Bio-similarity  $ \sim_{\mathsf{F}}$]
+Given an assertion $\mathsf{F}$, a \emph{bio-simulation} $\mathbf{R}_{\mathsf{F}}$ that respects $\mathsf{F}$ is a binary relation over c\CNA \  processes such that, whenever $P~\mathrel{\mathbf{R}_{\mathsf{F}}}~Q$ then:
  \begin{itemize} 
  \item
  for any $v,P'$ such that 
- $P \xRightarrow{v} P'$ then there exist $w,Q'$ such that $Q  \xRightarrow{w} Q'$ with $v\equiv_F w$ and $P' \mathrel{\mathbf{R}_F} Q'$.
+ $P \xRightarrow{v} P'$ then there exist $w,Q'$ such that $Q  \xRightarrow{w} Q'$ with $v\equiv_{\mathsf{F}} w$ and $P' \mathrel{\mathbf{R}_{\mathsf{F}}} Q'$.
 \item
  for any $w,Q'$ such that 
- $Q \xRightarrow{w} Q'$ then there exist $v,P'$ such that $P  \xRightarrow{v} P'$ with $v\equiv_F w$ and $P' \mathrel{\mathbf{R}_F} Q'$.
+ $Q \xRightarrow{w} Q'$ then there exist $v,P'$ such that $P  \xRightarrow{v} P'$ with $v\equiv_{\mathsf{F}} w$ and $P' \mathrel{\mathbf{R}_{\mathsf{F}}} Q'$.
 \end{itemize}
 %\item i$Q \xrightarrow{v} Q'$ with $v \entails F$ iff $\exists v',P'$ s.t.~$v \stretcheq v'$, $P  \xrightarrow{v'} P'$ with $v \entails F$. and $P' \mathrel{\mathbf{R}_{F}} Q'$.
 %\end{itemize}
-We let $ \sim_F $ denote the largest  bio-simulation and we say that $P$ is \emph{bio-similar} to $Q$, with respect to $F$, if $P \sim_F Q$.
+We let $ \sim_{\mathsf{F}} $ denote the largest  bio-simulation and we say that $P$ is \emph{bio-similar} to $Q$, with respect to $\mathsf{F}$, if $P \sim_{\mathsf{F}} Q$.
 \end{definition}
 
 \begin{remark}
@@ -256,70 +256,71 @@ It should not be confused with the notation for weak transitions commonly found 
 \end{remark}
 
 \begin{remark}
-An alternative way to look at a bio-simulation that respects $F$ is to define it as an ordinary bisimulation over the transition system labelled over $\{F,\neg F\}$ obtained by transforming each transition $P \xRightarrow{v} P'$ such that $v\entails F$ into $P \xrightarrow{F} P'$ and  each transition $P \xRightarrow{v} P'$ such that $v\not\entails F$ into $P \xrightarrow{\neg F} P'$.
+An alternative way to look at a bio-simulation that respects $\mathsf{F}$ is to define it as an ordinary bisimulation over the transition system labelled over $\{\mathsf{F},\neg \mathsf{F}\}$ obtained by transforming each transition $P \xRightarrow{v} P'$ such that $v\entails \mathsf{F}$ into $P \xrightarrow{\mathsf{F}} P'$ and  each transition $P \xRightarrow{v} P'$ such that $v\not\entails \mathsf{F}$ into $P \xrightarrow{\neg \mathsf{F}} P'$.
 \end{remark}
 
 It can be easily shown that the identity relation is a bio-simulation and that bio-simulations are closed under (relational) inverse, composition and union and that, as a consequence, bio-similarity is an equivalence relation.
 
-Now, we introduce a slightly modified version of the Hennessy Milner Logic~\cite{HM80}, called bioHML; due to the reasons we explained above, we do not want to look at the complete transition labels, thus we rely on our simple assertion language to make it parametric to the assertion $F$ of interest:
+Now, we introduce a slightly modified version of the Hennessy Milner Logic~\cite{HM80}, called bioHML; due to the reasons we explained above, we do not want to look at the complete transition labels, thus we rely on our simple assertion language to make it parametric to the assertion $\mathsf{F}$ of interest:
+
 \begin{definition}[BioHML]
-Let   $F$ be an assertion, then 
-the set of bioHML formulas $G$ that respects $F$ are built by the following syntax:
+Let   $\mathsf{F}$ be an assertion, then 
+the set of bioHML formulas $\mathsf{G}$ that respects $\mathsf{F}$ are built by the following syntax:
 $$
 \begin{array}{rcl}
-\chi & ::= & F~\mid~ \neg F\\
-G &::= &{\tt t} ~\mid~ {\tt f} ~\mid~ G\wedge G ~\mid~ G \vee G ~\mid~ \langle \chi \rangle G ~\mid~ [\chi]G
+\chi & ::= & \mathsf{F}~\mid~ \neg \mathsf{F}\\
+\mathsf{G},\mathsf{H} &::= &{\tt t} ~\mid~ {\tt f} ~\mid~ \mathsf{G}\wedge \mathsf{G} ~\mid~ \mathsf{G} \vee \mathsf{G} ~\mid~ \langle \chi \rangle \mathsf{G} ~\mid~ [\chi]\mathsf{G}
 \end{array}
 $$
 \end{definition}
 
 \begin{remark}
-An alternative way to look at bioHML formulas is as ordinary HML formulas over the set of labels $\{F,\neg F\}$.
+An alternative way to look at bioHML formulas is as ordinary HML formulas over the set of labels $\{\mathsf{F},\neg \mathsf{F}\}$.
 \end{remark}
 
 As usual, the semantics of a bioHML formula is the set of processes that satisfy it.
 
 \begin{definition}[Semantics of BioHML]
- We define $\llbracket G\rrbracket \subseteq {\cal P}$ by induction on the structure of $G$:
+ We define $\llbracket \mathsf{G}\rrbracket \subseteq {\cal P}$ by induction on the structure of $\mathsf{G}$:
  %(read as the transition label $v$ satisfies the formula $F$) as: 
 \[
 \begin{array}{ccl@{\hspace{1cm}}ccl}
- \llbracket {\tt t}\rrbracket &\defeq& {\cal P} &  \llbracket G\wedge H\rrbracket &\defeq&  \llbracket G\rrbracket  \cap \llbracket H\rrbracket  \\
+ \llbracket {\tt t}\rrbracket &\defeq& {\cal P} &  \llbracket \mathsf{G}\wedge \mathsf{H}\rrbracket &\defeq&  \llbracket \mathsf{G}\rrbracket  \cap \llbracket \mathsf{H}\rrbracket  \\
 \llbracket {\tt f}\rrbracket& \defeq& \emptyset &
-  \llbracket G\vee H\rrbracket &\defeq&  \llbracket G\rrbracket  \cup \llbracket H\rrbracket \\
+  \llbracket \mathsf{G}\vee \mathsf{H}\rrbracket &\defeq&  \llbracket \mathsf{G}\rrbracket  \cup \llbracket \mathsf{H}\rrbracket \\
 %\item   $ v \entails F_1 \vee F_2$ iff   $v \entails F_1$  $\vee$  $v \entails F_2$.
 \end{array}
 \]
 \[
 \begin{array}{lcl}
- \llbracket  \langle \chi \rangle G \rrbracket &\defeq& \{P \in {\cal P}: \exists v,P'.\ P\xRightarrow{v}P' \mbox{ with } v \entails \chi \mbox{ and } P' \in  \llbracket  G \rrbracket\} \\
- \llbracket [\chi]G \rrbracket &\defeq& \{P \in {\cal P}: \forall v,P'.\ P\xRightarrow{v}P' \mbox{ implies } v \entails \chi \mbox{ and } P' \in  \llbracket  G \rrbracket\}
+ \llbracket  \langle \chi \rangle \mathsf{G} \rrbracket &\defeq& \{P \in {\cal P}: \exists v,P'.\ P\xRightarrow{v}P' \mbox{ with } v \entails \chi \mbox{ and } P' \in  \llbracket  \mathsf{G} \rrbracket\} \\
+ \llbracket [\chi]\mathsf{G} \rrbracket &\defeq& \{P \in {\cal P}: \forall v,P'.\ P\xRightarrow{v}P' \mbox{ implies } v \entails \chi \mbox{ and } P' \in  \llbracket  \mathsf{G} \rrbracket\}
 \end{array}
 \]
-We write $P \entails G$ ($P$ satisfies $G$) if and only if $P \in  \llbracket G \rrbracket$.
+We write $P \entails \mathsf{G}$ ($P$ satisfies $\mathsf{G}$) if and only if $P \in  \llbracket \mathsf{G} \rrbracket$.
 \end{definition}
 
-Negation is not included in the syntax, but the converse $\overline{G}$ of a bioHML formula $G$ can be easily defined inductively in the same way as for HML logic.
+Negation is not included in the syntax, but the converse $\overline{\mathsf{G}}$ of a bioHML formula $\mathsf{G}$ can be easily defined inductively in the same way as for HML logic.
 
 \begin{definition}[Converse]
-Given a bioHML formula $G$ we define its converse $\overline{G}$ as follows:
+Given a bioHML formula $\mathsf{G}$ we define its converse $\overline{\mathsf{G}}$ as follows:
 \[
 \begin{array}{rcl@{\hspace{1cm}}rcl@{\hspace{1cm}}rcl}
 \overline{\tt t} & \defeq & {\tt f} &
-\overline{G \wedge H} & \defeq & \overline{G} \vee \overline{H} &
-\overline{\langle \chi \rangle G} & \defeq & [\chi]\overline{G}
+\overline{\mathsf{G} \wedge \mathsf{H}} & \defeq & \overline{\mathsf{G}} \vee \overline{\mathsf{H}} &
+\overline{\langle \chi \rangle \mathsf{G}} & \defeq & [\chi]\overline{\mathsf{G}}
 \\
 \overline{\tt f} & \defeq & {\tt t} &
-\overline{G \vee H} & \defeq & \overline{G} \wedge \overline{H} &
-\overline{[\chi]G} & \defeq & \langle \chi \rangle\overline{G}
+\overline{\mathsf{G} \vee \mathsf{H}} & \defeq & \overline{\mathsf{G}} \wedge \overline{\mathsf{H}} &
+\overline{[\chi]\mathsf{G}} & \defeq & \langle \chi \rangle\overline{\mathsf{G}}
 \end{array}
 \]
 \end{definition}
 
-We observe that, as expected, for any bioHML formula $G$ and process $P$ we have $\overline{\overline{G}} = G$ and  $P \entails \overline{G}$ iff  $P\not\entails G$.
+We observe that, as expected, for any bioHML formula $G$ and process $P$ we have $\overline{\overline{\mathsf{G}}} = \mathsf{G}$ and  $P \entails \overline{\mathsf{G}}$ iff  $P\not\entails \mathsf{G}$.
 
-We let $\mathcal{L}_F$ be the set of all bioHML formulas that respects $F$ and 
-we say that two processes $P,Q$ are bio-logically equivalent w.r.t. $F$, written $P \equiv_{\mathcal{L}_F}Q$, when $P$ and $Q$ satisfy the exactly the same bioHML formulas in $\mathcal{L}_F$, i.e. when for any $G\in \mathcal{L}_F$ we have $P \entails G\ \Leftrightarrow Q \entails G$.
+We let $\mathcal{L}_{\mathsf{F}}$ be the set of all bioHML formulas that respects $\mathsf{F}$ and 
+we say that two processes $P,Q$ are bio-logically equivalent w.r.t. $\mathsf{F}$, written $P \equiv_{\mathcal{L}_{\mathsf{F}}}Q$, when $P$ and $Q$ satisfy the exactly the same bioHML formulas in $\mathcal{L}_{\mathsf{F}}$, i.e. when for any $\mathsf{G}\in \mathcal{L}_{\mathsf{F}}$ we have $P \entails \mathsf{G}\ \Leftrightarrow Q \entails \mathsf{G}$.
 
 Finally, we extend the classical result establishing the correspondence between the logical equivalence induced by HML with bisimilarity for proving that bio-similarity coincides with bio-logical equivalence.
 
@@ -327,7 +328,7 @@ Finally, we extend the classical result establishing the correspondence between 
 
 \begin{restatable}[Correspondence]{theorem}{theocorr}
 %\begin{theorem}
-$\sim_F\ =\ \equiv_{\mathcal{L}_F}$
+$\sim_{\mathsf{F}}\ =\ \equiv_{\mathcal{L}_{\mathsf{F}}}$
 %\end{theorem}
 \end{restatable}
 %\begin{proof}
