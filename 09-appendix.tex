@@ -534,10 +534,10 @@ Towards a contradiction, assume that we cannot find such $w,Q'$.
 
 If there is no transition $Q\xRightarrow{w}Q'$ such that $w\entails F$, then the bioHML formula $G \defeq \langle F\rangle{\tt t}$ is such that $P\entails G$ and $Q\not\entails G$, contradicting the assumption $P\equiv_{\mathcal{L}_F} Q$.
 
-Otherwise, let $\mathcal{Q}\defeq \{Q'~\mid~\exists w.\ Q\xRightarrow{w}Q' \ \wedge\ w\entails F\}$ be the set of processes reachable from $Q$ via a transition with a (complete) label that satisfies $F$. Since our processes are with guarded recursion, the set $\mathcal{Q}$ is finite. Let $\mathcal{Q} = \{Q'_1,...,Q'_n\}$. By hypothesis all processes in $\mathcal{Q}$ must not be bio-logically equivalent to $P'$, hence for any $i\in[1,n]$ there exists a bioHML formula $G_i$ such that $P'\entails G_i$ and $Q'_i\not\entails G_i$ (if it was the opposite, $P'\not\entails G_i$ and $Q'_i\entails G_i$, we can use the converse formulas). But then the formula $G\defeq \langle F\rangle(G_1\wedge\dots\wedge G_n)$ is such that $P\entails G$ and $Q\not\entails G$, contradicting the assumption $P\equiv_{\mathcal{L}_F} Q$.
+Otherwise, let $\mathcal{Q}\defeq \{Q'~\mid~\exists w.\ Q\xRightarrow{w}Q' \ \wedge\ w\entails F\}$ be the set of processes reachable from $Q$ via a transition with a (complete) label that satisfies $F$. Since our processes are with guarded recursion, the set $\mathcal{Q}$ is finite. Let $\mathcal{Q} = \{Q'_1,...,Q'_n\}$. By hypothesis all processes in $\mathcal{Q}$ must not be bio-logically equivalent to $P'$, hence for any $i\in[1,n]$ there exists a bioHML formula $G_i$ such that $P'\entails G_i$ and $Q'_i\not\entails G_i$ (if it was the opposite, $P'\not\entails H_i$ and $Q'_i\entails H_i$ for some $H_i$, we can use the converse formula $G_i\defeq \overline{H}_i$). But then the formula $G\defeq \langle F\rangle(G_1\wedge\dots\wedge G_n)$ is such that $P\entails G$ and $Q\not\entails G$, contradicting the assumption $P\equiv_{\mathcal{L}_F} Q$.
 
 \item
-If $\upsilon \not\entails F$ then the proof is analogous to the previous case and thus omitted.
+If $\upsilon \not\entails F$ then the proof is analogous to the previous case (by exploiting $\neg F$) and thus omitted.
 \end{itemize}
 \end{description}
 \end{proof}

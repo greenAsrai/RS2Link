@@ -146,9 +146,9 @@ $\mathit{decs} \defeq \{ s, \overline{s}, \widetilde{s},\widehat{s},\underline{s
 \item
 $\mathit{ents} \defeq \{ d_i, d_o~|~ d\in \mathit{decs}\}$ is the set names for entities;
 \item
-$\mathit{reacts}\defeq \{r_1,...,r_u\}$ is the set of reaction names $r_j$ associated with each reaction $aj$;
+$\mathit{reacts}\defeq \{r_1,...,r_{|A|}\}$ is the set of reaction names $r_j$ associated with each reaction $aj$;
 \item 
-$\mathit{prods}\defeq \{p_1,...,p_u\}$ is the set of names for production $p_j$, associated with  reaction $aj$.
+$\mathit{prods}\defeq \{p_1,...,p_{|A|}\}$ is the set of names for production $p_j$, associated with  reaction $aj$.
 \end{itemize}
 
 
@@ -169,7 +169,7 @@ For technical reasons, we introduce the init process $I \defeq \link{\silent}{r_
 to allow the name $r_1$ to be matched at the start of any chain; also, 
 for notational convenience, we fix that 
 %$r_1 = \silent$,
-$r_{u+1} = \mathit{cxt}$ and $p_{u+1}=\silent$,  for $u$ the cardinality of $A$.
+$r_{u+1} = \mathit{cxt}$ and $p_{u+1}=\silent$,  for $u=|A|$.
 \end{definition}
  
 
