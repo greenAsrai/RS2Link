@@ -139,7 +139,7 @@ The context can vary at each step $n$ and for each entity $s \in S$, the context
 
 We only consider $\mathit{Cxt}^n$ with $n >0$, as the entities  that are present at step zero  are considered to be present in the initial system (if $s\in C_0$ the process $P_s$ will be present initially, otherwise $\overline{P_s}$ will be present).
 
-In the following use the following conventions for denoting different categories of names:
+In the following we use the following conventions for denoting different categories of names:
 \begin{itemize}
 \item
 $\mathit{decs} \defeq \{ s, \overline{s}, \widetilde{s},\widehat{s},\underline{s}~|~ s\in S\}$ is the set of names for decorated entities (without subscripts $_i$ and $_o$);
@@ -249,7 +249,7 @@ $$
 \end{array}
 \]  \\
 For clarity of exposition, we show the code of the processes just in part, to focus on the prefixes that will be involved in the first transition of the system. In Figure~\ref{fig:backbone} we show the  structure of a link chain label related to the execution of such a transition. The yellow blocks are referred to init process $I$, to the processes encoding the reactions, $P_{r_1}$ and $P_{r_2}$, and to the context $\mathit{Cxt}$. As the figure puts in evidence, these two kinds of processes determine the structure of the link chain, from end to end, i.e. from the left $\silent$ to the right one. We could say that these processes form the \emph{backbone} of the interaction.
-   In contrast, the processes encoding the entities, $P_{s1}$,  $\overline{P}_{s2}$, provides the
+   In contrast, the processes encoding the entities, $P_{s1}$,  $\overline{P}_{s2}$, provide the
     solid links to be merged with the virtual links of the backbone (i.e. to be plugged in the backbone).
  Formally, we have
  $$
@@ -478,7 +478,7 @@ p_1\
 p_2.
 $$
 
-Viceversa, it is immediate to define the function $\mathit{unflat}$ to rebuild the complete label from the compact string (here we exploit again the half link and block notation):
+It is then immediate to define the function $\mathit{unflat}$ to rebuild the complete label from the compact string (here we exploit again the half link and block notation):
 $$
 \mathit{unflat}(x) \defeq\left\{
 \begin{array}{ll}
@@ -496,7 +496,7 @@ $\upsilon = \mathit{unflat}(\mathit{flat}(\upsilon))$.
 
 
 With the next proposition, we analyse the structure of a c\CNA \ 
-process encoding of  a reactive process after one step transition.
+process encoding of  a reactive process after one transition step.
 In the following four statements, for brevity, we let ${\cal A} = (S, A)$ be a RS, and let  $\pi=(\gamma,\delta)$ be an extended interactive process in $A$, with $\gamma=\{C_i\}_{i\in\mathbb{N}}$ and $\delta=\{D_i\}_{i\in\mathbb{N}}$. 
 
  \begin{restatable}[Correctness 1]{proposition}{propcorruno}
