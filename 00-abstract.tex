@@ -1,12 +1,5 @@
 % !TEX root =  main_RS2L_LNCS.tex
 
-%Natural computing is an emerging area of research for modeling biological 
-%computations by means of computer science formal methods. Reaction systems 
-%have been defined in this area as a qualitative abstraction inspired by the 
-%functioning of living cells, suitable to model the main
-%mechanisms of biochemical reactions.
-%Natural computing is an emerging area of research for modeling biological 
-%computations by means of computer science formal methods. 
 In the area of Natural Computing, reaction systems are
 a qualitative abstraction inspired by the 
 functioning of living cells, suitable to model the main
@@ -14,7 +7,8 @@ mechanisms of biochemical reactions.
 This model has already been applied
 and extended successfully to various areas of research. Reaction 
 systems interact with the environment represented by the context, and
-pose problems of implementation, as it is a new computation model. 
+pose challenges for further extensions as well as
+for the implementation, as it is a new computation model. 
 In this paper we consider a variant of the {\tt link}-calculus, which allows to model 
 multiparty interaction in concurrent systems, and show that we can
 represent reaction systems as processes 
@@ -24,9 +18,7 @@ We show the correctness and completeness
 of our embedding.
 We illustrate our framework by showing the embedding of 
 a few examples expressing computer science
-and biological applications.
-%how to embed a \emph{lac} operon 
-%regulatory network. 
+and biological applications. 
 On top of the LTS semantics for reaction systems provided by our framework, 
 we then adapt the classical notion (in concurrency) of bisimulation
 to make it more suitable for studying properties of reaction systems.
@@ -35,5 +27,4 @@ which allows to specify the properties of interest, and use it to extend Henness
 to our framework. Interestingly, the novel notion of bisimilarity and logical equivalence that are defined parametrically on some assertion of interest are proved to coincide, like in the classical case.
 Finally, our methodology can contribute to increase the expressiveness
 of reaction systems, by exploiting the interaction among 
-different reaction systems.
-%entities and the context. 
+different reaction systems. 
