@@ -55,17 +55,16 @@ and we have $P_G \defeq P(G)$, $P_C \defeq P(C)$,  then $\overline{P}_H \defeq \
 Then, the initial configuration of system $Sys_1$ includes $C$ and not $G$ and the context can only provide $G$,
 the initial configuration of system $Sys_2$ includes $G$ and not $C$ and the context can only provide $C$:
 \[
-\begin{array}{lcl@{\hspace{0.5cm}}lcl}
+\begin{array}{lcl}
 \mathit{Sys}_1 & \defeq & I\mid  P_1 \mid P_2 \mid P_G \mid \overline{P}_C \mid \overline{P}_H\mid \mathit{Cxt}_1 \\
 \mathit{Sys}_2 & \defeq & I \mid P_1 \mid P_2 \mid \overline{P}_G \mid P_C \mid \overline{P}_H\mid \mathit{Cxt}_2\\
 \end{array}
 \]
 
-
-
 Fig.~\ref{fig:ltss} shows the labelled transition system of $Sys_1$, with initial state only  containing  $G$,  and the transition system of $Sys_2$, with initial state only containing $C$, limited to the complete
-and solid labels. As before we show the output of the $flat$ function applied to the transition labels:
+and solid labels. As before we show the output of the $\mathit{flat}(\cdot)$ function applied to the transition labels:
 %where
+
 {\footnotesize \[
 \begin{array}{lcl@{\hspace{0.3cm}} lcl}
 %\
@@ -108,17 +107,18 @@ r_1~G~\overline{H}~r_2~C~\overline{H}~\mathit{cxt}~\widehat{C}~\underline{G}~\ov
 \end{array}
 \]
 }
+
 The labels $\flat_i$ $\flat'_i$, with $i \in \{1,2,3\}$ can be obtained by labels $\ell_i,\ell'_i$ by substituting $G$ with $C$ and viceversa.
 \\
-Now, it easy to check that $\mathit{Sys}_1$ and $\mathit{Sys}_2$ are bio-similar if we check the property $F$ saying that $G$ and $C$ are simultaneously  produced,
+Now, it easy to check that $\mathit{Sys}_1$ and $\mathit{Sys}_2$ are bio-similar w.r.t the property $\mathsf{F}$ saying that $G$ and $C$ are simultaneously  produced,
 %in $Sys_1$ if and only if $G$ and $C$ are simultaneously  produced in $Sys_2$
 formally:
-$\mathit{Sys}_1 \sim_F \mathit{Sys}_2$ with $F= \star :: \widetilde{G}_i :: \star \wedge  \star :: \widetilde{C}_i :: \star $.
+$\mathit{Sys}_1 \sim_{\mathsf{F}} \mathit{Sys}_2$ with $\mathsf{F}= \star :: \widetilde{G} :: \star \wedge  \star :: \widetilde{C} :: \star $.
 
-On the contrary, $\mathit{Sys}_1 \not \sim_{F'} \mathit{Sys}_2$  with $F' =  \star :: \widetilde{C}_i :: \star $, 
+On the contrary, $\mathit{Sys}_1 \not \sim_{\mathsf{F'}} \mathit{Sys}_2$  with $\mathsf{F'} =  \star :: \widetilde{C} :: \star $, 
 because it happens that both  transition labels $\ell_1$  and $\ell'_1$, in $\mathit{Sys}_1$, record the production of $C$, whereas 
 transition labels $\flat_1$ and $\flat'_1$ do not.
-In fact, the bioHML formula $G\defeq \langle F'\rangle{\tt t}$ can be used to distinguish $\mathit{Sys}_1$ from $\mathit{Sys}_2$, as $\mathit{Sys}_1\entails G$ and $\mathit{Sys}_2\not\entails G$.
+In fact, the bioHML formula $\mathsf{G}\defeq \langle \mathsf{F'}\rangle{\tt t}$ can be used to distinguish $\mathit{Sys}_1$ from $\mathit{Sys}_2$, as $\mathit{Sys}_1\entails \mathsf{G}$ and $\mathit{Sys}_2\not\entails \mathsf{G}$.
 
 \begin{figure}
 \[

@@ -8,8 +8,8 @@ Our encoding increases the expressivity of  RS  concerning:
 %the behaviour of the context,
 the possibility of alternative behaviour of
 mutated entities, and  the communication between two different Reaction Systems.
-It is important to note that our encoding guarantees that from each state, 
-in the  c\CNA \ transition system, only one transition comes out, 
+It is important to note that, when the context is deterministic, our encoding guarantees that from each state, 
+in the  c\CNA \ transition system, only one state is reachable, 
 as the dynamics is totally deterministic.
 
 %\subsection{Recursive contexts}
@@ -38,13 +38,12 @@ Reaction $a1$ produces also $s1$ if $s2$ is present, otherwise $a1$ produces a m
 say $s1'$.
 When $s1'$ is produced, reaction $a2$ behaves in the same way as if $s1$ would be absent, whereas $a2$
 recognises the presence of $s1'$ and behaves in the same way as if $s1$ would be present.
-Technically, in both cases it is enough to add one more non 
-deterministic choice in the code of $P_{a1}$ and $P_{a2}$. 
+Technically, in both cases it is enough to add one more nondeterministic choice in the code of $P_{a1}$ and $P_{a2}$. 
 
 
 \subsection{Communicating Reaction Systems}
 We sketch how it is possible to program two RSs encodings, in a way that
-the entities that usually come from context of one RS will be provided instead from the other RS.
+the entities that usually come from the context of one RS will be provided instead from the other RS.
 
 %Here we present a a simple example showing how it is possible to implement in c\CNA\ a 
 %two RSs model where a subset of the entities of one RS is provided by the second one and not 
@@ -86,7 +85,7 @@ As we do not model contexts, we introduce  \emph{dummy} channel names $dx$ and $
 First, we translate the reaction in $rs1$:
 \[
 \begin{array}{lcl}
-%\llbracket r1_1\rrbracket \defeq P_{r1_1}&\defeq &\startchain{\silent}\chainedlink{s1}{\noact}\chainedlink{\noact}{s1}\chainedlink{\tilde{s2}}{\noact}\chainedlink{\noact}{\tilde{s2}}\chainend{r1_2}.P_{r1_1} +
+%\llbracket r1_1\rrbracket \defeq P_{r1_1}&\defeq &\startchain{\silent}\chainedlink{s1}{\noact}\chainedlink{\noact}{s1}\chainedlink{\widetilde{s2}}{\noact}\chainedlink{\noact}{\widetilde{s2}}\chainend{r1_2}.P_{r1_1} +
 %\startchain{\silent}\chainedlink{\overline{s1}}{\noact}\chainedlink{\noact}{\overline{s1}}\chainend{r1_2}.P_{r1_1}\\
 \llbracket a_1\rrbracket \defeq P_{a_1}&\defeq &
 \startchain{\silent}\chainedlink{s_i}{{\color{blue}\noact}}\chainedlink{{\color{blue}\noact}}{s_o}\chainedlink{\widetilde{x}_i}{{\color{gray}\noact}}\chainedlink{{\color{gray}\noact}}{\widetilde{x}_o}\chainend{a_2}.P_{a_1} +
@@ -96,7 +95,7 @@ First, we translate the reaction in $rs1$:
 %\\
 %
 %\begin{array}{lcl}
-%\llbracket r1_2\rrbracket \defeq P_{r1_2}&\defeq &\startchain{r1_2}\chainedlink{\overline{s2}}{\noact}\chainedlink{\noact}{\overline{s2}}\chainedlink{\tilde{s1}}{\noact}\chainedlink{\noact}{\tilde{s1}}\chainend{r2_1}.P_{r2_1} +
+%\llbracket r1_2\rrbracket \defeq P_{r1_2}&\defeq &\startchain{r1_2}\chainedlink{\overline{s2}}{\noact}\chainedlink{\noact}{\overline{s2}}\chainedlink{\widetilde{s1}}{\noact}\chainedlink{\noact}{\widetilde{s1}}\chainend{r2_1}.P_{r2_1} +
 %\startchain{r1_2}\chainedlink{s2}{\noact}\chainedlink{\noact}{s2}\chainend{r2_1}.P_{r2_1}\\
 \end{array}
 \]
@@ -111,7 +110,7 @@ The translation for the entities follows.
 %\begin{array}{lclclll}
 \llbracket x \rrbracket &\defeq & P_{x}& \defeq &\startchain{\widetilde{x}_i}\chainend{\widetilde{x}_o}.P_{x} +  \startchain{dx_i}\chainend{dx_o}.\overline{P_{x}}\\
 %\\
-%&&\overline{P_{s2}}&\defeq &\startchain{\overline{s2}}\chainedlink{\overline{s2}}{\noact}\chainedlink{\noact}{\tilde{s2}}\chainend{\tilde{s2}}.P_{s2} +
+%&&\overline{P_{s2}}&\defeq &\startchain{\overline{s2}}\chainedlink{\overline{s2}}{\noact}\chainedlink{\noact}{\widetilde{s2}}\chainend{\widetilde{s2}}.P_{s2} +
 %\startchain{\overline{s2}}\chainend{\overline{s2}}.\overline{P_{s2}}\\
 %\\
 %\\
@@ -127,9 +126,9 @@ The translation for the entities follows.
 
 %\[
 %\begin{array}{lclclll}
-%\llbracket s2 \rrbracket &\defeq& P_{s2}&\defeq &\startchain{s2}\chainedlink{s2}{\noact}\chainedlink{\noact}{\tilde{s2}}\chainend{\tilde{s2}}.P_{s2} +  \startchain{s2}\chainend{s2}.\overline{P_{s2}}\\
+%\llbracket s2 \rrbracket &\defeq& P_{s2}&\defeq &\startchain{s2}\chainedlink{s2}{\noact}\chainedlink{\noact}{\widetilde{s2}}\chainend{\widetilde{s2}}.P_{s2} +  \startchain{s2}\chainend{s2}.\overline{P_{s2}}\\
 %%\\
-%&&\overline{P_{s2}}&\defeq &\startchain{\overline{s2}}\chainedlink{\overline{s2}}{\noact}\chainedlink{\noact}{\tilde{s2}}\chainend{\tilde{s2}}.P_{s2} +
+%&&\overline{P_{s2}}&\defeq &\startchain{\overline{s2}}\chainedlink{\overline{s2}}{\noact}\chainedlink{\noact}{\widetilde{s2}}\chainend{\widetilde{s2}}.P_{s2} +
 %\startchain{\overline{s2}}\chainend{\overline{s2}}.\overline{P_{s2}}\\
 %
 %\end{array}
@@ -137,7 +136,7 @@ The translation for the entities follows.
 
 
 \noindent
-The translation for the $rs2$ follows.
+The translation for $rs2$ follows.
 
 \[
 \begin{array}{lcl}
@@ -149,7 +148,7 @@ The translation for the $rs2$ follows.
 %
 %\[
 %\begin{array}{lcl}
-%\llbracket r2_2\rrbracket \defeq P_{r2_2}&\defeq &\startchain{r2_2}\chainedlink{ss1}{\noact}\chainedlink{\noact}{ss1}\chainedlink{\tilde{s3}}{\noact}\chainedlink{\noact}{\tilde{s3}}\chainend{\silent}.P_{r2_2}
+%\llbracket r2_2\rrbracket \defeq P_{r2_2}&\defeq &\startchain{r2_2}\chainedlink{ss1}{\noact}\chainedlink{\noact}{ss1}\chainedlink{\widetilde{s3}}{\noact}\chainedlink{\noact}{\widetilde{s3}}\chainend{\silent}.P_{r2_2}
 %+
 %\startchain{r2_2}\chainedlink{\overline{ss1}}{\noact}\chainedlink{\noact}{\overline{ss1}}\chainend{\silent}.P_{r2_2}\\
 \end{array}
@@ -173,7 +172,7 @@ created to synchronise with $rs1$   on link $\link{\widehat{s}_i}{\widehat{s}_o}
 \startchain{dss_i}\chainend{dss_o}.\overline{P_{ss}}\\
 \llbracket y\rrbracket&\defeq & P_{y}&\defeq &\startchain{{\color{gray}y_i}}\chainend{{\color{gray}y_o}}.\overline{P_{y}} \\
 &&\overline{P_{y}}&\defeq &
-%\startchain{\overline{y}_i}\chainedlink{\overline{y}_o}{\noact}\chainedlink{\noact}{\tilde{y}_i}\chainend{\tilde{y}_o}.P_{y}
+%\startchain{\overline{y}_i}\chainedlink{\overline{y}_o}{\noact}\chainedlink{\noact}{\widetilde{y}_i}\chainend{\widetilde{y}_o}.P_{y}
 %+ 
 \startchain{\overline{y}_i}\chainend{\overline{y}_o}.\overline{P_{y}}
 \end{array}
