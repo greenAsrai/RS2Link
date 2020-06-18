@@ -1,0 +1,41 @@
+% !TEX root = ./main_RS2L_LNCS.tex
+
+\section{Conclusion}\label{sec:conclusion}
+
+In this paper we have introduced c\CNA, a variant of the {\tt link}-calculus
+where prefixes are link chains and no more single links, as it was 
+briefly described in the future work section in~\cite{BBB17}.
+This variant allowed us to define 
+%shown 
+a faithful embedding of Reaction Systems,
+an emerging formalism to model computationally biochemical systems.
+%into multilink processes.  
+This translation shows several benefits.
+For instance, in our paper the context of a RS can work non deterministically and it 
+is recursively defined.
+%  the context behaviour is expressed recursively and no be expressed recursively. 
+Also, entity mutations can be expressed easily and different reaction systems can
+communicate between them.
+
+We have then modified the classical notion (in concurrency) of bisimulation
+making it more suitable for proving properties of Reaction Systems in our
+framework.
+We have defined a new assertion language, which allows us to specify
+the properties to be verified, and have shown that it extends Hennessy-Milner logic
+to our framework.
+We believe that our work can make 
+possible to investigate how to integrate our methodology
+with other formal techniques to prove 
+properties of the modeled systems \cite{CFHOT15,OCHF16,BBGLBH2017}.
+
+We are confident that our embedding can contribute to extend the applications
+of Reaction Systems to diverse fields of computer science, and life
+sciences.
+
+As future work, we plan to implement a prototype of our framework,
+with an automatic translation from RSs to  {\tt link}-calculus. 
+We can also exploit the implementation of  the symbolic semantics of 
+the {\tt link}-calculus~\cite{BrodoO17} that can be found in~\cite{tool}.
+
+We also plan to build on the work in this paper to extend the framework
+of RSs towards a model where different RSs are allowed to communicate.
