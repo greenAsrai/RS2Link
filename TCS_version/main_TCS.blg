@@ -5,37 +5,37 @@ The style file: elsarticle-num.bst
 Database file #1: biblio_CNA.bib
 You've used 26 entries,
             2937 wiz_defined-function locations,
-            871 strings with 9516 characters,
-and the built_in function-call counts, 9036 in all, are:
-= -- 870
+            870 strings with 9475 characters,
+and the built_in function-call counts, 9005 in all, are:
+= -- 866
 > -- 303
 < -- 12
 + -- 117
 - -- 91
-* -- 691
-:= -- 1203
+* -- 685
+:= -- 1198
 add.period$ -- 31
 call.type$ -- 26
 change.case$ -- 26
 chr.to.int$ -- 0
 cite$ -- 26
-duplicate$ -- 291
-empty$ -- 986
+duplicate$ -- 289
+empty$ -- 982
 format.name$ -- 117
-if$ -- 2308
+if$ -- 2300
 int.to.chr$ -- 0
 int.to.str$ -- 26
 missing$ -- 26
-newline$ -- 92
+newline$ -- 91
 num.names$ -- 34
-pop$ -- 185
+pop$ -- 184
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 562
+skip$ -- 564
 stack$ -- 0
 substring$ -- 561
-swap$ -- 91
+swap$ -- 90
 text.length$ -- 12
 text.prefix$ -- 0
 top$ -- 0
@@ -43,4 +43,4 @@ type$ -- 0
 warning$ -- 0
 while$ -- 83
 width$ -- 28
-write$ -- 237
+write$ -- 236

@@ -38,12 +38,10 @@ R.~Barbuti, R.~Gori, F.~Levi, P.~Milazzo, Investigating dynamic causalities in
   reaction systems, Theor. Comput. Sci. 623 (2016) 114--145.
 
 \bibitem{OY16}
-F.~Okubo, T.~Yokomori, \href{https://doi.org/10.1007/s11047-015-9504-7}{The
-  computational capability of chemical reaction automata}, Natural Computing
-  15~(2) (2016) 215--224.
+F.~Okubo, T.~Yokomori, The computational capability of chemical reaction
+  automata, Natural Computing 15~(2) (2016) 215--224.
 \newblock \href {http://dx.doi.org/10.1007/s11047-015-9504-7}
   {\path{doi:10.1007/s11047-015-9504-7}}.
-\newline\urlprefix\url{https://doi.org/10.1007/s11047-015-9504-7}
 
 \bibitem{BodeiBB12}
 C.~Bodei, L.~Brodo, R.~Bruni, Open multiparty interaction, in: Recent Trends in
@@ -77,7 +75,7 @@ A.~Bernini, L.~Brodo, P.~Degano, M.~Falaschi, D.~Hermith, Process calculi for
   biological processes, Natural Computing 17~(2) (2018) 345--373.
 
 \bibitem{10.1007/978-3-319-73359-3_3}
-A.~Bogdan, C.~Gabriel, Controlled reversibility in reaction systems, in:
+B.~Aman, G.~Ciobanu, Controlled reversibility in reaction systems, in:
   M.~Gheorghe, G.~Rozenberg, A.~Salomaa, Z.~Claudio (Eds.), Membrane Computing,
   Springer International Publishing, 2018, pp. 40--53.
 

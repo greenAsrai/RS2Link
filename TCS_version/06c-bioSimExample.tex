@@ -1,4 +1,4 @@
-% !TEX root = ./main_RS2L_LNCS.tex
+% !TEX root = ./main_TCS.tex
 \subsection{Bio-simulation at work}
 
 %By using a simple example, 
@@ -52,8 +52,8 @@ P(G) &\defeq&\link{G_i}{G_o}.\overline{P}(G)\   & \overline{P}(G)&\defeq&\link{\
 \end{array}
 \]
 and we have $P_G \defeq P(G)$, $P_C \defeq P(C)$,  then $\overline{P}_H \defeq \link{\overline{H}_i}{\overline{H}_o}.\overline{P}_H + \startchain{\overline{H}_i}\chainedlink{\overline{H}_o}{\noact}\chainedlink{\noact}{\overline{H}_i}\chainend{\overline{H}_i}.\overline{P}_H$, as $H$ is neither produced nor provided by the context.
-Then, the initial configuration of system $Sys_1$ includes $C$ and not $G$ and the context can only provide $G$,
-the initial configuration of system $Sys_2$ includes $G$ and not $C$ and the context can only provide $C$:
+Then, the initial configuration of system $Sys_1$ includes $G$ and not $C$ and the context can only provide $C$,
+the initial configuration of system $Sys_2$ includes $C$ and not $G$ and the context can only provide $G$:
 \[
 \begin{array}{lcl}
 \mathit{Sys}_1 & \defeq & I\mid  P_1 \mid P_2 \mid P_G \mid \overline{P}_C \mid \overline{P}_H\mid \mathit{Cxt}_1 \\
@@ -125,13 +125,13 @@ In fact, the bioHML formula $\mathsf{G}\defeq \langle \mathsf{F'}\rangle{\tt t}$
 \begin{array}{cc}
 \xymatrix@R-1pc{
 *+[o][F-]{G} \ar@/ ^/[d]^{\ell_1} \ar@/_/[d]^{\ell'_1} \\
-*+[o][F-]{C} \ar@/^2pc/[u]^{\ell_2} \ar@/^/[dr]^{\ell'_2} \\ %\ar@(r,u)[]_a\
+*+[o][F-]{C} \ar@/^2pc/[u]^{\ell'_2} \ar@/^/[dr]^{\ell_2} \\ %\ar@(r,u)[]_a\
 & *+[o][F-]{GC}\ar@(d,l)^{\ell_3}\ar@(u,r)^{\ell'_3}
 }
 &
 \xymatrix@R-1pc{
 *+[o][F-]{C} \ar@/ ^/[d]^{\flat_1} \ar@/_/[d]^{\flat'_1} \\
-*+[o][F-]{G} \ar@/^2pc/[u]^{\flat_2} \ar@/^/[dr]^{\flat'_2} \\ 
+*+[o][F-]{G} \ar@/^2pc/[u]^{\flat'_2} \ar@/^/[dr]^{\flat_2} \\ 
 & *+[o][F-]{GC}\ar@(d,l)^{\flat_3}\ar@(u,r)^{\flat'_3}
 }\\
 Sys_1 & Sys_2

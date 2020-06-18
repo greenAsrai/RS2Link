@@ -1,4 +1,4 @@
-% !TEX root = ./main_RS2L_LNCS.tex
+% !TEX root = ./main_TCS.tex
 \section{Bio-simulation}
 \label{sec:biosimulation}
 
@@ -7,7 +7,7 @@ when one process can simulate all the instructions executed by the other one and
 In its weak formulation, internal instructions, i.e. non visible by external observers,
 are abstracted away. 
 There are many variants of the bisimulation for process algebras,  for example the
-barbed bisimulation~\cite{10.1007/3-540-55719-9_114} only consider the execution of invisible actions, and then equates two processes when the expose the same prefixes; for the mobile ambients~\cite{CardelliG00}, a process algebra equipped with a reduction semantics, a notion of
+barbed bisimulation~\cite{10.1007/3-540-55719-9_114} only consider the execution of invisible actions, and then equates two processes when they expose the same prefixes; for the mobile ambients~\cite{CardelliG00}, a process algebra equipped with a reduction semantics, a notion of
 behavioural equivalence equates two processes when they expose the same ambients~\cite{GC03}. 
 
 There are some previous works based on bisimulation applied to models for biological systems. Barbuti et al~\cite{BMMT08} define a classical setting for bisimulation for two formalisms: the Calculus of Looping Sequences, which is a rewriting system, and the Brane Calculi, which is based on process calculi.
@@ -187,7 +187,7 @@ where in 1, 2, 6 we exploit the fact that in a reaction $(R,I,P)$ the sets $R$ o
 \subsection{Bio-similarity and bio-logical equivalence}
 
 The notion of bio-simulation builds on the above language of assertions to parameterize the induced equivalence on the property of interest. 
-Please recall that we have defined the behaviour of the contest in a non deterministic way, thus 
+Please recall that we have defined the behaviour of the context in a non deterministic way, thus 
 at each step, different possible sets of entities can be provided to the system and different sets of reaction can be enabled/disabled. 
 Bio-simulation can thus be used to compare the behaviour of different systems that share some of the reactions or entities or also to compare the behaviour of the same set of reaction rules when different contexts are provided.
 

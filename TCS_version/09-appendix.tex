@@ -1,4 +1,4 @@
-% !TEX root = ./main_RS2L_LNCS.tex
+% !TEX root = ./main_TCS.tex
 
 
 %\section{Background on Core Network Algebra (CNA)}
@@ -210,7 +210,9 @@ Then, all the processes $I$, $P_a$, $P_s$ (or $\overline{P_s}$), and $\mathit{Cx
  it holds that the transition labels are of the form  $v=\link{\silent}{\silent}\dots\link{\silent}{\silent}$.\\
  Now,
 by Definition~\ref{def:trans} and by Lemma~\ref{lem:struct}.1, all the  channels $r_j,p_j$, with
- $j \in [1,\dots,u]$, and $cxt_h$, with $h \in [1, \dots, w]$, and all the annotated versions of 
+ $j \in [1,\dots,u]$, and $cxt$,
+ %$cxt_h$, with $h \in [1, \dots, w]$,
+  and all the annotated versions of 
  $s_i$, $s_o$ are restricted. Also, processes $\mathit{Cxt}$ always requires the 
  interaction with $P_s$ on either on channels $\widehat{s}_i$, $\widehat{s}_o$ or on channels 
  $\underline{s}_i$, $\underline{s}_o$.
@@ -223,24 +225,24 @@ if $aj$ is applicable and it produces the entity $s$,
 the process $P_{aj}$ provides a code of this type:
 %By Lemma~\ref{lem:compl1}, all the processes $A_j$, and $Cxt_h$ participated in the tr
 %The code executed by any process encoding rule $R_i$ producing $e$ is 
-$$P_{aj}\defeq \link{r_j}{\dots}\chainedlink{r_{j+1}}{\noact}\chainedlink{\noact}{p_j}\link{}{\dots}\chainedlink{\widetilde{s}_i}{\noact}\chainedlink{\noact}{\dots}\link{\widetilde{s}_o}{\dots} \chainend{p_{j+1}}.P_{aj} ;$$
+$$P_{aj}\defeq \link{r_j}{\dots}\chainedlink{r_{j+1}}{\noact}\chainedlink{\noact}{p_j}\link{}{\dots}\chainedlink{\widetilde{s}_i}{\noact}\chainedlink{\noact}{\widetilde{s}_o}\link{}{\dots} \chainend{p_{j+1}}.P_{aj} ;$$
 
 \item[(b)] 
  if $aj$ is applicable and it  consumes the entity $s$,
  the process $P_{aj}$ provides a code of this type: 
-$$P_{aj}\defeq \link{r_j}{\dots}\chainedlink{s_i}{\noact}\chainedlink{\noact}{}\link{s_o}{\dots} \chainedlink{r_{j+1}}{\noact}\chainedlink{\noact}{p_j}\link{}{\dots}\link{}{p_{j+1}}.P_{aj} ;$$
+$$P_{aj}\defeq \link{r_j}{\dots}\chainedlink{s_i}{\noact}\chainedlink{\noact}{s_o}\link{}{\dots} \chainedlink{r_{j+1}}{\noact}\chainedlink{\noact}{p_j}\link{}{\dots}\link{}{p_{j+1}}.P_{aj} ;$$
 
 \item[(c)]  
  if $aj$ is applicable and it requires the absence of the entity $s$,
  the process $P_{aj}$  provides a code of this type: 
-$$P_{aj}\defeq \link{r_j}{\dots}\chainedlink{\overline{s}_i}{\noact}\chainedlink{\noact}{}\link{\overline{s}_o}{\dots} \chainedlink{r_{j+1}}{\noact}\chainedlink{\noact}{p_j}\link{}{\dots}\link{}{p_{j+1}}.P_{aj} ;$$
+$$P_{aj}\defeq \link{r_j}{\dots}\chainedlink{\overline{s}_i}{\noact}\chainedlink{\noact}{\overline{s}_o}\link{}{\dots} \chainedlink{r_{j+1}}{\noact}\chainedlink{\noact}{p_j}\link{}{\dots}\link{}{p_{j+1}}.P_{aj} ;$$
 
 \item[(d)] 
  if $aj$ is not applicable,
 the process $P_{aj}$ executes a code  capturing either the absence of one of its reactants (case 1), or the presence  of one of its inhibitors (case 2):
 \begin{enumerate}
-\item $P_{aj}\defeq \link{r_j}{\dots}\chainedlink{\overline{s}_i}{\noact}\chainedlink{\noact}{}\link{\overline{s}_o}{\dots} \chainedlink{r_{j+1}}{\noact}\chainedlink{\noact}{p_j}\link{}{\dots}\link{}{p_{j+1}}.P_{aj} $;
-\item $P_{aj}\defeq \link{r_j}{\dots}\chainedlink{s_i}{\noact}\chainedlink{\noact}{}\link{s_o}{\dots} \chainedlink{r_{j+1}}{\noact}\chainedlink{\noact}{p_j}\link{}{\dots}\link{}{p_{j+1}} .P_{aj}$.
+\item $P_{aj}\defeq \link{r_j}{\dots}\chainedlink{\overline{s}_i}{\noact}\chainedlink{\noact}{\overline{s}_o}\link{}{\dots} \chainedlink{r_{j+1}}{\noact}\chainedlink{\noact}{p_j}\link{}{\dots}\link{}{p_{j+1}}.P_{aj} $;
+\item $P_{aj}\defeq \link{r_j}{\dots}\chainedlink{s_i}{\noact}\chainedlink{\noact}{s_o}\link{}{\dots} \chainedlink{r_{j+1}}{\noact}\chainedlink{\noact}{p_j}\link{}{\dots}\link{}{p_{j+1}} .P_{aj}$.
 \end{enumerate}
 \end{description}
 %It is worth nothing that there could be other processes $P_a$ encoding  a reaction $a \in A$ that do not
@@ -254,7 +256,7 @@ The code of the process $Cxt^1$ that provides $s$ and not $e$ has the following 
 $$
 \mathit{Cxt}^1 \defeq
 \link{\mathit{cxt}}{\dots}
-\chainedlink{\widehat{s}_i}{\noact}\chainedlink{\noact}{}\link{\widehat{s}_o}{\dots} 
+\chainedlink{\widehat{s}_i}{\noact}\chainedlink{\noact}{\widehat{s}_o}\link{}{\dots} 
 \chainedlink{\underline{e}_i}{\noact}\chainedlink{\noact}{}\link{\underline{e}_o}{\dots} 
 \chainend{p_{1}}. \mathit{Cxt}^{2} .
 $$
