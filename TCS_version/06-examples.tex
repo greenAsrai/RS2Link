@@ -33,7 +33,7 @@ In our $c\CNA$ encoding, $q$, $w$, $a$, and $b$ became the $entities$, the conte
 \end{array}
 \]
 \paragraph{Encoding of the rules}
-The encoding of the rules for reactions is  given in a parametric way:
+The encoding of the rules for reactions is  given in a parametric way, {\color{red} with $n \in \{1,2,3,4\}$}:
 \[
 \begin{array}{lcl}
 P_n(q,b,w,a,q) & \defeq & \pi_n(q,b,w,a,q).P_n(q,b,w,a,q)  \\
@@ -249,7 +249,7 @@ Here, the entities $T$ and $T'$ that can be produced by the reactions and that a
 \[
 \begin{array}{lcllcl}
 P (T,\widetilde{T})&\defeq & \sum_{h=0}^1 (\startchain{T_i}\chainedlink{T_o}{\noact}\chainend{\noact})^h\ \link{\widetilde{T}_i}{\widetilde{T}_o}.P (T,\widetilde{T})
-& +  && \link{T_i}{T_o}.P (\overline{T},\widetilde{T}) \\
+& +  & \link{T_i}{T_o}.P (\overline{T},\widetilde{T}) \\
 %\overline{P} (q)&\defeq &  \sum_{h=0}^1 (\startchain{\overline{T}_i}\chainedlink{\overline{T}_o}{\noact}\chainend{\noact})^h\link{\widetilde{T}_i}{\widetilde{T}_o}.P(q)\\
 %&& + & && +\\
 %&& \link{T_i}{T_o}.\overline{P}(T) &
@@ -295,9 +295,9 @@ The encoding of the entity $F$ that can be provided by the context follows:
 \[
 \begin{array}{lcllcl}
 P_F&\defeq & \sum_{h=0}^1 (\startchain{F_i}\chainedlink{F_o}{\noact}\chainend{\noact})^h\ \link{\widehat{F}_i}{\widehat{F}_o}.P_F
-& +  && \sum_{h=0}^1 (\startchain{F_i}\chainedlink{F_o}{\noact}\chainend{\noact})^h\ \link{\underline{F}_i}{\underline{F}_o}.\overline{P}_F \\[6pt]
+& +  & \sum_{h=0}^1 (\startchain{F_i}\chainedlink{F_o}{\noact}\chainend{\noact})^h\ \link{\underline{F}_i}{\underline{F}_o}.\overline{P}_F \\[6pt]
 \overline{P}_F&\defeq & \sum_{h=0}^1 (\startchain{\overline{F}_i}\chainedlink{\overline{F}_o}{\noact}\chainend{\noact})^h\ \link{\widehat{F}_i}{\widehat{F}_o}.P_F
-& +  && \sum_{h=0}^1 (\startchain{\overline{F}_i}\chainedlink{\overline{F}_o}{\noact}\chainend{\noact})^h\ \link{\underline{F}_i}{\underline{F}_o}.\overline{P}_F \\
+& +  & \sum_{h=0}^1 (\startchain{\overline{F}_i}\chainedlink{\overline{F}_o}{\noact}\chainend{\noact})^h\ \link{\underline{F}_i}{\underline{F}_o}.\overline{P}_F \\
 %\overline{P} (q)&\defeq &  \sum_{h=0}^1 (\startchain{\overline{T}_i}\chainedlink{\overline{T}_o}{\noact}\chainend{\noact})^h\link{\widetilde{T}_i}{\widetilde{T}_o}.P(q)\\
 %&& + & && +\\
 %&& \link{T_i}{T_o}.\overline{P}(T) &

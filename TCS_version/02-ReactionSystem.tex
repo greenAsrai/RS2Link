@@ -1,6 +1,6 @@
-% !TEX root = ./main_RS2L_LNCS.tex
+% !TEX root = ./main_TCS.tex
 
-\section{Reaction Systems}
+\section{An overview of Reaction Systems}
 \label{sec:rs}
 
 Natural Computing is concerned with human-designed computing inspired by 
@@ -29,7 +29,8 @@ $R \cap I = \emptyset$. If $S$ is a set such that  $R, I, P \subseteq S$,
 then $a$ is a reaction in $S$.
 \end{definition}
 
-The sets $R, I, P$ are also written $R_a, I_a, P_a$ and called the 
+{\color{red} The set $S$ is called the entity set}, the sets 
+$R, I, P$ are also written $R_a, I_a, P_a$ and called the 
 \emph{reactant set} of $a$, the  
 \emph{inhibitor set} of $a$, and the \emph{product set} of $a$, respectively. 
 All reactants are needed for the reaction to take place.
@@ -45,7 +46,7 @@ For the sake of simplicity, in some examples, we will allow $I$ to be empty.
 
 \begin{definition}[Reaction System]
 A Reaction System (RS) is an ordered pair ${\cal A} = (S, A)$ 
-such that $S$ is a finite set, and $A \subseteq rac(S)$.
+such that $S$ is a finite sete {\color{red} of  entities, and $A \subseteq rac(S)$ is a set over $S$}.
 %The set $S$ is called the background (set) of $A$.\\
 %The main notion concerning the functioning of a reaction system is defined 
 %as follows.
@@ -60,11 +61,11 @@ Since $S$ is finite, so is $A$:
 we denote by $|A|$ the number of reactions in $A$.
 
 \begin{definition}[Reaction Result]
-Let $W$ be a finite subset of $S$.
+Let $W$ be a finite subset of  entities $S$.
 \begin{enumerate}
-\item Let $a$ be a reaction in $S$. Then $a$ is enabled by $W$, denoted by $\mathit{en}_a(W)$, 
-if $R_a \subseteq W$
-and $I_a \cap W = \emptyset$. The result of $a$ on $W$, denoted by $\mathit{res}_a(W)$, 
+\item Let $a$ be a reaction in $S$. Then $a$ is enabled by the entities in the set $W$, denoted by $\mathit{en}_a(W)$, 
+if $R_a \subseteq W$, i.e. all the reactants of $a$ are in $W$,
+and $I_a \cap W = \emptyset$, i.e. none of the inhibitors of $a$ are in $W$. The result of $a$ on $W$, denoted by $\mathit{res}_a(W)$, 
 is defined by:
 $\mathit{res}_a(W) =P_a$, if $\mathit{en}_a(W)$, and $\mathit{res}_a(W) = \emptyset$ otherwise.
 \item Let $A$ be a finite set of reactions. The result of $A$ on $W$, denoted 
@@ -101,7 +102,9 @@ The dynamic behaviour of a RS is formalized in terms of
 
 
 \begin{definition}[Interactive Process]
-Let ${\cal A} = (S, A)$ be a RS and let $n \geq 0$. 
+Let ${\cal A} = (S, A)$ be a RS and let $n$
+% \geq 0$.
+be a nonnegative integer;   
 An $n$-step
 \emph{interactive process} in ${\cal A}$ is a pair $\pi = (\gamma, \delta)$ of 
 finite sequences s.t.

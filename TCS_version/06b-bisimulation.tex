@@ -7,7 +7,7 @@ when one process can simulate all the instructions executed by the other one and
 In its weak formulation, internal instructions, i.e. non visible by external observers,
 are abstracted away. 
 There are many variants of the bisimulation for process algebras,  for example the
-barbed bisimulation~\cite{10.1007/3-540-55719-9_114} only consider the execution of invisible actions, and then equates two processes when they expose the same prefixes; for the mobile ambients~\cite{CardelliG00}, a process algebra equipped with a reduction semantics, a notion of
+barbed bisimulation~\cite{10.1007/3-540-55719-9_114} only considers the execution of invisible actions, and then equates two processes when they expose the same prefixes; for the mobile ambients~\cite{CardelliG00}, a process algebra equipped with a reduction semantics, a notion of
 behavioural equivalence equates two processes when they expose the same ambients~\cite{GC03}. 
 
 There are some previous works based on bisimulation applied to models for biological systems. Barbuti et al~\cite{BMMT08} define a classical setting for bisimulation for two formalisms: the Calculus of Looping Sequences, which is a rewriting system, and the Brane Calculi, which is based on process calculi.
@@ -279,7 +279,7 @@ $$
 An alternative way to look at bioHML formulas is as ordinary HML formulas over the set of labels $\{\mathsf{F},\neg \mathsf{F}\}$.
 \end{remark}
 
-As usual, the semantics of a bioHML formula is the set of processes that satisfy it.
+As usual, the semantics of a bioHML formula is the set of c\CNA~processes that satisfy it.
 
 \begin{definition}[Semantics of BioHML]
  We define $\llbracket \mathsf{G}\rrbracket \subseteq {\cal P}$ by induction on the structure of $\mathsf{G}$:
@@ -320,9 +320,10 @@ Given a bioHML formula $\mathsf{G}$ we define its converse $\overline{\mathsf{G}
 \end{definition}
 
 We observe that, as expected, for any bioHML formula $G$ and process $P$ we have $\overline{\overline{\mathsf{G}}} = \mathsf{G}$ and  $P \entails \overline{\mathsf{G}}$ iff  $P\not\entails \mathsf{G}$.
-
+\begin{definition}
 We let $\mathcal{L}_{\mathsf{F}}$ be the set of all bioHML formulas that respects $\mathsf{F}$ and 
-we say that two processes $P,Q$ are bio-logically equivalent w.r.t. $\mathsf{F}$, written $P \equiv_{\mathcal{L}_{\mathsf{F}}}Q$, when $P$ and $Q$ satisfy the exactly the same bioHML formulas in $\mathcal{L}_{\mathsf{F}}$, i.e. when for any $\mathsf{G}\in \mathcal{L}_{\mathsf{F}}$ we have $P \entails \mathsf{G}\ \Leftrightarrow Q \entails \mathsf{G}$.
+we say that two processes $P,Q$ are \emph{bio-logically equivalent w.r.t. $\mathsf{F}$}, written $P \equiv_{\mathcal{L}_{\mathsf{F}}}Q$, when $P$ and $Q$ satisfy exactly the same bioHML formulas in $\mathcal{L}_{\mathsf{F}}$, i.e. when for any $\mathsf{G}\in \mathcal{L}_{\mathsf{F}}$ we have $P \entails \mathsf{G}\ \Leftrightarrow Q \entails \mathsf{G}$.
+\end{definition}
 
 Finally, we extend the classical result establishing the correspondence between the logical equivalence induced by HML with bisimilarity for proving that bio-similarity coincides with bio-logical equivalence.
 

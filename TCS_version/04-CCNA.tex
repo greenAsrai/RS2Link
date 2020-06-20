@@ -1,4 +1,4 @@
-% !TEX root = ./main_RS2L_LNCS.tex
+% !TEX root = ./main_TCS.tex
 
 \section{Chained \CNA \ (c\CNA)}
 \label{sec:ccna}
@@ -16,7 +16,8 @@ let $\mathcal{A} = \mathcal{C} \cup \setof{\silent} \cup \setof{{\noacts}}$ be t
 where the symbol $\silent$ denotes a \emph{silent} action, while the symbol $\noact$ denotes a \emph{virtual} (non-specified) action.
 A \emph{link} is a pair $\ell=\link{\alpha}{\beta}$;
 it is \emph{solid} if $\alpha,\beta \neq \ \noacts$; 
-the link $\link{\noact}{\noact}$ is called \emph{virtual}.
+{\color{red} $\alpha$ and $\beta$ are two interaction points, to fix the idea $\alpha$ is the action, and $\beta$ is the coaction.}
+The link $\link{\noact}{\noact}$ is called \emph{virtual}.
 A link is \emph{valid} if it is solid or virtual.
 We let $\mathcal{L}$ be the set of valid links.
 %

@@ -43,14 +43,22 @@ F.~Okubo, T.~Yokomori, The computational capability of chemical reaction
 \newblock \href {http://dx.doi.org/10.1007/s11047-015-9504-7}
   {\path{doi:10.1007/s11047-015-9504-7}}.
 
-\bibitem{BodeiBB12}
-C.~Bodei, L.~Brodo, R.~Bruni, Open multiparty interaction, in: Recent Trends in
-  Algebraic Development Techniques, 21st International Workshop, {WADT} 2012,
-  Vol. 7841 of Lecture Notes in Computer Science, Springer, 2012, pp. 1--23.
+\bibitem{BBF19}
+L.~Brodo, R.~Bruni, M.~Falaschi, Embedding reaction systems into link-calculus,
+  in: M.~Alvim, K.~Chatzikokolakis, C.~Olarte, F.~Valencia (Eds.), The Art of
+  Modelling Computational Systems: A Journey from Logic and Concurrency to
+  Security and Privacy, Vol. 11760 of Lecture Notes in Computer Science,
+  Springer Berlin, 2019, pp. 68--85.
 
 \bibitem{BBB17}
 C.~Bodei, L.~Brodo, R.~Bruni, A formal approach to open multiparty
   interactions, Theoretical Computer Science 763 (2019) 38--65.
+
+\bibitem{BODEI2020104587}
+C.~Bodei, L.~Brodo, R.~Bruni, The link-calculus for open multiparty
+  interactions, Information and Computation (2020) 104587\href
+  {http://dx.doi.org/https://doi.org/10.1016/j.ic.2020.104587}
+  {\path{doi:https://doi.org/10.1016/j.ic.2020.104587}}.
 
 \bibitem{CardelliG00}
 L.~Cardelli, A.~D. Gordon, Mobile ambients, Theoretical Computer Science
@@ -79,12 +87,10 @@ B.~Aman, G.~Ciobanu, Controlled reversibility in reaction systems, in:
   M.~Gheorghe, G.~Rozenberg, A.~Salomaa, Z.~Claudio (Eds.), Membrane Computing,
   Springer International Publishing, 2018, pp. 40--53.
 
-\bibitem{BBF19}
-L.~Brodo, R.~Bruni, M.~Falaschi, Embedding reaction systems into link-calculus,
-  in: M.~Alvim, K.~Chatzikokolakis, C.~Olarte, F.~Valencia (Eds.), The Art of
-  Modelling Computational Systems: A Journey from Logic and Concurrency to
-  Security and Privacy, Vol. 11760 of Lecture Notes in Computer Science,
-  Springer Berlin, 2019, pp. 68--85.
+\bibitem{BodeiBB12}
+C.~Bodei, L.~Brodo, R.~Bruni, Open multiparty interaction, in: Recent Trends in
+  Algebraic Development Techniques, 21st International Workshop, {WADT} 2012,
+  Vol. 7841 of Lecture Notes in Computer Science, Springer, 2012, pp. 1--23.
 
 \bibitem{WBB13}
 J.~D. Watson, T.~A. Baker, S.~P. Bell, Molecular Biology of the Gene, Pearson

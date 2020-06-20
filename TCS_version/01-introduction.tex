@@ -1,4 +1,4 @@
-% !TEX root = ./main_RS2L_LNCS.tex
+% !TEX root = ./main_TCS.tex
 
 \section{Introduction}
 
@@ -33,13 +33,19 @@ as independent models and do not interact.
 
 
 %Formally, Reaction Systems are defined as a rewriting formalism.
-In this paper, we present an encoding from RSs, 
-to the open multiparty process algebra c\CNA,\footnote{After `chained Core Network 
-Algebra'.} a variant of the {\tt link}-calculus~\cite{BodeiBB12,BBB17} without name mobility.
+%In this paper, we present an encoding from RSs, 
+%to the  open multiparty process algebra c\CNA,\footnote{After `chained Core Network 
+%Algebra'.} a variant of the {\tt link}-calculus~\cite{BodeiBB12,BBB17} without name mobility.
+{\color{red}In this paper, we present an encoding from RSs, 
+to the chained Core Network  Algebra (c\CNA), first defined in~\cite{BBF19}, a variant of the 
+ open multiparty process algebra~\CNA~\cite{BBB17}; the \CNA~equipped with mobility is referred to as the {\tt link}-calculus~\cite{BODEI2020104587}}.
 This formalism allows several processes to synchronise and 
 communicate altogether, at the same time, with a new interaction
 mechanism based on links and link chains. 
-The initial motivation for introducing this mechanism was to encode
+The initial motivation for introducing
+{\color{red} an open multiparty mechanism}
+% this mechanism 
+was to encode
 Mobile Ambients~\cite{CardelliG00}, getting a much stronger operational
 correspondence than any available in the literature, such as the one in~\cite{B16}.
 Later it was shown that the {\tt link}-calculus allowed one to easily encode calculi for biology equipped with membranes, as in~\cite{BodeiBBC14}.
@@ -58,7 +64,7 @@ process algebras allows to consider two processes as equivalent
 when one process can simulate all the actions executed 
 by the other one and vice versa. In this paper we define a new
 notion of bisimilarity which takes into account the characteristics
-of biological systems. We define a new {\em bio-simulation} having in mind
+of biological systems. We define a new {\em bio-simulation} relation having in mind
 the possibility that two interacting systems may be compared w.r.t.
 a subset of the possible biological actions. This is useful for concentrating 
 on the sub-model that one may need to consider for a specific study or application,
@@ -89,8 +95,8 @@ Reaction Systems and exploit it to define a novel notion of behavioural equivale
 \item we sketch how one can express the behaviour of entity mutation,
 %change the behaviour of  each single entity $s$  in a
 %way that a mutation $s'$ can be expressed; 
-in such a way that the mutated entity
-$s'$ can  take part to only a subset of rules requiring entity $s$;
+in such a way that {\color{red} the mutated version of the entity
+$s$ can}  take part to only a subset of rules requiring entity $s$;
 \item we show that with a little coding effort, our encoding allows two RSs to
 communicate; i.e. we can model scenarios where a subset of those entities that the context  can
 provide, are instead provided by a second RS.
@@ -110,14 +116,18 @@ the basic RS framework, as it can only happen with the context.
 By exploiting recursion, the kind of interactions which can be 
 defined can be complex and expressive.
 Example~\ref{ex:twoRS} and more in general the discussion in 
-Section~\ref{sec:discussion} show that 
+Section~\ref{subsec:comRS}
+%~\ref{sec:discussion}
+ show that 
 the interaction between RSs can help to model new scenarios.
 
 \paragraph{Related work}
 
 Process calculi have been used successfully to model
 biological processes, see~\cite{BBDFH18} for a recent survey.
-We are not aware of any SOS operational semantics for the RS; it seems not the case
+We are not aware of any 
+%SOS 
+structural operational semantics for the RS; it seems not the case
 that a deterministic behaviour, as the one of the RS, once the initial state is 
 fixed, could be defined by inference rules that classically are applied 
 to define non-deterministic transition systems.
