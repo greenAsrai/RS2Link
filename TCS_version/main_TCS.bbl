@@ -44,11 +44,11 @@ F.~Okubo, T.~Yokomori, The computational capability of chemical reaction
   {\path{doi:10.1007/s11047-015-9504-7}}.
 
 \bibitem{BBF19}
-L.~Brodo, R.~Bruni, M.~Falaschi, Embedding reaction systems into link-calculus,
-  in: M.~Alvim, K.~Chatzikokolakis, C.~Olarte, F.~Valencia (Eds.), The Art of
-  Modelling Computational Systems: A Journey from Logic and Concurrency to
-  Security and Privacy, Vol. 11760 of Lecture Notes in Computer Science,
-  Springer Berlin, 2019, pp. 68--85.
+L.~Brodo, R.~Bruni, M.~Falaschi, Enhancing reaction systems: A process
+  algebraic approach, in: M.~Alvim, K.~Chatzikokolakis, C.~Olarte, F.~Valencia
+  (Eds.), The Art of Modelling Computational Systems: A Journey from Logic and
+  Concurrency to Security and Privacy, Vol. 11760 of Lecture Notes in Computer
+  Science, Springer Berlin, 2019, pp. 68--85.
 
 \bibitem{BBB17}
 C.~Bodei, L.~Brodo, R.~Bruni, A formal approach to open multiparty
@@ -77,6 +77,11 @@ M.~Hennessy, R.~Milner, On observing nondeterminism and concurrency, in:
   J.~de~Bakker, J.~van Leeuwen (Eds.), Automata, Languages and Programming,
   Vol.~85 of Lecture Notes in Computer Science, Springer Berlin Heidelberg,
   Berlin, Heidelberg, 1980, pp. 299--309.
+
+\bibitem{BLR20}
+P.~Bottoni, A.~Labella, G.~Rozenberg, Networks of reaction systems,
+  International Journal of Foundations of Computer Science 31~(01) (2020)
+  53--71.
 
 \bibitem{BBDFH18}
 A.~Bernini, L.~Brodo, P.~Degano, M.~Falaschi, D.~Hermith, Process calculi for

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2018.2.3)  20 JUN 2020 19:53
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2018.2.3)  22 JUN 2020 16:21
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -1121,10 +1121,10 @@ Package rerunfilecheck Info: File `main_TCS.out' has not changed.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 159.
  ) 
 Here is how much of TeX's memory you used:
- 22377 strings out of 492995
- 389493 string characters out of 6132705
- 516131 words of memory out of 5000000
- 25234 multiletter control sequences out of 15000+600000
+ 22381 strings out of 492995
+ 389542 string characters out of 6132705
+ 516147 words of memory out of 5000000
+ 25237 multiletter control sequences out of 15000+600000
  24300 words of font info for 98 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,19n,54p,3219b,1077s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1167,10 +1167,10 @@ st/fonts/type1/public/stmaryrd/stmary10.pfb></usr/local/texlive/2017/texmf-dist
 /fonts/type1/urw/zapfding/uzdr.pfb></usr/local/texlive/2017/texmf-dist/fonts/ty
 pe1/public/xypic/xyatip10.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/p
 ublic/xypic/xybtip10.pfb>
-Output written on main_TCS.pdf (34 pages, 518245 bytes).
+Output written on main_TCS.pdf (34 pages, 518641 bytes).
 PDF statistics:
- 655 PDF objects out of 1000 (max. 8388607)
- 574 compressed objects within 6 object streams
- 188 named destinations out of 1000 (max. 500000)
+ 657 PDF objects out of 1000 (max. 8388607)
+ 576 compressed objects within 6 object streams
+ 189 named destinations out of 1000 (max. 500000)
  149 words of extra memory for PDF output out of 10000 (max. 10000000)
 
