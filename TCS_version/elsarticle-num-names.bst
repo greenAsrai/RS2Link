@@ -1,3 +1,5 @@
+%%
+%% This is file `elsarticle-num-names.bst',
 %% 
 %% Copyright 2007, 2008, 2009 Elsevier Ltd
 %% 
@@ -15,33 +17,11 @@
 %% given in the file `manifest.txt'.
 %% 
 %%
-%% This is file `elsearticle-num-names.bst',
-%% generated with the docstrip utility.
+%% $Id: elsarticle-num-names.bst 19 2009-12-17 07:07:52Z rishi $
 %%
-%% The original source files were:
 %%
-%% merlin.mbs  (with options: `head,exlang,ay,nat,seq-no,nm-init,ed-au,dt-jnl,dt-end,atit-u,jttl-rm,vnum-sp,volp-blk,jdt-p,pp-last,num-xser,jnm-x,btit-rm,bt-rm,bkpg-x,isbn,issn,doi,edpar,bkedcap,blk-com,in-col,english,ppx,ed,abr,xedn,varand,xand,url,url-blk,bibinfo,nfss,,{}')
-%% english.mbs  (with options: `exlang,ay,nat,seq-no,nm-init,ed-au,dt-jnl,dt-end,atit-u,jttl-rm,vnum-sp,volp-blk,jdt-p,pp-last,num-xser,jnm-x,btit-rm,bt-rm,bkpg-x,isbn,issn,doi,edpar,bkedcap,blk-com,in-col,english,ppx,ed,abr,xedn,varand,xand,url,url-blk,bibinfo,nfss,,{}')
-%% merlin.mbs  (with options: `tail,exlang,ay,nat,seq-no,nm-init,ed-au,dt-jnl,dt-end,atit-u,jttl-rm,vnum-sp,volp-blk,jdt-p,pp-last,num-xser,jnm-x,btit-rm,bt-rm,bkpg-x,isbn,issn,doi,edpar,bkedcap,blk-com,in-col,english,ppx,ed,abr,xedn,varand,xand,url,url-blk,bibinfo,nfss,,{}')
 %% ----------------------------------------
-%% *** Journal of Sound and Vibration ***
 %%
-%% Copyright 1994-2004 Patrick W Daly
- % ===============================================================
- % IMPORTANT NOTICE:
- % This bibliographic style (bst) file has been generated from one or
- % more master bibliographic style (mbs) files, listed above.
- %
- % This generated file can be redistributed and/or modified under the terms
- % of the LaTeX Project Public License Distributed from CTAN
- % archives in directory macros/latex/base/lppl.txt; either
- % version 1 of the License, or any later version.
- % ===============================================================
- % Name and version information of the main mbs file:
- % \ProvidesFile{merlin.mbs}[2004/02/09 4.13 (PWD, AO, DPC)]
- %   For use with BibTeX version 0.99a or later
- %-------------------------------------------------------------------
-
 ENTRY
  { address
    author
@@ -1459,3 +1439,5 @@ EXECUTE {end.bib}
 %%
 %%
 %% End of file `elsarticle-num-names.bst'.
+
+

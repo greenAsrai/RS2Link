@@ -90,7 +90,10 @@ specified in a recursive way, as ordinary processes;
 \item when deterministic contexts are considered, the c\CNA \
 computation is deterministic and mimics the evolution of the corresponding RS;
 \item we define an assertion language to specify local properties of 
-Reaction Systems and exploit it to define a novel notion of behavioural equivalence for Reaction Systems, called bio-similarity;
+Reaction Systems and exploit it to define a novel notion of behavioural equivalence for 
+RSs,
+%Reaction Systems, 
+called bio-similarity;
 \item we show that our assertions can be used to extend the Hennessy-Milner logic to our framework, in such a way that logical equivalence of processes coincide with bio-similarity;
 \item we sketch how one can express the behaviour of entity mutation,
 %change the behaviour of  each single entity $s$  in a
@@ -118,6 +121,7 @@ any reaction system in the network to receive entities
 produced from its neighbors (that will represent its context), with the hypothesis that  
 reaction systems without neighbors will receive no entities 
 from the context. 
+In our case, a RS can receive some entities from the context and some others from a second RS, in any case we always assume contextes having a non-determinist behaviour.
 }
 By exploiting recursion, the kind of interactions which can be 
 defined can be complex and expressive.
@@ -150,8 +154,11 @@ There are several major differences w.r.t. the paper~\cite{BBF19}, which is here
 \begin{itemize}
 \item we present several new examples to illustrate our framework,
 and give more detailed explanations about its use;
-\item we introduce an assertion language to specify the properties of Reaction Systems;
-\item we define the notion of bio-simulation to relate Reaction Systems and compare their behaviours;
+\item we introduce an assertion language to specify the properties of RSs;
+%Reaction Systems;
+\item we define the notion of bio-simulation to relate RSs
+%Reaction Systems 
+and compare their behaviours;
 \item we show that our assertion language allows to specify properties extending to our
 framework the Hennessy-Milner logic;
 \item we include here all proofs of main results.
