@@ -3,7 +3,9 @@
 
 \section{From Reaction Systems to c\CNA}
 \label{sec:trans}
-Here we present a translation from Reaction Systems to c\CNA.
+Here we present {\color{red} an embedding of}
+%a translation from 
+Reaction Systems {\color{red} into} c\CNA.
 The idea is to define separated processes for representing the behaviour of each entity, each reaction, 
 and for the provisioning of each entity by the context.
 
@@ -163,10 +165,13 @@ $\mathit{prods}\defeq \{p_1,...,p_{|A|}\}$ is the set of names for production $p
 
 
 
-\begin{definition}[Translation]
+\begin{definition}[{\color{red} Embedding}]
+%Translation]
 \label{def:trans}
 Let ${\cal A} = (S, A)$ be a RS, and let $\pi=(\gamma,\delta)$ be an extended interactive process in ${\cal A}$, with  $\gamma=\{C_i\}_{i\in\mathbb{N}}$. 
-We define its c\CNA~translation $\llbracket{\cal A},\gamma \rrbracket$ as follows: 
+We define its c\CNA~{\color{red} embedding}
+%translation 
+$\llbracket{\cal A},\gamma \rrbracket$ as follows: 
 $$
 \llbracket{\cal A},\gamma \rrbracket 
 \triangleq
@@ -187,7 +192,10 @@ $r_{u+1} = \mathit{cxt}$ and $p_{u+1}=\silent$,  for $u=|A|$.
 %In the general case we can use a counter, $N$, that allows us to specify the behaviour of the context for the first $N$ steps of the system, i.e.  $CXT_s \defeq CXT_s(N)$ and the counter at each step decrements its values, until it arrive to a stable behaviour.
 
 
-It is important to observe that,   for each transition, our c\CNA \ encoding requires  all the processes 
+It is important to observe that,   for each transition, our c\CNA \ 
+%encoding 
+{\color{red} embedding}
+requires  all the processes 
 %$P_a$, with $a \in A$, and  $\mathit{Cxt}^n$ and  $P_s$, with $s \in S$,  
 running in parallel to  interact in that transition.
 This is due to the fact that  all the channels $r_j$, $p_j$, $\mathit{cxt}$, including those for decorated names $s_{i},s_{o},\overline{s}_i,\overline{s}_o$ are  restricted.
@@ -197,7 +205,9 @@ Each reaction defines a pattern to be satisfied, i.e. each reaction inserts as m
  \label{lem:struct}
 %\begin{lemma}
  %\label{lem:struct}
-  Let ${\cal A} = (S, A)$ be a RS and let $\pi=(\gamma,\delta)$ be an extended  interactive process in ${\cal A}$. Let $P=\llbracket{\cal A},\gamma\rrbracket$ its c\CNA~translation. If $exists$ $P'$ such that $P \xrightarrow{\restrict{\mathit{names}}\upsilon} P'$ is a transition of $P$, then
+  Let ${\cal A} = (S, A)$ be a RS and let $\pi=(\gamma,\delta)$ be an extended  interactive process in ${\cal A}$. Let $P=\llbracket{\cal A},\gamma\rrbracket$ its c\CNA~{\color{red} embedding.}
+  %translation. 
+  If $exists$ $P'$ such that $P \xrightarrow{\restrict{\mathit{names}}\upsilon} P'$ is a transition of $P$, then
   \begin{enumerate}
   \item for each reaction  $aj \in A$, the corresponding channels $r_j$ and $p_j$ appear in  $\upsilon$; for each entity $s \in S$, the corresponding channel $s$ (suitably decorated) appear in $\upsilon$; 
   the channel $\mathit{cxt}$ appears in $\upsilon$;
@@ -217,7 +227,10 @@ A chain $\upsilon$ is called \emph{complete} if it is solid (i.e., it contains n
 We  write $P\xRightarrow{\upsilon} P'$ to mean that $P\xrightarrow{\upsilon} P'$ with $\upsilon$ complete.
 \end{definition}
 
-We will then use $\llparenthesis{\cal A},\gamma\rrparenthesis$ to refer to the encoding without topmost name restrictions, i.e.,
+We will then use $\llparenthesis{\cal A},\gamma\rrparenthesis$ to refer to the 
+%encoding 
+{\color{red} embedding}
+without topmost name restrictions, i.e.,
 $$
 \llparenthesis{\cal A},\gamma\rrparenthesis \defeq 
 I~|~ \prod_{a\in A} P_a ~|~  \mathit{Cxt}^1~|~\prod_{s\in C_0}P_{s} ~|~ \prod_{s \notin C_0}\overline{P_s} .

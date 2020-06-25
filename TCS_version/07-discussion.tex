@@ -77,7 +77,9 @@ Now, we set our example such that the two contexts, for  $rs1$ and $rs2$, do not
 We also assume that entity $s$ in $rs1$ is provided by $rs2$, as $rs2$ produces a quantity of $s$ that is enough for $rs1$ and $rs2$.
 For technical reasons, we can not use the same name for  $s$ in both the two RSs, then we use the name $ss$ in $rs2$.
 %
-We need to modify our translation technique to suite this new setting. 
+We need to modify our {\color{red} embedding}
+%translation 
+technique to suite this new setting. 
 As we do not model contexts, we introduce  \emph{dummy} channel names $dx$ and $dss$ to model the absence of entities. Also, thanks to the simplicity of the example, we can leave out the use of the   $p_i$ channels. This streamlining does not affect the programming technique we propose to make two RSs communicate.
 %Thus, there will be no $Cxt$ processes and we manage the code in a way that $rs1$ will receive the entity $s1$ from $rs2$. 
 %Please also note that, for our simple example, we do not have anymore to specify the all steps
@@ -105,7 +107,9 @@ First, we translate the reaction in $rs1$:
 
 \noindent
 Please note, that prefixes of process $P_{a_1}$ end with the channel name $a_2$, as the link chain is now connected with the  reaction of  $rs2$.
-The translation for the entities follows.
+The {\color{red} encoding} 
+%translation 
+for the entities follows.
 \[
 \begin{array}{lclcl}
 \llbracket s \rrbracket &\defeq &P_{s} &\defeq & \startchain{{\color{blue}s_i}}\chainedlink{{\color{blue}s_o}}{\noact}\chainedlink{\noact}{{\color{blue}\widehat{s}_i}}\chainend{{\color{blue}\widehat{s}_o}}.P_{s} + \startchain{s_i}\chainend{s_o}.\overline{P_{s}}\\
@@ -139,7 +143,9 @@ The translation for the entities follows.
 
 
 \noindent
-The translation for $rs2$ follows.
+The {\color{red} encoding}
+%translation 
+for $rs2$ follows.
 
 \[
 \begin{array}{lcl}
@@ -157,7 +163,9 @@ The translation for $rs2$ follows.
 \end{array}
 \]
 \noindent
-In the translation of the entities in  $rs2$, we introduce the mechanism that allows the entity
+In the {\color{red} encoding}
+%translation 
+of the entities in  $rs2$, we introduce the mechanism that allows the entity
 $s$ ($ss$ in $rs2$) to be provided in $rs1$. Every time $ss$ is produced in $rs2$,  a virtual link is
 created to synchronise with $rs1$   on link $\link{\widehat{s}_i}{\widehat{s}_o}$:
 \[

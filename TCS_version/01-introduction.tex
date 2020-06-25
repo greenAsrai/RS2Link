@@ -36,7 +36,9 @@ as independent models and do not interact.
 %In this paper, we present an encoding from RSs, 
 %to the  open multiparty process algebra c\CNA,\footnote{After `chained Core Network 
 %Algebra'.} a variant of the {\tt link}-calculus~\cite{BodeiBB12,BBB17} without name mobility.
-{\color{red}In this paper, we present an encoding from RSs, 
+{\color{red}In this paper, we present an embedding
+%encoding 
+from RSs, 
 to the chained Core Network  Algebra (c\CNA), first defined in~\cite{BBF19}, a variant of the 
  open multiparty process algebra~\CNA~\cite{BBB17}; the \CNA~equipped with mobility is referred to as the {\tt link}-calculus~\cite{BODEI2020104587}}.
 This formalism allows several processes to synchronise and 
@@ -94,25 +96,38 @@ Reaction Systems and exploit it to define a novel notion of behavioural equivale
 RSs,
 %Reaction Systems, 
 called bio-similarity;
-\item we show that our assertions can be used to extend the Hennessy-Milner logic to our framework, in such a way that logical equivalence of processes coincide with bio-similarity;
+\item we show that our assertions can be used to extend the Hennessy-Milner logic to our 
+%framework
+{\color{red}embedding}, in such a way that logical equivalence of processes coincide with bio-similarity;
 \item we sketch how one can express the behaviour of entity mutation,
 %change the behaviour of  each single entity $s$  in a
 %way that a mutation $s'$ can be expressed; 
 in such a way that {\color{red} the mutated version of the entity
 $s$ can}  take part to only a subset of rules requiring entity $s$;
-\item we show that with a little coding effort, our encoding allows two RSs to
+\item we show that with a little coding effort, our 
+%encoding 
+{\color{red} embedding}
+allows two RSs to
 communicate; i.e. we can model scenarios where a subset of those entities that the context  can
 provide, are instead provided by a second RS.
 \end{itemize}
 
-The main drawback of our proposal, is that the c\CNA \ translation is
+The main drawback of our proposal, is that the {\color{red} resulting c\CNA \ 
+code}
+%translation 
+is
 verbose. Nevertheless it is clear that our
-translation can be automatised by means of a proper front-end in
+%translation 
+{\color{red} embedding}
+can be automatised by means of a proper front-end in
 an implementation of the {\tt link}-calculus. 
 The examples that we propose also show that some optimisations are possible
 to reduce the coding when suitable assumptions are made about the provision of entities.
 
-As we have remarked, in our translation, Reaction Systems 
+As we have remarked, in our 
+%translation,
+{\color{red} embedding}
+ Reaction Systems 
 get the ability to interact between them in a synchronized manner. 
 This interaction is not foreseen in
 the basic RS framework, as it can only happen with the context.
@@ -152,7 +167,9 @@ computation step.
 A preliminary version of this paper appeared in~\cite{BBF19}.
 There are several major differences w.r.t. the paper~\cite{BBF19}, which is here extended as follows:
 \begin{itemize}
-\item we present several new examples to illustrate our framework,
+\item we present several new examples to illustrate our 
+{\color{red} embedding},
+%framework,
 and give more detailed explanations about its use;
 \item we introduce an assertion language to specify the properties of RSs;
 %Reaction Systems;
@@ -160,7 +177,9 @@ and give more detailed explanations about its use;
 %Reaction Systems 
 and compare their behaviours;
 \item we show that our assertion language allows to specify properties extending to our
-framework the Hennessy-Milner logic;
+{\color{red} embedding}
+%framework 
+the Hennessy-Milner logic;
 \item we include here all proofs of main results.
 \end{itemize}
  
