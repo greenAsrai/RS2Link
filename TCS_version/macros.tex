@@ -1,4 +1,4 @@
-% !TEX root = ./main_RS2L_LNCS.tex
+% !TEX root = ./main_TCS.tex
 
 %% PACKAGES
 %\usepackage[usenames,dvipsnames]{color}
@@ -22,10 +22,10 @@
 \newcommand{\CNA}{\textsf{CNA}}
 
 %% LINK CALCULUS
-\newcommand{\link}[2]{\ensuremath{{}^{#1} \backslash_{#2}}}
+\newcommand{\link}[2]{\ensuremath{{}^{#1} \backslash_{#2}^{}}}
 \newcommand{\chainedlink}[2]{\ensuremath{\backslash_{#1}^{#2}}}
 \newcommand{\startchain}[1]{\ensuremath{{}^{#1}}}
-\newcommand{\chainend}[1]{\ensuremath{\backslash_{#1}}}
+\newcommand{\chainend}[1]{\ensuremath{\backslash_{#1}^{}}}
 %\newcommand{\midlink}[2]{\ensuremath{{}_{#1} {}^{#2}}}
 \newcommand{\midlink}[2]{\ensuremath{{}_{#1}^{#2}}}
 \newcommand{\silent}{\tau}
@@ -69,7 +69,7 @@
 
 \newcommand{\halfl}[1]{{}^{#1\backslash}}
 \newcommand{\halfr}[1]{{}_{\backslash #1}}
-\newcommand{\blockchain}[3]{\ensuremath{\left({\big \backslash\!\!\big \backslash}\ {}_{#1}^{\noact}\chainedlink{\noact}{#2}}\right)_{\tiny\begin{array}{l}\\[0pt] \hspace{-1.5cm}#3\end{array}}\hspace{-0.3cm}}
+\newcommand{\blockchain}[3]{\ensuremath{\left({\big \backslash\!\!\big \backslash}\ {}_{#1}^{\noact}\chainedlink{\noact}{#2}}\right)_{\tiny\begin{array}{l}\\[2pt] \hspace{-42pt}#3\end{array}}\hspace{-0.3cm}}
 
 %% GENERAL
 \newcommand{\bn}[1]{\ensuremath{\mathit{bn}(#1)}}

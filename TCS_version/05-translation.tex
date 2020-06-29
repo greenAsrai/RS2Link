@@ -3,14 +3,16 @@
 
 \section{From Reaction Systems to c\CNA}
 \label{sec:trans}
-Here we present {\color{red} an embedding of}
+Here we define an encoding of
 %a translation from 
-Reaction Systems {\color{red} into} c\CNA.
+Reaction Systems into c\CNA.
 The idea is to define separated processes for representing the behaviour of each entity, each reaction, 
 and for the provisioning of each entity by the context.
 
+In the following we refer to a given set of entities $S$ and a set of reactions $A \subseteq \mathit{rac}(S)$, i.e. that the Reaction System ${\cal A} = (S, A)$ is known.
+
 \paragraph{Processes for entities}
-Given an entity $s \in S$, we exploit five different pairs of names for the interactions over $s$:
+Given an entity $s \in S$, we exploit five different pairs of channel names for the interactions over $s$:
 \begin{itemize}
 \item names $s_i$, $s_o$ are used to test the presence of $s$ in the system; 
 \item names $\widehat{s}_i$, $\widehat{s}_o$ are used to test the provisioning of $s$ from the context;
@@ -76,13 +78,18 @@ Note that in the case of $\overline{P_s}$ the test for presence of $s$ in the sy
 % the code of $P_s$ can be drastically simplified.
 
 \paragraph{Processes for reactions}
-We assume that {color{red} all the reactions $a$ are ordered by assign to them a progressive  number $j$
-from $1$ to $n$.}
+We assume that all the reactions $a$ are numbered and use $j$ as an index for reactions.
+We introduce two channel names for each reaction $aj$:
+\begin{itemize}
+\item $r_j$ to mark the occurrence of the reaction;
+\item $p_j$ to mark the product set of the reaction.
+\end{itemize}
+We shall exploit names $r_j,p_j$ to join the chains provided by the application of all the reactions. 
 %each reaction $a$ is 
 %assigned a progressive number $j$.
-The process for reaction $aj=(R_j,I_j,P_j)$ must assert either the possibility to apply the reaction or its impossibility.
+The process for the $j$th reaction $aj=(R_j,I_j,P_j)$ must assert either the possibility to apply the reaction or its impossibility.
 The first case happens when all its reactants are present (the link $\link{s_i}{s_o}$ is requested for any $s\in R_j$) and all its inhibitors are absent (the link $\link{\overline{e}_i}{\overline{e}_o}$ is requested for any $e\in I_j$), then the product set is released (the link $\link{\widetilde{c}_i}{\widetilde{c}_o}$ is requested for any $c\in P_j$).
-The next case can happen for two reasons: one of the reactants is absent (the link $\link{\overline{s}_i}{\overline{s}_o}$ is requested for some $s\in R_j$) or one of the inhibitors is present (the link $\link{e_i}{e_o}$ is requested for some $e\in I_j$).
+The second case can happen for two reasons: one of the reactants is absent (the link $\link{\overline{s}_i}{\overline{s}_o}$ is requested for some $s\in R_j$) or one of the inhibitors is present (the link $\link{e_i}{e_o}$ is requested for some $e\in I_j$).
 The process is recursive so that reactions can be applied at any step.
 \[
 \begin{array}{lcl@{\quad}l}
@@ -95,10 +102,12 @@ P_{aj} \defeq \\
 \end{array}
 \]
 
-We exploit names $r_j,p_j$ to join the chains provided by the application of all the reactions. 
 Channels $r_j$ and $r_{j+1}$ enclose the enabling/disabling condition of reaction $aj$.
 Channels $p_j$ and $p_{j+1}$ enclose the links related to the entities produced by $aj$.
 We will see that all the link chain labels of transitions follow the same schema: first we find all the reactions limited to the reactants and inhibitors (chained using $r_j$ channels), then all the supplies by the contexts (chained using the channel $\mathit{cxt}$, to be introduced next), and finally the products for all the reactions (chained using $p_j$ channels). 
+For notational convenience, we fix that 
+%$r_1 = \silent$,
+$r_{|A|+1} = \mathit{cxt}$ and $p_{|A|+1}=\silent$.
 In the following there is an example explaining this schema.
 %\[
 %\begin{array}{lcl@{\qquad}l}
@@ -113,12 +122,14 @@ In the following there is an example explaining this schema.
 %\]
 
 \paragraph{Processes for contexts}
-The context can vary at each step $n$ and for each entity $s \in S$, the context must say if the entity is provided or not. Let us denote by $C_n$ the context at step $n$, i.e. the set of entities that are made available. Correspondingly, we introduce another process $\mathit{Cxt}^n$ defined as follows:
+For marking the part of the chain provided by the context, we exploit the name $\mathit{cxt}$.
+In RSs, the context sequence $\gamma$ provides a set of entities $C_n$ at each instant of time $n$: for each entity $s \in S$, the context must say if the entity is provided or not.
+Correspondingly, we introduce another process $\mathit{Cxt}_n$ defined as follows:
 \[
 \begin{array}{lcl}
-\mathit{Cxt}^n &\defeq &
+\mathit{Cxt}_n &\defeq &
 %\left \{
-^{cxt} \backslash  \blockchain{\hat{s}_i}{\hat{s}_o}{s\!\in \!C_n}  \link{}{} \blockchain{\underline{e}_i}{\underline{e}_o}{e \!\not\in \! C_n}   \backslash_{p_1}. \mathit{Cxt}^{n+1}
+^{cxt} \backslash  \blockchain{\hat{s}_i}{\hat{s}_o}{s\!\in \!C_n}  \link{}{} \blockchain{\underline{e}_i}{\underline{e}_o}{e \!\not\in \! C_n}   \backslash_{p_1}. \mathit{Cxt}_{n+1}
 %+ \\
 % ^{cxt} \backslash  \blockchain{s_i}{s_o}{s \in I2_n} \, \link{}{} \blockchain{\overline{e}_i}{\overline{e}_o}{e \in Oj_n} \, \backslash_{p_1}
 % \chainedlink{\hat{s}_i}{\noact}\chainedlink{\noact}{\hat{s}_o}\chainend{p_1}. Cxt_{s}^{n+1} & \ \mbox{if the context provides $s$  at the $n$-th step}\\[5pt] 
@@ -148,28 +159,29 @@ The context can vary at each step $n$ and for each entity $s \in S$, the context
 %\]
 
 
-We only consider $\mathit{Cxt}^n$ with $n >0$, as the entities  that are present at step zero  are considered to be present in the initial system (if $s\in C_0$ the process $P_s$ will be present initially, otherwise $\overline{P_s}$ will be present).
+We only consider $\mathit{Cxt}_n$ with $n >0$, as the entities  that are present at step zero  are considered to be present in the initial system (if $s\in C_0$ the process $P_s$ will be present initially, otherwise $\overline{P_s}$ will be present).
 
+\paragraph{Encoding}
 In the following we use the following conventions for denoting different categories of names:
 \begin{itemize}
 \item
-$\mathit{decs} \defeq \{ s, \overline{s}, \widetilde{s},\widehat{s},\underline{s}~|~ s\in S\}$ is the set of names for decorated entities (without subscripts $_i$ and $_o$);
+$\mathit{decs} \defeq \{ s, \overline{s}, \widetilde{s},\widehat{s},\underline{s}~|~ s\in S\}$ is the set of channel names for decorated entities (without subscripts $_i$ and $_o$);
 \item
-$\mathit{ents} \defeq \{ d_i, d_o~|~ d\in \mathit{decs}\}$ is the set names for entities;
+$\mathit{ents} \defeq \{ d_i, d_o~|~ d\in \mathit{decs}\}$ is the set of channel names for entities;
 \item
-$\mathit{reacts}\defeq \{r_1,...,r_{|A|}\}$ is the set of reaction names $r_j$ associated with each reaction $aj$;
+$\mathit{reacts}\defeq \{r_1,...,r_{|A|+1}\}$ is the set of channel names $r_j$ associated with each reaction $aj$ (we remind that $r_{|A|+1} = \mathit{cxt}$);
 \item 
-$\mathit{prods}\defeq \{p_1,...,p_{|A|}\}$ is the set of names for production $p_j$, associated with  reaction $aj$.
+$\mathit{prods}\defeq \{p_1,...,p_{|A|}\}$ is the set of channel names $p_j$ for product sets associated with each reaction $aj$ (we remind that $p_{|A|+1} = \silent$).
 \end{itemize}
 
 
 
 
-\begin{definition}[{\color{red} Embedding}]
+\begin{definition}[Encoding]
 %Translation]
 \label{def:trans}
 Let ${\cal A} = (S, A)$ be a RS, and let $\pi=(\gamma,\delta)$ be an extended interactive process in ${\cal A}$, with  $\gamma=\{C_i\}_{i\in\mathbb{N}}$. 
-We define its c\CNA~{\color{red} embedding}
+We define its c\CNA\ encoding
 %translation 
 $\llbracket{\cal A},\gamma \rrbracket$ as follows: 
 $$
@@ -181,9 +193,6 @@ where $\mathit{names} = \mathit{reacts}\, \cup\, \mathit{ents}\, \cup \, \mathit
 %For notational convenience, we fix that $r_1 = \silent$,  $r_{u+1} = cxt_1$ for $u$ the number of reacts, and $cxt_{w+1} = \silent$ for $w$ the number of entities.
 For technical reasons, we introduce the {\color{red} recursive} init  process $I \defeq \link{\silent}{r_1}.I$
 to allow the name $r_1$ to be matched at the start of any chain; also, 
-for notational convenience, we fix that 
-%$r_1 = \silent$,
-$r_{u+1} = \mathit{cxt}$ and $p_{u+1}=\silent$,  for $u=|A|$.
 \end{definition}
  
 
