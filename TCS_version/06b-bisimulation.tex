@@ -17,20 +17,20 @@ Cardelli et al~\cite{CTTV15} present two quantitative behavioral equivalences ov
 chemical reaction network with semantics based on ordinary differential equations.
 Bisimulation identifies a partition where each equivalence class represents the exact sum of the concentrations of the species belonging to that class.
 Bisimulation also relates species that have identical solutions at all time points when starting from the same initial conditions.
-Both the mentioned formalisms~\cite{BMMT08,CTTV15} adopt a classical approach to bisimulation. 
+Both the fore mentioned formalisms~\cite{BMMT08,CTTV15} adopt a classical approach to bisimulation. 
 Albeit the bisimulation is a powerful tool for verifying if the behaviour of two different software 
-programs is indistinguishable, in the case of biological systems the classical bisimulation seems to be inappropriate, as it considers too many details.
-In fact, in a biological soup, a high number of interactions occur every seconds, and generally, biologists
-are only interested to analyse a small subset of them.
+programs is indistinguishable, in the case of biological systems the classical bisimulation seems to be inappropriate, as the labels of the transitions systems are too concrete.
+In fact, in a biological soup, a high number of interactions occur at every computational stage, and generally, biologists
+are only interested to analyse a small subset of them and to focus just on some entities.
 
 For this reason, we propose an alternative notion of bisimulation, that hereafter we call \emph{bio-simulation},
-that allows us  to compare two biological systems by restricting the observation to only the limited events of interest.
+that allows us  to compare two biological systems by restricting the observation to only a limited set of events of interest, which can be chosen according to the property one wants to investigate in an experiment.
 This allows one to tailor the equivalence to different applications and purposes. 
 
 The transition labels of our systems record detailed information about all the reactions that have been applied in one transition, about the elements that acted as reagents, as inhibitors or that have been produced, or that have been provided by the context.
 All these information are stored in the label because they are necessary to compose a transition in a modular way. Depending on the application, only a suitable abstraction over the label can be of interest.
 
-In a way, at each step of the bisimulation game, we want to query our transition labels to get only the information we care about.
+In a way, we want to query our transition labels to extract only the information we care about.
 To this goal, we introduce a simple language
 %simple assertion language 
 that allows us to formulate detailed and partial queries about what happened in a single transition.
@@ -39,7 +39,7 @@ that allows us to formulate detailed and partial queries about what happened in 
 For instance we would like to express properties about each step of the bio-simulation of a system like the ones below:
 \begin{enumerate}
 \item Has the entity $s_i$ been used by rule $r_j$ as reagent?
-\item Has the entity $s_i$ blocked the application of  rule $r_j$?
+\item Has the entity $s_i$ been blocked the application of  rule $r_j$?
 \item Has the entity $s_i$ been produced by rule $r_j$?
 \item Has the entity $s_i$ been produced by some rule?
 \item Has the entity $s_i$ been provided by the context? 
@@ -86,18 +86,18 @@ As detailed before, in the following we assume that: (i) the context can be non-
 %where  $::$ is the usual string concatenation operator.
 %
 
-Next, we introduce an assertion language that operates on simple strings
+Next, we introduce an assertion language that operates on strings
 and that combines regular expression operators with conjunction and disjunction.
-We let $\mathit{syms} = \mathit{decs}\cup\mathit{reacts}\cup\mathit{prods}\cup\{\mathit{cxt}\}$ be the set of symbolic names used in our assertion language.
+We let $\mathit{names}$ be the set of symbolic names used in our assertion language.
 
 \begin{definition}[Assertion Language]
 \label{def:assetionl}
-Assertions are built from: 
+Atomic assertions $\zeta$ and general assertions $\mathsf{F}$ are built from the syntax below: 
 $$
 %B ::=  s~\mid~ \tilde{s}~\mid~ \hat{s} ~\mid~ \overline{s} ~\mid~  \underline{s} ~\mid~ F \oplus F  
 \begin{array}{lcl}
 \zeta & ::= & 
-\alpha ~\mid ~ 
+\eta ~\mid ~ 
 ? ~\mid ~ 
 [N]
 \\
@@ -112,28 +112,29 @@ $$
 \end{array}
 $$
 %\noindent where $s \in {\cal C}$, and  $\oplus \in \{\wedge, \vee, \to \}$. 
-where $\alpha \in \mathit{syms}$ and $N\subseteq \mathit{syms}$.
+where $\eta \in \mathit{names}$ and $N\subseteq \mathit{names}$.
 %, and  $\oplus \in \{\wedge, \vee \}$. 
 % \{\wedge, \vee, \to \}$. 
 \end{definition}
 
-Roughly, a \emph{singleton} assertion $\zeta$ denotes either a string composed by a single symbol $\alpha$ (one of the symbols in the set $\mathit{syms}$ for denoting a particular entity, rule, production or context), or
-the wildcard $?$ that stands for any symbol, or the pattern $[N]$ that stands for any of the strings composed by a single symbol in the set $N$. Clearly $?$  is just a shorthand for $[\mathit{syms}]$.
+Roughly, an atomic assertion $\zeta$ denotes either a string composed by a single name $\eta$ (one of the symbols in the set $\mathit{names}$ for denoting a particular entity, rule, production or context), or
+the wildcard $?$ that stands for any symbol, or the pattern $[N]$ that stands for any string composed by a single symbol in the set $N$. Clearly $?$  is just a shorthand for $[\mathit{names}]$.
 We write $\mathbf{0}$ for $[\emptyset]$ and $[s_1,...,s_n]$ instead of $[\{s_1,...,s_n\}]$. 
 
-An \emph{assertion} $\mathsf{F}$ is either the empty string $\epsilon$, a singleton assertion $\zeta$, the concatenation of two assertions $\mathsf{F}_1::\mathsf{F}_2$, the replication of $\mathsf{F}$ for 1 or more times $\mathsf{F}^+$, the replication of $\mathsf{F}$ for 0 or more times $\mathsf{F}^*$, the disjunction of two assertions $\mathsf{F}_1 \vee \mathsf{F}_2$ or their conjunction $\mathsf{F}_1 \wedge \mathsf{F}_2$. We write $\star$ as an abbreviation of $?^*$.
+An assertion $\mathsf{F}$ is either the empty string $\epsilon$, an atomic assertion $\zeta$, the concatenation of two assertions $\mathsf{F}_1::\mathsf{F}_2$, the replication of $\mathsf{F}$ for 1 or more times $\mathsf{F}^+$, the replication of $\mathsf{F}$ for 0 or more times $\mathsf{F}^*$, the disjunction of two assertions $\mathsf{F}_1 \vee \mathsf{F}_2$ or their conjunction $\mathsf{F}_1 \wedge \mathsf{F}_2$. We denote by $\star$ the assertion $?^*$.
 
-An assertion denotes a set of strings over the alphabet $\mathit{syms}$ as expected.
+An assertion denotes a set of strings over the alphabet $\mathit{names}$ as expected.
+Below we let $\wp(X)$ denote the powerset of a set $X$.
 
 \begin{definition}[Semantics of Assertions]
- We define $\llbracket \mathsf{F}\rrbracket \subseteq\wp(\mathit{syms}^*)$ by induction on the structure of $\mathsf{F}$: 
+ We define $\llbracket \mathsf{F}\rrbracket \subseteq\wp(\mathit{names}^*)$ by induction on the structure of $\mathsf{F}$: 
 \[
 \begin{array}{rcl@{\hspace{1cm}}rcl}
  \llbracket \epsilon \rrbracket &\defeq&  \{\epsilon\}
  & \llbracket \mathsf{F}_1::\mathsf{F}_2 \rrbracket &\defeq& \{\omega_1 :: \omega_2~\mid~ \omega_1 \in \llbracket \mathsf{F}_1 \rrbracket \wedge \omega_2 \in \llbracket \mathsf{F}_2 \rrbracket\}  \\
  \llbracket \alpha \rrbracket &\defeq&  \{\alpha\} 
  & \llbracket \mathsf{F}^+ \rrbracket &\defeq& \llbracket \mathsf{F} \rrbracket^+  \\
- \llbracket ? \rrbracket &\defeq&   \mathit{syms}
+ \llbracket ? \rrbracket &\defeq&   \mathit{names}
  & \llbracket \mathsf{F}^* \rrbracket &\defeq& \llbracket \mathsf{F} \rrbracket^*  \\
  \llbracket [N]\rrbracket &\defeq&   N
  & \llbracket  \mathsf{F}_1 \vee \mathsf{F}_2 \rrbracket &\defeq& \llbracket  \mathsf{F}_1\rrbracket \cup \llbracket  \mathsf{F}_2\rrbracket  \\
@@ -166,7 +167,7 @@ Given two transition labels $v,w$ we write $v\equiv_{\mathsf{F}} w$ if $v \entai
 %\end{definition}
 
 \begin{example}
-The formulas corresponding to the sample queries listed in Example~\ref{properties_ex} are as follows:
+The assertions corresponding to the sample queries listed in Example~\ref{properties_ex} are as follows:
 \begin{enumerate}
 \item
 $\star :: r_j :: [ s_1,...,s_n ]^* :: s_i :: [  s_1,...,s_n ]^* :: [  \overline{s}_1,...,\overline{s}_n ]^+ :: \star$
@@ -262,7 +263,7 @@ An alternative way to look at a bio-simulation that respects $\mathsf{F}$ is to 
 
 It can be easily shown that the identity relation is a bio-simulation and that bio-simulations are closed under (relational) inverse, composition and union and that, as a consequence, bio-similarity is an equivalence relation.
 
-Now, we introduce a slightly modified version of the Hennessy Milner Logic~\cite{HM80}, called bioHML; due to the reasons we explained above, we do not want to look at the complete transition labels, thus we rely on our simple assertion language to make it parametric to the assertion $\mathsf{F}$ of interest:
+Now, we introduce a slightly modified version of the Hennessy Milner Logic (HML)~\cite{HM80}, called bioHML; due to the reasons we explained above, we do not want to look at the complete transition labels, thus we rely on our simple assertion language to make it parametric w.r.t the assertion $\mathsf{F}$ of interest:
 
 \begin{definition}[BioHML]
 Let   $\mathsf{F}$ be an assertion, then 
@@ -320,7 +321,8 @@ Given a bioHML formula $\mathsf{G}$ we define its converse $\overline{\mathsf{G}
 \end{definition}
 
 We observe that, as expected, for any bioHML formula $G$ and process $P$ we have $\overline{\overline{\mathsf{G}}} = \mathsf{G}$ and  $P \entails \overline{\mathsf{G}}$ iff  $P\not\entails \mathsf{G}$.
-\begin{definition}
+
+\begin{definition}[Bio-logical equivalence]
 We let $\mathcal{L}_{\mathsf{F}}$ be the set of all bioHML formulas that respects $\mathsf{F}$ and 
 we say that two processes $P,Q$ are \emph{bio-logically equivalent w.r.t. $\mathsf{F}$}, written $P \equiv_{\mathcal{L}_{\mathsf{F}}}Q$, when $P$ and $Q$ satisfy exactly the same bioHML formulas in $\mathcal{L}_{\mathsf{F}}$, i.e. when for any $\mathsf{G}\in \mathcal{L}_{\mathsf{F}}$ we have $P \entails \mathsf{G}\ \Leftrightarrow Q \entails \mathsf{G}$.
 \end{definition}

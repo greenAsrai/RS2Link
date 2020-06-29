@@ -1,20 +1,19 @@
 % !TEX root = ./main_TCS.tex
 \section{Examples}
 \label{ex:examples}
-{\color{red} For readability,  we shall often omit topmost restrictions. Please remember that, semantically, restriction allows for only interactions with no virtual links, creating a private interaction among all participants where all the channel names in the transition labels are hidden.
+Semantically, the topmost restriction $\restrict{\mathit{names}}$ filters out any interaction with  virtual links, and releases a private interaction among all participants where all the channel names in the transition labels are hidden (their occurrences are all replaced by $\silent$).
 %Hereafter, we shall often omit topmost restrictions
- Nevertheless, for simplicity,
- % but 
+This amounts to require that only complete chains are computed by the interaction.
+In this section, for simplicity,  we shall often omit topmost restrictions $\restrict{\mathit{names}}$ from our encoding, but 
  we shall take into account only transitions whose labels are complete chains, i.e. they do not contain 
-virtual links and start/end with the $\silent$ action symbol.}
-
-
+virtual links and start/end with the $\silent$ action symbol.
+This way it is possible to observe all channel names that occur in the interaction.
 
 \subsection{Labelled transition system}
 This example is inspired by the example in~\cite{BEMR11}, where
 a deterministic transition system is 
 %coded 
-{\color{red} encoded} in the Reaction System
+encoded in the Reaction System
 framework.
 Here we consider the minimal deterministic transition system in Figure~\ref{fig:lts}.
 %following the reaction system approach, to code it in the reaction system framework, we have to add
@@ -29,23 +28,26 @@ Here we consider the minimal deterministic transition system in Figure~\ref{fig:
 \caption{Minimal deterministic labelled transition system.}
 \label{fig:lts}
 \end{figure}
-\noindent
-In our $c\CNA$ 
-%encoding,
-{\color{red} embedding,} $q$, $w$, $a$, and $b$ became the $entities$, the context can only provide $a$ and $b$ and the reaction rules are as follows:\\
+
+At the level of RSs, the set of entities to consider is the union of sets of states and of labels of the transition system.
+Moreover, there is one reaction for each transition: its reactant set consists of the source state and transition label, its inhibitor set includes every other state and label, and its product set is the singleton with the target state.
+For the transition system in Fig.~\ref{fig:lts}, we take $S = \{q,w,a,b\}$ and the reaction rules are as follows:\\
 \[
 \begin{array}{cl@{\hspace{1cm}} cl}
 1 \ &(\{q,a\},\{w,b\},\{w\}) & 2\ &(\{q,b\},\{w,a\},\{q\})\\
 3 \  &(\{w,a\},\{q,b\},\{w\}) & 4\ &(\{w,b\},\{q,a\},\{q\})\\ 
 \end{array}
 \]
+
+Next we show how the above RS is encoded in c\CNA.
+
 \paragraph{Encoding of the rules}
-The encoding of the rules for reactions is  given in a parametric way, {\color{red} with $n \in \{1,2,3,4\}$}:
+The encoding of the rules for reactions is  given in a parametric way, with $n \in \{1,2,3,4\}$:
 \[
 \begin{array}{lcl}
-P_n(q,b,w,a,q) & \defeq & \pi_n(q,b,w,a,q).P_n(q,b,w,a,q)  \\
+P_n(q,b,w,a,q) & \defeq & \upsilon_n(q,b,w,a,q).P_n(q,b,w,a,q)  \\
 			&& +\\
-			&& \sum_{x\in\{\overline{q},\overline{b},w,a\}}\ \pi'_n(x).P_n(q,b,w,a,q)\\
+			&& \sum_{x\in\{\overline{q},\overline{b},w,a\}}\ \upsilon'_n(x).P_n(q,b,w,a,q)\\
 %			&& +\ \pi'(\overline{b}).P_n(q,b,w,a,q)\\
 %			&& +\ \pi'(w).P_n(q,b,w,a,q)\\ 
 %			&& +\ \pi'(a).P_n(q,b,w,a,q)\\
@@ -55,21 +57,21 @@ P_n(q,b,w,a,q) & \defeq & \pi_n(q,b,w,a,q).P_n(q,b,w,a,q)  \\
 			where
 			\[
 \begin{array}{lcl}
-\pi_n(q,b,w,a,q) &\defeq & \startchain{r_n}\chainedlink{q_i}{\noact}\chainedlink{\noact}{q_o}
+\upsilon_n(q,b,w,a,q) &\defeq & \startchain{r_n}\chainedlink{q_i}{\noact}\chainedlink{\noact}{q_o}
                                                     \chainedlink{b_i}{\noact}\chainedlink{\noact}{b_o}
                                                      \chainedlink{\overline{w}_i}{\noact}\chainedlink{\noact}{\overline{w}_o}
 					        \chainedlink{\overline{a}_i}{\noact}\chainedlink{\noact}{\overline{a}_o}
 					        \chainedlink{r_{n+1}}{\noact}\chainedlink{\noact}{p_n}
 					        \chainedlink{\widetilde{q}_i}{\noact}\chainedlink{\noact}{\widetilde{q}_o}
 			\chainend{p_{n+1}}\\[6pt]
-\pi'_n(x) &\defeq &  \startchain{r_n}\chainedlink{x_i}{\noact}\chainedlink{\noact}{x_o}\chainedlink{r_{n+1}}{\noact}\chainedlink{\noact}{p_n} \chainend{p_{n+1}} 
+\upsilon'_n(x) &\defeq &  \startchain{r_n}\chainedlink{x_i}{\noact}\chainedlink{\noact}{x_o}\chainedlink{r_{n+1}}{\noact}\chainedlink{\noact}{p_n} \chainend{p_{n+1}} 
 % \ + \   \startchain{r_n}\chainedlink{w_i}{\noact}\chainedlink{\noact}{w_o}\chainedlink{r_{n+1}}{\noact}\chainedlink{\noact}{p_n} \chainend{p_{n+1}}.P_n(q,b,w,a,q) \\
 %			&&+\\
 %			&& \startchain{r_n}\chainedlink{\overline{b}_i}{\noact}\chainedlink{\noact}{\overline{b}_o}\chainedlink{r_{n+1}}{\noact}\chainedlink{\noact}{p_n}\chainend{p_{n+1}}.P_n(q,b,w,a,q) \ + \  \startchain{r_n}\chainedlink{a_i}{\noact}\chainedlink{\noact}{a_o}\chainedlink{r_{n+1}}{\noact}\chainedlink{\noact}{p_n} \chainend{p_{n+1}}.P_n(q,b,w,a,q) 
 \end{array}
 \]
 
-Then we have 
+Then, we have 
 \[
 \begin{array}{lcl @{\hspace{1cm}}lcl  }
 P_1 & \defeq & P_1(q,a,w,b,w) & P_3 & \defeq & P_3(w,a,q,b,w)  \\
@@ -193,10 +195,10 @@ Alternative splicing is a regulated process during gene expression that results 
 coding for multiple proteins. 
 In practice, particular exons of a gene may be included within or excluded from the final, 
 processed messenger RNA (mRNA) produced from that gene.
- {\color{red} In our example,
+In our example,
 %where 
 a gene $a$  codes for a protein $T$ when molecules 
-$G$ is present and $C$ is absent, and in the opposite situation $a$ codes for protein $T'$.}
+$G$ is present and $C$ is absent, and in the opposite situation $a$ codes for protein $T'$.
 This behavior is encoded in rules $1$ and $2$.
 Then, rule 3 codes for the production of $C$ when proteins $T$ and $F$ are present, and $T'$ absent;
 rule 4 codes for the production of $G$ when  proteins $T'$ is present and $F$ is absent.
@@ -266,10 +268,10 @@ P (T,\widetilde{T})&\defeq & \sum_{h=0}^1 (\startchain{T_i}\chainedlink{T_o}{\no
 
 Then, we have
 \[
-\begin{array}{lcl @{\hspace{0.5cm}}lcl @{\hspace{0.5cm}}lcl @{\hspace{0.5cm}}lcl}
-P_T & \defeq & P(T,\widetilde{T})& \overline{P}_T & \defeq & P(\overline{T},\widetilde{T}) & P_{T'}& \defeq & P(T',\widetilde{T'}) & \\
+\begin{array}{l @{\hspace{0.5cm}}l @{\hspace{0.5cm}}l @{\hspace{0.5cm}}l @{\hspace{0.5cm}}lcl}
+P_T \defeq  P(T,\widetilde{T})& \overline{P}_T  \defeq  P(\overline{T},\widetilde{T}) & P_{T'} \defeq  P(T',\widetilde{T'}) & 
 %\overline{P}_{T',\widetilde{T'}}& \defeq & P(\overline{T'},\widetilde{T'})
-\overline{P}_{T'}& \defeq & P(\overline{T'},\widetilde{T'})
+\overline{P}_{T'} \defeq  P(\overline{T'},\widetilde{T'})
 \end{array}
 \]
 
@@ -312,7 +314,7 @@ P_F&\defeq & \sum_{h=0}^1 (\startchain{F_i}\chainedlink{F_o}{\noact}\chainend{\n
 \end{array}
 \]
 
-Also in this example we account for a nondeterministic context that can (nondeterministically) provide any combination of the entities: $C$, $G$ $F$:
+Also in this example we account for a nondeterministic context that can (nondeterministically) provide any combination of the entities $C$, $G$ $F$:
 \[
 \begin{array}{lcl}
  Cxt & \defeq &

@@ -1,5 +1,6 @@
 % !TEX root = ./main_TCS.tex
 \subsection{Bio-simulation at work}
+\label{sec:biowork}
 
 %By using a simple example, 
 We will show how bio-simulation works. For the sake of space, we consider a  very simple
@@ -36,19 +37,19 @@ P_1 & \defeq &\startchain{\silent}\chainedlink{G_i}{\noact}\chainedlink{\noact}{
 The two contexts follow :\\
 \[
 \begin{array}{l@{\hspace{0.1cm}}c@{\hspace{0.1cm}}l}
-\mathit{Cxt}_1 & \defeq &\startchain{\mathit{cxt}}\chainedlink{\widehat{C}_i}{\noact}\chainedlink{\noact}{\widehat{C}_o}\chainedlink{\underline{G}_i}{\noact}\chainedlink{\noact}{\underline{G}_o}
-\chainedlink{\underline{H}_i}{\noact}\chainedlink{\noact}{\underline{H}_o}\chainend{p_1}.\mathit{Cxt}_1 			                      +
-                              \startchain{\mathit{cxt}}\chainedlink{\underline{C}_i}{\noact}\chainedlink{\noact}{\underline{C}_o}\chainedlink{\underline{G}_i}{\noact}\chainedlink{\noact}{\underline{G}_o}\chainedlink{\underline{H}_i}{\noact}\chainedlink{\noact}{\underline{H}_o}\chainend{p_1}.\mathit{Cxt}_1 \\
+\mathit{Cxt} & \defeq &\startchain{\mathit{cxt}}\chainedlink{\widehat{C}_i}{\noact}\chainedlink{\noact}{\widehat{C}_o}\chainedlink{\underline{G}_i}{\noact}\chainedlink{\noact}{\underline{G}_o}
+\chainedlink{\underline{H}_i}{\noact}\chainedlink{\noact}{\underline{H}_o}\chainend{p_1}.\mathit{Cxt}			                      +
+                              \startchain{\mathit{cxt}}\chainedlink{\underline{C}_i}{\noact}\chainedlink{\noact}{\underline{C}_o}\chainedlink{\underline{G}_i}{\noact}\chainedlink{\noact}{\underline{G}_o}\chainedlink{\underline{H}_i}{\noact}\chainedlink{\noact}{\underline{H}_o}\chainend{p_1}.\mathit{Cxt} \\
                               \\
-                              \mathit{Cxt}_2 & \defeq &\startchain{\mathit{cxt}}\chainedlink{\widehat{G}_i}{\noact}\chainedlink{\noact}{\widehat{G}_o}\chainedlink{\underline{C}_i}{\noact}\chainedlink{\noact}{\underline{C}_o}\chainedlink{\underline{H}_i}{\noact}\chainedlink{\noact}{\underline{H}_o}\chainend{p_1}.\mathit{Cxt}_2 	                      +
-                              \startchain{\mathit{cxt}}\chainedlink{\underline{G}_i}{\noact}\chainedlink{\noact}{\underline{G}_o}\chainedlink{\underline{C}_i}{\noact}\chainedlink{\noact}{\underline{C}_o}\chainedlink{\underline{H}_i}{\noact}\chainedlink{\noact}{\underline{H}_o}\chainend{p_1}.\mathit{Cxt}_2
+                              \mathit{Cxt}' & \defeq &\startchain{\mathit{cxt}}\chainedlink{\widehat{G}_i}{\noact}\chainedlink{\noact}{\widehat{G}_o}\chainedlink{\underline{C}_i}{\noact}\chainedlink{\noact}{\underline{C}_o}\chainedlink{\underline{H}_i}{\noact}\chainedlink{\noact}{\underline{H}_o}\chainend{p_1}.\mathit{Cxt}' 	                      +
+                              \startchain{\mathit{cxt}}\chainedlink{\underline{G}_i}{\noact}\chainedlink{\noact}{\underline{G}_o}\chainedlink{\underline{C}_i}{\noact}\chainedlink{\noact}{\underline{C}_o}\chainedlink{\underline{H}_i}{\noact}\chainedlink{\noact}{\underline{H}_o}\chainend{p_1}.\mathit{Cxt}'
 \end{array}
 \]
 
 The definition of the processes encoding $G$ and $C$ is similar, and it is given in a parametric way:
 \[
 \begin{array}{lcl @{\hspace{1cm}}lcl}
-P(G) &\defeq&\link{G_i}{G_o}.\overline{P}(G)\   & \overline{P}(G)&\defeq&\link{\overline{G}_i}{\overline{G}_o} \link{\noact}{\noact}\link{\widetilde{G}_i}{\widetilde{G}_o}P(G) \ \ 			                      
+P(G) &\defeq&\link{G_i}{G_o}.\overline{P}(G)\   & \overline{P}(G)&\defeq&\startchain{\overline{G}_i}\chainedlink{\overline{G}_o}{\noact}\chainedlink{\noact}{\widetilde{G}_i}\chainend{\widetilde{G}_o}.P(G) \ \ 			                      
 \end{array}
 \]
 and we have $P_G \defeq P(G)$, $P_C \defeq P(C)$,  then $\overline{P}_H \defeq \link{\overline{H}_i}{\overline{H}_o}.\overline{P}_H + \startchain{\overline{H}_i}\chainedlink{\overline{H}_o}{\noact}\chainedlink{\noact}{\overline{H}_i}\chainend{\overline{H}_i}.\overline{P}_H$, as $H$ is neither produced nor provided by the context.
@@ -56,36 +57,40 @@ Then, the initial configuration of system $Sys_1$ includes $G$ and not $C$ and t
 the initial configuration of system $Sys_2$ includes $C$ and not $G$ and the context can only provide $G$:
 \[
 \begin{array}{lcl}
-\mathit{Sys}_1 & \defeq & I\mid  P_1 \mid P_2 \mid P_G \mid \overline{P}_C \mid \overline{P}_H\mid \mathit{Cxt}_1 \\
-\mathit{Sys}_2 & \defeq & I \mid P_1 \mid P_2 \mid \overline{P}_G \mid P_C \mid \overline{P}_H\mid \mathit{Cxt}_2\\
+\mathit{Sys}_1 & \defeq & I\mid  P_1 \mid P_2 \mid P_G \mid \overline{P}_C \mid \overline{P}_H\mid \mathit{Cxt} \\
+\mathit{Sys}_2 & \defeq & I \mid P_1 \mid P_2 \mid \overline{P}_G \mid P_C \mid \overline{P}_H\mid \mathit{Cxt}'\\
 \end{array}
 \]
 
-Fig.~\ref{fig:ltss} shows the labelled transition system of $Sys_1$, with initial state only  containing  $G$,  and the transition system of $Sys_2$, with initial state only containing $C$, limited to the complete
-and solid labels. As before we show the output of the $\mathit{flat}(\cdot)$ function applied to the transition labels:
+In Figure~\ref{fig:ltss} we show the operational semantics of $\mathit{Sys}_1$ (on the left) and $\mathit{Sys}_2$ (on the right), limited to the transitions with complete
+and solid labels. To improve readability, we named the states of the transition system with the entities that are present in the state. For example, in the leftmost figure, since in $\mathit{Sys}_1$  only the entity $G$ is available, we name the topmost state $G$ instead of $\mathit{Sys}_1$.
+Similarly, for the rightmost figure, where we write, e.g. $C$ instead of $\mathit{Sys}_2$. As before we show the output of the $\mathit{flat}(\cdot)$ function applied to the transition labels:
 %where
-
-{\footnotesize \[
-\begin{array}{lcl@{\hspace{0.3cm}} lcl}
+\[
+\begin{array}{lcl}
 %\
-\ell_1 &\defeq & 
+\mathit{flat}(\upsilon_1) &\defeq & 
 %\startchain{\silent}\chainedlink{G_i}{\bf G_i}\chainedlink{\bf G_o}{ G_o}\chainedlink{r_2}{r_2}\chainedlink{\overline{C}_i}{\bf \overline{C}_i}\chainedlink{\bf \overline{C}_o}{\overline{C}_o}
 %\chainedlink{\mathit{cxt}}{\mathit{cxt}}\chainedlink{\widehat{C}_i}{\bf \widehat{C}_i}\chainedlink{\bf \widehat{C}_o}{\widehat{C}_o}
 %\chainedlink{p_1}{p_1}\chainedlink{\widetilde{C}_i}{\bf \widetilde{C}_i}\chainedlink{\bf \widetilde{C}_o}{\widetilde{C}_o}\chainedlink{p_2}{p_2}\chainend{\silent}
 r_1~G~\overline{H}~r_2~\overline{C}~\mathit{cxt}~\widehat{C}~\underline{G}~\underline{H}~p_1~\widetilde{C}~p_2
-&
-\ell'_1 &\defeq & 
+\\
+\mathit{flat}(\upsilon'_1) &\defeq & 
 %\startchain{\silent}\chainedlink{G_i}{\bf G_i}\chainedlink{\bf G_o}{ G_o}\chainedlink{r_2}{r_2}\chainedlink{\overline{C}_i}{\bf \overline{C}_i}\chainedlink{\bf \overline{C}_o}{\overline{C}_o}
 %\chainedlink{\mathit{cxt}}{\mathit{cxt}}\chainedlink{\underline{C}_i}{\bf \underline{C}_i}\chainedlink{\bf \underline{C}_o}{\underline{C}_o}
 %\chainedlink{p_1}{p_1}\chainedlink{\widetilde{C}_i}{\bf \widetilde{C}_i}\chainedlink{\bf \widetilde{C}_o}{\widetilde{C}_o}\chainedlink{p_2}{p_2}\chainend{\silent}
-r_1~G~\overline{H}~r_2~\overline{C}~\mathit{cxt}~\underline{C}~\underline{G}~\underline{H}~p_1~\widetilde{C}~p_2\\
-\ell_2 &\defeq &
+r_1~G~\overline{H}~r_2~\overline{C}~\mathit{cxt}~\underline{C}~\underline{G}~\underline{H}~p_1~\widetilde{C}~p_2
+\end{array}
+\]
+\[
+\begin{array}{lcl}
+\mathit{flat}(\upsilon_2) &\defeq &
 % \startchain{\silent}\chainedlink{\overline{G}_i}{\bf \overline{G}_i}\chainedlink{\bf \overline{G}_o}{ \overline{G}_o}\chainedlink{r_2}{r_2}\chainedlink{C_i}{\bf C_i}\chainedlink{\bf C_o}{C_o}
 %\chainedlink{\mathit{cxt}}{\mathit{cxt}}\chainedlink{\widehat{C}_i}{\bf \widehat{C}_i}\chainedlink{\bf \widehat{C}_o}{\widehat{C}_o}
 %\chainedlink{p_1}{p_1}\chainedlink{p_2}{p_2}\chainedlink{\widetilde{G}_i}{\bf \widetilde{G}_i}\chainedlink{\bf \widetilde{G}_o}{\widetilde{G}_o}\chainend{\silent}
 r_1~\overline{G}~r_2~C~\overline{H}~\mathit{cxt}~\widehat{C}~\underline{G}~\underline{H}~p_1~p_2~\widetilde{G}
-&
-\ell'_2 &\defeq & 
+\\
+\mathit{flat}(\upsilon_2') &\defeq & 
 % \startchain{\silent}\chainedlink{\overline{G}_i}{\bf \overline{G}_i}\chainedlink{\bf \overline{G}_o}{ \overline{G}_o}\chainedlink{r_2}{r_2}\chainedlink{C_i}{\bf C_i}\chainedlink{\bf C_o}{C_o}
 %\chainedlink{\mathit{cxt}}{\mathit{cxt}}\chainedlink{\underline{C}_i}{\bf \underline{C}_i}\chainedlink{\bf \underline{C}_o}{\underline{C}_o}
 %\chainedlink{p_1}{p_1}\chainedlink{p_2}{p_2}\chainedlink{\widetilde{G}_i}{\bf \widetilde{G}_i}\chainedlink{\bf \widetilde{G}_o}{\widetilde{G}_o}\chainend{\silent}
@@ -93,22 +98,22 @@ r_1~\overline{G}~r_2~C~\overline{H}~\mathit{cxt}~\underline{C}~\underline{G}~\un
 \end{array}
 \]
 \[
-\begin{array}{lcl @{\hspace{0.3cm}}lcl}
-\ell_3 & \defeq & 
+\begin{array}{lcl}
+\mathit{flat}(\upsilon_3) & \defeq & 
 % \startchain{\silent}\chainedlink{G_i}{\bf G_i}\chainedlink{\bf G_o}{G_o}\chainedlink{r_2}{r_2}\chainedlink{C_i}{\bf C_i}\chainedlink{\bf C_o}{C_o}
 %\chainedlink{\mathit{cxt}}{\mathit{cxt}}\chainedlink{\widehat{C}_i}{\bf \widehat{C}_i}\chainedlink{\bf \widehat{C}_o}{\widehat{C}_o}
 %\chainedlink{p_1}{p_1}\chainedlink{\widetilde{G}_i}{\bf \widetilde{G}_i}\chainedlink{\bf \widetilde{G}_o}{\widetilde{G}_o}\chainedlink{p_2}{p_2}\chainedlink{\widetilde{G}_i}{\bf \widetilde{G}_i}\chainedlink{\bf \widetilde{G}_o}{\widetilde{G}_o}\chainend{\silent}
 r_1~G~\overline{H}~r_2~C~\overline{H}~\mathit{cxt}~\widehat{C}~\underline{G}~\overline{H}~p_1~\widetilde{C}~p_2~\widetilde{G}
 \\
-\ell'_3 & \defeq & r_1~G~\overline{H}~r_2~C~\overline{H}~\mathit{cxt}~\underline{C}~\underline{G}~\overline{H}~p_1~\widetilde{C}~p_2~\widetilde{G}
+\mathit{flat}(\upsilon'_3) & \defeq & r_1~G~\overline{H}~r_2~C~\overline{H}~\mathit{cxt}~\underline{C}~\underline{G}~\overline{H}~p_1~\widetilde{C}~p_2~\widetilde{G}
 % \startchain{\silent}\chainedlink{G_i}{\bf G_i}\chainedlink{\bf G_o}{G_o}\chainedlink{r_2}{r_2}\chainedlink{C_i}{\bf C_i}\chainedlink{\bf C_o}{C_o}
 %\chainedlink{\mathit{cxt}}{\mathit{cxt}}\chainedlink{\underline{C}_i}{\bf \underline{C}_i}\chainedlink{\bf \underline{C}_o}{\underline{C}_o}
 %\chainedlink{p_1}{p_1}\chainedlink{\widetilde{G}_i}{\bf \widetilde{G}_i}\chainedlink{\bf \widetilde{G}_o}{\widetilde{G}_o}\chainedlink{p_2}{p_2}\chainedlink{\widetilde{G}_i}{\bf \widetilde{G}_i}\chainedlink{\bf \widetilde{G}_o}{\widetilde{G}_o}\chainend{\silent}
 \end{array}
 \]
-}
 
-The labels $\flat_i$ $\flat'_i$, with $i \in \{1,2,3\}$ can be obtained by labels $\ell_i,\ell'_i$ by substituting $G$ with $C$ and viceversa.
+
+The labels $\flat_i$ $\flat'_i$, with $i \in \{1,2,3\}$ can be obtained by labels $\upsilon_i,\upsilon'_i$ by substituting $G$ with $C$ and viceversa.
 \\
 Now, it easy to check that $\mathit{Sys}_1$ and $\mathit{Sys}_2$ are bio-similar w.r.t the property $\mathsf{F}$ saying that $G$ and $C$ are simultaneously  produced,
 %in $Sys_1$ if and only if $G$ and $C$ are simultaneously  produced in $Sys_2$
@@ -124,9 +129,9 @@ In fact, the bioHML formula $\mathsf{G}\defeq \langle \mathsf{F'}\rangle{\tt t}$
 \[
 \begin{array}{cc}
 \xymatrix@R-1pc{
-*+[o][F-]{G} \ar@/ ^/[d]^{\ell_1} \ar@/_/[d]^{\ell'_1} \\
-*+[o][F-]{C} \ar@/^2pc/[u]^{\ell'_2} \ar@/^/[dr]^{\ell_2} \\ %\ar@(r,u)[]_a\
-& *+[o][F-]{GC}\ar@(d,l)^{\ell_3}\ar@(u,r)^{\ell'_3}
+*+[o][F-]{G} \ar@/ ^/[d]^{\upsilon_1} \ar@/_/[d]^{\upsilon'_1} \\
+*+[o][F-]{C} \ar@/^2pc/[u]^{\upsilon'_2} \ar@/^/[dr]^{\upsilon_2} \\ %\ar@(r,u)[]_a\
+& *+[o][F-]{GC}\ar@(d,l)^{\upsilon_3}\ar@(u,r)^{\upsilon'_3}
 }
 &
 \xymatrix@R-1pc{
@@ -134,8 +139,8 @@ In fact, the bioHML formula $\mathsf{G}\defeq \langle \mathsf{F'}\rangle{\tt t}$
 *+[o][F-]{G} \ar@/^2pc/[u]^{\flat'_2} \ar@/^/[dr]^{\flat_2} \\ 
 & *+[o][F-]{GC}\ar@(d,l)^{\flat_3}\ar@(u,r)^{\flat'_3}
 }\\
-Sys_1 & Sys_2
+\mathit{Sys}_1 & \mathit{Sys}_2
 \end{array}
 \]
-\caption{The two labelled transition systems of $Sys_1$ and $Sys_2$.}\label{fig:ltss}
+\caption{The operational semantics of $\mathit{Sys}_1$ and $\mathit{Sys}_2$.}\label{fig:ltss}
 \end{figure}

@@ -98,6 +98,9 @@ Here we do not consider name mobility, which is present instead in the {\tt link
 As common in process algebras we restrict to consider prefix-guarded sums $\upsilon_1.P_1 + \upsilon_2.P_2$ and, exploiting associativity, we use the shorthand $\sum_{i\in I} \upsilon_i.P_i$ for a finite set of indexes $I=\{i_1,...,i_k\}$ instead of $\upsilon_{i_1}.P_{i_1} + \cdots + \upsilon_{i_k}.P_{i_k}$.
 The inactive process $\nil$ is thus just the empty summation.
 
+In a prefix $\upsilon.P$ we can always assume that the links at the extremities of $\upsilon$ are solid: if $\upsilon$ needs to be used in larger chains, the operational semantics will add as many virtual links as needed by exploiting the equivalence $\blackstretcheq$ (see rule $\mathit{Sum}$ in Fig.~\ref{fig:cnasos}). For example, the process $\link{\mathsf{a}}{\mathsf{b}}.P$ and $\startchain{\mathsf{a}}\chainedlink{\mathsf{b}}{\noact}\chainend{\noact}.P$
+ are completely equivalent.
+ 
 Regarding process constants,  we rely on a given set $\Delta=\{A_i\defeq P_i\}_{i\in I}$ of (possibly
 recursive) process definitions.
 %\end{definition}

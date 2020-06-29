@@ -1,7 +1,7 @@
 % !TEX root = ./main_TCS.tex
 %\section{Discussion}
 
-\section{Enhanced  Reaction Systems}
+\section{Towards Enhanced  Reaction Systems}
 \label{sec:discussion}
 
 Our encoding increases the expressivity of  RS  concerning:
@@ -54,32 +54,35 @@ the entities that usually come from the context of one RS will be provided inste
 
 \begin{example}
 \label{ex:twoRS}
-Let  $rs1$ and $rs2$ be two RSs, defined by the rules in Table~\ref{tab:rules}.
+Let  $rs1$ and $rs2$ be two RSs, defined, respectively, by the reactions 
+%in Table~\ref{tab:rules}.
 %such that $rs2$ provides the entity $s1$ to $rs1$.
-
-
-\begin{table}[t]
-\centering
-\begin{tabular}{|c|c|}
-\hline
-$rs1$  & $rs2$ \\
-\hline
-%$r1_1=(s1,\ , s2)$ & $r2_1=(s3,\  ,s1)$\\
-$a_1=(s,\ , x)$ & $a_2=(y,\  ,s)$\\
-%$r1_2=(\ , s2,s1)$ & $r2_2=(s1,\ ,s3)$\\
-\hline 
-\end{tabular}
-\caption{The two Reaction Systems $rs1$ and $rs2$.}
-\label{tab:rules}
-\end{table}
- \noindent
+$a_1=(s,\emptyset , x)$ and $a_2=(y,\emptyset  ,s)$.
+%and 
+%
+%
+%\begin{table}[t]
+%\centering
+%\begin{tabular}{|c|c|}
+%\hline
+%$rs1$  & $rs2$ \\
+%\hline
+%%$r1_1=(s1,\ , s2)$ & $r2_1=(s3,\  ,s1)$\\
+%$a_1=(s,\emptyset , x)$ & $a_2=(y,\emptyset  ,s)$\\
+%%$r1_2=(\ , s2,s1)$ & $r2_2=(s1,\ ,s3)$\\
+%\hline 
+%\end{tabular}
+%\caption{The two Reaction Systems $rs1$ and $rs2$.}
+%\label{tab:rules}
+%\end{table}
+% \noindent
 Now, we set our example such that the two contexts, for  $rs1$ and $rs2$, do not provide any entities.
 We also assume that entity $s$ in $rs1$ is provided by $rs2$, as $rs2$ produces a quantity of $s$ that is enough for $rs1$ and $rs2$.
 For technical reasons, we can not use the same name for  $s$ in both the two RSs, then we use the name $ss$ in $rs2$.
 %
-We need to modify our {\color{red} embedding}
+We need to modify our encoding
 %translation 
-technique to suite this new setting. 
+technique to suit this new setting. 
 As we do not model contexts, we introduce  \emph{dummy} channel names $dx$ and $dss$ to model the absence of entities. Also, thanks to the simplicity of the example, we can leave out the use of the   $p_i$ channels. This streamlining does not affect the programming technique we propose to make two RSs communicate.
 %Thus, there will be no $Cxt$ processes and we manage the code in a way that $rs1$ will receive the entity $s1$ from $rs2$. 
 %Please also note that, for our simple example, we do not have anymore to specify the all steps
@@ -87,12 +90,13 @@ As we do not model contexts, we introduce  \emph{dummy} channel names $dx$ and $
 %behaviour.
 %\noindent
 %First, we translate the rules in $rs1$:
-First, we translate the reaction in $rs1$:
+First, we translate the reaction in $rs1$, by setting
+$\llbracket a_1\rrbracket \defeq P_{a_1}$ where:
 \[
 \begin{array}{lcl}
 %\llbracket r1_1\rrbracket \defeq P_{r1_1}&\defeq &\startchain{\silent}\chainedlink{s1}{\noact}\chainedlink{\noact}{s1}\chainedlink{\widetilde{s2}}{\noact}\chainedlink{\noact}{\widetilde{s2}}\chainend{r1_2}.P_{r1_1} +
 %\startchain{\silent}\chainedlink{\overline{s1}}{\noact}\chainedlink{\noact}{\overline{s1}}\chainend{r1_2}.P_{r1_1}\\
-\llbracket a_1\rrbracket \defeq P_{a_1}&\defeq &
+ P_{a_1}&\defeq &
 \startchain{\silent}\chainedlink{s_i}{{\color{blue}\noact}}\chainedlink{{\color{blue}\noact}}{s_o}\chainedlink{\widetilde{x}_i}{{\color{gray}\noact}}\chainedlink{{\color{gray}\noact}}{\widetilde{x}_o}\chainend{a_2}.P_{a_1} +
 \startchain{\silent}\chainedlink{\overline{s}_i}{\noact}\chainedlink{\noact}{\overline{s}_o}    \chainedlink{dx_i}{\noact}\chainedlink{\noact}{dx_o}\chainend{a_2}.P_{a_1}\\
 %\end{array}
@@ -107,21 +111,21 @@ First, we translate the reaction in $rs1$:
 
 \noindent
 Please note, that prefixes of process $P_{a_1}$ end with the channel name $a_2$, as the link chain is now connected with the  reaction of  $rs2$.
-The {\color{red} encoding} 
+The encoding
 %translation 
-for the entities follows.
+for the entities is given by setting $\llbracket s \rrbracket \defeq P_{s}$ and $\llbracket x \rrbracket \defeq  P_{x}$, where:
 \[
-\begin{array}{lclcl}
-\llbracket s \rrbracket &\defeq &P_{s} &\defeq & \startchain{{\color{blue}s_i}}\chainedlink{{\color{blue}s_o}}{\noact}\chainedlink{\noact}{{\color{blue}\widehat{s}_i}}\chainend{{\color{blue}\widehat{s}_o}}.P_{s} + \startchain{s_i}\chainend{s_o}.\overline{P_{s}}\\
-&& \overline{P_{s}}&\defeq &\startchain{\overline{s}_i}\chainedlink{\overline{s}_o}{\noact}\chainedlink{\noact}{\widehat{s}_i}\chainend{\widehat{s}_o}.P_{s}+\startchain{\overline{s}_i}\chainend{\overline{s}_i}.\overline{P_{s}}\\
+\begin{array}{lcl}
+P_{s} &\defeq & \startchain{{\color{blue}s_i}}\chainedlink{{\color{blue}s_o}}{\noact}\chainedlink{\noact}{{\color{blue}\widehat{s}_i}}\chainend{{\color{blue}\widehat{s}_o}}.P_{s} + \startchain{s_i}\chainend{s_o}.\overline{P_{s}}\\
+\overline{P_{s}}&\defeq &\startchain{\overline{s}_i}\chainedlink{\overline{s}_o}{\noact}\chainedlink{\noact}{\widehat{s}_i}\chainend{\widehat{s}_o}.P_{s}+\startchain{\overline{s}_i}\chainend{\overline{s}_i}.\overline{P_{s}}\\
 %\begin{array}{lclclll}
-\llbracket x \rrbracket &\defeq & P_{x}& \defeq &\startchain{\widetilde{x}_i}\chainend{\widetilde{x}_o}.P_{x} +  \startchain{dx_i}\chainend{dx_o}.\overline{P_{x}}\\
+P_{x}& \defeq &\startchain{\widetilde{x}_i}\chainend{\widetilde{x}_o}.P_{x} +  \startchain{dx_i}\chainend{dx_o}.\overline{P_{x}}\\
 %\\
 %&&\overline{P_{s2}}&\defeq &\startchain{\overline{s2}}\chainedlink{\overline{s2}}{\noact}\chainedlink{\noact}{\widetilde{s2}}\chainend{\widetilde{s2}}.P_{s2} +
 %\startchain{\overline{s2}}\chainend{\overline{s2}}.\overline{P_{s2}}\\
 %\\
 %\\
-&& \overline{P_{x}}&\defeq &\startchain{{\color{gray}\widetilde{x}_i}}\chainend{{\color{gray}\widetilde{x}_o}}.P_{x} +  \startchain{dx_i}\chainend{dx_o}.\overline{P_{x}}\\
+\overline{P_{x}}&\defeq &\startchain{{\color{gray}\widetilde{x}_i}}\chainend{{\color{gray}\widetilde{x}_o}}.P_{x} +  \startchain{dx_i}\chainend{dx_o}.\overline{P_{x}}\\
 %\end{array}
 %\]
 %
@@ -143,13 +147,13 @@ for the entities follows.
 
 
 \noindent
-The {\color{red} encoding}
+The encoding
 %translation 
-for $rs2$ follows.
+for $rs2$ is given by $\llbracket a_2\rrbracket \defeq P_{a_2}$, where:
 
 \[
 \begin{array}{lcl}
-\llbracket a_2\rrbracket \defeq P_{a_2}&\defeq &\startchain{a_2}\chainedlink{y_i}{{\color{gray}\noact}}\chainedlink{{\color{gray}\noact}}{y_o}\chainedlink{\widetilde{ss}_i}{{\color{red}\noact}}\chainedlink{{\color{red}\noact}}{\widetilde{ss}_o}\chainend{\silent}.P_{a_2}+
+P_{a_2}&\defeq &\startchain{a_2}\chainedlink{y_i}{{\color{gray}\noact}}\chainedlink{{\color{gray}\noact}}{y_o}\chainedlink{\widetilde{ss}_i}{{\color{red}\noact}}\chainedlink{{\color{red}\noact}}{\widetilde{ss}_o}\chainend{\silent}.P_{a_2}+
 \startchain{a_2}\chainedlink{\overline{y}_i}{\noact}\chainedlink{\noact}{\overline{y}_o}    
 \chainedlink{dss_i}{\noact}\chainedlink{\noact}{dss_o}\chainend{\silent}.P_{a_2}\\
 %\end{array}
@@ -163,26 +167,26 @@ for $rs2$ follows.
 \end{array}
 \]
 \noindent
-In the {\color{red} encoding}
+In the encoding
 %translation 
 of the entities in  $rs2$, we introduce the mechanism that allows the entity
 $s$ ($ss$ in $rs2$) to be provided in $rs1$. Every time $ss$ is produced in $rs2$,  a virtual link is
-created to synchronise with $rs1$   on link $\link{\widehat{s}_i}{\widehat{s}_o}$:
+created to synchronise with $rs1$   on link $\link{\widehat{s}_i}{\widehat{s}_o}$. 
+To this purpose we define $\llbracket ss \rrbracket \defeq P_{ss}$ and $\llbracket y\rrbracket\defeq  P_{y}$, where:
+
 \[
-\begin{array}{lclcl}
-\llbracket ss \rrbracket& \defeq& P_{ss}&\defeq &\startchain{\widetilde{ss}_i}\chainedlink{\widehat{s}_i}{\noact}\chainedlink{\noact}{\widehat{s}_o}\chainend{\widetilde{ss}_o}.P_{ss}+
+\begin{array}{lcl}
+P_{ss}&\defeq &\startchain{\widetilde{ss}_i}\chainedlink{\widehat{s}_i}{\noact}\chainedlink{\noact}{\widehat{s}_o}\chainend{\widetilde{ss}_o}.P_{ss}+
 \startchain{dss_i}   \chainend{dss_o}.\overline{P_{ss}} \\
-
-
 %\end{array}
 %\]
 %\[
 %\begin{array}{lcllcl}
-&&\overline{P_{ss}}&\defeq &\startchain{{\color{red}\widetilde{ss}_i}}\chainedlink{{\color{red}\widehat{s}_i}}{{\color{blue}\noact}}\chainedlink{{\color{blue}\noact}}{{\color{red}\widehat{s}_o}}\chainend{{\color{red}\widetilde{ss}_o}}.P_{ss}
+\overline{P_{ss}}&\defeq &\startchain{{\color{red}\widetilde{ss}_i}}\chainedlink{{\color{red}\widehat{s}_i}}{{\color{blue}\noact}}\chainedlink{{\color{blue}\noact}}{{\color{red}\widehat{s}_o}}\chainend{{\color{red}\widetilde{ss}_o}}.P_{ss}
 +
 \startchain{dss_i}\chainend{dss_o}.\overline{P_{ss}}\\
-\llbracket y\rrbracket&\defeq & P_{y}&\defeq &\startchain{{\color{gray}y_i}}\chainend{{\color{gray}y_o}}.\overline{P_{y}} \\
-&&\overline{P_{y}}&\defeq &
+P_{y}&\defeq &\startchain{{\color{gray}y_i}}\chainend{{\color{gray}y_o}}.\overline{P_{y}} \\
+\overline{P_{y}}&\defeq &
 %\startchain{\overline{y}_i}\chainedlink{\overline{y}_o}{\noact}\chainedlink{\noact}{\widetilde{y}_i}\chainend{\widetilde{y}_o}.P_{y}
 %+ 
 \startchain{\overline{y}_i}\chainend{\overline{y}_o}.\overline{P_{y}}

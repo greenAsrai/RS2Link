@@ -2,55 +2,29 @@
 
 \section{Conclusion}\label{sec:conclusion}
 
-In this paper we have introduced c\CNA, a variant of the {\tt link}-calculus
-where prefixes are link chains and no more single links, as it was 
-briefly described in the future work section in~\cite{BBB17}.
-This variant allowed us to define 
+In this paper we have introduced c\CNA, that generalises \CNA\ by allowing the use of prefixes that are link chains and not just single links.
+This extension was initially described in the future work section of~\cite{BBB17}.
+Thanks to this enhancement, c\CNA\ allowed us to define 
 %shown 
-a faithful embedding of 
-RSs,
-%Reaction Systems,
-an emerging formalism to model computationally biochemical systems.
-%into multilink processes.  
-This {\color{red} embedding}
+a faithful encoding of 
+Reaction Systems in a process algebraic framework.  
+This encoding
 %translation 
 shows several benefits.
-For instance, in our paper the context of a RS can work non deterministically and it 
-is recursively defined.
-%  the context behaviour is expressed recursively and no be expressed recursively. 
-Also, entity mutations can be expressed easily and different reaction systems can
-communicate between them.
+First, contexts of RSs can be easily defined recursively and exhibit non deterministic behaviour.
+Second, the operational semantics is defined in a compositional way by a set of SOS inference rules.
+Third, we have defined a new assertion language, which allows us to specify
+the properties to be verified over the labels of the operational semantics.
+Assertions can be used to tailor the classical notion of bisimilarity and Hennessy-Milner logic to focus on some particular aspects or experiments. We have called \emph{bio-similarity} the induced notion of equivalence.
 
-We have then modified the classical notion (in concurrency) of bisimulation
-making it more suitable for proving properties of 
-RSs
-%Reaction Systems 
-in our
-%framework.
-{\color{red} embedding.}
-We have defined a new assertion language, which allows us to specify
-the properties to be verified, and have shown that it extends Hennessy-Milner logic
-to our 
-%framework.
-{\color{red} embedding.}
-We believe that our work can make 
-possible to investigate how to integrate our methodology
+We are currently investigating how to integrate our methodology
 with other formal techniques to prove 
-properties of the modeled systems \cite{CFHOT15,OCHF16,BBGLBH2017}.
-
-We are confident that our embedding can contribute to extend the applications
-of 
-RSs
-%Reaction Systems
-to diverse fields of computer science, and life
-sciences.
+properties of the modeled systems, along the lines in~\cite{CFHOT15,OCHF16,BBGLBH2017}.
+Moreover, we are considering possible enhancements of RSs based on entity mutation and on the possibility for two RSs to exchange entities.
 
 As future work, we plan to implement a prototype of our 
 %framework,
-{\color{red} embedding,}
-with an automatic translation from RSs to  {\tt link}-calculus. 
-We can also exploit the implementation of  the symbolic semantics of 
+embedding,
+with an automatic translation from RSs to  {\tt link}-calculus, so to exploit the implementation of  the symbolic semantics of 
 the {\tt link}-calculus~\cite{BrodoO17} that can be found in~\cite{tool}.
 
-We also plan to build on the work in this paper to extend the framework
-of RSs towards a model where different RSs are allowed to communicate.
