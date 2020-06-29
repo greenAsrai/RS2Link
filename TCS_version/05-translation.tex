@@ -108,6 +108,7 @@ We will see that all the link chain labels of transitions follow the same schema
 For notational convenience, we fix that 
 %$r_1 = \silent$,
 $r_{|A|+1} = \mathit{cxt}$ and $p_{|A|+1}=\silent$.
+{\color{red} Please, recall that $A$ is a subset of reactions in $S$.}
 In the following there is an example explaining this schema.
 %\[
 %\begin{array}{lcl@{\qquad}l}
@@ -202,8 +203,8 @@ to allow the name $r_1$ to be matched at the start of any chain; also,
 
 
 It is important to observe that,   for each transition, our c\CNA \ 
-%encoding 
-{\color{red} embedding}
+encoding 
+%{\color{red} embedding}
 requires  all the processes 
 %$P_a$, with $a \in A$, and  $\mathit{Cxt}^n$ and  $P_s$, with $s \in S$,  
 running in parallel to  interact in that transition.
@@ -214,7 +215,8 @@ Each reaction defines a pattern to be satisfied, i.e. each reaction inserts as m
  \label{lem:struct}
 %\begin{lemma}
  %\label{lem:struct}
-  Let ${\cal A} = (S, A)$ be a RS and let $\pi=(\gamma,\delta)$ be an extended  interactive process in ${\cal A}$. Let $P=\llbracket{\cal A},\gamma\rrbracket$ its c\CNA~{\color{red} embedding.}
+  Let ${\cal A} = (S, A)$ be a RS and let $\pi=(\gamma,\delta)$ be an extended  interactive process in ${\cal A}$. Let $P=\llbracket{\cal A},\gamma\rrbracket$ its c\CNA~encoding.
+  %{\color{red} embedding.}
   %translation. 
   If $exists$ $P'$ such that $P \xrightarrow{\restrict{\mathit{names}}\upsilon} P'$ is a transition of $P$, then
   \begin{enumerate}
@@ -256,7 +258,7 @@ Then $P \xrightarrow{\restrict{\mathit{names}}\upsilon} P'$ iff $Q \xRightarrow{
 
 
 \begin{example}\label{ex:backbone}
- Let ${\cal A}$ be a RS whose specification contains two entities, $s1$ and $s2$, and the reactions $r_1=(s1,\ , s2)$ and $r_2 = (s2, \ , s1)$ that produce $s2$ if $s1$ is present and $s1$ if $s2$ is present. For simplicity we do not consider inhibitors, but the reader can assume a void inhibitor is present in both reactions. Then, we assume an  extended interactive process $\pi=(\gamma,\delta)$ where the context $\gamma$ provides  $s1$ and $s2$ at every step, but we assume that only $s1$ is initially present. The corresponding c\CNA \ process is $\llbracket{\cal A},\gamma\rrbracket \defeq \restrict{\mathit{names}} \llparenthesis{\cal A},\gamma\rrparenthesis$, with 
+ Let ${\cal A}$ be a RS whose specification contains two entities, $s1$ and $s2$, and the reactions $r_1=(s1,\emptyset , s2)$ and $r_2 = (s2, \emptyset , s1)$ that produce $s2$ if $s1$ is present and $s1$ if $s2$ is present. For simplicity we do not consider inhibitors, but the reader can assume a void inhibitor is present in both reactions. Then, we assume an  extended interactive process $\pi=(\gamma,\delta)$ where the context $\gamma$ provides  $s1$ and $s2$ at every step, but we assume that only $s1$ is initially present. The corresponding c\CNA \ process is $\llbracket{\cal A},\gamma\rrbracket \defeq \restrict{\mathit{names}} \llparenthesis{\cal A},\gamma\rrparenthesis$, with 
 $$
 \llparenthesis{\cal A},\gamma\rrparenthesis \defeq 
 I ~|~ P_{s1}~|~\overline{P}_{s2}~|~ P_{r1}~|~P_{r2}~|~\mathit{Cxt}
@@ -283,7 +285,7 @@ $$
 For clarity of exposition, we show the code of the processes just in part, to focus on the prefixes that will be involved in the first transition of the system. In Figure~\ref{fig:backbone} we show the  structure of a link chain label related to the execution of such a transition. The yellow blocks are referred to init process $I$, to the processes encoding the reactions, $P_{r_1}$ and $P_{r_2}$, and to the context $\mathit{Cxt}$. As the figure puts in evidence, these two kinds of processes determine the structure of the link chain, from end to end, i.e. from the left $\silent$ to the right one. We could say that these processes form the \emph{backbone} of the interaction.
    In contrast, the processes encoding the entities, $P_{s1}$,  $\overline{P}_{s2}$, provide the
     solid links to be merged with the virtual links of the backbone (i.e. to be plugged in the backbone).
-{\color{red}  In Figure~\ref{fig:backbone} we added the underline brackets, where the notation $P_1(P_2,P_3)$ means that the segment of the link chain is delimited by the process $P_1$ and it leaves "holes" where processes between the brackets insert their links.}
+{\color{red}  In Figure~\ref{fig:backbone} we added the underline brackets, where the notation $P_1(P_2,P_3)$ means that the segment of the link chain is delimited by the process $P_1$ and it leaves "holes" where processes between the brackets, in this case $P_2$ and $P_3$, insert their links.}
  Formally, we have
  $$
  \llparenthesis{\cal A},\gamma\rrparenthesis \xrightarrow{
@@ -477,10 +479,12 @@ d & \mbox{if $\beta=d_i$ with $d\in\mathit{decs}$}\\
 
 \[
 \begin{array}{lcl}
-\mathit{flat}(\link{\alpha}{\beta}\upsilon)& \defeq & \mathit{flat}(\link{\alpha}{\beta}):: \mathit{flat}(\upsilon)\\
+\mathit{flat}(\link{\alpha}{\beta}\upsilon)& \defeq & \mathit{flat}(\link{\alpha}{\beta}) \mathit{flat}(\upsilon)\\
 \end{array}\\
 \]
-where  $::$ is the usual string concatenation operator.
+{\color{red} where the juxtaposition of two string results in the   
+%$::$ is the 
+usual string concatenation operator.}
 
 For example, if we consider again the complete label
 $$

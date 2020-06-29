@@ -1,15 +1,20 @@
 % !TEX root = ./main_TCS.tex
 \section{Examples}
 \label{ex:examples}
-
-Hereafter, we shall often omit topmost restrictions but shall take into account only transitions whose labels are complete chains, i.e. they do not contain 
-virtual links and start/end with the $\silent$ action symbol.
+{\color{red} For readability,  we shall often omit topmost restrictions. Please remember that, semantically, restriction allows for only interactions with no virtual links, creating a private interaction among all participants where all the channel names in the transition labels are hidden.
+%Hereafter, we shall often omit topmost restrictions
+ Nevertheless, for simplicity,
+ % but 
+ we shall take into account only transitions whose labels are complete chains, i.e. they do not contain 
+virtual links and start/end with the $\silent$ action symbol.}
 
 
 
 \subsection{Labelled transition system}
 This example is inspired by the example in~\cite{BEMR11}, where
-a deterministic transition system is coded in the Reaction System
+a deterministic transition system is 
+%coded 
+{\color{red} encoded} in the Reaction System
 framework.
 Here we consider the minimal deterministic transition system in Figure~\ref{fig:lts}.
 %following the reaction system approach, to code it in the reaction system framework, we have to add
