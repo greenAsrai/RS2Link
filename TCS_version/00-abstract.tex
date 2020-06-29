@@ -1,18 +1,17 @@
 % !TEX root =  main_TCS.tex
 
-In the area of Natural Computing, reaction systems are
+In the area of Natural Computing, Reaction Systems (RSs) are
 a qualitative abstraction inspired by the 
 functioning of living cells, suitable to model the main
 mechanisms of biochemical reactions.
-This model has already been applied
-and extended successfully to various areas of research. Reaction 
-systems interact with the environment represented by the context, and
-pose challenges for further extensions as well as
-for the implementation, as it is a new computation model. 
-In this paper {\color{red} we define a modular embedding of Reaction Systems as processes
-in the chained Core Network Algebra (cCNA), which is a variant  of the  {\tt link}-calculus,
-by representing the behaviour of each entity and
-preserving faithfully their features, and we prove its correctness and completeness.}
+%This model has already been applied
+%and extended successfully to various areas of research. 
+RSs interact with a context, and
+pose challenges for modularity, compositionality, extendibility and behavioural equivalence. 
+In this paper we define a modular encoding of RSs as processes
+in the chained Core Network Algebra (cCNA), which is a new variant  of the  {\tt link}-calculus.
+The encoding represents the behaviour of each entity separately and
+preserves faithfully their features, and we prove its correctness and completeness.
 %we consider a variant of the {\tt link}-calculus, which allows to model 
 %multiparty interaction in concurrent systems, and show that we can
 %represent reaction systems as processes 
@@ -21,23 +20,23 @@ preserving faithfully their features, and we prove its correctness and completen
 %We show the correctness and completeness 
 %of our embedding.
 %We illustrate our framework by 
-{\color{red} We show} the embedding of 
-a few examples expressing computer science
-and biological applications. 
-{\color{red}Our embedding provides a Labelled Transition System (LTS) semantics for reaction systems. Based on the LTS semantics, we adapt  the classical notion of  process bisimulation to define a bio-simulation relation for studying properties of reaction systems.}
+%{\color{red} We show} the embedding of 
+%a few examples expressing computer science
+%and biological applications. 
+Our encoding provides a Labelled Transition System (LTS) semantics for RSs. Based on the LTS semantics, we adapt  the classical notion of  bisimulation to define a novel equivalence, called bio-similarity, for studying properties of RSs.
 %On top of the LTS semantics for reaction systems provided by our framework, 
 %we then adapt the classical notion (in concurrency) of bisimulation
 %to make it more suitable for studying properties of reaction systems.
 In particular, we define a new assertion language based on regular expressions, 
 which allows to specify the properties of interest, and use it to extend Hennessy-Milner logic
-to our {\color{red} embedding.}
+to our setting.
 % framework. 
-{\color{red} We prove that our bio-simulation relation and the logical equivalence, that are defined parametrically on some assertion of interest, coincide.}
+We prove that our bio-similarity relation and the logical equivalence, that are defined parametrically on some assertion of interest, coincide.
 %Interestingly, the novel notion of bisimilarity and logical equivalence that are defined parametrically on some assertion of interest are proved to coincide, like in the classical case.
 Finally, 
-{\color{red} we claim that}
-our methodology 
+we claim that
+our encoding 
 %can 
-contribute to increase the expressiveness
-of reaction systems, by exploiting the interaction among 
-different reaction systems. 
+contributes to increase the expressiveness
+of RSs, by exploiting the interaction among 
+different RSs. 

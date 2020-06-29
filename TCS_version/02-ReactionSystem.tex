@@ -1,6 +1,6 @@
 % !TEX root = ./main_TCS.tex
 
-\section{An overview of Reaction Systems}
+\section{An Overview of Reaction Systems}
 \label{sec:rs}
 
 Natural Computing is concerned with human-designed computing inspired by 
@@ -20,16 +20,18 @@ Here we briefly review the basic notions of RSs, see~\cite{BEMR11} for more deta
 The mechanisms that are at the basis of biochemical reactions and thus 
 regulate the functioning of a living cell, are 
 {\em facilitation} and {\em inhibition}. These mechanisms are 
-reflected in the basic definitions of Reaction Systems.
+reflected in the basic definitions of RSs.
 
 \begin{definition}[Reaction]
-A reaction is a triplet $a = (R,I,P)$, where $R, I, P$ are finite,  
-non empty sets  and
-$R \cap I = \emptyset$. If $S$ is a set such that  $R, I, P \subseteq S$, 
-then $a$ is a reaction in $S$.
+Let $S$ be a set of entities.
+A reaction over $S$ is a triplet $a = (R,I,P)$, where $R, I, P$ are finite,  
+non empty subsets of $S$ and
+$R \cap I = \emptyset$. 
+%If $S$ is a set such that  $R, I, P \subseteq S$, 
+%then $a$ is a reaction in $S$.
 \end{definition}
 
-{\color{red} The set $S$ is called the entity set}, the sets 
+The sets 
 $R, I, P$ are also written $R_a, I_a, P_a$ and called the 
 \emph{reactant set} of $a$, the  
 \emph{inhibitor set} of $a$, and the \emph{product set} of $a$, respectively. 
@@ -46,14 +48,13 @@ For the sake of simplicity, in some examples, we will allow $I$ to be empty.
 
 \begin{definition}[Reaction System]
 A Reaction System (RS) is an ordered pair ${\cal A} = (S, A)$ 
-such that $S$ is a finite sete {\color{red} of  entities, and $A \subseteq rac(S)$ is a set over $S$}.
+such that $S$ is a finite set of  entities, and $A \subseteq rac(S)$ is a set of reactions over $S$.
 %The set $S$ is called the background (set) of $A$.\\
 %The main notion concerning the functioning of a reaction system is defined 
 %as follows.
 \end{definition}
 
-The set $S$ is called the \emph{background set} of ${\cal A}$, its elements are called \emph{entities},
-they represent molecular substances (e.g., atoms, ions, molecules) that may be present
+The set $S$ is called the \emph{background set} of ${\cal A}$; its elements represent molecular substances (e.g., atoms, ions, molecules) that may be present
 in the states of a biochemical system.
 % modeled by $A$. 
 The set $A$ is the set of \emph{reactions} of $\mathcal{A}$.
@@ -61,16 +62,16 @@ Since $S$ is finite, so is $A$:
 we denote by $|A|$ the number of reactions in $A$.
 
 \begin{definition}[Reaction Result]
-Let $W$ be a finite subset of  entities $S$.
+Given a set of entities $S$, let $W\subseteq S$ be a finite subset of  entities.
 \begin{enumerate}
-\item Let $a$ be a reaction in $S$. Then $a$ is enabled by the entities in the set $W$, denoted by $\mathit{en}_a(W)$, 
-if $R_a \subseteq W$, i.e. all the reactants of $a$ are in $W$,
-and $I_a \cap W = \emptyset$, i.e. none of the inhibitors of $a$ are in $W$. The result of $a$ on $W$, denoted by $\mathit{res}_a(W)$, 
+\item Let $a$ be a reaction over $S$. Then $a$ is enabled by the entities in the set $W$, denoted by $\mathit{en}_a(W)$, 
+if $R_a \subseteq W$ and $I_a \cap W = \emptyset$, i.e. all the reactants of $a$ are in $W$,
+ while none of the inhibitors of $a$ are in $W$. The result of $a$ on $W$, denoted by $\mathit{res}_a(W)$, 
 is defined by:
-$\mathit{res}_a(W) =P_a$, if $\mathit{en}_a(W)$, and $\mathit{res}_a(W) = \emptyset$ otherwise.
-\item Let $A$ be a finite set of reactions. The result of $A$ on $W$, denoted 
+$\mathit{res}_a(W) \defeq P_a$, if $\mathit{en}_a(W)$, and $\mathit{res}_a(W) \defeq \emptyset$ otherwise.
+\item Let $A$ be a finite set of reactions over $S$. The result of $A$ on $W$, denoted 
 by $\mathit{res}_A(W)$,  is defined
-by: $\mathit{res}_A(W) = \bigcup_{a \in A} \mathit{res}_a(W)$.
+by: $\mathit{res}_A(W) \defeq \bigcup_{a \in A} \mathit{res}_a(W)$.
 \end{enumerate}
 \end{definition}
 
@@ -115,7 +116,7 @@ $ \gamma=\{C_i\}_{i\in[0,n]}$  and $\delta=\{D_i\}_{i\in[0,n]} $
 %\end{center}
 %\noindent
 where 
-$ C_{i}, D_{i}  \subseteq S$ for any $i\in[0,n]$, $D_0 = \emptyset$, and 
+$ C_{i}, D_{i}  \subseteq S$ are set of entities for any $i\in[0,n]$, $D_0 = \emptyset$, and 
 %$C_0,\dots, C_n, D_0,\dots, D_n  \subseteq S$, $D_0 = \emptyset$, and 
 $D_i =  \mathit{res}_{A}(D_{i-1} \cup C_{i-1})$ for any $i \in [1,n]$.
 % $i \in \{1,\dots, n\}$.
@@ -123,7 +124,8 @@ $D_i =  \mathit{res}_{A}(D_{i-1} \cup C_{i-1})$ for any $i \in [1,n]$.
 
 Living cells are seen as open systems that continuously react with 
 the external environment, in discrete steps. 
-The sequence $\gamma$ is the {\em context sequence} of $\pi$ and 
+The sequence $\gamma$ is the {\em context sequence} of $\pi$;
+it can be arbitrarily defined and 
 represents the influence of the environment on the 
 RS.
 %Reaction System.
@@ -155,7 +157,7 @@ at step $i$ and the result $D_i=\mathit{res}_{A}(W_{i-1})$ from the previous ste
 %\subseteq D_{i}$, $\forall i \in \{i, \ldots, n \}$.
   %\end{definition}
 
-For technical reasons, we extend the notion of an interactive process to deal with 
+Since we will be able to deal with recursively contexts, we extend the notion of an interactive process to deal with 
 infinite sequences.
 
 \begin{definition}[Extended Interactive Process]
