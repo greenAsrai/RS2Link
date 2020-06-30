@@ -180,9 +180,9 @@ The only prefix that starts with $\silent$ is the one of the recursive init proc
 Then each prefix that starts with $r_j$ involves $p_j$ and $r_{j+1}$.
 Thus all the prefixes associated with reactions must be concatenated and also the prefix associated with the context (remember that $r_{u+1} = \mathit{cxt}$), forming the backbone of the label.
 Since the context processes is involved, then all entities processes are also involved.
-Then, all the processes $I$, $P_a$, $P_s$ (or $\overline{P_s}$), and $\mathit{Cxt}$  must participate to each transition.
+Then, all the processes $I$, $P_a$, $P_s$ (or $\overline{P_s}$), and $\mathit{Cxt}_1$  must participate to each transition.
  \item for each reaction $aj \in A$, the c\CNA \ code of  $P_{aj}$ leaves one virtual link between two solid links of the types $\link{r_j}{\dots} \chainedlink{s_{i}}{\noact}\chainedlink{\noact}{s_{o}}\link{}{\dots}\link{}{r_{j+1}} {\dots}\link{p_j}{\dots}\link{}{p_{j+1}}$. Then, it derives that the process $P_{s}$, encoding the behaviour of entity $s$, can participate by filling the virtual link in the above transition by only offering one solid link of the form $\link{s_{i}}{s_{o}}$. In fact, there is no other way to generate a solid chain from $s_{i}$ to $s_{o}$.
- The same reasoning holds for the processes $\mathit{Cxt}$ and for all the decorated versions of $s_i,s_o$.
+ The same reasoning holds for the processes $\mathit{Cxt}_1$ and for all the decorated versions of $s_i,s_o$.
 % $P_{s_1}$ can not participate with a link chain, as by juxtaposing  $\link{s_{1i}}{s_{1o}}$, not valid
  %link chains would be generated.
    \end{enumerate}
@@ -213,10 +213,10 @@ by Definition~\ref{def:trans} and by Lemma~\ref{lem:struct}.1, all the  channels
  $j \in [1,\dots,u]$, and $cxt$,
  %$cxt_h$, with $h \in [1, \dots, w]$,
   and all the annotated versions of 
- $s_i$, $s_o$ are restricted. Also, processes $\mathit{Cxt}$ always requires the 
+ $s_i$, $s_o$ are restricted. Also, processes $\mathit{Cxt}_1$ always requires the 
  interaction with $P_s$ on either on channels $\widehat{s}_i$, $\widehat{s}_o$ or on channels 
  $\underline{s}_i$, $\underline{s}_o$.
- It derives that all the processes: $P_a$  (coding the behaviour of reaction $a \in A$), $P_s$ (coding the behaviour of entity $s \in S$), and $\mathit{Cxt}$ (coding the behaviour of the context regarding all the entities) have been involved in the transition. 
+ It derives that all the processes: $P_a$  (coding the behaviour of reaction $a \in A$), $P_s$ (coding the behaviour of entity $s \in S$), and $\mathit{Cxt}_1$ (coding the behaviour of the context regarding all the entities) have been involved in the transition. 
 
 For any process $P_{aj}$ encoding a reaction $aj$ we have the following cases:
 \begin{description}
@@ -247,18 +247,18 @@ the process $P_{aj}$ executes a code  capturing either the absence of one of its
 \end{description}
 %It is worth nothing that there could be other processes $P_a$ encoding  a reaction $a \in A$ that do not
 %involve the entity $s$.\\
-Now, we consider the structure of the process $\mathit{Cxt}^1$. 
-By Definition~\ref{def:trans}, $Cxt^1$ is the unique process encoding the behaviour of the context regulating the supply of any entity. 
+Now, we consider the structure of the process $\mathit{Cxt}_1$. 
+By Definition~\ref{def:trans}, $Cxt_1$ is the unique process encoding the behaviour of the context regulating the supply of any entity. 
 
 \begin{description}
 \item[(e)] 
-The code of the process $Cxt^1$ that provides $s$ and not $e$ has the following structure: 
+The code of the process $Cxt_1$ that provides $s$ and not $e$ has the following structure: 
 $$
-\mathit{Cxt}^1 \defeq
+\mathit{Cxt}_1 \defeq
 \link{\mathit{cxt}}{\dots}
 \chainedlink{\widehat{s}_i}{\noact}\chainedlink{\noact}{\widehat{s}_o}\link{}{\dots} 
 \chainedlink{\underline{e}_i}{\noact}\chainedlink{\noact}{}\link{\underline{e}_o}{\dots} 
-\chainend{p_{1}}. \mathit{Cxt}^{2} .
+\chainend{p_{1}}. \mathit{Cxt}_{2} .
 $$
 \end{description}
 
