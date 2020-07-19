@@ -25,8 +25,8 @@ such as {\em facilitation} and {\em inhibition}.
 As a qualitative approximation of the real biochemical reactions, they
 % do not take
 %into account the quantity of reagents effectively present. They
-consider if a necessary reagent is or not present, and likewise they
-consider if an inhibiting molecule is or not present. 
+consider if a necessary reagent is present or not, and likewise they
+consider if an inhibiting molecule is present or not. 
 The  possible reactants and inhibitors are called `entities'.
 RSs model in a direct way the interaction of a living cell
 with the environment (called `context'). However, two RSs are seen
@@ -124,28 +124,29 @@ can be automatised by means of a proper front-end in
 an implementation of the {\tt link}-calculus. 
 The examples that we propose also show that some optimisations are possible
 to reduce the coding when suitable assumptions are made about the provision of entities.
-
-As we have remarked, in our 
+{\color{red}
+\st{ As we have remarked, in our 
 %translation,
 encoding
 the entities and the reactions
 get the ability to interact in a synchronous manner. 
 This interaction is not foreseen in
-the basic RS framework, as it can only happen once the context is provided.
-The proposed network of RSs~\cite{BLR20} allows
-any RS in the network to receive entities 
-produced from its neighbours (that will represent its context), with the hypothesis that  
-RSs without neighbours will receive no entities 
-from the context. 
-In our case, a RS can receive some entities from the context and some others from a second RS; moreover we can represent contexts having a recursive, non-determinist behaviour.
-%
-By exploiting recursion, the kind of interactions which can be 
-defined can be complex and expressive.
-Example~\ref{ex:twoRS} and more in general the discussion in 
-Section~\ref{subsec:comRS}
-%~\ref{sec:discussion}
- show that 
-the interaction between RSs can help to model new scenarios.
+the basic RS framework, as it can only happen once the context is provided.}}
+
+%The proposed network of RSs~\cite{BLR20} allows
+%any RS in the network to receive entities 
+%produced from its neighbours (that will represent its context), with the hypothesis that  
+%RSs without neighbours will receive no entities 
+%from the context. 
+%In our case, a RS can receive some entities from the context and some others from a second RS; moreover we can represent contexts having a recursive, non-determinist behaviour.
+%%
+%By exploiting recursion, the kind of interactions which can be 
+%defined can be complex and expressive.
+%Example~\ref{ex:twoRS} and more in general the discussion in 
+%Section~\ref{subsec:comRS}
+%%~\ref{sec:discussion}
+% show that 
+%the interaction between RSs can help to model new scenarios.
 
 \paragraph{Related work}
 
@@ -162,7 +163,24 @@ allowing  backward computations as well as forward computations; for this
 goal a set of inference rules for rewriting logic has been 
 defined in~\cite{10.1007/978-3-319-73359-3_3}
 to exactly keep trace of those elements that  dissolve in the next 
-computation step.
+computation step.\\
+%
+The proposed network of RSs~\cite{BLR20} allows
+any RS in the network to receive entities 
+produced from its neighbours (that will represent its context), with the hypothesis that  
+RSs without neighbours will receive no entities 
+from the context. 
+%In our case
+In the idea we sketch, a RS can receive some entities from the context and some others from a second RS; moreover we can represent contexts having a recursive, non-determinist behaviour.
+%
+By exploiting recursion, the kind of interactions which can be 
+defined can be complex and expressive.
+Example~\ref{ex:twoRS} and more in general the discussion in 
+Section~\ref{subsec:comRS}
+%~\ref{sec:discussion}
+ show that 
+the interaction between RSs can help to model new scenarios.
+
 
 
 As already mentioned, a preliminary version of this paper appeared in~\cite{BBF19}.
@@ -188,7 +206,7 @@ the Hennessy-Milner logic;
 
 Section \ref{sec:rs} 
 describes RSs and their semantics (interactive processes).
-Section \ref{sec:ccna} describes briefly the c\CNA \ process algebra and
+Section \ref{sec:ccna} briefly describes  the c\CNA \ process algebra and
 its operational semantics.
 Section \ref{sec:trans} defines the embedding of RSs in
 c\CNA \ processes and shows some simple examples to illustrate 

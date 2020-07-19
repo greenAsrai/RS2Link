@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2018.2.3)  25 JUN 2020 11:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2018.2.3)  19 JUL 2020 07:03
 entering extended mode
  \write18 enabled.
  %&-line parsing enabled.
@@ -738,7 +738,19 @@ Xy-pic pdf driver: `line' extension support
 (/usr/local/texlive/2017/texmf-dist/tex/generic/xypic/xypdf-li.tex loaded)
 Xy-pic pdf driver: `rotate' extension support
 (/usr/local/texlive/2017/texmf-dist/tex/generic/xypic/xypdf-ro.tex loaded)
-loaded)) (./macros.tex
+loaded)) (/usr/local/texlive/2017/texmf-dist/tex/latex/soul/soul.sty
+Package: soul 2003/11/17 v2.4 letterspacing/underlining (mf)
+\SOUL@word=\toks45
+\SOUL@lasttoken=\toks46
+\SOUL@cmds=\toks47
+\SOUL@buffer=\toks48
+\SOUL@token=\toks49
+\SOUL@spaceskip=\skip50
+\SOUL@ttwidth=\dimen266
+\SOUL@uldp=\dimen267
+\SOUL@ulht=\dimen268
+)
+(./macros.tex
 (/usr/local/texlive/2017/texmf-dist/tex/latex/stmaryrd/stmaryrd.sty
 Package: stmaryrd 1994/03/03 St Mary's Road symbol package
 \symstmry=\mathgroup6
@@ -754,13 +766,13 @@ Package: caption 2016/02/21 v3.3-144 Customizing captions (AR)
 (/usr/local/texlive/2017/texmf-dist/tex/latex/caption/caption3.sty
 Package: caption3 2016/05/22 v1.7-166 caption3 kernel (AR)
 Package caption3 Info: TeX engine: e-TeX on input line 67.
-\captionmargin=\dimen266
-\captionmargin@=\dimen267
-\captionwidth=\dimen268
-\caption@tempdima=\dimen269
-\caption@indent=\dimen270
-\caption@parindent=\dimen271
-\caption@hangindent=\dimen272
+\captionmargin=\dimen269
+\captionmargin@=\dimen270
+\captionwidth=\dimen271
+\caption@tempdima=\dimen272
+\caption@indent=\dimen273
+\caption@parindent=\dimen274
+\caption@hangindent=\dimen275
 )
 \c@ContinuedFloat=\count154
 Package caption Info: hyperref package is loaded.
@@ -778,22 +790,22 @@ Proof Tree (bussproofs) style macros. Version 1.1.
 \myBoxD=\box54
 \myBoxLL=\box55
 \myBoxRL=\box56
-\thisAboveSkip=\dimen273
-\thisBelowSkip=\dimen274
-\newScoreStart=\dimen275
-\newScoreEnd=\dimen276
-\newCenter=\dimen277
-\displace=\dimen278
-\leftLowerAmt=\dimen279
-\rightLowerAmt=\dimen280
-\scoreHeight=\dimen281
-\scoreDepth=\dimen282
-\htLbox=\dimen283
-\htRbox=\dimen284
-\htRRbox=\dimen285
-\htRRRbox=\dimen286
-\htAbox=\dimen287
-\htCbox=\dimen288
+\thisAboveSkip=\dimen276
+\thisBelowSkip=\dimen277
+\newScoreStart=\dimen278
+\newScoreEnd=\dimen279
+\newCenter=\dimen280
+\displace=\dimen281
+\leftLowerAmt=\dimen282
+\rightLowerAmt=\dimen283
+\scoreHeight=\dimen284
+\scoreDepth=\dimen285
+\htLbox=\dimen286
+\htRbox=\dimen287
+\htRRbox=\dimen288
+\htRRRbox=\dimen289
+\htAbox=\dimen290
+\htCbox=\dimen291
 ) (/usr/local/texlive/2017/texmf-dist/tex/latex/mathtools/mathtools.sty
 Package: mathtools 2015/11/12 v1.18 mathematical typesetting tools
 
@@ -801,14 +813,14 @@ Package: mathtools 2015/11/12 v1.18 mathematical typesetting tools
 Package: calc 2014/10/28 v4.3 Infix arithmetic (KKT,FJ)
 \calc@Acount=\count159
 \calc@Bcount=\count160
-\calc@Adimen=\dimen289
-\calc@Bdimen=\dimen290
-\calc@Askip=\skip50
-\calc@Bskip=\skip51
+\calc@Adimen=\dimen292
+\calc@Bdimen=\dimen293
+\calc@Askip=\skip51
+\calc@Bskip=\skip52
 LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
 \calc@Ccount=\count161
-\calc@Cskip=\skip52
+\calc@Cskip=\skip53
 )
 (/usr/local/texlive/2017/texmf-dist/tex/latex/mathtools/mhsetup.sty
 Package: mhsetup 2010/01/21 v1.2a programming setup (MH)
@@ -818,14 +830,14 @@ LaTeX Info: Thecontrolsequence`\)'isalreadyrobust on input line 129.
 LaTeX Info: Thecontrolsequence`\['isalreadyrobust on input line 129.
 LaTeX Info: Thecontrolsequence`\]'isalreadyrobust on input line 129.
 \g_MT_multlinerow_int=\count162
-\l_MT_multwidth_dim=\dimen291
-\origjot=\skip53
-\l_MT_shortvdotswithinadjustabove_dim=\dimen292
-\l_MT_shortvdotswithinadjustbelow_dim=\dimen293
-\l_MT_above_intertext_sep=\dimen294
-\l_MT_below_intertext_sep=\dimen295
-\l_MT_above_shortintertext_sep=\dimen296
-\l_MT_below_shortintertext_sep=\dimen297
+\l_MT_multwidth_dim=\dimen294
+\origjot=\skip54
+\l_MT_shortvdotswithinadjustabove_dim=\dimen295
+\l_MT_shortvdotswithinadjustbelow_dim=\dimen296
+\l_MT_above_intertext_sep=\dimen297
+\l_MT_below_intertext_sep=\dimen298
+\l_MT_above_shortintertext_sep=\dimen299
+\l_MT_below_shortintertext_sep=\dimen300
 )
 (/usr/local/texlive/2017/texmf-dist/tex/latex/wasysym/wasysym.sty
 Package: wasysym 2003/10/30 v2.0 Wasy-2 symbol support package
@@ -846,34 +858,34 @@ Package: cancel 2013/04/12 v2.2 Cancel math terms
 (./main_TCS.aux)
 \openout1 = `main_TCS.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 77.
-LaTeX Font Info:    ... okay on input line 77.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 77.
-LaTeX Font Info:    ... okay on input line 77.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 77.
-LaTeX Font Info:    ... okay on input line 77.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 77.
-LaTeX Font Info:    ... okay on input line 77.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 77.
-LaTeX Font Info:    ... okay on input line 77.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 77.
-LaTeX Font Info:    ... okay on input line 77.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 77.
-LaTeX Font Info:    ... okay on input line 77.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 78.
+LaTeX Font Info:    ... okay on input line 78.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 78.
+LaTeX Font Info:    ... okay on input line 78.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 78.
+LaTeX Font Info:    ... okay on input line 78.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 78.
+LaTeX Font Info:    ... okay on input line 78.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 78.
+LaTeX Font Info:    ... okay on input line 78.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 78.
+LaTeX Font Info:    ... okay on input line 78.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 78.
+LaTeX Font Info:    ... okay on input line 78.
 
 (/usr/local/texlive/2017/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count165
-\scratchdimen=\dimen298
+\scratchdimen=\dimen301
 \scratchbox=\box57
 \nofMPsegments=\count166
 \nofMParguments=\count167
-\everyMPshowfont=\toks45
+\everyMPshowfont=\toks50
 \MPscratchCnt=\count168
-\MPscratchDim=\dimen299
+\MPscratchDim=\dimen302
 \MPnumerator=\count169
 \makeMPintoPDFobject=\count170
-\everyMPtoPDFconversion=\toks46
+\everyMPtoPDFconversion=\toks51
 ) (/usr/local/texlive/2017/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
 
@@ -892,7 +904,7 @@ File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
 \AtBeginShipoutBox=\box58
-Package hyperref Info: Link coloring OFF on input line 77.
+Package hyperref Info: Link coloring OFF on input line 78.
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
@@ -902,34 +914,34 @@ Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
 \c@section@level=\count171
 )
-LaTeX Info: Redefining \ref on input line 77.
-LaTeX Info: Redefining \pageref on input line 77.
-LaTeX Info: Redefining \nameref on input line 77.
+LaTeX Info: Redefining \ref on input line 78.
+LaTeX Info: Redefining \pageref on input line 78.
+LaTeX Info: Redefining \nameref on input line 78.
 
 (./main_TCS.out) (./main_TCS.out)
 \@outlinefile=\write6
 \openout6 = `main_TCS.out'.
 
  ABD: EveryShipout initializing macros
-LaTeX Font Info:    Try loading font information for U+msa on input line 77.
+LaTeX Font Info:    Try loading font information for U+msa on input line 78.
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 77.
+LaTeX Font Info:    Try loading font information for U+msb on input line 78.
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-LaTeX Font Info:    Try loading font information for U+stmry on input line 77.
+LaTeX Font Info:    Try loading font information for U+stmry on input line 78.
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/stmaryrd/Ustmry.fd)
-LaTeX Font Info:    Try loading font information for U+wasy on input line 77.
+LaTeX Font Info:    Try loading font information for U+wasy on input line 78.
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/wasysym/uwasy.fd
 File: uwasy.fd 2003/10/30 v2.0 Wasy-2 symbol font definitions
 )
-Package xypdf Info: Line width: 0.39998pt on input line 77.
+Package xypdf Info: Line width: 0.39998pt on input line 78.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
 
@@ -937,155 +949,169 @@ Package caption Info: End \AtBeginDocument code.
 
 
 {/usr/local/texlive/2017/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 86.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 89.
 
 (/usr/local/texlive/2017/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 86.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 89.
  [2] [3])
-(./02-ReactionSystem.tex [4] [5]) (./04-CCNA.tex
-
-LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 38.
-
+(./02-ReactionSystem.tex [4] [5]) (./04-CCNA.tex [6]
 
 LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 41.
 
 
-LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 42.
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 44.
 
 
-LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 46.
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 45.
 
 
-LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 47.
-
-
-LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 48.
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 49.
 
 
 LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 50.
 
-[6]
 
-LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 108.
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 51.
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 53.
+
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 101.
 
 
 [7]
+
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 119.
+
+
 \myBox1=\box59
-\myScoreStart1=\dimen300
-\myCenter1=\dimen301
-\myScoreEnd1=\dimen302
+\myScoreStart1=\dimen303
+\myCenter1=\dimen304
+\myScoreEnd1=\dimen305
 
-
-LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 127.
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 138.
 
 
 \myBox2=\box60
-\myScoreStart2=\dimen303
-\myCenter2=\dimen304
-\myScoreEnd2=\dimen305
+\myScoreStart2=\dimen306
+\myCenter2=\dimen307
+\myScoreEnd2=\dimen308
+[8]
 
-LaTeX Font Warning: Command \tiny invalid in math mode on input line 212.
-
-
-LaTeX Font Warning: Command \tiny invalid in math mode on input line 216.
+LaTeX Font Warning: Command \scriptsize invalid in math mode on input line 234.
 
 
-LaTeX Font Warning: Command \tiny invalid in math mode on input line 217.
+
+LaTeX Font Warning: Command \tiny invalid in math mode on input line 240.
 
 
-LaTeX Font Warning: Command \tiny invalid in math mode on input line 218.
+LaTeX Font Warning: Command \tiny invalid in math mode on input line 242.
 
 
-LaTeX Font Warning: Command \tiny invalid in math mode on input line 218.
+LaTeX Font Warning: Command \tiny invalid in math mode on input line 247.
 
 
-LaTeX Font Warning: Command \tiny invalid in math mode on input line 229.
+LaTeX Font Warning: Command \tiny invalid in math mode on input line 271.
 
 
-LaTeX Font Warning: Command \tiny invalid in math mode on input line 230.
+LaTeX Font Warning: Command \tiny invalid in math mode on input line 272.
 
-) (./05-translation.tex [8] [9]
+) (./05-translation.tex
+Overfull \hbox (9.93884pt too wide) in paragraph at lines 271--2
+[][]\OMS/cmsy/m/n/10 n[]n[][]n[]$\OT1/cmr/m/n/10 ; and the ex-pres-sion $[][]\O
+MS/cmsy/m/n/10 n[] [][]  [][]n[]$ \OT1/cmr/m/n/10 de-notes the chain $[][]\OMS/
+cmsy/m/n/10 n[]n[]n[]n[]n[]$\OT1/cmr/m/n/10 .
+ []
 
-LaTeX Font Warning: Command \tiny invalid in math mode on input line 90.
+
+Underfull \hbox (badness 10000) in paragraph at lines 271--2
+
+ []
+
+[9]
+
+LaTeX Font Warning: Command \tiny invalid in math mode on input line 98.
 
 
-LaTeX Font Warning: Command \tiny invalid in math mode on input line 90.
+LaTeX Font Warning: Command \tiny invalid in math mode on input line 98.
 
 
-LaTeX Font Warning: Command \tiny invalid in math mode on input line 90.
+LaTeX Font Warning: Command \tiny invalid in math mode on input line 98.
 
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <9> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 90.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 98.
 
-Overfull \hbox (4.99026pt too wide) detected at line 96
+Overfull \hbox (4.99026pt too wide) detected at line 104
 []
  []
 
-
-LaTeX Font Warning: Command \tiny invalid in math mode on input line 121.
-
-
-LaTeX Font Warning: Command \tiny invalid in math mode on input line 121.
-
 [10]
+
+LaTeX Font Warning: Command \tiny invalid in math mode on input line 135.
+
+
+LaTeX Font Warning: Command \tiny invalid in math mode on input line 135.
+
+[11]
 Package hyperref Info: bookmark level for unknown lemma defaults to 0 on input 
-line 220.
+line 232.
 
 
 LaTeX Font Warning: Font shape `OT1/cmss/m/it' in size <10> not available
-(Font)              Font shape `OT1/cmss/m/sl' tried instead on input line 220.
+(Font)              Font shape `OT1/cmss/m/sl' tried instead on input line 232.
 
 
-[11]
+[12]
 Package hyperref Info: bookmark level for unknown corollary defaults to 0 on in
-put line 243.
- [12]
-Underfull \hbox (badness 10000) in paragraph at lines 433--439
+put line 254.
+ [13]
+Underfull \hbox (badness 10000) in paragraph at lines 444--450
 [][]
  []
 
-[13]
+[14]
 Package hyperref Info: bookmark level for unknown proposition defaults to 0 on 
-input line 550.
-) (./06-examples.tex <xymatrix 2x1 236>
-Underfull \hbox (badness 10000) in paragraph at lines 11--31
+input line 561.
+) (./06-examples.tex <xymatrix 2x1 236> [15]
+Underfull \hbox (badness 10000) in paragraph at lines 32--35
 
  []
 
-[14] [15]
-Overfull \hbox (13.24576pt too wide) detected at line 173
+[16]
+Overfull \hbox (13.24576pt too wide) detected at line 180
 [][]\OMS/cmsy/m/n/5 n[]n[]n[]n[]n[]n[]n[]n[]n[]n[]n[]n[]n[]n[]n[]n[]n[]n[]n[]n[
 ]n[]n[]n[]n[]n[]n[]n[]n[]n[]n[]
  []
 
-[16]
-Overfull \hbox (2.9618pt too wide) detected at line 285
+[17]
+Overfull \hbox (2.9618pt too wide) detected at line 292
 []
  []
 
-[17]
+[18]
 
-LaTeX Font Warning: Command \tiny invalid in math mode on input line 314.
+LaTeX Font Warning: Command \tiny invalid in math mode on input line 321.
 
-) (./06b-bisimulation.tex [18] [19] [20] [21]
-Overfull \hbox (9.33502pt too wide) in paragraph at lines 265--266
-[]\OT1/cmr/m/n/10 Now, we in-tro-duce a slightly mod-i-fied ver-sion of the Hen
--nessy Mil-ner Logic [[]],
+) (./06b-bisimulation.tex [19] [20] [21] [22]
+Overfull \hbox (0.6638pt too wide) in paragraph at lines 326--328
+[]\OT1/cmr/m/n/10 We let $\OMS/cmsy/m/n/10 L[]$ \OT1/cmr/m/n/10 be the set of a
+ll bioHML
  []
 
-[22]
+[23]
 Package hyperref Info: bookmark level for unknown theorem defaults to 0 on inpu
-t line 336.
+t line 338.
 ) (./06c-bioSimExample.tex
-Underfull \hbox (badness 10000) in paragraph at lines 35--37
+Underfull \hbox (badness 10000) in paragraph at lines 36--38
 
  []
 
 
-Overfull \hbox (2.24857pt too wide) in paragraph at lines 53--57
+Overfull \hbox (2.24857pt too wide) in paragraph at lines 54--58
 \OT1/cmr/m/n/10 and we have $\OML/cmm/m/it/10 P[] \U/msa/m/n/10 , \OML/cmm/m/it
 /10 P\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 G\OT1/cmr/m/n/10 )$, $\OML/cmm/m/it/10 P
 [] \U/msa/m/n/10 , \OML/cmm/m/it/10 P\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 C\OT1/cm
@@ -1094,33 +1120,37 @@ r/m/n/10 )$, then $[][] \U/msa/m/n/10 , [][]\OMS/cmsy/m/n/10 n[]\OML/cmm/m/it/1
 \OT1/cmr/m/n/10 ,
  []
 
-[23] <xymatrix 2x3 336> <xymatrix 2x3 336>) (./07-discussion.tex [24] [25]
-Underfull \hbox (badness 10000) in paragraph at lines 206--209
+[24] <xymatrix 2x3 336> <xymatrix 2x3 336>) (./07-discussion.tex [25] [26]
+Underfull \hbox (badness 10000) in paragraph at lines 210--213
 
  []
 
-) (./08-conclusion.tex) [26] (./main_TCS.bbl [27] [28]) (./09-appendix.tex
-[29] [30] [31] [32]
+) (./08-conclusion.tex [27]) (./main_TCS.bbl [28] [29]) (./09-appendix.tex
+[30] [31] [32] [33]
 Underfull \hbox (badness 10000) in paragraph at lines 451--464
 
  []
 
-[33]) [34]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 161.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 161.
+[34]) [35]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 162.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 162.
  (./main_TCS.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 161.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 161.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 162.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 162.
 Package rerunfilecheck Info: File `main_TCS.out' has not changed.
-(rerunfilecheck)             Checksum: 087E90F89DCA09D892350B375141EC63;1101.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 161.
+(rerunfilecheck)             Checksum: C67B2E7A9B490EEEB268B9D0AF086BE4;1109.
+
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 162.
  ) 
 Here is how much of TeX's memory you used:
- 22089 strings out of 492995
- 385490 string characters out of 6132705
- 512017 words of memory out of 5000000
- 24945 multiletter control sequences out of 15000+600000
- 24300 words of font info for 98 fonts, out of 8000000 for 9000
+ 22262 strings out of 492995
+ 387625 string characters out of 6132705
+ 515497 words of memory out of 5000000
+ 25110 multiletter control sequences out of 15000+600000
+ 24919 words of font info for 100 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  55i,19n,54p,3219b,1077s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
@@ -1128,44 +1158,41 @@ Here is how much of TeX's memory you used:
 /usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmcsc10.pfb><
 /usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></
 usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex7.pfb
-></usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.
-pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.p
-fb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb
-></usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb><
-/usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></u
-sr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr
-/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/l
-ocal/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/loc
-al/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/
-texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/tex
-live/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texliv
-e/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2
-017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2017
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/local/texlive/2017/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/texlive/2017/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/local/texlive/2017/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmssi10.pfb></usr/local/texlive/2017/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2017/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2017/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2017/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2017/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2017/texmf-dist
-/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2017/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmti7.pfb></usr/local/texlive/2017/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmti8.pfb></usr/local/texlive/2017/texmf-dist/font
-s/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2017/texmf-dist/fonts
-/type1/public/amsfonts/cm/cmtt8.pfb></usr/local/texlive/2017/texmf-dist/fonts/t
-ype1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2017/texmf-dist/fon
-ts/type1/public/amsfonts/symbols/msam7.pfb></usr/local/texlive/2017/texmf-dist/
-fonts/type1/public/amsfonts/symbols/msbm7.pfb></usr/local/texlive/2017/texmf-di
-st/fonts/type1/public/stmaryrd/stmary10.pfb></usr/local/texlive/2017/texmf-dist
-/fonts/type1/urw/zapfding/uzdr.pfb></usr/local/texlive/2017/texmf-dist/fonts/ty
-pe1/public/xypic/xyatip10.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/p
-ublic/xypic/xybtip10.pfb>
-Output written on main_TCS.pdf (34 pages, 519138 bytes).
+></usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb>
+</usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></
+usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></us
+r/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/
+local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/lo
+cal/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/loca
+l/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/t
+exlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texl
+ive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive
+/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/20
+17/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texlive/2017/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/local/texlive/2017/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmss8.pfb></usr/local/texlive/2017/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/local/texlive/2017/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmssi10.pfb></usr/local/texlive/2017/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2017/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive/2017/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2017/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2017/texmf-dis
+t/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2017/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmti7.pfb></usr/local/texlive/2017/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmti8.pfb></usr/local/texlive/2017/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2017/texmf-dist/font
+s/type1/public/amsfonts/cm/cmtt8.pfb></usr/local/texlive/2017/texmf-dist/fonts/
+type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2017/texmf-dist/fo
+nts/type1/public/amsfonts/symbols/msam7.pfb></usr/local/texlive/2017/texmf-dist
+/fonts/type1/public/amsfonts/symbols/msbm7.pfb></usr/local/texlive/2017/texmf-d
+ist/fonts/type1/public/stmaryrd/stmary10.pfb></usr/local/texlive/2017/texmf-dis
+t/fonts/type1/urw/zapfding/uzdr.pfb></usr/local/texlive/2017/texmf-dist/fonts/t
+ype1/public/xypic/xyatip10.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/
+public/xypic/xybtip10.pfb>
+Output written on main_TCS.pdf (35 pages, 503087 bytes).
 PDF statistics:
- 658 PDF objects out of 1000 (max. 8388607)
- 577 compressed objects within 6 object streams
- 190 named destinations out of 1000 (max. 500000)
+ 661 PDF objects out of 1000 (max. 8388607)
+ 582 compressed objects within 6 object streams
+ 192 named destinations out of 1000 (max. 500000)
  149 words of extra memory for PDF output out of 10000 (max. 10000000)
 

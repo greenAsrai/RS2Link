@@ -178,7 +178,7 @@ Then, only the second reaction can be applied, and the transition carries the co
  \chainend{\silent}
 %\end{array}
 \]}
-The parts in bold are provided by the entity processes, the other parts are provided by the processes encoding the reactions and by the process encoding the context (starting at $\mathit{cxt}$ and ended at $p_1$.
+The parts in bold are provided by the entity processes, the other parts are provided by the processes encoding the reactions and by the process encoding the context (starting at $\mathit{cxt}$ and ending at $p_1$.
 In the label we can read that the rules $1$ and $4$ have been not executed because the entity $a$ is absent, 
 the rule $3$ has been not applied because the entity $w$ is absent, then only rule $2$ has been applied, and it has produced the entity $q$. Also,  the context provides entity $a$, that will be available in the next state, and not the entity $b$.
 Now, to let the label more readable, we show the result of the application of the function $flat(\cdot)$ to it:
@@ -193,7 +193,7 @@ r_1~\overline{a}~r_2~q~b~\overline{w}~\overline{a}~r_3~\overline{a}~r_4~\overlin
 We consider a biological toy  example in the style of gene's alternative splicing \cite{WBB13}.
 Alternative splicing is a regulated process during gene expression that results in a single gene 
 coding for multiple proteins. 
-In practice, particular exons of a gene may be included within or excluded from the final, 
+In practice, particular exons of a gene may be included within or excluded from the final 
 processed messenger RNA (mRNA) produced from that gene.
 In our example,
 %where 
@@ -300,7 +300,7 @@ P_C & \defeq &  P(C,\widehat{C},\underline{C},\widetilde{C})&  P_G& \defeq &   P
 \end{array}
 \]
 
-The encoding of the entity $F$ that can be provided by the context follows:
+The encoding of the entity $F$ that can only be provided by the context follows:
 \[
 \begin{array}{lcllcl}
 P_F&\defeq & \sum_{h=0}^1 (\startchain{F_i}\chainedlink{F_o}{\noact}\chainend{\noact})^h\ \link{\widehat{F}_i}{\widehat{F}_o}.P_F
