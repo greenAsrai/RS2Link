@@ -24,7 +24,7 @@ reflected in the basic definitions of RSs.
 
 \begin{definition}[Reaction]\label{def:reaction}
 Let $S$ be a set of entities.
-A reaction over $S$ is a triplet $a = (R,I,P)$, where $R, I, P$ are finite,  
+A reaction over $S$ is a triple $a = (R,I,P)$, where $R, I, P$ are finite,  
 non empty subsets of $S$ and
 $R \cap I = \emptyset$. 
 %If $S$ is a set such that  $R, I, P \subseteq S$, 
@@ -64,12 +64,12 @@ we denote by $|A|$ the number of reactions in $A$.
 \begin{definition}[Reaction Result]
 Given a set of entities $S$, let $W\subseteq S$ be a finite subset of  entities.
 \begin{enumerate}
-\item Let $a$ be a reaction over $S$. Then $a$ is enabled by the entities in the set $W$, denoted by $\mathit{en}_a(W)$, 
+\item Let $a\in \mathit{rac}(S)$ be a reaction over $S$. Then $a$ is enabled by the entities in the set $W$, denoted by $\mathit{en}_a(W)$, 
 if $R_a \subseteq W$ and $I_a \cap W = \emptyset$, i.e. all the reactants of $a$ are in $W$,
  while none of the inhibitors of $a$ are in $W$. The result of $a$ on $W$, denoted by $\mathit{res}_a(W)$, 
 is defined by:
 $\mathit{res}_a(W) \defeq P_a$, if $\mathit{en}_a(W)$, and $\mathit{res}_a(W) \defeq \emptyset$ otherwise.
-\item Let $A$ be a finite set of reactions over $S$. The result of $A$ on $W$, denoted 
+\item Let $A\subseteq \mathit{rac}(S)$ be a (finite) set of reactions over $S$. The result of $A$ on $W$, denoted 
 by $\mathit{res}_A(W)$,  is defined
 by: $\mathit{res}_A(W) \defeq \bigcup_{a \in A} \mathit{res}_a(W)$.
 \end{enumerate}

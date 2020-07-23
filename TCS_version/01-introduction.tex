@@ -86,13 +86,20 @@ over complex labels by abstracting from unnecessary details.
 
 Our main contributions are as follows:
 \begin{itemize}
+\item 
+\begin{color}{blue}
+RSs are encoded in a modular way, in the sense that all constituents of a RS, namely entities, reactions and the context, are seen as interacting  c\CNA \ processes; in principle, this allows to study the behaviour of any constituent in isolation, contrary to what happens in the basic RS framework, where the evolution is possible only when all constituents are given;
+\end{color}
+
 \item any context is represented as an ordinary c\CNA \ process, which allows us to specify recursive and non-deterministic contexts in a natural way; 
 when deterministic contexts are considered, as in ordinary RSs, the c\CNA \
 computation is also deterministic and matches the evolution of the underlying RS;
+
 \item we define an assertion language to specify local properties of 
 RSs and exploit it to define a novel notion of behavioural equivalence,
 %Reaction Systems, 
 called bio-similarity;
+
 \item we show that our assertions can be used to extend the Hennessy-Milner's logic to our 
 %framework
 encoding, in such a way that logical equivalence of processes coincide with bio-similarity.
@@ -123,15 +130,15 @@ encoding
 can be automatised by means of a proper front-end in
 an implementation of the {\tt link}-calculus. 
 The examples that we propose also show that some optimisations are possible
-to reduce the coding when suitable assumptions are made about the provision of entities.
-{\color{red}
-\st{ As we have remarked, in our 
-%translation,
-encoding
-the entities and the reactions
-get the ability to interact in a synchronous manner. 
-This interaction is not foreseen in
-the basic RS framework, as it can only happen once the context is provided.}}
+to reduce the coding efforts when suitable assumptions are made about the provision of entities.
+%{\color{red}
+%\st{ As we have remarked, in our 
+%%translation,
+%encoding
+%the entities and the reactions
+%get the ability to interact in a synchronous manner. 
+%This interaction is not foreseen in
+%the basic RS framework, as it can only happen once the context is provided.}}
 
 %The proposed network of RSs~\cite{BLR20} allows
 %any RS in the network to receive entities 
@@ -154,7 +161,7 @@ Process calculi have been used successfully to model
 biological processes, see~\cite{BBDFH18} for a recent survey.
 We are not aware of any 
 %SOS 
-structural operational semantics for RS; it seems not the case
+Structural Operational Semantics for RS; it seems not the case
 that a deterministic behaviour, as the one of the RS, once the initial state is 
 fixed, could be defined by inference rules that classically are applied 
 to define non-deterministic transition systems.
@@ -163,7 +170,8 @@ allowing  backward computations as well as forward computations; for this
 goal a set of inference rules for rewriting logic has been 
 defined in~\cite{10.1007/978-3-319-73359-3_3}
 to exactly keep trace of those elements that  dissolve in the next 
-computation step.\\
+computation step.
+
 %
 The proposed network of RSs~\cite{BLR20} allows
 any RS in the network to receive entities 
@@ -171,7 +179,7 @@ produced from its neighbours (that will represent its context), with the hypothe
 RSs without neighbours will receive no entities 
 from the context. 
 %In our case
-In the idea we sketch, a RS can receive some entities from the context and some others from a second RS; moreover we can represent contexts having a recursive, non-determinist behaviour.
+In the idea we sketch, a RS can receive some entities from the context and some others from a second RS; moreover we can represent contexts having a recursive, non-deterministic behaviour.
 %
 By exploiting recursion, the kind of interactions which can be 
 defined can be complex and expressive.
@@ -211,7 +219,7 @@ its operational semantics.
 Section \ref{sec:trans} defines the embedding of RSs in
 c\CNA \ processes and shows some simple examples to illustrate 
 it.
-Section~\ref{ex:examples} presents a couple of examples with computer science and biological applications.
+Section~\ref{ex:examples} presents a couple of examples with automata theory and biological applications.
 %Section \ref{ex:lactose} shows a more complex example taken from
 %the literature on RSs and illustrating a \emph{lac} operon.
 Section~\ref{sec:biosimulation} presents a methodology for the formal verification of
