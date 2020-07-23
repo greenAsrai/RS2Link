@@ -468,7 +468,7 @@ for when reaction $a$ is not applicable} (see Definition~\ref{def:trans}, code f
 The proof is just an adaptation of the classical result. The two implications are proved separately.
 \begin{description}
 \item[$\sim_{\mathsf{F}}\ \subseteq\ \equiv_{\mathcal{L}_{\mathsf{F}}}$:]
-Given any two processes $P\sim_{\mathsf{F}} Q$ we need to prove that for any bioHML formula $\mathsf{G}$ we have $P\entails \mathsf{G}$ iff $Q\entails \mathsf{G}$. 
+Given any two processes $P\sim_{\mathsf{F}} Q$ we need to prove that for any bioHML formula $\mathsf{G} \in \mathcal{L}_{\mathsf{F}}$ we have $P\entails \mathsf{G}$ iff $Q\entails \mathsf{G}$. 
 Without loss of generality, we prove that $P\entails \mathsf{G}$ implies $Q\entails \mathsf{G}$.
 The proof is by structural induction on $\mathsf{G}$.
 \begin{itemize}
@@ -536,7 +536,7 @@ Towards a contradiction, assume that we cannot find such $w,Q'$.
 
 If there is no transition $Q\xRightarrow{w}Q'$ such that $w\entails \mathsf{F}$, then the bioHML formula $\mathsf{G} \defeq \langle \mathsf{F}\rangle{\tt t}$ is such that $P\entails \mathsf{G}$ and $Q\not\entails \mathsf{G}$, contradicting the assumption $P\equiv_{\mathcal{L}_{\mathsf{F}}} Q$.
 
-Otherwise, let $\mathcal{Q}\defeq \{Q'~\mid~\exists w.\ Q\xRightarrow{w}Q' \ \wedge\ w\entails \mathsf{F}\}$ be the (non-empty) set of processes reachable from $Q$ via a transition with a (complete) label that satisfies $\mathsf{F}$. Since our processes are with guarded recursion, the set $\mathcal{Q}$ is finite. Let $\mathcal{Q} = \{Q'_1,...,Q'_n\}$. By hypothesis all processes in $\mathcal{Q}$ must not be bio-logically equivalent to $P'$, hence for any $i\in[1,n]$ there exists a bioHML formula $\mathsf{G}_i$ such that $P'\entails \mathsf{G}_i$ and $Q'_i\not\entails \mathsf{G}_i$ (if it was the opposite, $P'\not\entails \mathsf{H}_i$ and $Q'_i\entails \mathsf{H}_i$ for some $\mathsf{H}_i$, we can use the converse formula $\mathsf{G}_i\defeq \overline{\mathsf{H}}_i$). But then the formula $\mathsf{G}\defeq \langle \mathsf{F}\rangle(\mathsf{G}_1\wedge\dots\wedge \mathsf{G}_n)$ is such that $P\entails \mathsf{G}$ and $Q\not\entails \mathsf{G}$, contradicting the assumption $P\equiv_{\mathcal{L}_{\mathsf{F}}} Q$.
+Otherwise, let $\mathcal{Q}\defeq \{Q'~\mid~\exists w.\ Q\xRightarrow{w}Q' \ \wedge\ w\entails \mathsf{F}\}$ be the (non-empty) set of processes reachable from $Q$ via a transition with a (complete) label that satisfies $\mathsf{F}$. Since our processes are with guarded recursion, the set $\mathcal{Q}$ is finite. Let $\mathcal{Q} = \{Q'_1,...,Q'_n\}$. By hypothesis all processes in $\mathcal{Q}$ must not be bio-logically equivalent to $P'$, hence for any $i\in[1,n]$ there exists a bioHML formula $\mathsf{G}_i  \in \mathcal{L}_{\mathsf{F}}$ such that $P'\entails \mathsf{G}_i$ and $Q'_i\not\entails \mathsf{G}_i$ (if it was the opposite, $P'\not\entails \mathsf{H}_i$ and $Q'_i\entails \mathsf{H}_i$ for some $\mathsf{H}_i$, we can use the converse formula $\mathsf{G}_i\defeq \overline{\mathsf{H}}_i$). But then the formula $\mathsf{G}\defeq \langle \mathsf{F}\rangle(\mathsf{G}_1\wedge\dots\wedge \mathsf{G}_n)$ is such that $P\entails \mathsf{G}$ and $Q\not\entails \mathsf{G}$, contradicting the assumption $P\equiv_{\mathcal{L}_{\mathsf{F}}} Q$.
 
 \item
 If $\upsilon \not\entails \mathsf{F}$ then the proof is analogous to the previous case (by exploiting $\neg \mathsf{F}$) and thus omitted.

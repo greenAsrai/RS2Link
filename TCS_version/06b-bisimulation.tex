@@ -38,12 +38,12 @@ that allows us to formulate detailed and partial queries about what happened in 
 \begin{example} \label{properties_ex}
 For instance we would like to express properties about each step of the bio-simulation of a system like the ones below:
 \begin{enumerate}
-\item Has the entity $s_i$ been used by rule $r_j$ as reagent?
-\item Has the entity $s_i$ been blocked the application of  rule $r_j$?
-\item Has the entity $s_i$ been produced by rule $r_j$?
-\item Has the entity $s_i$ been produced by some rule?
+\item Has the entity $s_i$ been used by reaction $r_j$ as reagent?
+\item Has the entity $s_i$ been blocked the application of  reaction $r_j$?
+\item Has the entity $s_i$ been produced by reaction $r_j$?
+\item Has the entity $s_i$ been produced by some reaction?
 \item Has the entity $s_i$ been provided by the context? 
-\item Has the rule $r_j$ not been applied? 
+\item Has the reaction $r_j$ not been applied? 
 %\item Has the entity $s$ been used by some rule as reagent ?
 %\item Has the entity $s$ blocked  the application of some rules ?
 %\item Has the entity $s$ been produced ?
@@ -52,7 +52,7 @@ For instance we would like to express properties about each step of the bio-simu
 \end{enumerate}
 \end{example}
 
-As detailed before, in the following we assume that: (i) the context can be non-deterministic, otherwise it makes little sense to rely on bisimulation to observe the branching structure of system dynamics; (ii) we are interested in observing the names of the entities involved in the transitions and also the rules that have been applied, thus we assume top level restrictions are absent and rely on solid transitions only (with leftmost and rightmost silent actions).
+As detailed before, in the following we assume that: (i) the context can be non-deterministic, otherwise it makes little sense to rely on bisimulation to observe the branching structure of system dynamics; (ii) we are interested in observing the names of the entities involved in the transitions and also the reactions that have been applied, thus we assume top level restrictions are absent and rely on solid transitions only (with leftmost and rightmost silent actions).
 
 \subsection{Assertion language}
 
@@ -117,7 +117,7 @@ where $\eta \in \mathit{names}$ and $N\subseteq \mathit{names}$.
 % \{\wedge, \vee, \to \}$. 
 \end{definition}
 
-Roughly, an atomic assertion $\zeta$ denotes either a string composed by a single name $\eta$ (one of the symbols in the set $\mathit{names}$ for denoting a particular entity, rule, production or context), or
+Roughly, an atomic assertion $\zeta$ denotes either a string composed by a single name $\eta$ (one of the symbols in the set $\mathit{names}$ for denoting a particular entity, reaction, production or context), or
 the wildcard $?$ that stands for any symbol, or the pattern $[N]$ that stands for any string composed by a single symbol in the set $N$. Clearly $?$  is just a shorthand for $[\mathit{names}]$.
 We write $\mathbf{0}$ for $[\emptyset]$ and $[s_1,...,s_n]$ instead of $[\{s_1,...,s_n\}]$. 
 
@@ -189,8 +189,8 @@ where in 1, 2, 6 we exploit the fact that in a reaction $(R,I,P)$ the sets $R$ o
 
 The notion of bio-simulation builds on the above language of assertions to parameterize the induced equivalence on the property of interest. 
 Please recall that we have defined the behaviour of the context in a non deterministic way, thus 
-at each step, different possible sets of entities can be provided to the system and different sets of reaction can be enabled/disabled. 
-Bio-simulation can thus be used to compare the behaviour of different systems that share some of the reactions or entities or also to compare the behaviour of the same set of reaction rules when different contexts are provided.
+at each step, different possible sets of entities can be provided to the system and different sets of reactions can be enabled/disabled. 
+Bio-simulation can thus be used to compare the behaviour of different systems that share some of the reactions or entities or also to compare the behaviour of the same set of reactions when different contexts are provided.
 
 
 %situations where in the same conditions, two alternative (mutually exclusive) behaviors can happen.
