@@ -31,7 +31,7 @@ Here we consider the minimal deterministic transition system in Figure~\ref{fig:
 
 At the level of RSs, the set of entities to consider is the union of sets of states and of labels of the transition system.
 Moreover, there is one reaction for each transition: its reactant set consists of the source state and transition label, its inhibitor set includes every other state and label, and its product set is the singleton with the target state.
-For the transition system in Fig.~\ref{fig:lts}, we take $S = \{q,w,a,b\}$ and the reaction rules are as follows:\\
+For the transition system in Fig.~\ref{fig:lts}, we take $S = \{q,w,a,b\}$ and the reactions are as follows:\\
 \[
 \begin{array}{cl@{\hspace{1cm}} cl}
 1 \ &(\{q,a\},\{w,b\},\{w\}) & 2\ &(\{q,b\},\{w,a\},\{q\})\\
@@ -102,10 +102,10 @@ E(q,\widetilde{q})&\defeq & \sum_{h=1}^3 (\startchain{q_i}\chainedlink{q_o}{\noa
 \end{array}
 \]
 
-In fact the presence/absence of $q$ and $w$ will be exploited by at least one rule and at most three rules.
+In fact the presence/absence of $q$ and $w$ will be exploited by at least one reaction and at most three reactions.
 
 
-Here, for the entities $a$ and $b$ that can be provided by the context but not produced by the rules, we let:
+Here, for the entities $a$ and $b$ that can be provided by the context but not produced by  reactions, we let:
 \[
 \begin{array}{lcl@{\hspace{1cm}}lcl}
 P_a & \defeq & E(a,\widehat{a},\underline{a}) & 
@@ -179,8 +179,8 @@ Then, only the second reaction can be applied, and the transition carries the co
 %\end{array}
 \]}
 The parts in bold are provided by the entity processes, the other parts are provided by the processes encoding the reactions and by the process encoding the context (starting at $\mathit{cxt}$ and ending at $p_1$.
-In the label we can read that the rules $1$ and $4$ have been not executed because the entity $a$ is absent, 
-the rule $3$ has been not applied because the entity $w$ is absent, then only rule $2$ has been applied, and it has produced the entity $q$. Also,  the context provides entity $a$, that will be available in the next state, and not the entity $b$.
+In the label we can read that reactions $1$ and $4$ have been not executed because the entity $a$ is absent, 
+the reaction $3$ has been not applied because the entity $w$ is absent, then only reaction $2$ has been applied, and it has produced the entity $q$. Also,  the context provides entity $a$, that will be available in the next state, and not the entity $b$.
 Now, to let the label more readable, we show the result of the application of the function $flat(\cdot)$ to it:
 \[
 r_1~\overline{a}~r_2~q~b~\overline{w}~\overline{a}~r_3~\overline{a}~r_4~\overline{w}~\mathit{cxt}~\widehat{a}~\underline{b}~p_1~p_2~\widetilde{q}~p_3~p_4 .
@@ -199,13 +199,13 @@ In our example,
 %where 
 a gene $a$  codes for a protein $T$ when molecules 
 $G$ is present and $C$ is absent, and in the opposite situation $a$ codes for protein $T'$.
-This behavior is encoded in rules $1$ and $2$.
-Then, rule 3 codes for the production of $C$ when proteins $T$ and $F$ are present, and $T'$ absent;
-rule 4 codes for the production of $G$ when  proteins $T'$ is present and $F$ is absent.
+This behavior is encoded in reactions $1$ and $2$.
+Then, reaction $3$ codes for the production of $C$ when proteins $T$ and $F$ are present, and $T'$ absent;
+reaction $4$ codes for the production of $G$ when  proteins $T'$ is present and $F$ is absent.
 
-\paragraph{Encoding of the rules}
+\paragraph{Encoding of the reactions}
 
-The encoding of the rules for reactions is  given in a parametric way:
+The encoding of reactions is  given in a parametric way:
 \[
 \begin{array}{lcl}
 P_n(a,G,C,T) & \defeq &\pi_n(a,G,C,T).P_n(a,G,C,T)  \\
