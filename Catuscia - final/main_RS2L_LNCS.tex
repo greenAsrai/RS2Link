@@ -1,0 +1,154 @@
+\documentclass[runningheads]{llncs}
+%\pagestyle{plain}
+
+\usepackage{hyperref}
+%\usepackage{lineno}
+%\modulolinenumbers[5]
+
+%\journal{Theoretical Computer Science}
+
+%\usepackage{amsmath,amsthm,amssymb,amsfonts,thmtools,thm-restate}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{thmtools}
+\usepackage{thm-restate}
+\usepackage{tikz}
+\usepackage[normalem]{ulem}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%% Elsevier bibliography styles
+%%%%%%%%%%%%%%%%%%%%%%%
+%% To change the style, put a % in front of the second line of the current style and
+%% remove the % from the second line of the style you would like to use.
+%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Numbered
+%\bibliographystyle{model1-num-names}
+
+%% Numbered without titles
+%\bibliographystyle{model1a-num-names}
+
+%% Harvard
+%\bibliographystyle{model2-names.bst}\biboptions{authoryear}
+
+%% Vancouver numbered
+%\usepackage{numcompress}\bibliographystyle{model3-num-names}
+
+%% Vancouver name/year
+%\usepackage{numcompress}\bibliographystyle{model4-names}\biboptions{authoryear}
+
+%% APA style
+%\bibliographystyle{model5-names}\biboptions{authoryear}
+
+%% AMA style
+%\usepackage{numcompress}\bibliographystyle{model6-num-names}
+
+%% `Elsevier LaTeX' style
+%\bibliographystyle{elsarticle-num}
+%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%% Authors' packages, macros, environments
+%%%%%%%%%%%%%%%%%%%%%%%
+\input{macros}
+% \newtheorem{theorem}{Theorem}
+% \newtheorem{lemma}[theorem]{Lemma}
+% \newtheorem{proposition}[theorem]{Proposition}
+% \newtheorem{corollary}[theorem]{Corollary}
+% \newdefinition{definition}[theorem]{Definition}
+% \newdefinition{remark}[theorem]{Remark}
+% \newdefinition{example}[theorem]{Example}
+%\newproof{proof}{Proof}
+%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%% REDUCE VERTICAL SPACING FOR FLOATING FIGURES
+%\textfloatsep 5pt
+%\abovecaptionskip 5pt 
+%\belowcaptionskip\abovecaptionskip
+
+\frenchspacing 
+% forza LaTeX ad una spaziatura uniforme, invece di lasciare più spazio
+% alla fine dei punti fermi come da convenzione inglese
+ 
+\raggedbottom
+
+\begin{document}
+
+%\begin{frontmatter}
+
+\title{Enhancing reaction systems:\\ a process algebraic approach}
+%\title{Embedding Reaction Systems into {\tt link}-calculus}
+
+%% Group authors per affiliation:
+
+
+% \author[uniss]{Linda Brodo\corref{cor}}
+% \ead{brodo@uniss.it}
+% 
+% \author[unipi]{Roberto Bruni}
+% \ead{bruni@di.unipi.it}
+% 
+% \author[unisi]{Moreno Falaschi}
+% \ead{falaschi@unisi.it}
+% 
+% \address[unipi]{Dipartimento di Informatica, Universit\`{a} di Pisa, Italy}
+% \address[uniss]{di Scienze economiche e aziendali,   Universit\`a di Sassari, Italy}
+% \address[unisi]{Dipartimento di Ingegneria,   Universit\`a di Siena, Italy}
+% 
+% \cortext[cor]{Corresponding Author}
+
+
+\author{ Linda Brodo\inst{1}\thanks{corresponding author}\orcidID{0000-0002-4455-2419} \and Roberto Bruni\inst{2}\orcidID{0000-0002-7771-4154} \and Moreno 
+Falaschi\inst{3}\orcidID{0000-0002-6659-3828}}
+
+\authorrunning{L. Brodo et al.}
+
+
+\institute{Dipartimento di Scienze economiche e aziendali,
+          Universit\`a di Sassari, Italy
+	   \email{brodo@uniss.it.}\\
+	   \and
+	   Dipartimento di Informatica,
+	   Universit\`{a} di Pisa, Italy
+	   \email{bruni@di.unipi.it.} \\
+	   \and
+           Dipartimento di Ingegneria dell'Informazione e Scienze Matematiche\\
+           Universit\`a di Siena, Italy 
+	   \email{moreno.falaschi@unisi.it}
+           %\\
+           %\email{moreno.falaschi@unisi.it.}
+	   }
+	   %\date{}
+\maketitle
+
+
+%\end{frontmatter}
+
+%\linenumbers
+
+\begin{abstract}
+\input{00-abstract}
+
+\keywords{Process algebras \and Reaction systems \and Multi-party 
+interaction.}
+\end{abstract}
+
+\input{01-introduction}
+\input{02-ReactionSystem}
+%\input{03-background-links-CNA}
+\input{04-CCNA}
+\input{05-translation}
+\input{06-exampleLactose}
+\input{07-discussion}
+\input{08-conclusion}
+%\input{06-conclusion}
+%\section{References}
+\bibliography{biblio_CNA}
+%\bibliographystyle{abbrv}
+\bibliographystyle{splncs04}
+%\appendix
+%\input{09-appendix}
+
+\end{document}
+

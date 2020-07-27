@@ -1,0 +1,33 @@
+% !TEX root = ./main_RS2L_LNCS.tex
+
+\section{Conclusion}\label{sec:conclusion}
+
+In this paper we have introduced a variant of the {\tt link}-calculus
+where prefixes are link chains and no more single links, as it was 
+briefly described in the future work section in~\cite{BBB17}.
+This variant allowed us to define 
+%shown 
+an elegant embedding of reaction systems,
+an emerging formalism to model computationally biochemical systems.
+%into multilink processes.  
+This translation shows several benefits.
+For instance, the context behaviour can also be expressed recursively. 
+Entity mutations can be expressed easily. Reaction systems can
+communicate between them.
+
+We believe that our embedding can contribute to extend the applications
+of reaction systems to diverse fields of computer science, and life
+sciences.
+As we have already mentioned, the evolution of each process resulting from our embedding 
+is deterministic, thus we do not have the problem of having infinitely many transitions
+in the produced labelled transition system. In any case, we can exploit the implementation of  the symbolic semantics of the {\tt link}-calculus~\cite{BrodoO17} that can be found in~\cite{tool}.
+
+
+As future work, we plan to implement a prototype of our framework,
+with an automatic translation from RSs to  {\tt link}-calculus. 
+We believe that our work can also help to extend the framework
+of RSs towards a model which can improve the communication
+between different RSs. We also believe that our work can make 
+possible to investigate how to apply formal techniques to prove 
+properties of the
+modeled systems \cite{CFHOT15,OCHF16,BBGLBH2017}.

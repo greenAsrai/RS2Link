@@ -1,0 +1,127 @@
+
+
+Dear Roberto,
+
+ On behalf of the Organization Committee for Catuscia Palamidessi's Festschrift, we are pleased to inform you that your paper 
+
+9: Enhancing reaction systems: a process algebraic approach
+
+has been accepted for publication in the LNCS volume. 
+
+This email includes comments by the reviewers. Please take them carefully into account when preparing your final version. 
+
+The deadline for submitting the camera ready version is ***July 15***.  This is a firm deadline in order to have the volume  published and printed by the day of the event. 
+
+Please follow carefully the LNCS instructions to prepare the manuscript (https://www.springer.com/de/it-informatik/lncs/conference-proceedings-guidelines). The final version, including the source files, must be uploaded to Easychair. 
+
+In July, we will send you more information about the event. In particular, the exact date (probably the second week of November) and the schedule. 
+
+
+Thank you again for your contribution.
+
+Yours,
+  Carlos, Frank, Kostas and Mario,
+  Chairs of FC'19.
+
+SUBMISSION: 9
+TITLE: Enhancing reaction systems: a process algebraic approach
+
+
+----------------------- REVIEW 1 ---------------------
+SUBMISSION: 9
+TITLE: Enhancing reaction systems: a process algebraic approach
+AUTHORS: Linda Brodo, Roberto Bruni and Moreno Falaschi
+
+----------- Overall evaluation -----------
+SCORE: 2 (accept)
+----- TEXT:
+The authors illustrate how to encode reaction systems into the link-calculus, a 
+powerful formalism previously used to encode several concurrent calculi.
+The authors also demonstrate the correctness and completeness of the encoding.
+The result is interesting because the target language is amenable to automatic execution and verification.
+
+I have a couple of suggestions for the authors to improve the presentation:
+
+1) It should be very helpful to add a comment about the fact that the encoding is
+deterministic (perhaps near the end of section 4). Reactive systems are nondeterministic:
+a rule might produce a molecule that inhibits another one, which is active. What 
+is the behaviour of the encoded process, in this case?
+
+2) Reactive systems are open systems, while the encoding somehow "close" them 
+with respect to some context. A discussion about this issue may be helpful.
+
+3) I also suggest to move the examples in the corresponding sections (because the
+notation is quite heavy and example may help in parsing the formulas). In particular,
+the lac operon RS formalization should be moved in Section 2, and so on.
+
+MINOR REMARKS
+
+pag 2, line 5: any available ==> any one available
+pag 2, line -8: and illustrating a lac ==>  and illustrates a lac
+pag 4, Definition5: before the "Then" you need a dot
+pag 5, rule (Sum): the premise should have j \in I
+Section 4: please verify all the "ctx" and "cxt" and unify them
+pag 8, Lemma 1: If exists ==> If there exists
+
+
+
+----------------------- REVIEW 2 ---------------------
+SUBMISSION: 9
+TITLE: Enhancing reaction systems: a process algebraic approach
+AUTHORS: Linda Brodo, Roberto Bruni and Moreno Falaschi
+
+----------- Overall evaluation -----------
+SCORE: 2 (accept)
+----- TEXT:
+The authors propose an encoding of Reactive Systems (RS) into a variant of the link calculus. RS is a rewriting system where reactions can check the absence or presence of certain components in the context/system. Rules produce new components whenever the inhibitors are absent and the needed components are present. 
+
+The encoding exploits the ability of the link calculus to perform multi-synchronizations among processes. By carefully choosing the right labels for the components and restricting those names, the proposed multi-synchronization adequately captures one step in the  transition system of the encoded RS. 
+
+A compelling example of RS is presented. Moreover, it is shown that the encoding can be useful to give a more general definition of RS where, for instance, 2 RSs can interact (one specifies the context of the other) and the context does not need to be a finite process but recursive definitions can be used instead.  
+
+Here some question/comments that may help to improve the paper:
+
+ * Is the translation deterministic ? Every execution of the RS is deterministic ? Definition 3 (the assumption "Threshold nature of resources") seems to avoid conflicts between different reactions competing for the same resource. Please clarify this point. 
+
+ * I did not understand well the purpose of Section 5: The encoding was defined and then, for any RS, the resulting process must be the same (systematically computed with the encoding proposed). I would suggest to describe the system, avoid the translations (or just add one case as a mean of example) and add an example of transition (as the one in Pg 13). 
+
+ * I did not understand very well the purpose of Ctx in the encoding. If the process can run under an arbitrary context, why do you define a particular one ? For instance, you are "forced" to specify a particular context in the example of Section 5 where lactose is present while glucose is absent. Maybe this is because the particular notion of "execution" of RS (Definition 4) where a particular "input" gamma must be provided. Can the process algebra machinery handle better this aspect ? 
+ 
+ * Sect 7: It seems that the link calculus presented here is new (where prefixes are also links). A more detailed account of that must be given. In particular, do the original properties of the link calculus hold for this new version ? 
+
+Minor comments:
+
+* l20 : , molecular chemistry -> and missing
+* l34: getting -> obtaining
+* l60 and illustrating => . It illustrates ? or, Section 5 describes the lac operon, a more compelling example ...
+* l65: , and concludes => and concludes
+* l70: but also for the contributions which is giving -> but also for the contributions given ...
+* l90: For the sake of simplicity... and wlog (without lost of generality), ...
+* l95: they represent -> and they represent 
+* l95: the set of reactions of A  .. that "A" must be \mathcal{A} ? 
+* l130: This definition may be omitted (it is enough to say "For technical reasons, we extend the notion of an interactive process to deal with infinite sequences in the obvious way").  Moreover, you can profit this sentence to make a link to one of the results of the paper (Section 6.1): context that can be defined recursively (and then, possibly with infinite behavior). 
+* l135: \mathcal{A} was already used to define RS (Definition 3)... maybe you can change A in Def 3 with \mathcal{R}. 
+* Fig1: Don't you need a rule for P[\phi] ? -- relabelling --
+* l165: puts as label a => uses, as a label, a possible contraction...
+* l165: defining process for a constant => the process defined by a constant ?
+* Definition 8: I would not call "half right" a definition. Better to say that \a denotes the half right of a link x\a for any x ? 
+* Definition 9: R should be a list (and not a set). Otherwise, it is not possible to guarantee the "ordering" in the resulting blocks.
+* l200: ">=0" is missing in the first summation (for h). 
+* l205. In fact, the bound is needed, otherwise, you are introducing infinite summations in the calculus (that can be problematic). 
+* l205. In the continuation \overline{P_s}, the parameter that is replaced is the first one (s vs \overline{s}). In that case, the presence of s in the *system* is really the presence of s in the *context* ? 
+* Process for reactions: It seems that the subscript is missing in aj (a_j) -- several occurrences-- . 
+* Lemma 1: If P --> P' for some P', then ... or if there exists P' ... 
+* l220 saying if, the entity => determining whether the entity ...
+* Please check the paragraph before Definition 10. 
+* l250: check the notation a = (s1, ,s1). Moreover, it seems that s1, s2 are not in the math environment. 
+* l235: for when s is absent => when s is absent
+* Corollary 1: There is a (unexpected) superscript  "j" in the second line. 
+* l335 : to optimizing the code => to optimize the code
+* l354:  entities, the communication => and the communication 
+* l355: in each reactions => in each reaction 
+* Section 6.2. There are some ai, si without math environment. 
+* Example 2: rs1 and rs2 lack of math environment. 
+* l385:  Use "," or ";" instead of "." when listing the benefits.
+
+
+

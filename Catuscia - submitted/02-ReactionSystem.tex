@@ -1,0 +1,169 @@
+% !TEX root = ./main_RS2L_LNCS.tex
+
+\section{Reaction Systems}
+\label{sec:rs}
+
+Natural Computing is concerned with human-designed computing inspired by 
+nature as well as with computation taking place in nature.
+The theory of Reaction Systems~\cite{BEMR11} 
+was born in the field of Natural Computing 
+to model the behaviour of biochemical reactions taking place in living cells. 
+Despite its initial aim, this formalism has shown to be quite useful 
+not only for modeling biological phenomena, but also for
+the contributions which is giving to computer science~\cite{MPR15}, 
+theory of computing, 
+mathematics, biology~\cite{ABP14,CMMBM12,Az17,BarbutiGLM16}, 
+and molecular chemistry~\cite{OY16}.
+%
+Here we briefly review the basic notions of RSs, see~\cite{BEMR11} for more details.
+
+The mechanisms that are at the basis of biochemical reactions and thus 
+regulate the functioning of a living cell, are 
+{\em facilitation} and {\em inhibition}. These mechanisms are 
+reflected in the basic definitions of Reaction Systems.
+
+\begin{definition}[Reaction]
+A reaction is a triplet $a = (R,I,P)$, where $R, I, P$ are finite,  
+non empty sets  and
+$R \cap I = \emptyset$. If $S$ is a set such that  $R, I, P \subseteq S$, 
+then $a$ is a reaction in $S$.
+\end{definition}
+
+The sets $R, I, P$ are also written $R_a, I_a, P_a$ and called the 
+\emph{reactant set} of $a$, the  
+\emph{inhibitor set} of $a$, and the \emph{product set} of $a$, respectively. 
+All reactants are needed for the reaction to take place.
+Any inhibitor blocks the reaction if it is present. Products are the outcome of the reaction.
+Also,  $R_a \cup I_a$ is the set of the resources of $a$ and $ rac(S)$
+denotes the set of all reactions in $S$.
+%
+Because $R$ and $I$ are non empty, all products are produced from at least one reactant and every reaction can be inhibited in some way. 
+Sometimes artificial inhibitors are used that are never produced by any reaction.
+For the sake of simplicity, in some examples, we will allow $I$ to be empty.
+%Note that since $R_a$ and $I_a$ are both nonempty, we always 
+%have $|M_a| \geq 2$.
+
+\begin{definition}[Reaction System]
+A Reaction System (RS) is an ordered pair ${\cal A} = (S, A)$ 
+such that $S$ is a finite set, and $A \subseteq rac(S)$.
+%The set $S$ is called the background (set) of $A$.\\
+%The main notion concerning the functioning of a reaction system is defined 
+%as follows.
+\end{definition}
+
+The set $S$ is called the \emph{background set} of ${\cal A}$, its elements are called \emph{entities},
+they represent molecular substances (e.g., atoms, ions, molecules) that may be present
+in the states of a biochemical system.
+% modeled by $A$. 
+The set $A$ is the set of \emph{reactions} of $A$.
+Since $S$ is finite, so is $A$: 
+we denote by $|A|$ the number of reactions in $A$.
+
+\begin{definition}[Reaction Result]
+Let $T$ be a finite set.
+\begin{enumerate}
+\item Let $a$ be a reaction. Then $a$ is enabled by $T$, denoted by $en_a(T)$, 
+if $R_a \subseteq T$
+and $I_a \cap T = \emptyset$. The result of $a$ on $T$, denoted by $res_a(T)$, 
+is defined by:
+$res_a(T) =P_a$, if $en_a(T)$, and $res_a(T) = \emptyset$ otherwise.
+\item Let $A$ be a finite set of reactions. The result of $A$ on $T$, denoted 
+by $res_A(T)$,  is defined
+by: $res_A(T) = \bigcup_{a \in A} res_a(T)$.
+\end{enumerate}
+\end{definition}
+
+
+%\medskip
+%\noindent
+%{\bf Important Assumptions}\\
+The theory of Reaction Systems is based on the following assumptions.
+\begin{itemize}
+\item {\bf No permanency.} An entity of a set $T$ vanishes unless it is sustained 
+by a reaction. This reflects the fact that a living cell would die for lack 
+of energy, without chemical reactions.
+\item {\bf No counting.} The basic model of RSs is very abstract and 
+qualitative, i.e. the quantity of entities that are present 
+in a cell is not taken into account. 
+%It is just analyzed the behavior of 
+%the system based on the reactions that take place.
+\item {\bf Threshold nature of resources.} From the 
+previous item,
+we assume that either an entity is available and there is enough of it 
+(i.e. there are no conflicts), or it is not available at all.
+\end{itemize}
+
+
+
+
+The dynamic behaviour of a RS is formalized in terms of 
+{\em interactive processes}.
+
+
+\begin{definition}[Interactive Process]
+Let ${\cal A} = (S, A)$ be a RS and let $n \geq 0$. 
+An $n$-step
+\emph{interactive process} in ${\cal A}$ is a pair $\pi = (\gamma, \delta)$ of 
+finite sequences s.t.
+%
+%\begin{center}
+$ \gamma=\{C_i\}_{i\in[0,n]}$  and $\delta=\{D_i\}_{i\in[0,n]} $
+%$\gamma = C_0, \dots , C_n$ and $\delta = D_0, \dots , D_n$, 
+%\end{center}
+%\noindent
+where 
+$ C_{i}, D_{i}  \subseteq S$ for any $i\in[0,n]$, $D_0 = \emptyset$, and 
+%$C_0,\dots, C_n, D_0,\dots, D_n  \subseteq S$, $D_0 = \emptyset$, and 
+$D_i =  res_{\cal A}(D_{i-1} \cup C_{i-1})$ for any $i \in [1,n]$.
+% $i \in \{1,\dots, n\}$.
+\end{definition}
+
+Living cells are seen as open systems that continuously react with 
+the external environment, in discrete steps. 
+The sequence $\gamma$ is the {\em context sequence} of $\pi$ and 
+represents the influence of the environment on the Reaction System.
+The sequence $\delta$ is
+the {\em result sequence} of $\pi$ and it is entirely determined by $\gamma$ and $A$.
+%
+The sequence $\tau = W_{0}, \ldots, W_{n}$ with $W_{i} = C_{i} \cup D_{i}$, 
+for any $i \in [0, n]$
+%, and $D_{0} = \emptyset$ 
+is called a \emph{state sequence}.
+%
+Each state $W_{i}$ in a state sequence
+is the union of two sets: the context $C_{i}$
+at step $i$ and the result of the previous step.
+
+%\begin{definition}[State Sequence]
+%\label{def:statesequence}
+% A {\em state sequence} $\tau$ of an interactive process $\pi$:
+%
+%\begin{center}
+%
+%\end{center}
+%\end{definition}
+
+%\begin{definition} 
+%A process $\pi$, or a state 
+%sequence $\tau = W_{0}, \ldots, W_{n}$, is said to be 
+%{\em context-independent} when $C_{i} 
+%\subseteq D_{i}$, $\forall i \in \{i, \ldots, n \}$.
+  %\end{definition}
+
+For technical reasons, we extend the notion of an interactive process to deal with 
+infinite sequences.
+
+\begin{definition}[extended interactive process]
+Let ${\cal A}=(S,A)$ be a RS, and let $\pi =(\gamma,\delta)$  be an  $n$-step interactive process,
+with $ \gamma=\{C_i\}_{i\in[0,n]}$ and  $\delta=\{D_i\}_{i\in[0,n]}$
+%, $\delta= D_0, \dots D_n$.
+Then, let $\pi'= (\gamma',\delta')$ be the extended interactive process of  $\pi =(\gamma,\delta)$,
+defined as $  \gamma'=\{C_i'\}_{i\in\mathbb{N}}$, $\delta'=\{D_i'\}_{i\in\mathbb{N}}$, where
+ $C_j' = C_j$ for $j\in[0,n]$ and $C_j' =\emptyset$ for $j>n$,   $D_0' = D_0$ and  $D_j' = res_A(D_{j-1}' \cup C_{j-1}')$ for $j\geq 1$.
+\end{definition}
+
+
+
+
+
+

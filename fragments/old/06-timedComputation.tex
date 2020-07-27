@@ -1,0 +1,40 @@
+% !TEX root = ./main_RS2L.tex
+
+\section{Timed Computation}
+
+In the classical Reaction Systems, the actual state is the union of the elements resulting from the 
+previous reaction, and of the elements that the context can provide.
+
+The context can provides elements at certain points along the computation. Here we want to 
+simulate this behaviour by introducing a technique that we call \emph{timed programmed computation}.
+We introduce a two step computation: one step correspond to the transition simulating the reaction in a reaction system, the other step simulates the time passing.
+Within this framework, we can introduce macros for delaying (and programming in advance) the entry
+of those elements that in the Reaction Systems are provided by the context at certain points.
+The macros $MACRO_j(P_s,n)$ are univocally numbered, and takes as parameters the program  $P_s$(simulating the $s$ element in the RS), and the delay $n$. Then, after $n$ computation steps  $MACRO_j(P_s,n)$  makes program $\overline{P}_s$ to turn into $P_s$, if is not already in the state $P_s$.\\
+The c\CNA code for $MACRO_j(P_s,n)$ follows:
+\[
+\begin{array}{lcl}
+MACRO_j(P_s,n) &\defeq & \link{t_j}{t_{j+1}}.MACRO_j(P_s,n-1)\\
+MACRO_j(P_s,0) & \defeq & \link{t_j}{act_{s_i}}.\nil | \link{act_{s_o}}{t_{j+1}}.FWD_j\\
+FWD_j & \defeq & \link{t_j}{t_{j+1}}.FWD_j\\
+\end{array}
+\] 
+where $j = w$ and $w$ is the number of macro processes.\\
+Then, we add an an additional process $START$ that decides the alternation between a RS computational step and a step simulates the time passing.
+
+\[
+\begin{array}{lcl}
+START& \defeq &\link{\silent}{r_1}.\link{\silent}{t_1}.START
+\end{array}
+\]
+
+Finally, we have to slightly  modify the code of $P_s$ processes, in both  active ($P_s$) or inactive ($\overline{P_s}$) state, corresponding to each element $s \in S$ of a RS system:
+\[
+\begin{array}{lcl@{\hspace {1cm}} lcl}
+P_s &\defeq &   \dots  & \overline{P}_s &\defeq &   \dots \\
+ && +  & && +\\
+ && \link{act_{s_i}}{act_{s_o}}.P_s &
+  && \link{act_{s_i}}{act_{s_o}}.P_s
+\end{array}
+\] 
+

@@ -1,0 +1,223 @@
+% !TEX root = ./main_RS2L_LNCS.tex
+%\section{Discussion}
+
+\section{Enhanced  Reaction Systems}
+\label{sec:discussion}
+
+Our encoding increases the expressivity of  RS  concerning:
+the behaviour of the context, the possibility of alternative behaviour of
+mutated entities and the communication between two different reaction systems.
+It is important to note that our encoding guarantees that from each state, 
+in the  c\CNA \ transition system, only one transition comes out, 
+as the dynamics is totally deterministic.
+
+\subsection{Recursive contexts}
+In RS, the behaviour of the context is finite. For the first $n$ steps, it is specified 
+ which are the entities that are provided from the context. 
+Using c\CNA\ we can describe in a natural way the behaviour of the context in a recursive way. 
+Then, the context behaviour would not necessarily end after $n$ steps,
+and  could be infinite.
+For example, in an extended interactive process, we may want that the entity $s$ is 
+intermittently provided by the context every two steps: 
+\[
+\begin{array}{lcll}
+Cxt_s & \defeq &  \startchain{cxt_j}\chainedlink{\hat{s}_i}{\noact}\chainedlink{\noact}{\hat{s}_o}\chainend{cxt_{j+1}}.Cxt_{s'}, &\mbox{ context provides $s$;} \\
+Cxt_{s'} & \defeq & \startchain{cxt_j}\chainedlink{\underline{s}_i}{\noact}\chainedlink{\noact}{\underline{s}_o}\chainend{cxt_{j+1}}.Cxt_{s''},& \mbox{ context doesn't provide $s$;} \\
+Cxt_{s''} & \defeq & \startchain{cxt_j}\chainedlink{\underline{s}_i}{\noact}\chainedlink{\noact}{\underline{s}_o}\chainend{cxt_{j+1}}.Cxt_{s}, & \mbox{ context doesn't provide $s$.} \\
+\end{array}
+\]
+
+\subsection{Mutating entities} 
+In RS, when an entity is present, it can potentially be involved in each reaction where it is required.
+With a few more lines of code, in c\CNA~it is possible to describe the behaviour of a mutation of 
+an entity, in a way that the mutated version of the entity can take 
+part to only a subset of the rules requiring  the  \emph{normal version} of the entity.
+For example, let us assume that entity $s1$ is consumed by reactions $a1$ and $a2$.
+Reaction $a1$ produces $s1$ if $s2$ is present, otherwise $a1$ produces a mutated version of $s1$, 
+say $s1'$.
+When $s1'$ is produced, reaction $a1$ behaves in the same way as if $s1$ would be absent, whereas $a2$
+recognises the presence of $s1'$ and behaves in the same way as if $s1$ would be present.
+Technically, in both cases it is enough to add one more non 
+deterministic choice in the code of $P_{a1}$ and $P_{a2}$. 
+
+
+\subsection{Communicating reaction systems} 
+We sketch how it is possible to program two RS encodings, in a way that 
+the entities that usually come from context of one RS will be provided instead from the other RS. 
+
+%Here we present a a simple example showing how it is possible to implement in c\CNA\ a 
+%two RSs model where a subset of the entities of one RS is provided by the second one and not 
+%provided by the context.
+
+\begin{example}
+\label{ex:twoRS}
+Let  $rs1$ and $rs2$ be two RSs, defined by the rules in Table~\ref{tab:rules}.
+%such that $rs2$ provides the entity $s1$ to $rs1$.
+
+
+\begin{table}[t]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+$rs1$  & $rs2$ \\
+\hline
+%$r1_1=(s1,\ , s2)$ & $r2_1=(s3,\  ,s1)$\\
+$a_1=(s,\ , x)$ & $a_2=(y,\  ,s)$\\
+%$r1_2=(\ , s2,s1)$ & $r2_2=(s1,\ ,s3)$\\
+\hline 
+\end{tabular}
+\caption{The two reaction systems $rs1$ and $rs2$.}
+\label{tab:rules}
+\end{table}
+ \noindent
+Now, we set our example such that the two contexts, for  $rs1$ and $rs2$, do not provide any entities.
+We also assume that entity $s$ in $rs1$ is provided by $rs2$, as $rs2$ produces a quantity of $s$ that is enough for $rs1$ and $rs2$.
+For technical reasons, we can not use the same name for  $s$ in both the two RSs, then we use the name $ss$ in $rs2$.
+%
+We need to modify our translation technique to suite this new setting. 
+As we do not model contexts, we introduce  \emph{dummy} channel names $dx$ and $dss$ to model the case $x$ and $ss$ are not produced.
+%absence of entities. 
+Also, thanks to the simplicity of the example, we can leave out the use of the   $p_i$ channels. This streamlining does not affect the programming technique we propose to make two RSs communicate.
+%Thus, there will be no $Cxt$ processes and we manage the code in a way that $rs1$ will receive the entity $s1$ from $rs2$. 
+%Please also note that, for our simple example, we do not have anymore to specify the all steps
+%of a interactive system, as the communication mechanism from $rs2$ to $rs1$ will generate an infinite
+%behaviour.
+%\noindent
+%First, we translate the rules in $rs1$:
+First, we translate the reaction in $rs1$:
+\[
+\begin{array}{lcl}
+%\llbracket r1_1\rrbracket \defeq P_{r1_1}&\defeq &\startchain{\silent}\chainedlink{s1}{\noact}\chainedlink{\noact}{s1}\chainedlink{\tilde{s2}}{\noact}\chainedlink{\noact}{\tilde{s2}}\chainend{r1_2}.P_{r1_1} +
+%\startchain{\silent}\chainedlink{\overline{s1}}{\noact}\chainedlink{\noact}{\overline{s1}}\chainend{r1_2}.P_{r1_1}\\
+\llbracket a_1\rrbracket \defeq P_{a_1}&\defeq &
+\startchain{\silent}\chainedlink{s_i}{{\color{blue}\noact}}\chainedlink{{\color{blue}\noact}}{s_o}\chainedlink{\tilde{x}_i}{{\color{gray}\noact}}\chainedlink{{\color{gray}\noact}}{\tilde{x}_o}\chainend{a_2}.P_{a_1} +
+\startchain{\silent}\chainedlink{\overline{s}_i}{\noact}\chainedlink{\noact}{\overline{s}_o}    \chainedlink{dx_i}{\noact}\chainedlink{\noact}{dx_o}\chainend{a_2}.P_{a_1}\\
+%\end{array}
+%\]
+%\\
+%
+%\begin{array}{lcl}
+%\llbracket r1_2\rrbracket \defeq P_{r1_2}&\defeq &\startchain{r1_2}\chainedlink{\overline{s2}}{\noact}\chainedlink{\noact}{\overline{s2}}\chainedlink{\tilde{s1}}{\noact}\chainedlink{\noact}{\tilde{s1}}\chainend{r2_1}.P_{r2_1} +
+%\startchain{r1_2}\chainedlink{s2}{\noact}\chainedlink{\noact}{s2}\chainend{r2_1}.P_{r2_1}\\
+\end{array}
+\]
+
+\noindent
+Please note, that prefixes of process $P_{a_1}$ end with the channel name $a_2$, as the link chain is now connected with the  reaction of  $rs2$.
+The translation for the entities follows.
+\[
+\begin{array}{lclcl@{\qquad}lclcl}
+\llbracket s \rrbracket &\defeq &P_{s}&\defeq &\startchain{{\color{blue}s_i}}\chainedlink{{\color{blue}s_o}}{\noact}\chainedlink{\noact}{{\color{blue}\hat{s}_i}}\chainend{{\color{blue}\hat{s}_o}}.P_{s} + \startchain{s_i}\chainend{s_o}.\overline{P_{s}}
+&
+%\begin{array}{lclclll}
+\llbracket x \rrbracket &\defeq& P_{x}&\defeq &\startchain{\tilde{x}_i}\chainend{\tilde{x}_o}.P_{x} +  \startchain{dx_i}\chainend{dx_o}.\overline{P_{x}}\\
+%\\
+%&&\overline{P_{s2}}&\defeq &\startchain{\overline{s2}}\chainedlink{\overline{s2}}{\noact}\chainedlink{\noact}{\tilde{s2}}\chainend{\tilde{s2}}.P_{s2} +
+%\startchain{\overline{s2}}\chainend{\overline{s2}}.\overline{P_{s2}}\\
+%\\
+%\\
+&&\overline{P_{s}}&\defeq &\startchain{\overline{s}_i}\chainedlink{\overline{s}_o}{\noact}\chainedlink{\noact}{\hat{s}_i}\chainend{\hat{s}_o}.P_{s}+\startchain{\overline{s}_i}\chainend{\overline{s}_i}.\overline{P_{s}}
+&
+&& \overline{P_{x}}&\defeq &\startchain{{\color{gray}\tilde{x}_i}}\chainend{{\color{gray}\tilde{x}_o}}.P_{x} +  \startchain{dx_i}\chainend{dx_o}.\overline{P_{x}}\\
+%\end{array}
+%\]
+%
+%\[
+
+\end{array}
+\]
+
+
+%\[
+%\begin{array}{lclclll}
+%\llbracket s2 \rrbracket &\defeq& P_{s2}&\defeq &\startchain{s2}\chainedlink{s2}{\noact}\chainedlink{\noact}{\tilde{s2}}\chainend{\tilde{s2}}.P_{s2} +  \startchain{s2}\chainend{s2}.\overline{P_{s2}}\\
+%%\\
+%&&\overline{P_{s2}}&\defeq &\startchain{\overline{s2}}\chainedlink{\overline{s2}}{\noact}\chainedlink{\noact}{\tilde{s2}}\chainend{\tilde{s2}}.P_{s2} +
+%\startchain{\overline{s2}}\chainend{\overline{s2}}.\overline{P_{s2}}\\
+%
+%\end{array}
+%\]
+
+
+\noindent
+The translation for the $rs2$ follows.
+
+\[
+\begin{array}{lcl}
+\llbracket a_2\rrbracket \defeq P_{a_2}&\defeq &\startchain{a_2}\chainedlink{y_i}{{\color{gray}\noact}}\chainedlink{{\color{gray}\noact}}{y_o}\chainedlink{\tilde{ss}_i}{{\color{red}\noact}}\chainedlink{{\color{red}\noact}}{\tilde{ss}_o}\chainend{\silent}.P_{a_2}+
+\startchain{a_2}\chainedlink{\overline{y}_i}{\noact}\chainedlink{\noact}{\overline{y}_o}    
+\chainedlink{dss_i}{\noact}\chainedlink{\noact}{dss_o}\chainend{\silent}.P_{a_2}\\
+%\end{array}
+%\]
+%
+%\[
+%\begin{array}{lcl}
+%\llbracket r2_2\rrbracket \defeq P_{r2_2}&\defeq &\startchain{r2_2}\chainedlink{ss1}{\noact}\chainedlink{\noact}{ss1}\chainedlink{\tilde{s3}}{\noact}\chainedlink{\noact}{\tilde{s3}}\chainend{\silent}.P_{r2_2}
+%+
+%\startchain{r2_2}\chainedlink{\overline{ss1}}{\noact}\chainedlink{\noact}{\overline{ss1}}\chainend{\silent}.P_{r2_2}\\
+\end{array}
+\]
+\noindent
+In the translation of the entities in  $rs2$, we introduce the mechanism that allows the entity
+$s$ ($ss$ in $rs2$) to be provided in $rs1$. Every time $ss$ is produced in $rs2$,  a virtual link is
+created to synchronise with $rs1$   on link $\link{\hat{s}_i}{\hat{s}_o}$:
+\[
+\begin{array}{lclcl@{\qquad} lclcl}
+\llbracket ss \rrbracket& \defeq& P_{ss}&\defeq &\startchain{\tilde{ss}_i}\chainedlink{\hat{s}_i}{\noact}\chainedlink{\noact}{\hat{s}_o}\chainend{\tilde{ss}_o}.P_{ss}+
+\startchain{dss_i}   \chainend{dss_o}.\overline{P_{ss}}
+&
+\llbracket y\rrbracket&\defeq & P_{y}&\defeq &\startchain{{\color{gray}y_i}}\chainend{{\color{gray}y_o}}.\overline{P_{y}} \\
+%\end{array}
+%\]
+%\[
+%\begin{array}{lcllcl}
+&&\overline{P_{ss}}&\defeq &\startchain{{\color{red}\tilde{ss}_i}}\chainedlink{{\color{red}\hat{s}_i}}{{\color{blue}\noact}}\chainedlink{{\color{blue}\noact}}{{\color{red}\hat{s}_o}}\chainend{{\color{red}\tilde{ss}_o}}.P_{ss}
++
+\startchain{dss_i}\chainend{dss_o}.\overline{P_{ss}}
+&
+&&\overline{P_{y}}&\defeq &
+%\startchain{\overline{y}_i}\chainedlink{\overline{y}_o}{\noact}\chainedlink{\noact}{\tilde{y}_i}\chainend{\tilde{y}_o}.P_{y}
+%+ 
+\startchain{\overline{y}_i}\chainend{\overline{y}_o}.\overline{P_{y}}
+\end{array}
+\]
+%\[
+%\begin{array}{lcllcl}
+
+%\end{array}
+%\]
+\end{example}
+
+\noindent
+We now assume that the initial system is $S \defeq \restrict{names}(P_{a_1}|P_{a_2}|P_s|P_y|\overline{P_x}|\overline{P_{ss}})$, i.e.
+only entities $s$ and $y$ are present. Now, the only possible transition has  the following label (that we report without restriction):
+\[
+\startchain{\silent}\chainedlink{s_i}{{\color{blue}s_i}}\chainedlink{{\color{blue}s_o}}{s_o}\chainedlink{\tilde{x}_i}{{\color{gray}\tilde{x}_i}}\chainedlink{{\color{gray}\tilde{x}_o}}{\tilde{x}_o} \chainedlink{a_2}{a_2}\chainedlink{y_i}{ {\color{gray}y_i}}\chainedlink{{\color{gray}y_o}}{y_o}\chainedlink{\tilde{ss}_i}{{\color{red}\tilde{ss}_i}}
+\chainedlink{{\color{red}\hat{s}_i}}{{\color{blue}\hat{s}_i}}
+\chainedlink{{\color{blue}\hat{s}_o}}{{\color{red}\hat{s}_o}}
+\chainedlink{{\color{red}\tilde{ss}_o}}{\tilde{ss}_o}\chainend{\silent},
+\]
+where the black links belong to the prefixes of $P_{a_1}$, and $P_{a_2}$, the blue links belong to $P_s$, the gray links belong to $P_y$, and $\overline{P_x}$ and the red links belong to $\overline{P_{ss}}$.
+After the execution, the entity $s$ is still present in $rs1$ as it has been provided by $rs2$.\\
+
+As we have briefly sketched, our model of two 
+\emph{communicating reaction systems} 
+can enable the study of the behaviour of one RS
+in relation to another one.
+% In Section~\ref{ex:lactose} describing  the behaviour of the \emph{lac} operon,
+% the two entities lactose and glucose are controlled 
+% non deterministically by the context.
+% In our framework,
+% instead, by exploiting the expressivity of c\CNA, 
+% the \emph{lac} operon system can be connected with the two systems 
+% producing the lactose and the glucose.
+% This way, the presence of these two entities in the \emph{lac} operon system 
+% could be regulated by realistic mechanisms.
+Thus, the products of the reactions of one RS can become the input for
+another one. This could allow for a modular approach to modeling 
+complex systems, by composing different Reaction Systems.
+
+
+
+
+

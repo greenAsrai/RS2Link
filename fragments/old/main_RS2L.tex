@@ -1,0 +1,404 @@
+
+\documentclass[review]{elsarticle}
+
+\usepackage{lineno,hyperref}
+\modulolinenumbers[5]
+
+%\journal{Theoretical Computer Science}
+
+\usepackage{amsmath,amsthm,amssymb,amsfonts,thmtools,thm-restate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%% Elsevier bibliography styles
+%%%%%%%%%%%%%%%%%%%%%%%
+%% To change the style, put a % in front of the second line of the current style and
+%% remove the % from the second line of the style you would like to use.
+%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Numbered
+%\bibliographystyle{model1-num-names}
+
+%% Numbered without titles
+%\bibliographystyle{model1a-num-names}
+
+%% Harvard
+%\bibliographystyle{model2-names.bst}\biboptions{authoryear}
+
+%% Vancouver numbered
+%\usepackage{numcompress}\bibliographystyle{model3-num-names}
+
+%% Vancouver name/year
+%\usepackage{numcompress}\bibliographystyle{model4-names}\biboptions{authoryear}
+
+%% APA style
+%\bibliographystyle{model5-names}\biboptions{authoryear}
+
+%% AMA style
+%\usepackage{numcompress}\bibliographystyle{model6-num-names}
+
+%% `Elsevier LaTeX' style
+\bibliographystyle{elsarticle-num}
+%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%% Authors' packages, macros, environments
+%%%%%%%%%%%%%%%%%%%%%%%
+\input{macros}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newdefinition{definition}[theorem]{Definition}
+\newdefinition{remark}[theorem]{Remark}
+\newdefinition{example}[theorem]{Example}
+%\newproof{proof}{Proof}
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\begin{frontmatter}
+
+\title{A translation from Reaction System rules to {\tt link}-calculus}
+
+%% Group authors per affiliation:
+
+
+\author[uniss]{Linda Brodo\corref{cor}}
+\ead{brodo@uniss.it}
+
+\author[unipi]{Roberto Bruni}
+\ead{bruni@di.unipi.it}
+
+\author[unisi]{Moreno Falaschi}
+\ead{falaschi@unisi.it}
+
+\address[unipi]{Dipartimento di Informatica, Universit\`{a} di Pisa, Italy}
+\address[uniss]{di Scienze economiche e aziendali,   Universit\`a di Sassari, Italy}
+\address[unisi]{Dipartimento di Ingegneria,   Universit\`a di Siena, Italy}
+
+\cortext[cor]{Corresponding Author}
+
+
+%\input{00-abstract}
+
+\begin{keyword}
+ CNA\sep reaction systems \sep translation\sep multi-party interaction 
+\end{keyword}
+
+\end{frontmatter}
+
+\linenumbers
+$\pi =(\gamma,\delta)$ 
+\input{01-introduction}
+\input{02-ReactionSystem}
+%\input{03-background-links-CNA}
+\input{04-CCNA}
+\input{05-translation}
+\input{06-exampleLactose}
+\input{07-discussion}
+%\input{06-conclusion}
+\section{References}
+\bibliography{biblio_CNA}
+
+%\appendix
+%\input{07-appendix}
+
+\end{document}
+
+
+
+
+
+    
+
+
+
+\section{Introduction}
+
+
+
+\section{Reaction Systems}
+
+\begin{definition}
+A reaction system, abbreviated $rs$, is an ordered pair ${\cal A} = (S, A)$ such that $S$ is a finite set, and $A$ is a
+set of reactions in $S$.\\
+The set $S$ is called the background (set) of $A$.\\
+The main notion concerning the functioning of a reaction system is defined as follows.
+\end{definition}
+
+\section{{\tt Link}-calculus}
+
+\section{The translation}
+
+
+\subsection{New transition rules}
+\begin{figure*}[t]
+\begin{center} 
+\begin{prooftree} 
+\AxiomC{$P \nrightarrow$} 
+\RightLabel{\scriptsize(noAct)}
+\UnaryInfC{$ P | \link{\silent}{add}.\nil$ }
+\quad
+%\AxiomC{$en(P) = er \cup \{r\}$} 
+%\RightLabel{\scriptsize(Start)}
+%\UnaryInfC{$ (P, er\cup \{r\}, \nil, \nil) $}
+%\DisplayProof
+\end{prooftree}
+\hline 
+\end{center}
+\begin{center} 
+\begin{prooftree} 
+\AxiomC{$\ell \blackstretcheq s \quad \notsolid{s}  
+ \quad  g=\ground{t}_\sigma \quad  rule(s) =r $} 
+\RightLabel{\scriptsize(Act)}
+\UnaryInfC{$ (\ell t.P, er\cup \{r\}, \nil, {\cal S}) \xrightarrow{s g} (\ell t.P,  er\cup \{r\},  P\sigma, {\cal S})$ } 
+%\DisplayProof
+\end{prooftree} 
+\end{center}
+%\quad
+%%\AxiomC{$\ell \blackstretcheq s$} 
+%%\AxiomC{$g \instanceof_{\sigma} t$} 
+%%\AxiomC{$ \solid{t}$} 
+%%\RightLabel{\scriptsize(Act2)}
+%%\UnaryInfC{$\ell t.P \xrightarrow{\ell} P$} 
+%%\DisplayProof
+\begin{center} 
+\begin{prooftree} 
+\AxiomC{$(P,  er \cup \{r\}, \nil, {\cal S}) \xrightarrow{s g} (P, er\cup \{r\}, P', {\cal S}) \quad rule(s) =r $} 
+\RightLabel{\scriptsize(Lsum)}
+\UnaryInfC{$(P+Q, er \cup \{r\}, \nil, {\cal S})  \xrightarrow{s g} (P+Q, er\cup \{r\}, P', {\cal S})$} 
+%%\DisplayProof
+\end{prooftree} 
+\end{center}
+\begin{center} 
+\begin{prooftree} 
+\AxiomC{$(P\{\subst{\tilde{y}}{\tilde{x}}\}, er \cup \{r\}, \nil, {\cal S})  \xrightarrow{s g} (P\{\subst{\tilde{y}}{\tilde{x}}\}, er \cup \{r\}, P', {\cal S}) $} 
+\AxiomC{$(A(\tilde{x}) \defeq  P) \in\Delta$} 
+\RightLabel{\scriptsize(Ide)}
+\BinaryInfC{$(A(\tilde{y}),er \cup \{r\}, \nil, {\cal S})  \xrightarrow{s g}( A(\tilde{y}),er \cup \{r\}, P', {\cal S}) $} 
+%\DisplayProof
+%%\quad
+%%\AxiomC{$P \xrightarrow{s g} P'$} 
+%%\AxiomC{$a\not\in g$} 
+%%\RightLabel{\scriptsize(Res)}
+%%\BinaryInfC{$\restrict{a}P \xrightarrow{\restrict{a}(s g)} \restrict{a}P'$} 
+%%\DisplayProof
+%%\quad
+\end{prooftree} 
+\end{center}
+\begin{center} 
+\begin{prooftree} 
+%\AxiomC{$P \xrightarrow{s g} P'$}  
+%\AxiomC{$a\in g$} 
+%\RightLabel{\scriptsize(Open)}
+%\BinaryInfC{$\restrict{a}P \xrightarrow{\restrict{a}(s g)} P'$} 
+%\DisplayProof
+%\quad
+\AxiomC{$(P, er \cup\{r\},\nil,{\cal S}) \xrightarrow{s g} (P, er \cup\{r\},P',{\cal S}) $} 
+%\AxiomC{${g}\#{Q}$ } 
+%\AxiomC{$\quad rule(s) = r$} 
+\RightLabel{\scriptsize(Lpar)}
+\UnaryInfC{$(P|Q,er \cup\{r\},\nil,{\cal S})  \xrightarrow{s g} (P|Q, er \cup\{r\},P'|Q, {\cal S})$} 
+\end{prooftree} 
+\end{center}
+\begin{center} 
+\begin{prooftree} 
+\AxiomC{$(P, er \cup \{r\}, \nil, S) \xrightarrow{s g} (P, er \cup \{r\}, P', S) 
+\quad (Q , er \cup \{r\},\nil ,S)\xrightarrow{s' g'} (Q, er \cup \{r\}, Q', S)$} 
+%\AxiomC{${g}\#{Q}\quad {g'} \# {P}$}
+\AxiomC{$\notsolid{(\merges{s}{s'})}$} 
+\RightLabel{\scriptsize(Com)}
+\BinaryInfC{$(P|Q, er \cup \{r\},\nil,S) \xrightarrow{\merges{(s g)}{(s' g')}} (P|Q, er \cup \{r\},P'|Q',S)$} 
+\end{prooftree} 
+\end{center}
+\begin{flushleft} 
+\begin{prooftree} 
+\hspace{-2ex}
+\AxiomC{$(P, er \cup \{r\}, \nil, S) \xrightarrow{s g} (P, er \cup \{r\}, P', S)$} 
+\AxiomC{$(Q, er \cup \{r\}, \nil, S) \xrightarrow{s' g'} (Q, er \cup \{r\}, Q', S)$} 
+\AxiomC{$
+%{g}\# {Q} 
+%\quad 
+%{g'} \#{P} 
+\solid{(\merges{s}{s'})} \quad
+\solid{(\merges{g}{g'})}
+$
+%\merges{s}{s'}$ is solid \quad
+%$\merges{g}{g'}$ is ground
+}
+\RightLabel{\scriptsize(Close)}
+\TrinaryInfC{$(P|Q,er \cup \{r\}, \nil, S)  \xrightarrow{(R::r,\epsilon)} (P|Q , er , \nil, (P'|Q')|S)$} 
+\end{prooftree} 
+\end{flushleft}
+\begin{center} 
+\begin{prooftree} 
+\hspace{-2ex}
+\AxiomC{$(P,  \{r\}, \nil, S) \xrightarrow{s g} (P,  \{r\}, P', S)$} 
+\AxiomC{$(Q, \{r\}, \nil, S) \xrightarrow{s' g'} (Q,  \{r\}, Q', S)$} 
+\AxiomC{$
+%{g}\# {Q} 
+%\quad 
+%{g'} \#{P} 
+\solid{(\merges{s}{s'})} \quad
+\solid{(\merges{g}{g'})}
+$
+%\merges{s}{s'}$ is solid \quad
+%$\merges{g}{g'}$ is ground
+}
+\RightLabel{\scriptsize(End2)}
+\TrinaryInfC{$(P|Q,\{r\}, \nil, S)  \xrightarrow{(R::r,\epsilon)} (P'|Q')|S$} 
+\end{prooftree}
+
+\end{center}
+\vspace{-.9ex}
+\caption{SOS semantics of the {\tt link}-calculus (rules (\textit{Rsum}) and (\textit{Rpar}) are omitted)}
+\label{fig:cnasosenh}
+\end{figure*}
+
+\subsection{Another version for the new transition rules}
+
+
+\begin{figure*}[t]
+\begin{center} 
+\begin{prooftree} 
+\AxiomC{$P \nrightarrow$} 
+\RightLabel{\scriptsize(noAct)}
+\UnaryInfC{$ P | \link{\silent}{add}.\nil$ }
+\quad
+%\AxiomC{$en(P) = er \cup \{r\}$} 
+%\RightLabel{\scriptsize(Start)}
+%\UnaryInfC{$ (P, er\cup \{r\}, \nil, \nil) $}
+%\DisplayProof
+\end{prooftree}
+\hline 
+\end{center}
+\begin{center} 
+\begin{prooftree} 
+\AxiomC{$\ell \blackstretcheq s \quad \notsolid{s}  
+ \quad  g=\ground{t}_\sigma \quad  rule(s) =r $} 
+\RightLabel{\scriptsize(Act1)}
+\UnaryInfC{$ \ell t.R \xrightarrow{s g}_{\langle\ell t.R, er\cup \{r\}, \nil\rangle} R\sigma$ } 
+\quad
+\AxiomC{$\ell \blackstretcheq s \quad \notsolid{s}  
+ \quad  g=\ground{t}_\sigma \quad  rule(s) =r $} 
+ \AxiomC{$P|Q \xrightarrow{R}_{\langle \nil,er \cup \{r\}, ((P'|Q')|S)\rangle } P|Q$}
+\RightLabel{\scriptsize(Act2)}
+\BinaryInfC{$ \ell t.P \xrightarrow{s g}_{\langle\ell t.P, er\cup \{r\},  ((P'|Q')|S)\rangle} P\sigma$ }
+%\DisplayProof
+\end{prooftree} 
+\end{center}
+%\quad
+%%\AxiomC{$\ell \blackstretcheq s$} 
+%%\AxiomC{$g \instanceof_{\sigma} t$} 
+%%\AxiomC{$ \solid{t}$} 
+%%\RightLabel{\scriptsize(Act2)}
+%%\UnaryInfC{$\ell t.P \xrightarrow{\ell} P$} 
+%%\DisplayProof
+\begin{center} 
+\begin{prooftree} 
+\AxiomC{$P \xrightarrow{s g}_{\langle P, er \cup \{r\}, {\cal S} \rangle}  P'  \quad rule(s) =r $} 
+\RightLabel{\scriptsize(Lsum)}
+\UnaryInfC{$P+Q  \xrightarrow{s g}_{\langle P+Q , er \cup \{r\}, {\cal S}\rangle} P' $} 
+%%\DisplayProof
+\end{prooftree} 
+\end{center}
+\begin{center} 
+\begin{prooftree} 
+\AxiomC{$ P\{\subst{\tilde{y}}{\tilde{x}}\}  \xrightarrow{s g}_{\langle P\{\subst{\tilde{y}}{\tilde{x}}\}, er \cup \{r\}, {\cal S}\rangle}  P' $} 
+\AxiomC{$(A(\tilde{x}) \defeq  P) \in\Delta$} 
+\RightLabel{\scriptsize(Ide)}
+\BinaryInfC{$A(\tilde{y}) \xrightarrow{s g}_{\langle A(\tilde{y}) ,er \cup \{r\}, {\cal S}\rangle} P'$} 
+%\DisplayProof
+%%\quad
+%%\AxiomC{$P \xrightarrow{s g} P'$} 
+%%\AxiomC{$a\not\in g$} 
+%%\RightLabel{\scriptsize(Res)}
+%%\BinaryInfC{$\restrict{a}P \xrightarrow{\restrict{a}(s g)} \restrict{a}P'$} 
+%%\DisplayProof
+%%\quad
+\end{prooftree} 
+\end{center}
+\begin{center} 
+\begin{prooftree} 
+\AxiomC{$P \xrightarrow{s g}_{P, er \cup \{r\}, S\rangle}P'
+\quad Q \xrightarrow{s' g'}_{Q, er \cup \{r\},S)} Q' $} 
+%\AxiomC{${g}\#{Q}\quad {g'} \# {P}$}
+\AxiomC{$\notsolid{(\merges{s}{s'})}$} 
+\RightLabel{\scriptsize(Com)}
+\BinaryInfC{$P|Q\xrightarrow{\merges{(s g)}{(s' g')}}_{\langle  P|Q, er \cup \{r\},S \rangle} P'|Q'$} 
+\end{prooftree} 
+\end{center}
+\begin{flushleft} 
+\begin{prooftree} 
+\hspace{-2ex}
+\AxiomC{$P \xrightarrow{s g}_{\langle P, er \cup \{r\},  S \rangle} P' $} 
+\AxiomC{$Q \xrightarrow{s' g'}_{\langle Q, er \cup \{r\}, S\rangle}Q'$} 
+\AxiomC{$
+%{g}\# {Q} 
+%\quad 
+%{g'} \#{P} 
+\solid{(\merges{s}{s'})} \quad
+\solid{(\merges{g}{g'})}
+$
+%\merges{s}{s'}$ is solid \quad
+%$\merges{g}{g'}$ is ground
+}
+\RightLabel{\scriptsize(End1)}
+\TrinaryInfC{$P|Q \xrightarrow{(R::r,\epsilon)}_{\langle \nil,er , ((P'|Q')|S)\rangle } P|Q$} 
+\end{prooftree} 
+\end{flushleft}
+\begin{center} 
+\begin{prooftree} 
+%\AxiomC{$P \xrightarrow{s g} P'$}  
+%\AxiomC{$a\in g$} 
+%\RightLabel{\scriptsize(Open)}
+%\BinaryInfC{$\restrict{a}P \xrightarrow{\restrict{a}(s g)} P'$} 
+%\DisplayProof
+%\quad
+\AxiomC{$P \xrightarrow{R} P'$} 
+\AxiomC{$Q(\tilde{a}) \defeq R $ } 
+%\AxiomC{$\quad rule(s) = r$} 
+\RightLabel{\scriptsize(Lpar)}
+\BinaryInfC{$P|Q  \xrightarrow{s g}P'|dQ(\tilde{a})$} 
+\end{prooftree} 
+\end{center}
+\begin{center} 
+\begin{prooftree} 
+\hspace{-2ex}
+\AxiomC{$P\xrightarrow{s g}_{\langle P,  \{r\},  S \rangle} P' $} 
+\AxiomC{$Q \xrightarrow{s' g'}_{\langle Q, \{r\}, S\rangle} Q' $} 
+\AxiomC{$
+%{g}\# {Q} 
+%\quad 
+%{g'} \#{P} 
+\solid{(\merges{s}{s'})} \quad
+\solid{(\merges{g}{g'})}
+$
+%\merges{s}{s'}$ is solid \quad
+%$\merges{g}{g'}$ is ground
+}
+\RightLabel{\scriptsize(End2)}
+\TrinaryInfC{$P|Q  \xrightarrow{(R::r,\epsilon)} (P'|Q')|S$} 
+\end{prooftree}
+
+\end{center}
+\vspace{-.9ex}
+\caption{SOS semantics of the {\tt link}-calculus (rules (\textit{Rsum}) and (\textit{Rpar}) are omitted)}
+\label{fig:cnasosenh}
+\end{figure*}
+
+
+%\input{01-introduction}
+%%\input{02-motivatingexample}
+%\input{03-CNA}
+%\input{04-linkcalculus}
+%\input{05-abstractSemantics}
+%%\input{06-encodingMA}
+%%\input{06-moreExamples}
+\section*{References}
+%
+\bibliography{biblio_CNA}
+%\input{07-Appendix}
+
+\end{document}

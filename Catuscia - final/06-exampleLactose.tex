@@ -1,0 +1,333 @@
+% !TEX root = ./main_RS2L_LNCS.tex
+\section{Example: \emph{lac} operon}
+\label{ex:lactose}
+In this section we present the encoding of a RS example
+taken from~\cite{CMMBM12}.
+%, concerning the lac Operon.
+\subsection{The \emph{lac} operon}
+An operon is a cluster of genes under the control of a single promoter. 
+The \emph{lac} operon  is involved in the metabolism of lactose in \emph{Escherichia coli} cells;
+it is composed by three adjacent structural genes (plus some regulatory components):  $lacZ$, $lacY$ and $lacA$ encoding for two enzymes $Z$ and $A$, and a transporter $Y$, involved in the digestion of the $lactose$. The main regulations are:
+\begin{itemize}
+\item 
+%\begin{color}{red}
+the gene $lacI$ encodes a repressor protein $I$;
+%\end{color}
+\item the DNA sequence, called \emph{promoter},  is recognised by a RNA polymerase
+to iniziate the transcription  of the genes $lacZ$, $lacY$ and $lacA$;
+\item a DNA segment, called  the \emph{operator} ($OP$),   obstructs the RNA polymerase functionality when  the repressor protein $I$ is bound to it forming $I\textrm{-}OP$;
+\item  a short DNA sequence, called the $CAP\textrm{-}binding\ site$, when it is bound to the complex composed by  the protein $CAP$ and the signal molecule $cAMP$, acts as a promoter for the interaction between the RNA polymerase and the promoter.
+\end{itemize}
+The functionality of the \emph{lac} operon depends on the integration of two control mechanisms, one mediated by \emph{lactose}, and the other one mediated by \emph{glucose}. 
+
+In the first control mechanism, an effect of the absence of the \emph{lactose} is that $I$ is able to bind the operator sequence preventing the \emph{lac} operon expression. If lactose is available, $I$ is unable to bind the operator sequence, and the \emph{lac} operon can be potentially expressed.
+
+In  the second control mechanism, when glucose is absent, the molecule $cAMP$ and the protein $CAP$ increase the \emph{lac} operon expression, thanks to the fact that  the binding between the molecular complex $cAMP\textrm{-}CAP$ and the $CAP\textrm{-}binding\ site$ increases.
+In summary, the condition promoting the operon
+gene expression is when the $lactose$ is present and the $glucose$ is absent.
+
+In the following we report the description of the \emph{lac} operon mechanism in the reaction system formalism
+and then show its encoding in c\CNA. 
+
+\subsection{The RS formalization}\label{subsec:RSlacoperon}
+The reaction system for the \emph{lac} operon is defined as
+$A_{lac} = (S, A)$, where the set S represents
+the main biochemical components involved in this genetic system, while the reaction set A contains the biochemical
+reactions involved in the regulation of the \emph{lac} operon expression. Formally, the \emph{lac} operon reaction system is defined as
+follows:
+$S$ is the set
+{\small
+$$\{lac, Z, Y, A, lacI, I, I\textrm{-}OP, cya, cAMP, crp, CAP,cAMP\textrm{-}CAP, lactose,glucose\},$$
+}
+and A consists of the following 10 reactions:
+{\small
+\[
+\begin{array}{lcllcl}
+a_1 &= &(\{lac\},\{. . .\},\{lac\}), & a_6 &= &(\{cya\},\{. . .\},\{cAMP\}),\\
+a_2 &= &(\{lacI\},\{. . .\},\{lacI\}), & a_7 &= &(\{crp\},\{. . .\},\{crp\}),\\
+a_3 &= &(\{lacI\},\{. . .\},\{I\}), & a_8 &= &(\{crp\},\{. . .\},\{CAP\}),\\
+a_4 &= &(\{I\},\{lactose\},\{I\textrm{-}OP\}), & a_9 &= &(\{cAMP, CAP\},\{glucose\},\{cAMP\textrm{-}CAP\}),\\
+a_5 &= &(\{cya\},\{. . .\},\{cya\}),&
+a_{10} &=& (\{lac, cAMP\textrm{-}CAP\},\{I\textrm{-}OP\},\{Z, Y, A\}).
+\end{array}
+\]
+}
+The default context ($DC$) is composed by those entities that are always present in the system
+$DC = \{lac,lacI,I,cya,cAMP,crp,CAP\}$, whereas the $lactose$ and the $glucose$ are given non-deterministically by the context.
+\subsection{The RS encoding}
+For the sake of readability, the encoding we propose exploits the specific features of the example in hand 
+to perform some simplifications:
+\begin{itemize}
+\item for the entities in the default context, $s \in DC$, as they are persistent, we do not provide the $\overline{P_s}$ processes and the $Cxt_s$ processes;
+\item for the reactions requiring the presence of entities $s \in DC$, we do not provide the reaction alternative behaviour when $s$ is absent;
+\item the $Cxt_s$ processes are specified only for those entitiess that are really provided by the context.
+\end{itemize}
+Moreover, we do not model the \emph{dummy} entity that is specified by  dots ($\dots$) by the RS reactions in Section~\ref{subsec:RSlacoperon}.
+Finally, we exclude the \emph{duplication reactions} ($a_1$, $a_2$, $a_5$, $a_7$), and renumber the remaining reactions :
+{\small
+\[
+\begin{array}{cccl}
+%a1 &= &(\{lac\},\{. . .\},\{lac\}),\\
+%a2 &= &(\{lacI\},\{. . .\},\{lacI\}),\\
+\textrm{old } &\textrm{new }&& \textrm{reactions}\\
+a_3 &a_1&=&(\{lacI\},\{. . .\},\{I\}),\\
+a_4 &a_2&=&(\{I\},\{lactose\},\{I\textrm{-}OP\}),\\
+%a5 &= &(\{cya\},\{. . .\},\{cya\}),\\
+a_6 & a_3&=&(\{cya\},\{. . .\},\{cAMP\}),\\
+%a7 &= &(\{crp\},\{. . .\},\{crp\}),\\
+a_8 &a_4&=&(\{crp\},\{. . .\},\{CAP\}),\\
+a_9 &a_5&=&(\{cAMP, CAP\},\{glucose\},\{cAMP\textrm{-}CAP\}),\\
+a_{10} & a_6&=& (\{lac, cAMP\textrm{-}CAP\},\{I\textrm{-}OP\},\{Z, Y, A\}).
+\end{array}
+\]
+}
+%\paragraph{Duplication reactions.}
+%As explained previously, their encoding is omitted.
+%%$
+%\begin{array}{lcccl}
+%P_{ai} & \defeq& P_d(ai,s) & = & \startchain{r_i}\chainedlink{s_i}{\noact}\chainedlink{\noact}{s_o}
+%\chainedlink{\tilde{s}_i}{\noact}\chainedlink{\noact}{\tilde{s}_o}\chainend{r_{i+1}}.P_d(ai,s)
+%\end{array}
+%$,
+%with $r_1 = \silent$.
+%There are four duplication rules:\\ $P_d(a1,lac)$, $P_d(a2,lacI)$,$P_d(a5,cya)$,$P_d(a7,crp)$.\\
+\paragraph{Expression reactions.}
+First we define the parametric process
+\[
+\begin{array}{lcl}
+% P_i(s1,s2) & \defeq & \startchain{r_i}\chainedlink{s1_i}{\noact}\chainedlink{\noact}{s1_o}
+%\chainedlink{\tilde{s2}_i}{\noact}\chainedlink{\noact}{\tilde{s2}_o}\chainend{r_{i+1}}.P_i(s1,s2)\\
+ P_i(s1,s2) & \defeq & \startchain{r_i}\chainedlink{s1_i}{\noact}\chainedlink{\noact}{s1_o}
+ \chainedlink{r_{i+1}}{\noact}\chainedlink{\noact}{p_{i}}\chainedlink{\tilde{s2}_i}{\noact}
+\chainedlink{\noact}{\tilde{s2}_o}\chainend{p_{i+1}}.P_i(s1,s2)\\
+\end{array}
+\]
+Then, we let $P_{a1}\defeq P_1(lacI,I)$,  $P_{a3} \defeq P_3(cya,cAMP)$, and $P_{a4} \defeq P_4(crp,CAP)$.
+%\[
+%\begin{array}{lcl}
+%P_{a1} & =& \startchain{\silent}\chainedlink{lac_i}{\noact}\chainedlink{\noact}{lac_o}\chainedlink{\tilde{lac}_i}{\noact}\chainedlink{\noact}{\tilde{lac}_o}\chainend{r_2}.P_{a1}\\
+%P_{a2} & =& \startchain{r_2}\chainedlink{lacI_i}{\noact}\chainedlink{\noact}{lacI_o}\chainedlink{\tilde{lacI}_i}{\noact}\chainedlink{\noact}{\tilde{lacI}_o}\chainend{r_3}.P_{a2}\\
+%P_{a3} & =& \startchain{r_3}\chainedlink{I_i}{\noact}\chainedlink{\noact}{I_o}\chainedlink{\tilde{I}_i}{\noact}\chainedlink{\noact}{\tilde{I}_o}\chainend{r_4}.P_{a3}\\
+\paragraph{Regulation reactions.}
+
+{\small
+\[
+\begin{array}{lcl}
+%P_{a2} & \defeq& \startchain{r_2}\chainedlink{I_i}{\noact}\chainedlink{\noact}{I_o}\chainedlink{\overline{lactose}_i}{\noact}\chainedlink{\noact}{\overline{lactose}_o}
+%\chainedlink{\widetilde{I\textrm{-}OP}_i}{\noact}\chainedlink{\noact}{\widetilde{I\textrm{-}OP}_o}\chainend{r_3}.P_{a2}  \\
+P_{a2} & \defeq& \startchain{r_2}\chainedlink{I_i}{\noact}\chainedlink{\noact}{I_o}\chainedlink{\overline{lactose}_i}{\noact}\chainedlink{\noact}{\overline{lactose}_o}
+\chainedlink{r_3}{\noact}\chainedlink{\noact}{p_2}
+\chainedlink{\widetilde{I\textrm{-}OP}_i}{\noact}\chainedlink{\noact}{\widetilde{I\textrm{-}OP}_o}\chainend{p_3}.P_{a2}  \\
+&&+\\
+ && \startchain{r_2}\chainedlink{lactose_i}{\noact}\chainedlink{\noact}{lactose_o}\chainedlink{r_3}{\noact}\chainedlink{\noact}{p_2}\chainend{p_3}.P_{a2} \ +\  \startchain{r_2}\chainedlink{\overline{I}_i}{\noact}\chainedlink{\noact}{\overline{I}_o}\chainedlink{r_3}{\noact}\chainedlink{\noact}{p_2}\chainend{p_3}.P_{a2}\\[5pt]
+ \\
+%%P_{a5} & =& \startchain{r_5}\chainedlink{cya_i}{\noact}\chainedlink{\noact}{cya_o}\chainedlink{\tilde{cya}_i}{\noact}\chainedlink{\noact}{\tilde{cya}_o}\chainend{r_6}.P_{a5}\\
+%P_{a6} & =& \startchain{r_6}\chainedlink{cya_i}{\noact}\chainedlink{\noact}{cya_o}\chainedlink{\tilde{cya}_i}{\noact}\chainedlink{\noact}{\tilde{cya}_o}\chainend{r_7}.P_{a6}\\
+%%P_{a7} & =& \startchain{r_7}\chainedlink{crp_i}{\noact}\chainedlink{\noact}{crp_o}\chainedlink{\tilde{crp}_i}{\noact}\chainedlink{\noact}{\tilde{crp}_o}\chainend{r_8}.P_{a7}\\
+%P_{a8} & =& \startchain{r_8}\chainedlink{crp_i}{\noact}\chainedlink{\noact}{crp_o}\chainedlink{\tilde{CAP}_i}{\noact}\chainedlink{\noact}{\tilde{CAP}_o}\chainend{r_9}.P_{a8}\\
+P_{a5} & \defeq& \startchain{r_5}\chainedlink{cAMP_i}{\noact}\chainedlink{\noact}{cAMP_o}
+\chainedlink{CAP_i}{\noact}\chainedlink{\noact}{CAP_o}\chainedlink{\overline{glucose}_i}{\noact}
+\chainedlink{\noact}{\overline{glucose}_o}\chainedlink{r_6}{\noact}
+\chainedlink{\noact}{p_5}
+\chainedlink{\widetilde{cAMP\textrm{-}CAP}_i}{\noact}\chainedlink{\noact}{\widetilde{cAMP\textrm{-}CAP}_o}
+\chainend{p_6}.P_{a5}\\
+%P_{a5} & \defeq& \startchain{r_5}\chainedlink{cAMP_i}{\noact}\chainedlink{\noact}{cAMP_o}
+%\chainedlink{CAP_i}{\noact}\chainedlink{\noact}{CAP_o}\chainedlink{\overline{glucose}_i}{\noact}
+%\chainedlink{\noact}{\overline{glucose}_o}
+%\chainedlink{\widetilde{cAMP\textrm{-}CAP}_i}{\noact}\chainedlink{\noact}{\widetilde{cAMP\textrm{-}CAP}_o}
+%\chainend{r_6}.P_{a5}\\
+&& +\\
+&& \startchain{r_5}\chainedlink{glucose_i}{\noact}\chainedlink{\noact}{glucose_o} \chainedlink{r_6}{\noact}\chainedlink{\noact}{p_5}\chainend{p_6}.P_{a5}\\
+&& + \\
+&&  \startchain{r_5}\chainedlink{\overline{cAMP}_i}{\noact}\chainedlink{\noact}{\overline{cAMP}_o} \chainedlink{r_6}{\noact}\chainedlink{\noact}{p_5}\chainend{p_6}.P_{a5} \ + \ \startchain{r_5}\chainedlink{\overline{CAP}_i}{\noact}\chainedlink{\noact}{\overline{CAP}_o} \chainedlink{r_6}{\noact}\chainedlink{\noact}{p_5}\chainend{p_6}.P_{a5}\\[5pt]
+\\
+%\end{array}
+%\]\\
+%%$lac$ operon expression.\\
+%$
+%\begin{array}{lcl}
+P_{a6} & \defeq& \startchain{r_{6}}\chainedlink{lac_i}{\noact}\chainedlink{\noact}{lac_o}
+\chainedlink{cAMP\textrm{-}CAP_i}{\noact}\chainedlink{\noact}{cAMP\textrm{-}CAP_o}\chainedlink{\overline{I\textrm{-}OP}_i}{\noact}
+\chainedlink{\noact}{\overline{I\textrm{-}OP}_o}\chainedlink{cxt_1}{\noact}
+\chainedlink{\noact}{p_6}
+\chainedlink{\tilde{z}_i}{\noact}\chainedlink{\noact}{\tilde{z}_o}
+\chainedlink{\tilde{y}_i}{\noact}\chainedlink{\noact}{\tilde{y}_o}
+\chainedlink{\tilde{A}_i}{\noact}\chainedlink{\noact}{\tilde{A}_o}
+\chainend{\silent}.P_{a6}\\
+%P_{a6} & \defeq& \startchain{r_{6}}\chainedlink{lac_i}{\noact}\chainedlink{\noact}{lac_o}
+%\chainedlink{cAMP_i}{\noact}\chainedlink{\noact}{cAMP_o}\chainedlink{\overline{I\textrm{-}OP}_i}{\noact}
+%\chainedlink{\noact}{\overline{I\textrm{-}OP}_o}
+%\chainedlink{\tilde{z}_i}{\noact}\chainedlink{\noact}{\tilde{z}_o}
+%\chainedlink{\tilde{y}_i}{\noact}\chainedlink{\noact}{\tilde{y}_o}
+%\chainedlink{\tilde{A}_i}{\noact}\chainedlink{\noact}{\tilde{A}_o}
+%\chainend{cxt_1}.P_{a6}\\
+&& +\\
+&& \startchain{r_{6}}\chainedlink{I\textrm{-}OP_i}{\noact}\chainedlink{\noact}{I\textrm{-}OP_o} \chainedlink{cxt_1}{\noact}\chainedlink{\noact}{p_6}\chainend{\silent}.P_{a6} \\
+&& + \\
+&&  \startchain{r_{6}}\chainedlink{\overline{lac}_i}{\noact}\chainedlink{\noact}{\overline{lac}_o} \chainedlink{cxt_1}{\noact}\chainedlink{\noact}{p_6}\chainend{\silent}.P_{a6} \ + \ \chainedlink{\overline{cAMP\textrm{-}CAP}_i}{\noact}\chainedlink{\noact}{\overline{cAMP\textrm{-}CAP}_o} \chainedlink{cxt_1}{\noact}\chainedlink{\noact}{p_6}\chainend{\silent}.P_{a6}
+\end{array}
+\]
+}
+\paragraph{Processes for the entities.}
+We exploit the specificity of the example in hand to optimise the code, and we specify exactly
+the number of solid links that each process encoding an entity must offer.
+For the always present entities  we let:
+%{\color{red} For the always present entities we define the parametric process $P(s)\defeq \link{s_i}{s_o}.P_{s}$, and we let:
+%\[
+%\begin{array}{lcl@{\qquad}lcl@{\qquad}lcl@{\qquad}lcl}
+%P_{cya}&\defeq&P(cya) &P_{crp}&\defeq&P(crp)&P_{lacI}&\defeq&P(lacI) &
+% P_{lac}&\defeq&P(lac)
+%\end{array}\]
+\[
+\begin{array}{lcl@{\qquad}lcl}
+P_{cya}&\defeq&\link{cya_i}{cya_o}.P_{cya} &
+P_{crp}&\defeq&\link{crp_i}{crp_o}.P_{crp}\\[5pt]
+P_{lacI}&\defeq& \link{lacI_i}{lacI_o}.P_{lacI} &
+ P_{lac}&\defeq&\link{lac_i}{lac_o}.P_{lac}
+\end{array}\]
+For the entities always produced (i.e. not present only at the first step), we  provide a  parametric
+definition  
+$P_e(s) \defeq  \startchain{s_i}\chainedlink{s_o}{\noact}\chainedlink{\noact}{\tilde{s}_i}\chainend{\tilde{s}_o}.P_e(s) +  \startchain{\tilde{s_i}}\chainend{\tilde{s}_o} .P_e(s) $.\\
+% There are four entities of the first type: $P_d(lac)$, $P_d(cya)$, $P_d(crp)$, $P_d(lacI)$.
+ There are three entities of the second type:  $$P_{cAMP}\defeq P_e(cAMP) \qquad P_{CAP} \defeq P_e(CAP)\qquad P_I \defeq P_e(I).$$
+
+
+The entity $I\textrm{-}OP$ can be either produced (by $a_2$) or tested for absence (by $a_6$).
+Correspondingly, the process  $P_{I\textrm{-}OP}$ is defined as follows:
+\[\begin{array}{lcl}
+P_{I\textrm{-}OP}&\defeq & 
+\sum_{h=0}^1 (\startchain{I\textrm{-}OP_i}\chainedlink{I\textrm{-}OP_o}{\noact}\chainend{\noact})^h  \, \startchain{\widetilde{I\textrm{-}OP}_i}\chainend{\widetilde{I\textrm{-}OP}_o}.P_{I\textrm{-}OP}
+%\\
+%&&+\\
+%&&\sum_{h=0}^1(\startchain{I-OP_i}\chainedlink{I-OP_o}{\noact}\chainend{\noact})^h\ \startchain{\widetilde{I-OP}_i}\chainedlink{\widetilde{I-OP}_o}{\noact}\chainedlink{\noact}{\underline{I-OP}_i}\chainend{\underline{I-OP}_o}.P_{I-OP}\\
+%&&
+\  +\ %\\
+%&&
+\link{I\textrm{-}OP_i}{I\textrm{-}OP_o}.\overline{P_{I\textrm{-}OP}}\\
+\overline{P_{I\textrm{-}OP}} & \defeq & 
+% P_{I\textrm{-}OP}(\overline{I\textrm{-}OP})\\
+\sum_{h=0}^1  (\startchain{\overline{I\textrm{-}OP}_i}\chainedlink{\overline{I\textrm{-}OP}_o}{\noact}\chainend{\noact})^h \,
+\startchain{\widetilde{I\textrm{-}OP}_i}\chainend{\widetilde{I\textrm{-}OP}_o}.P_{I\textrm{-}OP}%\\
+%&&
+\ +\ %\\
+%&&
+\link{\overline{I\textrm{-}OP}_i}{\overline{I\textrm{-}OP}_o}.\overline{P_{I\textrm{-}OP}}\\
+
+\end{array}
+\]
+\noindent
+The  process $P_{cAMP\textrm{-}CAP}$ is similar to $P_{I\textrm{-}OP}$, as it is produced by $a_5$ and tested for presence by $a_6$. 
+Its code is omitted.
+%Its code is  in Table~\ref{tab:cAMP-CAP}, in the Appendix.
+
+The $lactose$ is provided by the context and tested for absence by $a_2$.
+
+\[
+\begin{array}{lcllcl}
+P_{lactose} &\defeq &%== \overline{P_{glucose}}&\defeq & P_{glu-lact}(\overline{glucose})\\
+\sum_{h=0}^1 (\startchain{lactose_i}\chainedlink{lactose_o}{\noact}\chainend{\noact})^h\ \link{\widehat{lactose_i}}{\widehat{lactose_o}}.P_{lactose}
+\\
+&& + \\
+&& \sum_{h=0}^1 (\startchain{lactose_i}\chainedlink{lactose_o}{\noact}\chainend{\noact})^h\ \link{\underline{lactose_i}}{\underline{lactose_o}}.\overline{P_{lactose}}\\
+\\
+\overline{P_{lactose}} &\defeq &\sum_{h=0}^1 (\startchain{\overline{lactose}_i}\chainedlink{\overline{lactose}_o}{\noact}\chainend{\noact})^h\ \link{\widehat{lactose_i}}{\widehat{lactose_o}}.P_{lactose}\\
+&&+\\
+&& \sum_{h=0}^1 (\startchain{\overline{lactose}_i}\chainedlink{\overline{lactose}_o}{\noact}\chainend{\noact})^h\ \link{\underline{lactose_i}}{\underline{lactose_o}}.\overline{P_{lactose}}\\
+\end{array}
+\]
+\noindent
+The  process $P_{glucose}$ is similar to $P_{lactose}$ and tested for absence by $a_5$. 
+Its code is omitted.
+%Its code is  in Table~\ref{tab:glucose}, in the Appendix.
+
+The entity $z$ can only be produced by rule $a_6$, while it is never provided by the context. Moreover, there is no rule for testing its presence or absence.
+\[
+\begin{array}{lcl@{\qquad\qquad}lcl}
+P_z&\defeq &\startchain{\tilde{z_i}}\chainedlink{\tilde{z_o}}{\noact}\chainedlink{\noact}{\underline{z_i}}\chainend{\underline{z_o}}.P_z\ + \
+\link{\underline{z_i}}{\underline{z_o}}.\overline{P_z}
+&
+\overline{P_z} &\defeq &\startchain{\tilde{z_i}}\chainedlink{\tilde{z_o}}{\noact}\chainedlink{\noact}{\underline{z_i}}\chainend{\underline{z_o}}.\overline{P_z}\ + \
+\link{\underline{z_i}}{\underline{z_o}}.\overline{P_z}\\\end{array}
+\]
+\noindent
+The entities $y$ and $A$ are treated likewise $z$. Their processes are omitted.
+%in Table~\ref{tab:yA} in the Appendix.
+
+
+
+\paragraph{Context.}
+%Now, we define the behaviour of the context.
+The entities in $DC$ are assumed always present by default, so no context process is needed for them.
+The entities $z$, $y$, and $A$ are assumed never provided by the context:
+% Their processes are
+\[
+\begin{array}{rcl@{\qquad}rcl}
+Cxt_{z}&\defeq & \startchain{cxt_1}\chainedlink{\underline{z}_i}{\noact}\chainedlink{\noact}{\underline{z}_o}\chainend{cxt_2}.Cxt_{z}
+&
+Cxt_{y}&\defeq & \startchain{cxt_2}\chainedlink{\underline{y}_i}{\noact}\chainedlink{\noact}{\underline{y}_o}\chainend{cxt_3}.Cxt_{y}
+\\
+Cxt_{A}&\defeq & \startchain{cxt_3}\chainedlink{\underline{A}_i}{\noact}\chainedlink{\noact}{\underline{A}_o}\chainend{cxt_4}.Cxt_{A} 
+\end{array}
+\]
+ Also, for the sake of presentation, we assume that the $glucose$ is never provided and $lactose$ is always provided by the context:
+\[
+\begin{array}{lcl}
+Cxt_{lactose}&\defeq& \startchain{cxt_4}\chainedlink{\widehat{lactose}_i}{\noact}\chainedlink{\noact}{\widehat{lactose}_o}\chainend{cxt_5}.Cxt_{lactose}\\
+Cxt_{glucose}&\defeq & \startchain{cxt_5}\chainedlink{\underline{glucose}_i}{\noact}\chainedlink{\noact}{\underline{glucose}_o}\chainend{p_1}.Cxt_{glucose}
+\end{array}
+\]
+
+\noindent
+%For the sake of presentation, we assume that the $lactose$ is always provided by the context, in contrast,
+%$glucose$ is never provided.
+%\[
+%\begin{array}{lcllcl}
+%Cxt_{lactose}&\defeq& \startchain{cxt_4}\chainedlink{\widehat{lactose}_i}{\noact}\chainedlink{\noact}{\widehat{lactose}_o}\chainend{cxt_5}.Cxt_{lactose}
+%\\
+%Cxt_{glucose}&\defeq & \startchain{cxt_5}\chainedlink{\underline{glucose}_i}{\noact}\chainedlink{\noact}{\underline{glucose}_o}\chainend{p_1}.Cxt_{glucose}
+%\end{array}
+%\]
+\noindent
+In the following we let $CXT \defeq Cxt_z | Cxt_y |Cxt_A | Cxt_{lactose} | Cxt_{glucose}$ be the processes for context. 
+%
+The whole system
+%, encoding an extended interactive process, with the previous context behaviour
+is as follows: 
+\[ lacOp \defeq \restrict{names} (\Pi_{i=1}^6 P_{ai} | \Pi_{s \in DC} P_s |   \Pi_{s \in S \backslash DC} \overline{P}_s| CXT)
+\]
+
+\paragraph{Execution.}
+Now, we show  the execution of two transitions. 
+After the first transition, the entity $cAMP\textrm{-}CAP$ is produced due to the absence of  $glucose$(see $P_{a5}$), while the presence of $lactose$ inhibits the production of $I\textrm{-}OP$ (see $P_{a2}$): $lacOp \xrightarrow{\restrict{names} v} lacOp'$,
+where
+{\small
+$$
+\begin{array}{rcl}
+v & = & \link{\silent}{lac_i}\dots \link{lactose_o}{r3}\dots
+ \link{r_5}{cAMP_i}\dots
+  \link{\overline{glucose}_o}{r_6}
+\dots \link{p_5}{\widetilde{cAMP\textrm{-}CAP}_i}\dots \link{p_6}{\silent}\\[5pt]
+%{\underline{glucose}_o}
+lacOp' & \defeq & \restrict{names} (\Pi_{i =1}^6 P_{ai} | \Pi_{s \in AP} P_s |   \Pi_{s \in S \backslash AP} \overline{P}_s| CXT)
+\end{array}
+$$ 
+}
+with $AP= DC\cup \{cAMP\textrm{-}CAP\}$  the actual context.\\
+After the second step the entities $z$, $y$ and $A$ are produced, due to the presence of $cAMP\textrm{-}CAP$ and the absence of $I\textrm{-}OP$ (see $P_{a6}$), thus
+$lacOp' \xrightarrow{\restrict{names}v'} lacOp''$
+where:
+{\small
+$$
+\begin{array}{rcl}
+v' & = & \link{\silent}{lac_i}\dots \link{lac_o}{cAMP-CAP_i}\dots \startchain{\overline{I-OP}_o}
+\chainedlink{cxt_1}{\dots}\startchain{\underline{glucose}_o}\chainedlink{p_1}{p_1}
+\chainedlink{\dots}{p_6}\chainedlink{\tilde{z}_i}{\tilde{z}_i}\chainedlink{\tilde{z}_o}{\tilde{z}_o}
+\chainedlink{\tilde{y}_i}{\tilde{y}_i}\chainedlink{\tilde{y}_o}{\tilde{y}_o}\chainedlink{\tilde{A}_i}{\tilde{A}_i}\chainedlink{\tilde{A}_o}{\tilde{A}_o}\chainend{\silent}\\
+%\chainend{cxt_1}\dots \link{\underline{glucose}_o}{\silent}\\[5pt]
+lacOp'' & \defeq & \restrict{names} (\Pi_{i =1}^{6} P_{ai} | \Pi_{s \in AP'} P_s |   \Pi_{s \in S \backslash AP'} \overline{P}_s| CXT)
+\end{array}
+$$
+}
+with $AP'= DC\cup \{z,y,A\} $.
+
+

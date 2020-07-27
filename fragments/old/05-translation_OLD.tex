@@ -1,0 +1,285 @@
+% !TEX root = ./main_RS2L.tex
+
+
+\section{From Reaction Systems to c\CNA}
+\label{sec:trans}
+
+Here we present a translation from the Reaction Systems~\cite{} to a variant of the \CNA, the c\CNA, where
+the prefixes are link chains and no simple links.
+
+
+
+
+\begin{definition}
+\label{def:trans}
+Let ${\cal A} = (S, A)$ be a reaction system, then its  translation, $P=[|{\cal A}|]$ into the {\tt link}-calculus is defined as follows 
+\begin{center}$P = \restrict{stop,r_1,\dots,r_m}(\Pi_{s\in S} P_s | \Pi_{i\in A} P_a| STOP)$,\end{center} 
+with $m$ be the number of reactions, and where:
+\begin{itemize}
+\item for each biological element $s \in S$ we write:\\
+\[
+\begin{array}{lcl}
+%P_s& \defeq &\sum_{h=1}^{{\cal N}_s}\underbrace{ \startchain{a_i}\chainedlink{a_o}{\noact}\chainedlink{\noact}{a_i}\chainedlink{a_o}{\noact}\chainend{\noact}...}_{size = h}.\nil + 
+%\\
+%&&| \ \\
+%&& (  \sum_{h=1}^{{\cal P}_s}\underbrace{ \startchain{\tilde{a}_i}\chainedlink{\tilde{a}_o}{\noact}\chainedlink{\noact}{\tilde{a}_i}\chainedlink{\tilde{a}_o}{\noact}\chainend{\noact}...}_{size = h}\link{\hat{a}_i}{\hat{a}_o}.P_s
+% \ + \ \link{\hat{a}_i}{\hat{a}_o}.\overline{P_s})
+\\
+P_s& \defeq &\sum_{h\geq 0} \sum_{k\geq 1}  \underbrace{ \startchain{s_i}\chainedlink{s_o}{\noact}\chainedlink{\noact}{s_i}\chainedlink{s_o}{\noact}\chainend{\noact}...}_{h\ \mathrm{times}}\underbrace{ \startchain{\tilde{s}_i}\chainedlink{\tilde{s}_o}{\noact}\chainedlink{\noact}{\tilde{s}_i}\chainedlink{\tilde{s}_o}{\noact}\chainend{\noact}...}_{k\ \mathrm{times}}\link{\hat{s}_i}{\hat{s}_o}.P_s\\
+&&\ +\\
+&&\sum_{h\geq 0}   \underbrace{ \startchain{s_i}\chainedlink{s_o}{\noact}\chainedlink{\noact}{s_i}\chainedlink{s_o}{\noact}\chainend{\noact}...}_{h\ \mathrm{times}}\link{\hat{s}_i}{\hat{s}_o}.\overline{P}_s
+
+% \ + \ \link{\hat{a}_i}{\hat{a}_o}.\overline{P_s})
+ \\
+ \overline{P}_s& \defeq &\sum_{h\geq 0} \sum_{k\geq 1} \underbrace{ \startchain{\overline{s}_i}\chainedlink{\overline{s}_o}{\noact}\chainedlink{\noact}{\overline{s}_i}\chainedlink{\overline{s}_o}{\noact}\chainend{\noact}...}_{h\ \mathrm{times}}\underbrace{ \startchain{\tilde{s}_i}\chainedlink{\tilde{s}_o}{\noact}\chainedlink{\noact}{\tilde{s}_i}\chainedlink{\tilde{s}_o}{\noact}\chainend{\noact}...}_{k\ \mathrm{times}}.\link{\hat{s}_i}{\hat{s}_o}.P_s\\
+ && \ +\\
+ && \sum_{h\geq 0}  \underbrace{ \startchain{\overline{s}_i}\chainedlink{\overline{s}_o}{\noact}\chainedlink{\noact}{\overline{s}_i}\chainedlink{\overline{s}_o}{\noact}\chainend{\noact}...}_{h\ \mathrm{times}}.\link{\hat{s}_i}{\hat{s}_o}.\overline{P}_s\\
+ %\ + \ \link{\hat{a}_i}{\hat{a}_o}.\overline{P_s})
+ 
+\end{array}
+\]
+\end{itemize}
+\begin{itemize}
+\item we number each rule in a way each $a \in A$ has associated a progressive number $j$. Then, for each rule $a \in A$ with number $j$, we write:\\
+ \[
+%\begin{array}{lcl}
+%R_i& \defeq & \startchain{rule_i}\chainedlink{a_i}{\noact}\chainedlink{\noact}{a_o}\chainedlink{\overline{a}_i}{\noact} \chainedlink{\noact}{\overline{a}_o}\chainedlink{\tilde{a}_i}{\noact}\chainedlink{\noact}{\tilde{a}_o} \chainend{rule_{i+1}}.R_i\\
+%&& +\  \\
+%&& \startchain{rule_i}\chainedlink{a_i}{\noact}\chainedlink{\noact}{a_o}\chainedlink{a_i}{\noact} \chainedlink{\noact}{a_o} \chainend{rule_{i+1}}.R_i\\
+%&&+\\
+%&& \startchain{rule_i}\chainedlink{\overline{a}_i}{\noact}\chainedlink{\noact}{\overline{a}_o}\chainedlink{\overline{a}_i}{\noact} \chainedlink{\noact}{\overline{a}_o} \chainend{rule_{i+1}}.R_i\\
+%&& +\\
+%&& \startchain{rule_i}\chainedlink{\overline{a}_i}{\noact}\chainedlink{\noact}{\overline{a}_o}\chainedlink{a_i}{\noact} \chainedlink{\noact}{a_o} \chainend{rule_{i+1}}.R_i\\
+%\end{array}
+\begin{array}{lcl}
+A_j& \defeq & \startchain{r_j}
+      \underbrace{\chainedlink{s_{1i}}{\noact}\chainedlink{\noact}{s_{1o}}\chainedlink{s_{2i}}{\noact}\ldots\chainedlink{\noact}{s_{ko}}}_{R_j=\{s_{1},...,s_{k}\}}
+      \underbrace{\chainedlink{\overline{b}_{1i}}{\noact} \chainedlink{\noact}{\overline{b}_{1o}}
+      \chainedlink{\overline{b}_{2i}}{\noact} \ldots \chainedlink{\noact}{\overline{b}_{ho}}}_{I_j=\{b_1,...,b_h\}}
+      \underbrace{\chainedlink{\tilde{c}_{1i}}{\noact}\chainedlink{\noact}{\tilde{c}_{1o}} \chainedlink{\tilde{c}_{2i}}{\noact}\ldots \chainedlink{\noact}{\tilde{c}_{\ell o}}}_{P_j=\{c_1,...,c_\ell\}}
+      \chainend{r_{j+1}}.A_j\\
+&& +\  \\
+&& \sum_{s\in R_j}\startchain{r_j}\chainedlink{\overline{s}_i}{\noact}\chainedlink{\noact}{\overline{s}_o} \chainend{r_{j+1}}.A_j\\
+&&+\\
+&& \sum_{b\in I_j}\startchain{r_j}\chainedlink{b_i}{\noact} \chainedlink{\noact}{b_o} \chainend{r_{i+1}}.A_i\\
+%&& +\\
+%&& \startchain{rule_i}\chainedlink{\overline{a}_i}{\noact}\chainedlink{\noact}{\overline{a}_o}\chainedlink{a_i}{\noact} \chainedlink{\noact}{a_o} \chainend{rule_{i+1}}.R_i\\
+\end{array}
+\]
+\end{itemize}
+where $s$ is the meta-variable for the elements required by the rule,  $b$ is the meta-variable for  the elements that the rule requires to be absent, and  $c$ is the metavariable for the elements produced.
+
+For notational convenience, we fix that $r_1 = \tau$ and $r_{m+1} = stop$ for $m$ the number of reactions.
+
+Eventually, the unique process $STOP$ is defined as\\
+\[
+\begin{array}{lcl}
+STOP &\defeq& \startchain{stop}\chainedlink{\hat{s1}_{i}}{\noact}\chainedlink{\noact}{\hat{s1}_{o}}\chainedlink{\hat{s2}_{i}}{\noact}... \chainedlink{\noact}{\hat{sn}_{o}} \chainend{\silent}. STOP
+\end{array}
+\]
+where the $n \in \mathbb{N}$ is the number of the elements in the system.
+\end{definition}
+ 
+ 
+ 
+ \begin{example}
+ Let  $\mathcal{A} =(S,A) $ be a reaction system with $S= \{e1,e2,e3\}$, and $A=\{(e1|e3|e1),(e2|e1|e3),(e3|e2|e2) \}$.
+ The code of the resulting {\tt link}-calculus process $ \Pi_{s\in S} P_s | \Pi_{i\in A} P_a| STOP = [|(S,A) |] $ is the following. \\
+ The code for the elements:\\
+%  \[
+% \begin{array}{lcl}
+% S1 &\defeq& (\startchain{e1_i}\chainedlink{e1_o}{\noact}\chainedlink{\noact} \\
+%  +\startchain{e1_i}\chainedlink{e1_o}{\noact}\chainedlink{\noact}{e1_i}\chainend{e1_o}.\nil) \  |\ 
+% (\startchain{\tilde{e1}_i}\chainedlink{\tilde{e1}_o}{\noact}\chainedlink{\noact}{\hat{e1}_i}\chainend{\hat{e1}_o}.S1 + \link{\hat{e1}_i}{\hat{e1}_o}.\overline{S1})\\
+%\\
+%\overline{S1} &\defeq& (\link{\overline{e1}_i}{{e1}_o}.\nil +\startchain{\overline{e1}_i}\chainedlink{\overline{e1}_o}{\noact}\chainedlink{\noact}{\overline{e1}_i}\chainend{\overline{e1}_o}.\nil) \  |\ 
+% (\startchain{\tilde{e1}_i}\chainedlink{\tilde{e1}_o}{\noact}\chainedlink{\noact}{\hat{e1}_i}\chainend{\hat{e1}_o}.S1 + \link{\hat{e1}_i}{\hat{e1}_o}.\overline{S1})\\ 
+% \\
+% \\
+%  S2 &\defeq& (\link{e2_i}{e2_o}.\nil +\startchain{e2_i}\chainedlink{e2_o}{\noact}\chainedlink{\noact}{e2_i}\chainend{e2_o}.\nil) \  |\ 
+% (\startchain{\tilde{e2}_i}\chainedlink{\tilde{e2}_o}{\noact}\chainedlink{\noact}{\hat{e2}_i}\chainend{\hat{e2}_o}.S1 + \link{\hat{e2}_i}{\hat{e2}_o}.\overline{S2})\\
+%\\
+%\overline{S2} &\defeq& (\link{\overline{e2}_i}{{e2}_o}.\nil +\startchain{\overline{e2}_i}\chainedlink{\overline{e2}_o}{\noact}\chainedlink{\noact}{\overline{e2}_i}\chainend{\overline{e2}_o}.\nil) \  |\ 
+% (\startchain{\tilde{e2}_i}\chainedlink{\tilde{e2}_o}{\noact}\chainedlink{\noact}{\hat{e2}_i}\chainend{\hat{e2}_o}.S1 + \link{\hat{e2}_i}{\hat{e2}_o}.\overline{S2})\\ 
+% \\
+% \\
+%   S3 &\defeq& (\link{e3_i}{e3_o}.\nil +\startchain{e3_i}\chainedlink{e3_o}{\noact}\chainedlink{\noact}{e3_i}\chainend{e3_o}.\nil) \  |\ 
+% (\startchain{\tilde{e3}_i}\chainedlink{\tilde{e3}_o}{\noact}\chainedlink{\noact}{\hat{e3}_i}\chainend{\hat{e3}_o}.S1 + \link{\hat{e3}_i}{\hat{e3}_o}.\overline{S3})\\
+%\\
+%\overline{S3} &\defeq& (\link{\overline{e3}_i}{{e3}_o}.\nil +\startchain{\overline{e3}_i}\chainedlink{\overline{e3}_o}{\noact}\chainedlink{\noact}{\overline{e3}_i}\chainend{\overline{e3}_o}.\nil) \  |\ 
+% (\startchain{\tilde{e3}_i}\chainedlink{\tilde{e3}_o}{\noact}\chainedlink{\noact}{\hat{e3}_i}\chainend{\hat{e3}_o}.S1 + \link{\hat{e3}_i}{\hat{e3}_o}.\overline{S3})\\ 
+% \end{array}
+% \]
+
+ \[
+ \begin{array}{lcl}
+ S1 &\defeq& \startchain{s1_i}\chainedlink{s1_o}{\noact}\chainedlink{\noact}{\tilde{s1}_i}\chainedlink{\tilde{s1}_o}{\noact}\chainedlink{\noact}{\hat{s1}_i}\chainend{\hat{s1}_o}.S1 \ + \
+ \startchain{s1_i}\chainedlink{s1_o}{\noact}\chainedlink{\noact}{s1_i}\chainedlink{s1_o}{\noact}\chainedlink{\noact}{\tilde{s1}_i}\chainedlink{\tilde{s1}_o}{\noact}\chainedlink{\noact}{\hat{s1}_i}\chainend{\hat{s1}_o}.S1 \ + \ \startchain{\tilde{s1}_i}\chainedlink{\tilde{s1}_o}{\noact}\chainedlink{\noact}{\hat{s1}_i}\chainend{\hat{s1}_o}.S1\\
+ && + \\
+ &&  \startchain{s1_i}\chainedlink{s1_o}{\noact}\chainedlink{\noact}{\hat{s1}_i}\chainend{\hat{s1}_o}.\overline{S1} 
+\  + \ \startchain{s1_i}\chainedlink{s1_o}{\noact}\chainedlink{\noact}{s1_i}\chainedlink{s1_o}{\noact}\chainedlink{\noact}{\hat{s1}_i}\chainend{\hat{s1}_o}.\overline{S1}\ + \  \link{\hat{s1}_i}{\hat{s1}_o}.\overline{S1}\\
+\\
+\overline{S1} &\defeq& \startchain{\overline{s1}_i}\chainedlink{\overline{s1}_o}{\noact}\chainedlink{\noact}{\tilde{s1}_i}\chainedlink{\tilde{s1}_o}{\noact}\chainedlink{\noact}{\hat{s1}_i}\chainend{\hat{s1}_o}.S1 \ + \
+ \startchain{\overline{s1}_i}\chainedlink{\overline{s1}_o}{\noact}\chainedlink{\noact}{\overline{s1}_i}\chainedlink{\overline{s1}_o}{\noact}\chainedlink{\noact}{\tilde{s1}_i}\chainedlink{\tilde{s1}_o}{\noact}\chainedlink{\noact}{\hat{s1}_i}\chainend{\hat{s1}_o}.S1 \ + \ \startchain{\tilde{s1}_i}\chainedlink{\tilde{s1}_o}{\noact}\chainedlink{\noact}{\hat{s1}_i}\chainend{\hat{s1}_o}.S1\\
+ && + \\
+ &&  \startchain{\overline{s1}_i}\chainedlink{\overline{s1}_o}{\noact}\chainedlink{\noact}{\overline{s1}_i}\chainedlink{\overline{s1}_o}{\noact}\chainedlink{\noact}{\hat{s1}_i}\chainend{\hat{s1}_o}.\overline{S1} 
+\  + \ \startchain{\overline{s1}_i}\chainedlink{\overline{s1}_o}{\noact}\chainedlink{\noact}{\hat{s1}_i}\chainend{\hat{s1}_o}.\overline{S1}\ + \  \link{\hat{s1}_i}{\hat{s1}_o}.\overline{S1}\\
+ \\
+ \\
+ S2 & \defeq &\sum_{h=0}^{2} \sum_{k=0}^{2}  \underbrace{ \startchain{s2_i}\chainedlink{s2_o}{\noact}\chainedlink{\noact}{s2_i}\chainedlink{s2_o}{\noact}\chainend{\noact}...}_{size = h}\underbrace{ \startchain{\tilde{s2}_i}\chainedlink{\tilde{s2}_o}{\noact}\chainedlink{\noact}{\tilde{s2}_i}\chainedlink{\tilde{s2}_o}{\noact}\chainend{\noact}...}_{size = k}\link{\hat{s2}_i}{\hat{s2}_o}.S2\\
+&&\ +\\
+&&\sum_{h=0}^{2}   \underbrace{ \startchain{s2_i}\chainedlink{s2_o}{\noact}\chainedlink{\noact}{s_i}\chainedlink{s2_o}{\noact}\chainend{\noact}...}_{size = h}\link{\hat{s2}_i}{\hat{s2}_o}.\overline{S2}
+
+% \ + \ \link{\hat{a}_i}{\hat{a}_o}.\overline{P_s})
+ \\
+ \overline{S2}& \defeq &\sum_{h=0}^{2} \sum_{k=1}^{2} \underbrace{ \startchain{\overline{s2}_i}\chainedlink{\overline{s2}_o}{\noact}\chainedlink{\noact}{\overline{s2}_i}\chainedlink{\overline{s2}_o}{\noact}\chainend{\noact}...}_{size = h}\underbrace{ \startchain{\tilde{s2}_i}\chainedlink{\tilde{s2}_o}{\noact}\chainedlink{\noact}{\tilde{s2}_i}\chainedlink{\tilde{s2}_o}{\noact}\chainend{\noact}...}_{size = k}.\link{\hat{s2}_i}{\hat{s2}_o}.S2\\
+ && \ +\\
+ && \sum_{h=0}^{2}  \underbrace{ \startchain{\overline{s2}_i}\chainedlink{\overline{s2}_o}{\noact}\chainedlink{\noact}{\overline{s2}_i}\chainedlink{\overline{s2}_o}{\noact}\chainend{\noact}...}_{size = h}.\link{\hat{s2}_i}{\hat{s2}_o}.\overline{S2}\\
+% 
+% 
+%   S2 &\defeq& \startchain{e2_i}\chainedlink{e2_o}{\noact}\chainedlink{\noact}{\tilde{e2}_i}\chainedlink{\tilde{e2}_o}{\noact}\chainedlink{\noact}{\hat{e2}_i}\chainend{\hat{e2}_o}.S2 \ + \
+% \startchain{e2_i}\chainedlink{e2_o}{\noact}\chainedlink{\noact}{e2_i}\chainedlink{e2_o}{\noact}\chainedlink{\noact}{\tilde{e2}_i}\chainedlink{\tilde{e2}_o}{\noact}\chainedlink{\noact}{\hat{e2}_i}\chainend{\hat{e2}_o}.S2 \ + \ \startchain{\tilde{e2}_i}\chainedlink{\tilde{e2}_o}{\noact}\chainedlink{\noact}{\hat{e2}_i}\chainend{\hat{e2}_o}.S2\\
+% && + \\
+% &&  \startchain{e2_i}\chainedlink{e2_o}{\noact}\chainedlink{\noact}{\hat{e2}_i}\chainend{\hat{e2}_o}.\overline{S2} 
+%\  + \ \startchain{e2_i}\chainedlink{e2_o}{\noact}\chainedlink{\noact}{e2_i}\chainedlink{e2_o}{\noact}\chainedlink{\noact}{\hat{e2}_i}\chainend{\hat{e2}_o}.\overline{S2}\ + \  \link{\hat{e2}_i}{\hat{e2}_o}.\overline{S2}\\
+%\\
+%\overline{S2} &\defeq& \startchain{\overline{e2}_i}\chainedlink{\overline{e2}_o}{\noact}\chainedlink{\noact}{\tilde{e2}_i}\chainedlink{\tilde{e2}_o}{\noact}\chainedlink{\noact}{\hat{e2}_i}\chainend{\hat{e2}_o}.S2 \ + \
+% \startchain{\overline{e2}_i}\chainedlink{\overline{e2}_o}{\noact}\chainedlink{\noact}{\overline{e2}_i}\chainedlink{\overline{e2}_o}{\noact}\chainedlink{\noact}{\tilde{e2}_i}\chainedlink{\tilde{e2}_o}{\noact}\chainedlink{\noact}{\hat{e2}_i}\chainend{\hat{e2}_o}.S2 \ + \ \startchain{\tilde{e2}_i}\chainedlink{\tilde{e2}_o}{\noact}\chainedlink{\noact}{\hat{e2}_i}\chainend{\hat{e2}_o}.S2\\
+% && + \\
+% &&  \startchain{\overline{e2}_i}\chainedlink{\overline{e2}_o}{\noact}\chainedlink{\noact}{\overline{e2}_i}\chainedlink{\overline{e2}_o}{\noact}\chainedlink{\noact}{\hat{e2}_i}\chainend{\hat{e2}_o}.\overline{S2} 
+%\  + \ \startchain{\overline{e2}_i}\chainedlink{\overline{e2}_o}{\noact}\chainedlink{\noact}{\hat{e2}_i}\chainend{\hat{e2}_o}.\overline{S2}\ + \  \link{\hat{e2}_i}{\hat{e2}_o}.\overline{S2}\\
+ \\
+ \\
+   S3 &\defeq& \startchain{s3_i}\chainedlink{s3_o}{\noact}\chainedlink{\noact}{\tilde{s3}_i}\chainedlink{\tilde{s3}_o}{\noact}\chainedlink{\noact}{\hat{s3}_i}\chainend{\hat{s3}_o}.S3 \ + \
+ \startchain{s3_i}\chainedlink{s3_o}{\noact}\chainedlink{\noact}{s3_i}\chainedlink{s3_o}{\noact}\chainedlink{\noact}{\tilde{s3}_i}\chainedlink{\tilde{s3}_o}{\noact}\chainedlink{\noact}{\hat{s3}_i}\chainend{\hat{s3}_o}.S3 \ + \ \startchain{\tilde{s3}_i}\chainedlink{\tilde{s3}_o}{\noact}\chainedlink{\noact}{\hat{s3}_i}\chainend{\hat{s3}_o}.S3\\
+ && + \\
+ &&  \startchain{s3_i}\chainedlink{s3_o}{\noact}\chainedlink{\noact}{\hat{s3}_i}\chainend{\hat{s3}_o}.\overline{S3} 
+\  + \ \startchain{s3_i}\chainedlink{s3_o}{\noact}\chainedlink{\noact}{s3_i}\chainedlink{s3_o}{\noact}\chainedlink{\noact}{\hat{s3}_i}\chainend{\hat{s3}_o}.\overline{S3}\ + \  \link{\hat{s3}_i}{\hat{s3}_o}.\overline{S3}\\
+\\
+\overline{S3} &\defeq& \startchain{\overline{s3}_i}\chainedlink{\overline{s3}_o}{\noact}\chainedlink{\noact}{\tilde{s3}_i}\chainedlink{\tilde{s3}_o}{\noact}\chainedlink{\noact}{\hat{s3}_i}\chainend{\hat{s3}_o}.S3 \ + \
+ \startchain{\overline{s3}_i}\chainedlink{\overline{s3}_o}{\noact}\chainedlink{\noact}{\overline{s3}_i}\chainedlink{\overline{s3}_o}{\noact}\chainedlink{\noact}{\tilde{s3}_i}\chainedlink{\tilde{s3}_o}{\noact}\chainedlink{\noact}{\hat{s3}_i}\chainend{\hat{s3}_o}.S3 \ + \ \startchain{\tilde{s3}_i}\chainedlink{\tilde{s3}_o}{\noact}\chainedlink{\noact}{\hat{s3}_i}\chainend{\hat{s3}_o}.S3\\
+ && + \\
+ &&  \startchain{\overline{s3}_i}\chainedlink{\overline{s3}_o}{\noact}\chainedlink{\noact}{\overline{s3}_i}\chainedlink{\overline{s3}_o}{\noact}\chainedlink{\noact}{\hat{s3}_i}\chainend{\hat{s3}_o}.\overline{S3} 
+\  + \ \startchain{\overline{s3}_i}\chainedlink{\overline{s3}_o}{\noact}\chainedlink{\noact}{\hat{s3}_i}\chainend{\hat{s3}_o}.\overline{S3}\ + \  \link{\hat{s3}_i}{\hat{s3}_o}.\overline{S3}\\
+ \end{array}
+ \]
+ 
+ The code for the rules is as follow.:
+ \begin{itemize}
+\item Rule 1
+ \[
+ \begin{array}{lcl}
+ R1 &\defeq & \startchain{\silent}\chainedlink{s1_i}{\noact}\chainedlink{\noact}{s1_o}\chainedlink{\overline{s3}_i}{\noact}\chainedlink{\noact}{\overline{s3}_o}\chainedlink{\tilde{s1}_i}{\noact}\chainedlink{\noact}{\tilde{s1}_o}\chainend{rule2}.R1
+\ +\ 
+ \startchain{\silent}\chainedlink{\overline{s1}_i}{\noact}\chainedlink{\noact}{\overline{s1}_o}\chainend{rule2}.R1
+ \ +\ 
+  \startchain{\silent}\chainedlink{s3_i}{\noact}\chainedlink{\noact}{s3_o}\chainend{rule2}.R1\\
+ \end{array}
+ \]
+ \item Rule 2
+  \[
+ \begin{array}{lcl}
+ R2 &\defeq & \startchain{rule2}\chainedlink{s2_i}{\noact}\chainedlink{\noact}{s2_o}\chainedlink{\overline{s1}_i}{\noact}\chainedlink{\noact}{\overline{s1}_o}\chainedlink{\tilde{s3}_i}{\noact}\chainedlink{\noact}{\tilde{s3}_o}\chainend{rule3}.R2\\
+ &&+\\
+ &&  \startchain{rule2}\chainedlink{\overline{s2}_i}{\noact}\chainedlink{\noact}{\overline{s2}_o}\chainend{rule3}.R2\\
+ &&+\\
+ &&  \startchain{rule2}\chainedlink{s1_i}{\noact}\chainedlink{\noact}{s1_o}\chainend{rule3}.R2\\
+ \end{array}
+ \]
+ \item Rule 3
+  \[
+ \begin{array}{lcl}
+ R3 &\defeq & \startchain{rule3}\chainedlink{s3_i}{\noact}\chainedlink{\noact}{s3_o}\chainedlink{\overline{s2}_i}{\noact}\chainedlink{\noact}{\overline{s2}_o}\chainedlink{\tilde{s2}_i}{\noact}\chainedlink{\noact}{\tilde{s2}_o}\chainend{stop}.R3\\
+ &&+\\
+ &&  \startchain{rule3}\chainedlink{\overline{s3}_i}{\noact}\chainedlink{\noact}{\overline{s3}_o}\chainend{stop}.R3\\
+ &&+\\
+ &&  \startchain{rule3}\chainedlink{s2_i}{\noact}\chainedlink{\noact}{s2_o}\chainend{stop}.R3\\
+ \end{array}
+ \]
+\end{itemize}
+Finally, the process $STOP$ is defined as:
+\[
+STOP\ \defeq \ \startchain{stop}\chainedlink{\hat{s1}_i}{\noact}\chainedlink{\noact}{\hat{s1_o}} \chainedlink{\hat{s2}_i}{\noact}\chainedlink{\noact}{\hat{s2}_o}\chainedlink{\hat{s3}_i}{\noact}\chainedlink{\noact}{\hat{s3}_o}\chainend{\silent}.STOP
+\]
+
+Now, let assume that our initial system is composed by only the element $S1$, as follow:
+\[
+System \ \defeq \ S1|\overline{S2}|\overline{S3}|R1|R2|R3|STOP
+\]
+Then, it is possible to apply only the first rule. The {\tt link}-calculus transition follows:
+\[
+\begin{array}{ll}
+System & \rightarrow \\
+&\startchain{\silent}\chainedlink{s1_i}{s1_i}\chainedlink{s1_o}{s1_o} \chainedlink{\overline{s3}_i}{\overline{s3}_i}\chainedlink{\overline{s3}_o}{\overline{s3}_o}\chainedlink{\tilde{s1}_i}{\tilde{s1}_i}\chainedlink{\tilde{s1}_o}{\tilde{s1}_o}\chainedlink{rule2}{rule2}\chainedlink{\overline{s2}_i}{\overline{s2}_i}\chainedlink{\overline{s2}_o}{\overline{s2}_o}\chainedlink{s1_i}{s1_i}\chainedlink{s1_o}{s1_o}\chainedlink{rule3}{rule3}\chainedlink{\overline{s3}_i}{\overline{s3}_i}\chainedlink{\overline{s3}_o}{\overline{s3}_o}\chainedlink{\overline{s2}_i}{\overline{s2}_i}\chainedlink{\overline{s2}_o}{\overline{s2}_o}\chainedlink{stop}{stop}\\
+&
+\chainedlink{\hat{s1}_i}{\hat{s1}_i}\chainedlink{\hat{s1}_o}{\hat{s1}_o}\chainedlink{\hat{s2}_i}{\hat{s2}_i}\chainedlink{\hat{s2}_o}{\hat{s2}_o}\chainedlink{\hat{s2}_o}{\hat{s2}_o}\chainedlink{\hat{s3}_i}{\hat{s3}_i}\chainedlink{\hat{s3}_i}{\hat{s3}_i}\chainedlink{\hat{s3}_o}{\hat{s3}_o}\chainend{\silent} \ System
+\end{array}
+\]
+ \end{example}
+ 
+
+% Let ${\cal A} = (S, A)$ be a reaction system, and let $t$ be a transition such that $t= ([|{\cal A}|] \xrightarrow{\link{\silent}{\silent}}P')$. By Definition~\ref{def:trans}, we know that
+% each rule $a_j \in A$ is encoded by the process $A_j$;
+% we denote as the \emph{required elements} by  $A_j$ in $t$ all the elements appearing in the link chain prefix offered by  $A_j$ in $t$.
+
+ 
+ \begin{lemma}
+ \label{lem:allrules}
+  Let ${\cal A} = (S, A)$ be a reaction system, let $P=[|{\cal A}|]$ its c\CNA~translation, and let $t$
+be a transition such that  if $t= (P \xrightarrow{\link{\silent}{\silent}} P')$, then
+  \begin{enumerate}
+  \item for each rule  $a_j \in A$, the corresponding process $A_j = [|a_j|]$,  is involved in the transition $t$;
+  \item each process $P_s = [|s|]$, with $s \in S$, participates at most  with one solid link for each rule $A_j$.%, if $s$ is a \emph{required element} of $A_j$ in $t$.
+  \end{enumerate}
+  \end{lemma}
+  \begin{proof}
+  We prove the two items separately:
+  \begin{enumerate}
+\item by Definition~\ref{def:trans}, all the names $r_j$, where $j$ is the counter of the rules in ${\cal A}$, are restricted. Then, all the processes $A_j$ must participate to each transitions.
+ \item the code of each rule leaves one virtual link between two solid links of the types $\dots\chainedlink{s_{1i}}{\noact}\chainedlink{\noact}{s_{1o}}\dots$. Then, it derives that the process $P_{s_1}$, that  codes the behaviour of element $s_1$, can participate in the transition with only one solid link $\link{s_{1i}}{s_{1o}}$. In fact, with a number $v$ of virtuals  $v > 1$, 
+ $P_{s_1}$ can not participate with a link chain, as by juxtaposing  $\link{s_{1i}}{s_{1o}}$, not valid
+ link chains would be generated.
+    \end{enumerate}
+  \end{proof}
+ 
+ 
+ \begin{proposition}[completeness]
+ Let ${\cal A} = (S, A)$ be a reaction system, and let $P=[|{\cal A}|]$ its c\CNA~translation, then if ${\cal A}$ evolves in ${\cal A'} = (S', A)$ in one step, then $\exists$ $P'$ such that $P \rightarrow P'$ and  $P'=[|{\cal A'}|]$.
+ \end{proposition}
+ \begin{proof}
+ The proof proceeds by cases on the possible evolution of each element  $e \in S$, following the execution of one step in the reaction system ${\cal A} = (S, A)$.\\
+ %Let  ${\cal A} = (S, A)$ be a reaction system and let $e$ be an element in the system.
+ % Then 
+  Let ${\cal A'} = (S', A)$ be the evolution of  ${\cal A}$ after one step. There are four cases to be considered: \ 
+ 1) \ $e \in S$, $e \in S'$; \ 2)\  $e \in S$, $e \notin S'$; \ 3)\  $e \notin S$, $e \notin S'$; \ 4)\  $e \notin S$, $e \in S'$.\\
+ case  $e \in S$ and $e \in S'$\\
+It means that have been applied some rules  in $A$ producing the element $e$, and also that some rules in $A$ requiring the element $e$ could have been applied. All the rules requiring the absence of $e$ have not been applied.\\
+%Then, let $R_i = [e';e'',e]$ be a rule producing $e$ with $e'' \neq e$, and let $i$ be its associated number. \\
+It is important to observe that our c\CNA encoding, for each transition, requires the application of all the rules in the system, as the channels $r_j$, with $j \in [1,m]$ are restricted.
+Each rule, define a pattern to be satisfied, i.e. each rule inserts as many virtual links  as  the number of reactants, inhibitors, and products, as required by the corresponding RS rule.
+It follows that 
+
+
+The code executed by any rule $R_i$ producing $e$ is $R_i \defeq \startchain{rule_i}\chainedlink{e'_i}{\noact}\chainedlink{\noact}{e'_o}\chainedlink{\overline{e''}_i}{\noact} \chainedlink{\noact}{\overline{e''}_o}\chainedlink{\tilde{e}_i}{\noact}\chainedlink{\noact}{\tilde{e}_o} \chainend{rule_{i+1}}.R_i + \dots$, with $e'' \neq e$.\\
+The code executed by any  rules $j$ consuming $e$ without producing it is $R_j \defeq \startchain{rule_j}\chainedlink{e_i}{\noact}\chainedlink{\noact}{e_o}\chainedlink{\overline{e'}_i}{\noact} \chainedlink{\noact}{\overline{e'}_o}\chainedlink{\tilde{e''}_i}{\noact}\chainedlink{\noact}{\tilde{e''}_o} \chainend{rule_{j+1}}.R_j + \dots$, with $e',e''\neq e $.\\
+The code executed by any rule $j$ not requiring $e$ is $R_j \defeq \startchain{rule_j}\chainedlink{e_i}{\noact}\chainedlink{\noact}{e_o} \chainend{rule_{j+1}}.R_j + \dots$.\\
+The code executed by the element $e$ is $P_e \defeq  \underbrace{ \startchain{e_i}\chainedlink{e_o}{\noact}\chainedlink{\noact}{e_i}\chainedlink{e_o}{\noact}\chainend{\noact}...}_{size = h}\underbrace{ \startchain{\tilde{e}_i}\chainedlink{\tilde{e}_o}{\noact}\chainedlink{\noact}{\tilde{e}_i}\chainedlink{\tilde{e}_o}{\noact}\chainend{\noact}...}_{size = k}\link{\hat{e}_i}{\hat{e}_o}.P_s + \dots$, where $h$ is the number of  rules requiring $e$ and $k$ is the number of active rules producing $e$.
+Then we observe that, together with the process $STOP$, the resulting processes are $R_i$, $R_j$, $P_e$ and $STOP$, i.e. the element $e$ is produced, because at least a rule $R_i$ produces $e$. \\
+The other cases are similar. 
+\end{proof}
+ 
+ 
+ \begin{corollary}
+  Let ${\cal A} = (S, A)$ be a reaction system, and let $P=[|{\cal A}|]$ its {\tt link}-calculus translation, then if ${\cal A}$ evolves in ${\cal A'} = (S', A)$  then $\exists$ $P'$ such that $P \rightarrow^* P'$ and  $P'=[|{\cal A'}|]$.  
+ \end{corollary}
+ 
+ 
+ 
+ \begin{proposition}[correctness]
+ Let $P$ a {\tt link}-calculus process such that exists a reaction system ${\cal A}$ such that $P=[|{\cal A}|]$, then if $P \rightarrow P'$, then $\exists$ ${\cal A'}$ such that ${\cal A}$  evolves in ${\cal A'}$ in one step and $P'=[|{\cal A'}|]$.
+ \end{proposition}
+ 
+ 
+ \begin{corollary}
+  Let $P$ a {\tt link}-calculus process such that exists a reaction system ${\cal A}$ such that $P=[|{\cal A}|]$, then if $P \rightarrow^* P'$, then $\exists$ ${\cal A'}$ such that ${\cal A}$  evolves in ${\cal A'}$ and $P'=[|{\cal A'}|]$.
+ \end{corollary}
