@@ -1,0 +1,323 @@
+Da: Theoretical Computer Science <em@editorialmanager.com>
+Date: dom 7 giu 2020 alle ore 18:02
+Subject: Review on TCS-D-20-00267
+To: Moreno Falaschi <moreno.falaschi@unisi.it>
+
+
+Manuscript Number: TCS-D-20-00267
+Manuscript Title: A process algebraic approach to reaction systems.
+Author(s): Linda Brodo, Researcher; Roberto Bruni, Professor; Moreno Falaschi, Professor
+Submitted to: Theoretical Computer Science
+
+
+Dear Professor Moreno Falaschi,
+
+Referees have evaluated your paper mentioned above. Their comments are below. On the basis of these comments, the member of the Editorial Board handling your paper has decided that a major revision is needed before your paper can be considered for publication. I would appreciate it if you could revise your paper within fifty six days of this email.
+
+I look forward to receiving the revised version of your paper. You should explain how and where the reviewers' comments have been addressed by your changes to the text (overview of changes). Should you disagree with some of these comments, please explain why.
+
+To upload the source file (LaTeX, or Word) of the revised paper and the overview of changes, please log-in to the system at https://www.editorialmanager.com/tcs/ with
+username: Your username is: moreno.falaschi@unisi.it
+
+If you need to retrieve password details, please go to https://www.editorialmanager.com/tcs/admin/Default.aspx
+selecting the 'Author' button.
+
+When submitting your revised paper, we ask that you include the following items:
+
+Response to Reviewers (mandatory)
+
+This should be a separate file labeled "Response to Reviewers" that carefully addresses, point-by-point, the issues raised in the comments appended below. You should also include a suitable rebuttal to any specific request for change that you have not made. Mention the page, paragraph, and line number of any revisions that are made.
+
+Manuscript and Figure Source Files (mandatory)
+
+We cannot accommodate PDF manuscript files for production purposes. We also ask that when submitting your revision you follow the journal formatting guidelines.  Figures and tables may be embedded within the source file for the submission as long as they are of sufficient resolution for Production. For any figure that cannot be embedded within the source file (such as *.PSD Photoshop files), the original figure needs to be uploaded separately. Refer to the Guide for Authors for additional information.
+http://www.elsevier.com/journals/theoretical-computer-science/0304-3975/guide-for-authors
+
+Highlights (Optional)
+
+Highlights consist of a short collection of bullet points that convey the core findings of the article and should be submitted in a separate file in the online submission system. Please use 'Highlights' in the file name and include 3 to 5 bullet points (maximum 85 characters, including spaces, per bullet point). See the following website for more information
+http://www.elsevier.com/highlights
+
+Please note that this journal offers a new, free service called AudioSlides: brief, webcast-style presentations that are shown next to published articles on ScienceDirect (see also http://www.elsevier.com/audioslides). If your paper is accepted for publication, you will automatically receive an invitation to create an AudioSlides presentation.
+
+Theoretical Computer Science features the Interactive Plot Viewer, see: http://www.elsevier.com/interactiveplots. Interactive Plots provide easy access to the data behind plots. To include one with your article, please prepare a .csv file with your plot data and test it online at http://authortools.elsevier.com/interactiveplots/verification before submission as supplementary material.
+PLEASE NOTE: Theoretical Computer Science would like to enrich online articles by displaying interactive figures that help the reader to visualize and explore your research results. For this purpose, we would like to invite you to upload figures in the MATLAB .FIG file format as supplementary material to our online submission system. Elsevier will generate interactive figures from these files and include them with the online article on SciVerse ScienceDirect. If you wish, you can submit .FIG files along with your revised submission.
+
+Include interactive data visualizations in your publication and let your readers interact and engage more closely with your research. Follow the instructions here: https://www.elsevier.com/authors/author-services/data-visualization to find out about available data visualization options and how to include them with your article.
+
+Kind regards,
+
+Ion Petre
+Editor
+Theoretical Computer Science
+
+
+Comments:
+
+Reviewer #1: In this paper the authors consider a variant of the link-calculus, and show that one can represent reaction systems. For this embedding they show its correctness and completeness. Several examples are use to show how the embedding works. Also, they define an assertion language based on regular expressions, and use it to extend the Hennessy-Milner logic to their framework. They prove that their notion of bisimilarity and the logical equivalence coincide. They also claim to increase the expressiveness of reaction systems, by exploiting the interaction among different reaction systems.
+
+The paper seems technical sound, but the long chains are not easy to read and understand. For example I couldn't follow how the chain given in Figure 2 in obtain from the given interacting processes. Maybe a more detailed connection should be made between the depicted chains, those on labels and those used in the given processes.
+
+Also, some processes used in examples seem not to follow the definitions given on pages 9 and 10 for embedding rules and objects. Why?
+
+Remarks:
+
+p.2, l.52 - replace "looks a suitable option" by "is a suitable option"
+
+p.3, l.39 - you mention here that interactive reaction systems do not exist, but this is no longer the case. See Networks of Reaction Systems https://doi.org/10.1142/S0129054120400043
+
+p.8, Fig.1 - you mention that rule (Rel) is omitted. What does this rule do and where is it used in the paper?  This rule isn't explained on the previous page with the other rules of Fig.
+
+p.9, l.9 - you mention "four different names" but in what follows you give and explain five pairs of names. Why?
+
+p.10, l.21 - replace "Channels p_i" by "Channels p_j"
+
+p.10, l.33, def. of Cxt^n - replace s_j and \overline{e_j} by s_i and \overline{e_i} in order to have uniform notations corresponding to the notations on top of page 9
+
+p.11, l.29 - shouldn't be Cxt^1 instead of Cxt? if this is the check please check all appearances of Cxt without superscript from all over the paper (e.g., example 15)
+
+p.12, Fig.2. - maybe add some brackets to illustrate each part of the chain to which process corresponds. While the parts taken form the processes I and Cxt^1 are easily to spot, the same thing can't be said about Pr_1 and Pr_2. E.G., Pr_1 should start with r_1\s1_i but this is not part of Fig.2. Why?
+
+p.12, l.28, def. of P_{s1} - why are the pairs box\box \tilde{s1_i}\ tile{s1_o} missing? according to top of page 9 shouldn't it also be present as r_2 can produce s_1?
+
+p.12, l.32, def of Cxt - shouldn't it contain entities without decorations according to its definition given on page 10?
+
+p.14, l.50-51 - all four rules do not describe the evolution depicted in Fig.1, namely the final states are swapped (w and q I mean). E.g., the first rule should reach w and not q as it does now
+
+p.15, l.22-23 - just like at the previous remark, processes P_1 and P_2 have last states swapped
+
+p.15, l.56 - why is the definition of Cxt different from that of Cxt^n given on page 10, namely the decorations are different?
+
+p.16, l.10 - replace "context: We model" by "context: we model" or "context. We model"
+
+p.16, l.28 - replace "the entity w" by "the entity q" (according to previous remark on swapped states)
+
+p.16, l.32 - replace the symbol \tilde{w} between p_2 and p_3 by \tilde{q}
+
+p.16, l.41 - something seems to be missing here as the start of the paragraph makes no sense now
+
+p.17, l.31 - replace \overline{P}_{T',\tilde{T'}} by \overline{P}_{T'}
+
+p.17, l.36 - according to the definitions on page 9, should be box\box (tilde{c_i}\ tilde{c_o} box\box)^h instead of  (box\box tilde{c_i}\ tilde{c_o})^h ?
+
+p.17, l.40 - before .p shouldn't be box\box according to the definitions on page 9?
+
+p.17, l.49-50 - remove the dots after the power h in the second processes of both lines
+
+p.18, l.34 - replace "when the expose" by "when they expose"
+
+p.12, l.12 - replace "contest" by "context"
+
+p.23, l.11-14 - why Cxt_1 and Cxt_2 have a different form than the definition of Cxt^n on page 10?
+
+p.23, l.18 - according to the definition on page 9, the pair box\box should appear before the dot (twice); also the dot is missing in the definition of \overline{P}(G); same remark for almost all processes on page 25
+
+p.23, l.26-27 - the definitions of Sys_1and Sys_2 seem swapped based on the explanations given before the relations. E.g., Sys_1 includes C, but in the formal part it contains the process \overline{P}_C. This swapping seems to propagate till the end of Section 6 so please check carefully that part also
+
+p.25 - try not to use colours as in the printed black/white version those are not visible
+
+p.26, ref. [7]  - remove the hyperlink from paper title, and also the URL as this is the only reference that has both a DOI and an URL
+
+p.27, ref. [15] - replace "A. Bogdan, C. Gabriel" by "B. Aman, G. Ciobanu"; this seems to be the only place with such an error, but please check all other references as well
+
+p.30, l.17 - who are h and w in "h \in [1,...,w]"? Also who is cxt_h as only Cxt^n was defined previously?
+
+p.30, l.28, def. P_{aj} - replace \ldots \tilde{s_o} by \tilde{s_o} \ldots
+
+p.30, l.33, def. P_{aj}  replace space before s_o; same issue with extra spaces appears in the rest of the formulae on page 30
+
+
+
+Reviewer #2:
+Title: A process algebraic approach to reaction systems
+
+In the first part of the paper the authors define a framework for encoding reaction systems as processes in the open multi-party process algebra cCNA (chained Core Network Algebra) and prove the correctness and the completeness of this encoding. In the second part the authors define a new bisimulation relation, called bio-simulation, alongside an assertion language extending the Hennessy-Milner logic. This paper is an extended version of the conference paper [16] and the authors listed the additional results and included proofs of the results.
+
+In general this algebraic approach of encoding Reaction Systems is interesting and seems sound.
+
+While I am generally in favour of the work, I believe this paper should be improved in a few ways before publication. My concerns regard the conciseness of the abstract, the introduction and the conclusions, as well as the clarity of the actual contributions. In the body of the paper more details should be added in places mentioned below such that the heavy notations are easier to grasp.
+
+In the following I list questions, comments, suggestions, and typos.
+
+Page1
+The abstract of the paper could be made more concise. Second sentence is not needed and it's somehow contradictory with the statement of the third sentence "it is a new computation model". In the 3rd sentence, the justification of the challenges is not convincing, maybe just a simple rephrasing would help.
+Line 28 - say that you are using chained Core Network Algebra (cCNA) which is a variant of the link-calculus. When you say "we consider", it's not clear if you define it or just use it. Why not say simpler (instead of sentence starting at line 28): We define a (modular?) encoding/embedding of Reaction Sytems as processes in the chained Core Network Algebra (cCNA), which is a variant of the link-calculus, by representing ..., and we prove its correctness and completeness.
+Line 33 - "Computer science applications" sounds quite vague.
+Line 35 - framework, embedding, encoding, approach, translation -- it is not clear all through the paper if there is a distinction between these 5 words, better to settle on 1 or 2
+Line 34 - I would say it as a statement: "Our *framework* provides a Labelled Transition System (LTS) semantics for reaction systems. Based on the LTS semantics we adapt the classical notion of process bisimulation to define a bio-simulation relation for studying properties of reaction systems.
+Line 40 - Remove "Interestingly" and instead make the statement: We prove that our bio-simulation relation and the logical equivalence .... coincide.
+Line 42 - A stronger statement would be: "We claim/show/prove(?) that our methodology contributes to ..."
+Line 50 - Is Natural Computing still an emerging area of research?
+
+Page 2
+In some place it's Reaction Systems with capital letter, in others is lower caps. Please make this consistent throughout the paper.
+Line 16 - For cCNA please remove the footnote and put the full description in the text. Is this something defined in this paper or not, in which case add biblio reference(s).
+Line 19 - "this mechanism" refers to cCNA or to link-calculus?
+Line 21 - How is [12] "later" as [11] is from 2018 and [12] from 2014?
+Line 33 - "a new bio-simulation relation"
+Line 45 - "looks like"
+
+Page 3
+The first 3 items of the contributions are unclear and should be grouped into one item. Instead start each sentence with "we define" or "we show" or something similar.
+Line 60 - The contribution is unclear (at this point in the paper what are s and s' and what is the relationship among them?) and it also raises the question if it is worth to be considered as a contribution since it is only sketched.
+Line 63 - Last contribution is somehow contradictory and the example is unclear at this point in the paper.  The contradiction comes from the last sentence in the conclusions section where you say that you are planning to extend the framework to include communication. The result in section 7.2 is also a sketch, not fully studied, barely a little more than one page.
+Line 75 - Section 7.2 instead of Section 7
+Line 78 - "SOS operational semantics" -> "structural operational semantics"
+Line 88 - Exactly how many new examples?
+
+Page 4
+The name of the section 2 should include any of the words background or overview.
+Line 53: Say that S is called the entity set?
+Definition 2: I think it would be helpful to state that S is a finite set of entities and A $\subseteq$ rac(S) is a set of reactions over S.
+Definition 3: The same as above, say "a finite subset of entities". Overall the definitions need more words to remind the readers what are all the sets about, e.g. a is enables by W is W includes the reactant set but not the inhibitor set...
+Definiton 4: Replace $n\geq 0$ with $n$ a nonnegative integer; C_i, D_i \subseteq S are set of entities. How is C_0 defined?
+
+Page 6
+Line 166: Please give more details of the reason for extending the notion of interactive processes.
+Line 173: When you say "we introduce" do you mean "we define"? Is cCNA new as it is not clear at this point? Was it defined in [16]? Are there any paper references for CNA?  Be more explicit in the text about the difference between the link-calculus and cCNA (and CNA?).
+Line 176: The symbol {\cal A} is overloaded: it was used earlier for (S,A) a reaction system! Please use another letter or font style for the set of actions.
+Line 181: Shouldn't \epsilon be defined here?
+Give intuition behind a link \alpha\ \beta: what roles are \alpha and \beta supposed to have? (input, output, etc.)
+
+Page 7
+Syntax: the grammar is not complete as it does not define the empty summation, not single v.P, nor the operator +. Is the operator \Sum a summation or a non-deterministic choice? Using the word summation is misleading at this point. It's better to be explicit, so replace the operator \Sum with  0 | v.P | P + Q . Is the set I finite?
+Line 202: here is the first reference to a paper introducing CNA, it should be also earlier. What is the difference between CNA and link-calculus, it seems that CNA is a subset of link-calculus. Why isn't the name mobility included in CNA and cCNA?
+Semantics is not completely detailed. Why are rules Rel and Rpar omitted (per Fig.1 caption)? Rel is not even mention in the text on page 7. \Delta is not defined. In rule Res shouldn't the condition "(\nu a)v is defined" be included? The same in rule Com for the condition "v \cdot v' defined". Best is to give the full semantics. In the Fig.1 caption: SOS semantics -> structural operational semantics.
+Example 7 on page 7 is not clear at all. What is a forwarder? Or "some sort of forwarder" (this is too colloquial)? For H is it "alternates" or do you mean sequential? What is the dot operator between links in the definition of H?
+
+Page 8
+Definition 8: Because you say "vv is also a valid link chain" it implies that v is assumed to be a valid link.
+Definition 9: instead of saying "we define the ..." better say "we denote by $a\$ a half left link and by $\a$ a half right link.
+Definition 10 was difficult to follow. R looks like the set of reactants in a reaction, was that your intention? You also overload the use of subscript "i"  (previously it was denoting a nonnegative integer while here it stands for "input"?) and initially thought that i is a number and the other subscript o is zero. Best to give the intuition explicitly behind the two new subscripts. \epsilon appears here but it was not defined previously. The format of the "table" is confusing: please use the booktabs package or default tables and a horizontal line to separate the header from the rest of 3 rows; in the header use capital letters for the initial letter of the first word. Or alternatively, use the definition with 3 choices for the block of chain.
+Is R a set or a sequence of names? As on line 236 when you instantiate the expression of the open block with R you only get one block, first a and then b; why not first b and then a?
+
+Line 239: When you say "we present", do you mean "we define" or "we present a new translation" ? It's not clear this is a new.
+
+Page 9
+First line: "we exploit four" -> we exploit 5"
+I suggest you itemize the new 5 names and emphasize their role so that it helps in the rest of the paper identify which one is which.
+What does it mean "progressive number j"?
+
+Page 10:
+Introduce r_j, r_{j+1}, p_j, p_{j+1} before use.
+
+What does is mean "step n"? If n=0 as you mention in parentheses the case of C_0, then there should be Cxt^0 too, isn't it? This is not clear. Is C_n included in S? When e\notin C_n, does it mean e \in S\C_n? What is cxt ?
+
+Move the paragraph before Def11 with the notation conventions before the subsubsection or paragraph Processes for reactions because you used there reaction names and production names. Is a reaction name a channel name? What is a production? Do you mean product? Remind here that A is a subset of reactions in S.
+
+Page 11
+The init process is defined recursively?
+
+Page 12
+In Example 15 please find another notation for an empty set of inhibitors, why not $\emptyset$, because it looks like there was a printing error for the second argument in the reactions r_1 and r_2.
+
+In the definitions of $P_{r_1}$ and so on, because of the long subscripts the notations appear misleading for each link: the left argument is too far away from the symbol \ and that must be due to the fact that you stacked one on top the other say for example $\square$ and $s1_i$. Please fix this because it doesn't respect the visual representation of the definition of a link.
+
+Page 13
+In the middle of the page when you write flat(v) = ..., you omitted the concatenation symbols :: . Best would be to remove the :: symbol in the definition of the function flat(.)
+
+Page 14
+Please give a reason for omitting the topmost restrictions (as a matter of fact, what are those?).
+In subsection 5.1, what does it mean that a deterministic transition system is coded? Do you mean represented, encoded? For readers not familiar with RS please explain how is the deterministic LTS in figure 3 represented as the RS at the bottom of the page, how does one get to those reactions?
+
+Page 15
+Say that n\in \{1,2,3,4\}.
+
+Page 16
+Line 375: text is missing.
+
+Page 17
+In the definition of P(T, tilda T) why is there a space after the + sign? The same questions for the definitions of P_F and \bar P_F.
+
+Page 18
+Line 396: "only considers"
+Line 397: "when they expose"
+Line 412: "the mentioned" -> "fore mentioned"
+The justification that "the classical bisimulation seems to be inappropriate" is weak, please elaborate.
+"A high number of interactions occur every seconds". It should be second, but the question is more about the chosen time unit.
+
+Page 19:
+"to only the limited events of interest" -> "to only a limited set of event of interest".
+How do you chose this set?
+What is a "bisimulation game"?
+Line 436: "s_i blocked" -> "s_i been blocked"
+What are "simple strings" as compared to more complex strings?
+The use of the same font style for syms, decs, reacts, prods, and cxt is misleading, as syms, decs, reacts and prods are sets, while cxt is an element of a set.
+Definition 21: \alpha is overloaded, before it denoted channels in the set {a,b,c,...}
+
+Page 20
+When talking about the singleton, that's not "a string composed by a single symbol ...", best to say that it's either a symbol \alpha or the wildcard ? ...
+The next sentence also needs to be changed to remove "strings composed by" -- that's not correct in  English.
+Replace "We write \star as an abbreviation of ?^*." with "We denote by ....
+
+Definition 22: what does the symbol after \subseteq mean?
+
+Example 24 first line:
+formulas -> assertions
+Is there a typo in the third item: p_j or r_j ?
+
+Page 21
+"behaviour of the contest" -- what contest is that?
+"parametric to the assertion" -> "parametric w.r.t. the assertion" ?
+Introduce the abbreviation HML on line 513.
+
+Page 22
+Line 519: "the set of process" -> "the set of cCNA processes"
+Line 526: make this paragraph a definition and emphasise "bio-logically equivalent w.r.t. F"
+"the exactly the same" -> "exactly the same"
+
+Page 23
+Line 535: it is not obvious how to go from a RS to  a LTS, please detail.
+
+Since in section 7 you sketch some ideas, shouldn't that be helpful to say it in the section title? Maybe "Towards ... " or "Enhancing ..." or simply "Future Work"?
+
+Page 24
+Table 1 is unclear. Please add headers or just remove it completely and describe the two RSs in text. Again the missing second argument in the reaction rules is misleading as if it's a latex/printing error. Why not \emptyset ?
+
+"to suite this" -> "to suit this"
+
+The translation with several "by definition" symbols (triangle on top of the equal sign) is misleading, please separate on both pages 24 and 25.
+
+Page 25
+
+It's only in the first line of the conclusions you area clearly stating that cCNA is defined in this paper.
+"link chains and no more single links ..." -> "link chains generalizing the original single links. This was described initially in the ..."
+"This variant ..." -> "cCNA"
+"a faithful embedding of RSs" -> a faithful embedding into what? Best to rephrase this sentence.
+Enumerate clearly the benefits: "This translation ..." -> "This translation shows several benefits: 1) ... , 2)... , 3)... , and 4) ... .
+"We have then modified ..." -> "We defined a new bisimulation relation, bio-simulation, based on ..."
+"We defined a new assertion language for specifying properties of RS encodings in cCNA and showed how this language extends  ..."
+The sentence "We believe ..." is vague in relation to the three cited papers, could you give more details?
+The sentence "We are confident ..." is again vague and doesn't bring anything here.
+"We can also exploit the implementation" -> "and we will make use of the implementation [26] ... "
+
+The last sentence basically says what you did already in Section 7.2. Is there more to it? If so, please expand.
+
+In the bibliographic references, paper [16] has a different title on the Springer website. Please check.
+
+
+*****
+
+Data in Brief (optional):
+We invite you to convert your supplementary data (or a part of it) into an additional journal publication in Data in Brief, a multi-disciplinary open access journal. Data in Brief articles are a fantastic way to describe supplementary data and associated metadata, or full raw datasets deposited in an external repository, which are otherwise unnoticed. A Data in Brief article (which will be reviewed, formatted, indexed, and given a DOI) will make your data easier to find, reproduce, and cite.
+
+You can submit to Data in Brief when you upload your revised manuscript. To do so, complete the template and follow the co-submission instructions found here: www.elsevier.com/dib-template. If your manuscript is accepted, your Data in Brief submission will automatically be transferred to Data in Brief for editorial review and publication.
+
+Please note: an open access Article Publication Charge (APC) is payable by the author or research funder to cover the costs associated with publication in Data in Brief and ensure your data article is immediately and permanently free to access by all. For the current APC see: www.elsevier.com/journals/data-in-brief/2352-3409/open-access-journal
+
+Please contact the Data in Brief editorial office at dib-me@elsevier.com or visit the Data in Brief homepage (www.journals.elsevier.com/data-in-brief/) if you have questions or need further information.
+
+
+***********************************************************
+For further assistance, please visit our customer
+support site at http://help.elsevier.com/app/answers/list/p/7923
+Here you can search for solutions on a range of
+topics, find answers to frequently asked
+questions and learn more about EM via
+interactive tutorials. You will also find our 24/7
+support contact details should you need any
+further assistance from one of our customer
+support representatives.
+
+__________________________________________________
+In compliance with data protection regulations, you may request that we remove your personal registration details at any time.  (Use the following URL: https://www.editorialmanager.com/tcs/login.asp?a=r). Please contact the publication office if you have any questions.
