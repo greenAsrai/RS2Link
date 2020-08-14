@@ -1,0 +1,103 @@
+% !TEX root = ./main_TCS.tex
+
+%% PACKAGES
+%\usepackage[usenames,dvipsnames]{color}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+%\usepackage{amsthm} 
+%\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{stmaryrd}
+\usepackage{subcaption}
+%\usepackage{graphicx} 
+ \usepackage[all]{xy}
+\usepackage{bussproofs}
+\usepackage{mathtools} 
+\usepackage{wasysym}
+\usepackage{lscape}
+\usepackage{graphicx}
+\usepackage{cancel}
+\newcommand{\plusarrow}{\xrightarrow{+\Delta V \%}}
+
+\newcommand{\CNA}{\textsf{CNA}}
+
+%% LINK CALCULUS
+\newcommand{\link}[2]{\ensuremath{{}^{#1} \backslash_{#2}^{}}}
+\newcommand{\chainedlink}[2]{\ensuremath{\backslash_{#1}^{#2}}}
+\newcommand{\startchain}[1]{\ensuremath{{}^{#1}_{}}}
+\newcommand{\chainend}[1]{\ensuremath{\backslash_{#1}^{}}}
+%\newcommand{\midlink}[2]{\ensuremath{{}_{#1} {}^{#2}}}
+\newcommand{\midlink}[2]{\ensuremath{{}_{#1}^{#2}}}
+\newcommand{\silent}{\tau}
+%\newcommand{\noact}{*}
+%\newcommand{\noact}{_{\square}}
+\newcommand{\noact}{\scriptstyle {\square}}
+\newcommand{\noacts}{\scriptstyle \square}
+\newcommand{\merges}[2]{\ensuremath{#1 \bullet   #2}}
+%\newcommand{\merges}[2]{\ensuremath{#1 \,\wr\, #2}}
+\newcommand{\restrict}[1]{\ensuremath{(\nu\, #1)}}
+\newcommand{\recproc}[2]{\ensuremath{\mathsf{rec}\ #1.\, #2}}
+\newcommand{\nil}{\mathbf{0}}
+%\newcommand{\solid}[1]{\ensuremath{\{\, #1\,\}}}
+\newcommand{\tuple}[1]{\ensuremath{\langle #1\rangle}}
+\newcommand{\variable}[1]{\ensuremath{\underline{#1}}}
+%\newcommand{\subst}[2]{#2 \mapsto #1}
+\newcommand{\subst}[2]{#1/#2}
+\newcommand{\ground}[1]{\ensuremath{\llbracket\, #1 \,\rrbracket}}
+\newcommand{\values}[1]{\ensuremath{\mathit{vals}(#1)}}
+\newcommand{\variables}[1]{\ensuremath{\mathit{vars}(#1)}}
+\newcommand{\extruded}[1]{\ensuremath{\mathit{ex}(#1)}}
+\newcommand{\innames}[1]{\ensuremath{\mathit{in}(#1)}}
+\newcommand{\outnames}[1]{\ensuremath{\mathit{out}(#1)}}
+\newcommand{\names}[1]{\ensuremath{\mathit{names}(#1)}}
+\newcommand{\forwarded}[1]{\ensuremath{\llparenthesis #1\rrparenthesis}}
+\newcommand{\instanceof}{\preceq}
+\newcommand{\elc}{\ensuremath{\epsilon}}
+\newcommand{\reduce}[1]{\ensuremath{\mathsf{e}(#1)}}
+%\newcommand{\stretcheq}{\ensuremath{\bowtie}}
+\newcommand{\stretcheq}{\scriptsize \mathrel \vartriangleright \joinrel \mathrel \vartriangleleft}
+%$\mathrel \vartriangleright \joinrel \mathrel \vartriangleleft$
+%\newcommand{\blackstretcheq}{\ensuremath{\fbowtie}}
+%\newcommand{\llink}{\ensuremath{\mathrel \square \joinrel \mathrel \square}}
+\newcommand{\blackstretcheq}{\mathrel{\scriptsize {\mathrel \blacktriangleright \joinrel \mathrel \blacktriangleleft}}}
+%$\mathrel \blacktriangleright \joinrel \mathrel \blacktriangleleft$
+\newcommand{\simnet}{\ensuremath{\stackrel{\stretcheq}{\sim}}}
+\newcommand{\simbnet}{\ensuremath{\stackrel{\blackstretcheq}{\sim}}}
+
+\newcommand{\solid}[1]{{#1}\downarrow}
+\newcommand{\notsolid}[1]{{#1}\ndownarrow}
+
+\newcommand{\halfl}[1]{{}^{#1\backslash}}
+\newcommand{\halfr}[1]{{}_{\backslash #1}}
+\newcommand{\blockchain}[3]{\ensuremath{\left({\big \backslash\!\!\big \backslash}\ {}_{#1}^{\noact}\chainedlink{\noact}{#2}}\right)_{\tiny\begin{array}{l}\\[2pt] \hspace{-42pt}#3\end{array}}\hspace{-0.3cm}}
+
+%% GENERAL
+\newcommand{\bn}[1]{\ensuremath{\mathit{bn}(#1)}}
+\newcommand{\fn}[1]{\ensuremath{\mathit{fn}(#1)}}
+\newcommand{\prodsep}{\;\mid\;}
+\newcommand{\defeq}{\triangleq}
+\newcommand{\setof}[1]{\{\, #1 \,\}}
+\newcommand{\setofmid}[2]{\{\, #1\,\mid\, #2 \,\}}
+
+%% AMBIENT
+\newcommand{\nilMA}{\nil}
+\newcommand{\incap}[1]{\ensuremath{\mathsf{in}\, #1}}
+\newcommand{\outcap}[1]{\ensuremath{\mathsf{out}\, #1}}
+\newcommand{\opencap}[1]{\ensuremath{\mathsf{open}\, #1}}
+\newcommand{\inprefix}[2]{\ensuremath{\incap{#1}.#2}}
+\newcommand{\outprefix}[2]{\ensuremath{\outcap{#1}.#2}}
+\newcommand{\openprefix}[2]{\ensuremath{\opencap{#1}.#2}}
+\newcommand{\ambient}[2]{\ensuremath{#1 [\, #2\,]}}
+\newcommand{\replicated}[1]{\ensuremath{\mathsf{!} #1}}
+
+%% ENCODING
+\newcommand{\CNAencode}[2]{\ensuremath{\llbracket\, #1 \,\rrbracket_{#2}}}
+\newcommand{\ttop}{{\tt t}}
+
+%% ??
+\newcommand{\In}{\, {\cal I}n \, }
+\newcommand{\Nin}{\, \not \!\!\!\!{\cal I}n \, }
+
+
+%%Assertion
+\newcommand{\entails}{\models}

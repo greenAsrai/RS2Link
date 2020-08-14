@@ -1,0 +1,230 @@
+% !TEX root = ./main_TCS.tex
+
+\section{Introduction}
+
+Natural Computing is an active area of research which builds on two main 
+aspects: human designed computing inspired by nature, and computation 
+performed in nature. Reaction Systems (RSs)~\cite{BEMR11} are 
+% model of
+% formal computation 
+a rewriting formalism
+%model 
+inspired by the way biochemical reactions take place in living 
+cells.  
+This theory has already shown to be relevant in several different 
+fields, 
+%such as computer science~\cite{MPR15}, 
+including biology~\cite{ABP14,CMMBM12,Az17,BarbutiGLM16}
+and molecular chemistry~\cite{OY16}.
+%,
+% and it
+%is continuously developing, with a growing number of workshops and
+%international meetings. 
+RSs formalise the mechanisms of biochemical systems, 
+such as {\em facilitation} and {\em inhibition}. 
+As a qualitative approximation of the real biochemical reactions, they
+% do not take
+%into account the quantity of reagents effectively present. They
+consider if a necessary reagent is present or not, and likewise they
+consider if an inhibiting molecule is present or not. 
+The  possible reactants and inhibitors are called `entities'.
+RSs model in a direct way the interaction of a living cell
+with the environment (called `context'). However, two RSs are seen
+as independent models and do not interact.
+
+
+%Formally, Reaction Systems are defined as a rewriting formalism.
+%In this paper, we present an encoding from RSs, 
+%to the  open multiparty process algebra c\CNA,\footnote{After `chained Core Network 
+%Algebra'.} a variant of the {\tt link}-calculus~\cite{BodeiBB12,BBB17} without name mobility.
+In this paper, which is an extended version of~\cite{BBF19},
+we present an encoding
+%encoding 
+from RSs
+to the chained Core Network  Algebra (c\CNA), a variant of the 
+ open multiparty process algebra~\CNA~\cite{BBB17}; the \CNA~equipped with mobility is referred to as the {\tt link}-calculus~\cite{BodeiBB12,BODEI2020104587}.
+ Here mobility is not needed.
+This formalism allows several processes to synchronise and 
+communicate altogether, at the same time, with a new interaction
+mechanism based on links and link chains. 
+The initial motivation for introducing
+an open multiparty mechanism in~\cite{BodeiBB12}
+% this mechanism 
+was to encode
+Mobile Ambients~\cite{CardelliG00}, getting a much stronger operational
+correspondence than any available in the literature, such as the ones in~\cite{CZ07,B16}.
+Later it was shown that the {\tt link}-calculus allowed one to easily encode calculi for biology equipped with membranes, as in~\cite{BodeiBBC14}.
+
+We illustrate our embedding by means of some examples coming
+both from the computer science and the biological field.
+%and then we consider a more complex example, by modeling a RS 
+%representing a regulatory network for \emph{lac} operon, presented in~\cite{CMMBM12}. 
+We also show that our embedding preserves the main
+features of RSs, and prove its correctness and completeness
+from the operational semantics viewpoint.
+
+Then, we present a methodology for verifying formally
+properties of Reaction Systems. The classical notion of bisimulation for 
+process algebras allows to consider two processes as equivalent 
+when one process can simulate all the actions executed 
+by the other one and vice versa. In this paper we define a new
+notion of bisimilarity which takes into account the characteristics
+of biological systems. We define a new {\em bio-simulation} relation having in mind
+the possibility that two interacting systems may be compared w.r.t.
+a subset of the possible biological actions. This is useful for concentrating 
+on the sub-model that one may need to consider for a specific study or application,
+without getting lost in the complexity of the full biological system, or network.
+The notion of bio-simulation relies on a new and simple assertion language,
+which allows to focus on some properties of the Reaction Systems to be verified.
+In fact, bio-similarity is parametric on a given assertion of interest.
+Then we prove that the well-known logical characterisation of bisimilarity in terms of Hennessy-Milner Logic~\cite{HM80} (HML)
+can be extended to the case of bio-similarity by tailoring HML formulas to
+the same assertion of interest used in bio-similarity.  As HML is a powerful
+formalism for specifying properties of labeled transition systems, 
+its variant introduced here is a suitable option to specify formulas 
+over complex labels by abstracting from unnecessary details.
+
+Our main contributions are as follows:
+\begin{itemize}
+\item 
+RSs are encoded in a modular way, in the sense that all constituents of a RS, namely entities, reactions and the context, are seen as interacting  c\CNA \ processes; in principle, this allows to study the behaviour of any constituent in isolation, contrary to what happens in the basic RS framework, where the evolution is possible only when all constituents are given;
+
+\item any context is represented as an ordinary c\CNA \ process, which allows us to specify recursive and non-deterministic contexts in a natural way; 
+when deterministic contexts are considered, as in ordinary RSs, the c\CNA \
+computation is also deterministic and matches the evolution of the underlying RS;
+
+\item we define an assertion language to specify local properties of 
+RSs and exploit it to define a novel notion of behavioural equivalence,
+%Reaction Systems, 
+called bio-similarity;
+
+\item we show that our assertions can be used to extend the Hennessy-Milner's logic to our 
+%framework
+encoding, in such a way that logical equivalence of processes coincide with bio-similarity.
+\end{itemize}
+
+Moreover, we sketch how the encoding can be used to enhance the expressivity of RSs along different dimensions:
+\begin{itemize}
+\item we sketch how one can express the behaviour of entity mutation,
+%change the behaviour of  each single entity $s$  in a
+%way that a mutation $s'$ can be expressed; 
+in such a way that the mutated version of the entity
+$s$ can  take part to only a subset of reactions requiring entity $s$;
+\item we sketch how with a little coding effort, our 
+%encoding 
+embedding
+allows two RSs to
+communicate; i.e. we can model scenarios where a subset of those entities that the context  can
+provide, are instead provided by a second RS.
+\end{itemize}
+
+The main drawback of our proposal, is that the resulting c\CNA \ 
+code
+%translation 
+is
+verbose. Nevertheless it is clear that our
+%translation 
+encoding
+can be automatised by means of a proper front-end in
+an implementation of the {\tt link}-calculus. 
+The examples that we propose also show that some optimisations are possible
+to reduce the coding efforts when suitable assumptions are made about the provision of entities.
+%{\color{red}
+%\st{ As we have remarked, in our 
+%%translation,
+%encoding
+%the entities and the reactions
+%get the ability to interact in a synchronous manner. 
+%This interaction is not foreseen in
+%the basic RS framework, as it can only happen once the context is provided.}}
+
+%The proposed network of RSs~\cite{BLR20} allows
+%any RS in the network to receive entities 
+%produced from its neighbours (that will represent its context), with the hypothesis that  
+%RSs without neighbours will receive no entities 
+%from the context. 
+%In our case, a RS can receive some entities from the context and some others from a second RS; moreover we can represent contexts having a recursive, non-determinist behaviour.
+%%
+%By exploiting recursion, the kind of interactions which can be 
+%defined can be complex and expressive.
+%Example~\ref{ex:twoRS} and more in general the discussion in 
+%Section~\ref{subsec:comRS}
+%%~\ref{sec:discussion}
+% show that 
+%the interaction between RSs can help to model new scenarios.
+
+\paragraph{Related work}
+
+Process calculi have been used successfully to model
+biological processes, see~\cite{BBDFH18} for a recent survey.
+We are not aware of any 
+%SOS 
+Structural Operational Semantics for RS; it seems not the case
+that a deterministic behaviour, as the one of the RS, once the initial state is 
+fixed, could be defined by inference rules that classically are applied 
+to define non-deterministic transition systems.
+The reversible computation paradigm for RS extends the RS framework  by
+allowing  backward computations as well as forward computations; for this 
+goal a set of inference rules for rewriting logic has been 
+defined in~\cite{10.1007/978-3-319-73359-3_3}
+to exactly keep trace of those elements that  dissolve in the next 
+computation step.
+
+%
+The proposed network of RSs~\cite{BLR20} allows
+any RS in the network to receive entities 
+produced from its neighbours (that will represent its context), with the hypothesis that  
+RSs without neighbours will receive no entities 
+from the context. 
+%In our case
+In the idea we sketch, a RS can receive some entities from the context and some others from a second RS; moreover we can represent contexts having a recursive, non-deterministic behaviour.
+%
+By exploiting recursion, the kind of interactions which can be 
+defined can be complex and expressive.
+Example~\ref{ex:twoRS} and more in general the discussion in 
+Section~\ref{subsec:comRS}
+%~\ref{sec:discussion}
+ show that 
+the interaction between RSs can help to model new scenarios.
+
+
+
+As already mentioned, a preliminary version of this paper appeared in~\cite{BBF19}.
+There are several major differences w.r.t. the conference version~\cite{BBF19}, which is here extended as follows:
+\begin{itemize}
+\item we present several new examples (those in Sections~\ref{ex:examples} and~\ref{sec:biowork}) to illustrate our 
+ encoding,
+%framework,
+and give more detailed explanations about its use;
+\item we introduce an assertion language to specify the properties of RSs;
+%Reaction Systems;
+\item we define the notion of bio-simulation to relate RSs
+%Reaction Systems 
+and compare their behaviours;
+\item we show that our assertion language allows to specify properties extending to our
+encoding
+%framework 
+the Hennessy-Milner logic;
+\item we include here all proofs of main results.
+\end{itemize}
+ 
+\paragraph{Structure of the paper} 
+
+Section \ref{sec:rs} 
+describes RSs and their semantics (interactive processes).
+Section \ref{sec:ccna} briefly describes  the c\CNA \ process algebra and
+its operational semantics.
+Section \ref{sec:trans} defines the embedding of RSs in
+c\CNA \ processes and shows some simple examples to illustrate 
+it.
+Section~\ref{ex:examples} presents a couple of examples with automata theory and biological applications.
+%Section \ref{ex:lactose} shows a more complex example taken from
+%the literature on RSs and illustrating a \emph{lac} operon.
+Section~\ref{sec:biosimulation} presents a methodology for the formal verification of
+properties of Reaction Systems that are expressed in a novel assertion language.
+Section~\ref{sec:discussion} presents some features and 
+advantages of our embedding for the compositionality of RSs.
+Finally, Section~\ref{sec:conclusion}
+discusses future work, and concludes.
+
+

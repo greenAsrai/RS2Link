@@ -1,0 +1,30 @@
+% !TEX root = ./main_TCS.tex
+
+\section{Conclusion}\label{sec:conclusion}
+
+In this paper we have introduced c\CNA, that generalises \CNA\ by allowing the use of prefixes that are link chains and not just single links.
+This extension was initially described in the future work section of~\cite{BBB17}.
+Thanks to this enhancement, c\CNA\ allowed us to define 
+%shown 
+a faithful encoding of 
+Reaction Systems in a process algebraic framework.  
+This encoding
+%translation 
+shows several benefits.
+First, contexts of RSs can be easily defined recursively and exhibit non deterministic behaviour.
+Second, the operational semantics is defined in a compositional way by a set of SOS inference rules.
+Third, we have defined a new assertion language, which allows us to specify
+the properties to be verified over the labels of the operational semantics.
+Assertions can be used to tailor the classical notion of bisimilarity and Hennessy-Milner logic to focus on some particular aspects or experiments. We have called \emph{bio-similarity} the induced notion of equivalence.
+
+We are currently investigating how to integrate our methodology
+with other formal techniques to prove 
+properties of the modeled systems, along the lines in~\cite{CFHOT15,OCHF16,BBGLBH2017}.
+Moreover, we are considering possible enhancements of RSs based on entity mutation and on the possibility for two RSs to exchange entities.
+
+As future work, we plan to implement a prototype of our 
+%framework,
+embedding,
+with an automatic translation from RSs to  {\tt link}-calculus, so to exploit the implementation of  the symbolic semantics of 
+the {\tt link}-calculus~\cite{BrodoO17} that can be found in~\cite{tool}.
+

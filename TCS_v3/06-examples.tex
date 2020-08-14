@@ -1,0 +1,361 @@
+% !TEX root = ./main_TCS.tex
+\section{Examples}
+\label{ex:examples}
+Semantically, the topmost restriction $\restrict{\mathit{names}}$ filters out any interaction with  virtual links, and releases a private interaction among all participants where all the channel names in the transition labels are hidden (their occurrences are all replaced by $\silent$).
+%Hereafter, we shall often omit topmost restrictions
+This amounts to require that only complete chains are computed by the interaction.
+In this section, for simplicity,  we shall often omit topmost restrictions $\restrict{\mathit{names}}$ from our encoding, but 
+ we shall take into account only transitions whose labels are complete chains, i.e. they do not contain 
+virtual links and start/end with the $\silent$ action symbol.
+This way it is possible to observe all channel names that occur in the interaction.
+
+\subsection{Labelled transition system}
+This example is inspired by the example in~\cite{BEMR11}, where
+a deterministic transition system is 
+%coded 
+encoded in the Reaction System
+framework.
+Here we consider the minimal deterministic transition system in Figure~\ref{fig:lts}.
+%following the reaction system approach, to code it in the reaction system framework, we have to add
+%extra labels, as in Figure~\ref{fig:ndlts2}.
+\begin{figure}
+\[
+\xymatrix{
+*+[o][F-]{q} \ar@/ ^/[r]^a \ar@(l,u)[]^b &
+*+[o][F-]{w} \ar@/^/[l]^b \ar@(r,u)[]_a
+}
+\]
+\caption{Minimal deterministic labelled transition system.}
+\label{fig:lts}
+\end{figure}
+
+At the level of RSs, the set of entities to consider is the union of sets of states and of labels of the transition system.
+Moreover, there is one reaction for each transition: its reactant set consists of the source state and transition label, its inhibitor set includes every other state and label, and its product set is the singleton with the target state.
+For the transition system in Fig.~\ref{fig:lts}, we take $S = \{q,w,a,b\}$ and the reactions are as follows:\\
+\[
+\begin{array}{cl@{\hspace{1cm}} cl}
+1 \ &(\{q,a\},\{w,b\},\{w\}) & 2\ &(\{q,b\},\{w,a\},\{q\})\\
+3 \  &(\{w,a\},\{q,b\},\{w\}) & 4\ &(\{w,b\},\{q,a\},\{q\})\\ 
+\end{array}
+\]
+
+Next we show how the above RS is encoded in c\CNA.
+
+\paragraph{Encoding of the reactions}
+The encoding of the  reactions is  given in a parametric way, with $n \in \{1,2,3,4\}$:
+\[
+\begin{array}{lcl}
+P_n(q,b,w,a,q) & \defeq & \upsilon_n(q,b,w,a,q).P_n(q,b,w,a,q)  \\
+			&& +\\
+			&& \sum_{x\in\{\overline{q},\overline{b},w,a\}}\ \upsilon'_n(x).P_n(q,b,w,a,q)\\
+%			&& +\ \pi'(\overline{b}).P_n(q,b,w,a,q)\\
+%			&& +\ \pi'(w).P_n(q,b,w,a,q)\\ 
+%			&& +\ \pi'(a).P_n(q,b,w,a,q)\\
+			\end{array}
+			\]
+			\noindent
+			where
+			\[
+\begin{array}{lcl}
+\upsilon_n(q,b,w,a,q) &\defeq & \startchain{r_n}\chainedlink{q_i}{\noact}\chainedlink{\noact}{q_o}
+                                                    \chainedlink{b_i}{\noact}\chainedlink{\noact}{b_o}
+                                                     \chainedlink{\overline{w}_i}{\noact}\chainedlink{\noact}{\overline{w}_o}
+					        \chainedlink{\overline{a}_i}{\noact}\chainedlink{\noact}{\overline{a}_o}
+					        \chainedlink{r_{n+1}}{\noact}\chainedlink{\noact}{p_n}
+					        \chainedlink{\widetilde{q}_i}{\noact}\chainedlink{\noact}{\widetilde{q}_o}
+			\chainend{p_{n+1}}\\[6pt]
+\upsilon'_n(x) &\defeq &  \startchain{r_n}\chainedlink{x_i}{\noact}\chainedlink{\noact}{x_o}\chainedlink{r_{n+1}}{\noact}\chainedlink{\noact}{p_n} \chainend{p_{n+1}} 
+% \ + \   \startchain{r_n}\chainedlink{w_i}{\noact}\chainedlink{\noact}{w_o}\chainedlink{r_{n+1}}{\noact}\chainedlink{\noact}{p_n} \chainend{p_{n+1}}.P_n(q,b,w,a,q) \\
+%			&&+\\
+%			&& \startchain{r_n}\chainedlink{\overline{b}_i}{\noact}\chainedlink{\noact}{\overline{b}_o}\chainedlink{r_{n+1}}{\noact}\chainedlink{\noact}{p_n}\chainend{p_{n+1}}.P_n(q,b,w,a,q) \ + \  \startchain{r_n}\chainedlink{a_i}{\noact}\chainedlink{\noact}{a_o}\chainedlink{r_{n+1}}{\noact}\chainedlink{\noact}{p_n} \chainend{p_{n+1}}.P_n(q,b,w,a,q) 
+\end{array}
+\]
+
+Then, we have 
+\[
+\begin{array}{lcl @{\hspace{1cm}}lcl  }
+P_1 & \defeq & P_1(q,a,w,b,w) & P_3 & \defeq & P_3(w,a,q,b,w)  \\
+P_2 & \defeq & P_2(q,b,w,a,q) &P_4 & \defeq & P_4(w,b,q,a,q) 
+\end{array}
+\]
+and we put, as usual,
+%$r_1 = \silent$, 
+$r_5 = \mathit{cxt}$ and  $p_5 = \silent$.
+
+\paragraph{Encoding of the entities}
+As for reactions, also the encoding of the entities is given in a parametric way.
+Here we differentiate the encoding for the entities that are not provided by the context and that can be produced by the reactions, and the ones that can be provided by the context and that are not produced by the reactions.
+
+Here, for the entities $q$ and $w$ that are not provided by the context, we let:
+\[
+\begin{array}{lcl@{\hspace{1cm}}lcl}
+P_q & \defeq & E(q,\widetilde{q}) & \overline{P}_q & \defeq & E(\overline{q},\widetilde{q}) \\
+P_w& \defeq & E(w,\widetilde{w}) & \overline{P}_w & \defeq & E(\overline{w},\widetilde{w})
+\end{array}
+\]
+where:
+\[
+\begin{array}{lcl}
+E(q,\widetilde{q})&\defeq & \sum_{h=1}^3 (\startchain{q_i}\chainedlink{q_o}{\noact}\chainend{\noact})^h\ \link{\widetilde{q}_i}{\widetilde{q}_o}.P_q\\
+&& +\\
+&& \sum_{h=1}^3 (\startchain{q_i}\chainedlink{q_o}{\noact}\chainend{\noact})^h.\overline{P}_q\\
+\end{array}
+\]
+
+In fact the presence/absence of $q$ and $w$ will be exploited by at least one reaction and at most three reactions.
+
+
+Here, for the entities $a$ and $b$ that can be provided by the context but not produced by  reactions, we let:
+\[
+\begin{array}{lcl@{\hspace{1cm}}lcl}
+P_a & \defeq & E(a,\widehat{a},\underline{a}) & 
+\overline{P}_a & \defeq & E(\overline{a},\widehat{a},\underline{a}) \\
+P_b& \defeq & E(b,\widehat{b},\underline{b})&
+\overline{P}_b& \defeq & E(\overline{b},\widehat{b},\underline{b})
+\end{array}
+\]
+where:
+\[
+\begin{array}{rcl}
+ E(a,\widehat{a},\underline{a}) & \defeq &\sum_{h=1}^3  
+  (\startchain{a_i}\chainedlink{a_o}{\noact}\chainend{\noact})^h \ \startchain{\widehat{a}_i}\chainend{\widehat{a}_o}.P_a\\
+&&\ + \\
+&&
+\sum_{h=1}^3
+ (\startchain{a_i}\chainedlink{a_o}{\noact}\chainend{\noact})^h \ \startchain{\underline{a}_i}\chainend{\underline{a}_o}.\overline{P}_a
+\end{array}
+\]
+
+
+Finally, for the context, the encoding follows:
+\[
+\begin{array}{lcl @{\hspace{0.5cm}}c@{\hspace{0.5cm}} l}
+\mathit{Cxt} &\defeq &  \startchain{\mathit{cxt}}\chainedlink{\widehat{a}_i}{\noact}\chainedlink{\noact}{\widehat{a}_o}\chainedlink{\underline{b}_i}{\noact}\chainedlink{\noact}{\underline{b}_o}\chainend{p_1}.\mathit{Cxt}
+&+
+&\startchain{\mathit{cxt}}\chainedlink{\widehat{b}_i}{\noact}\chainedlink{\noact}{\widehat{b}_o}\chainedlink{\underline{a}_i}{\noact}\chainedlink{\noact}{\underline{a}_o}\chainend{p_1}.\mathit{Cxt}\\
+\end{array}
+\]
+
+Notice that we exploit here the capabilities of the process algebraic framework to define a nondeterministic, recursive context.
+We model the context to always offer either $a$ or $b$, but never both the entities together. The reason is that in
+the other cases (providing both $a$ and $b$ or neither of them) would lead the system to be stuck because of the simplifications we have adopted in the other processes.
+
+Now, we assume that we have an initial configuration containing the entities $q$ and $b$:
+% (with $\widetilde{q},\widetilde{w},\widetilde{a},\widetilde{b}$ grouping all the possibile decorations for these names):
+\[
+\begin{array}{lcl}
+\mathit{Sys}  \defeq \ %\restrict{r1,r2,r3,r4,\widetilde{q},\widetilde{w},\widetilde{a},\widetilde{b}}
+ I\mid P_q \mid \overline{P}_w  \mid  \overline{P}_a  \mid P_b  \mid  P_1  \mid  P_2  \mid  P_3  \mid P_4  \mid \mathit{Cxt}.
+\end{array}
+\] 
+
+Then, only the second reaction can be applied, and the transition carries the complete label $\upsilon$ below
+{\tiny
+\[
+%\begin{array}{l}
+%\upsilon = \\
+%\restrict{r1,r2,r3,r4,\widetilde{q},\widetilde{w},\widetilde{a},\widetilde{b}}\\
+ \startchain{\silent}
+ \chainedlink{r_1}{r_1}
+ \chainedlink{\overline{a}_i}{\bf  \overline{a}_i}\chainedlink{\bf \overline{a}_o}{\overline{a}_o}
+ \chainedlink{r_2}{r_2}
+ \chainedlink{q_i}{\bf q_i}\chainedlink{\bf q_o}{q_o}
+ \chainedlink{b_i}{\bf b_i}\chainedlink{\bf b_o}{b_o}
+ \chainedlink{\overline{w}_i}{\bf \overline{w}_i}\chainedlink{\bf \overline{w}_o}{\overline{w}_o}
+ \chainedlink{\overline{a}_i}{\bf \overline{a}_i}\chainedlink{\bf \overline{a}_o}{\overline{a}_o}
+ \chainedlink{r_3}{r_3}
+ \chainedlink{\overline{a}_i}{\bf \overline{a}_i}\chainedlink{\bf \overline{a}_o}{\overline{a}_o}
+ \chainedlink{r_4}{r_4}
+ \chainedlink{\overline{w}_i}{\bf \overline{w}_i}\chainedlink{\bf \overline{w}_o}{\overline{w}_o}
+ \chainedlink{\mathit{cxt}}{\mathit{cxt}}
+ \chainedlink{\widehat{a}_i}{\bf \widehat{a}_i}\chainedlink{\bf \widehat{a}_o}{\widehat{a}_o}
+ \chainedlink{\underline{b}_i}{\bf \underline{b}_i}\chainedlink{\bf \underline{b}_o}{\underline{b}_o}
+ \chainedlink{p_1}{p_1}
+ \chainedlink{p_2}{p_2}
+ \chainedlink{\widetilde{q}_i}{\bf \widetilde{q}_i}\chainedlink{\bf \widetilde{q}_o}{\widetilde{q}_o}
+ \chainedlink{p_3}{p_3}
+ \chainedlink{p_4}{p_4}
+ \chainend{\silent}
+%\end{array}
+\]}
+The parts in bold are provided by the entity processes, the other parts are provided by the processes encoding the reactions and by the process encoding the context (starting at $\mathit{cxt}$ and ending at $p_1$.
+In the label we can read that reactions $1$ and $4$ have been not executed because the entity $a$ is absent, 
+the reaction $3$ has been not applied because the entity $w$ is absent, then only reaction $2$ has been applied, and it has produced the entity $q$. Also,  the context provides entity $a$, that will be available in the next state, and not the entity $b$.
+Now, to let the label more readable, we show the result of the application of the function $flat(\cdot)$ to it:
+\[
+r_1~\overline{a}~r_2~q~b~\overline{w}~\overline{a}~r_3~\overline{a}~r_4~\overline{w}~\mathit{cxt}~\widehat{a}~\underline{b}~p_1~p_2~\widetilde{q}~p_3~p_4 .
+\]
+
+
+\subsection{A  biological toy example of gene expression}\label{subsec:toy}
+
+\noindent
+We consider a biological toy  example in the style of gene's alternative splicing \cite{WBB13}.
+Alternative splicing is a regulated process during gene expression that results in a single gene 
+coding for multiple proteins. 
+In practice, particular exons of a gene may be included within or excluded from the final 
+processed messenger RNA (mRNA) produced from that gene.
+In our example,
+%where 
+a gene $a$  codes for a protein $T$ when molecules 
+$G$ is present and $C$ is absent, and in the opposite situation $a$ codes for protein $T'$.
+This behavior is encoded in reactions $1$ and $2$.
+Then, reaction $3$ codes for the production of $C$ when proteins $T$ and $F$ are present, and $T'$ absent;
+reaction $4$ codes for the production of $G$ when  proteins $T'$ is present and $F$ is absent.
+
+\paragraph{Encoding of the reactions}
+
+The encoding of reactions is  given in a parametric way:
+\[
+\begin{array}{lcl}
+P_n(a,G,C,T) & \defeq &\pi_n(a,G,C,T).P_n(a,G,C,T)  \\
+				&& +\\
+			&&\sum_{x\in \{a,G,C\}} \pi'_n(x).P_n(a,G,C,T)
+\end{array}
+\]
+where
+\[
+\begin{array}{lcl}
+\pi_n(a,G,C,T) & \defeq & \startchain{r_n}\chainedlink{a_i}{\noact}\chainedlink{\noact}{a_o}
+                                                    \chainedlink{G_i}{\noact}\chainedlink{\noact}{G_o}
+                                                     \chainedlink{\overline{C}_i}{\noact}\chainedlink{\noact}{\overline{C}_o}
+					        \chainedlink{r_{n+1}}{\noact}\chainedlink{\noact}{p_n}
+					        \chainedlink{\widetilde{T}_i}{\noact}\chainedlink{\noact}{\widetilde{T}_o}
+			\chainend{p_{n+1}}\\[6pt]
+\pi'_n(x) &\defeq &  \startchain{r_n}\chainedlink{x_i}{\noact}\chainedlink{\noact}{x_o}\chainedlink{r_{n+1}}{\noact}\chainedlink{\noact}{p_n} \chainend{p_{n+1}} 
+% \ + \   \startchain{r_n}\chainedlink{w_i}{\noact}\chainedlink{\noact}{w_o}\chainedlink{r_{n+1}}{\noact}\chainedlink{\noact}{p_n} \chainend{p_{n+1}}.P_n(q,b,w,a,q) \\
+%			&&+\\
+%			&& \startchain{r_n}\chainedlink{\overline{b}_i}{\noact}\chainedlink{\noact}{\overline{b}_o}\chainedlink{r_{n+1}}{\noact}\chainedlink{\noact}{p_n}\chainend{p_{n+1}}.P_n(q,b,w,a,q) \ + \  \startchain{r_n}\chainedlink{a_i}{\noact}\chainedlink{\noact}{a_o}\chainedlink{r_{n+1}}{\noact}\chainedlink{\noact}{p_n} \chainend{p_{n+1}}.P_n(q,b,w,a,q) 
+\end{array}
+\]
+
+Then we have 
+\[
+\begin{array}{lcl @{\hspace{0.5cm}}lcl @{\hspace{0.5cm}}lcl }
+P_1 & \defeq & P_1(a,G,C,T) &   P_2 & \defeq & P_2(a,C,G,T') &   P_3 & \defeq & P_3(F,T,T',C)  \\
+\end{array}
+\]
+\[
+\begin{array}{lcl}
+P_4 & \defeq &\startchain{r_4}\chainedlink{T'_i}{\noact}\chainedlink{\noact}{T'_o}
+                                                     \chainedlink{\overline{F}_i}{\noact}\chainedlink{\noact}{\overline{F}_o}
+					        \chainedlink{\mathit{cxt}}{\noact}\chainedlink{\noact}{p_4}
+					        \chainedlink{\widetilde{G}_i}{\noact}\chainedlink{\noact}{\widetilde{G}_o}
+			\chainend{\silent}.P_4  \\
+				&& +\\
+&&\startchain{r_4}\chainedlink{\overline{T'}_i}{\noact}\chainedlink{\noact}{\overline{T'}_o}\chainedlink{cxt}{\noact}\chainedlink{\noact}{p_4} \chainend{\silent}.P_4 \ +\  \startchain{r_4}\chainedlink{F_i}{\noact}\chainedlink{\noact}{F_o}\chainedlink{\mathit{cxt}}{\noact}\chainedlink{\noact}{p_4} \chainend{\silent}.P_4
+\end{array}
+\]
+\noindent
+%and we put $r_1 = \silent$.
+
+\paragraph{Encoding of the entities}
+
+As for reactions, also the encoding of the entities is given in a parametric way.
+Here we differentiate three types of encodings: (1)~for the entities that are not  provided by the context and  can be produced by the reactions; (2)~for the entities that can be provided by the context and can be  produced by the reactions; (3)~for the entities that are only provided by the context.
+
+Here, the entities $T$ and $T'$ that can be produced by the reactions and that are not provided by the context:
+\[
+\begin{array}{lcllcl}
+P (T,\widetilde{T})&\defeq & \sum_{h=0}^1 (\startchain{T_i}\chainedlink{T_o}{\noact}\chainend{\noact})^h\ \link{\widetilde{T}_i}{\widetilde{T}_o}.P (T,\widetilde{T})
+& +  & \link{T_i}{T_o}.P (\overline{T},\widetilde{T}) \\
+%\overline{P} (q)&\defeq &  \sum_{h=0}^1 (\startchain{\overline{T}_i}\chainedlink{\overline{T}_o}{\noact}\chainend{\noact})^h\link{\widetilde{T}_i}{\widetilde{T}_o}.P(q)\\
+%&& + & && +\\
+%&& \link{T_i}{T_o}.\overline{P}(T) &
+%&& \link{\overline{T}_i}{\overline{T}_o}.\overline{P}(T)\\
+\end{array}
+\]
+
+Then, we have
+\[
+\begin{array}{l @{\hspace{0.5cm}}l @{\hspace{0.5cm}}l @{\hspace{0.5cm}}l @{\hspace{0.5cm}}lcl}
+P_T \defeq  P(T,\widetilde{T})& \overline{P}_T  \defeq  P(\overline{T},\widetilde{T}) & P_{T'} \defeq  P(T',\widetilde{T'}) & 
+%\overline{P}_{T',\widetilde{T'}}& \defeq & P(\overline{T'},\widetilde{T'})
+\overline{P}_{T'} \defeq  P(\overline{T'},\widetilde{T'})
+\end{array}
+\]
+
+The entities that can be produced by the reactions and that can be  provided by the context are as follows:
+\[
+\begin{array}{lcl @{\hspace{1cm}}lcl}
+P(C,\widehat{C},\underline{C},\widetilde{C}) & \defeq &  \sum_{h=0}^1 (\startchain{C_i}\chainedlink{C_o}{\noact}\chainend{\noact})^h \ \startchain{\widehat{C}_i}\chainedlink{\widehat{C}_o} {\noact}\chainend{\noact}( \startchain{\widetilde{C}_i}\chainedlink{\widetilde{C}_o}{\noact}\chainend{\noact})^h.   P(C,\widehat{C},\underline{C},\widetilde{C})\\
+&&+\\
+&& \sum_{h=0}^1 (\startchain{C_i}\chainedlink{C_o}{\noact}\chainend{\noact})^h\ \link{\underline{C}_i}{\underline{C}_o}.P(\overline{C},\widehat{C},\underline{C},\widetilde{C})\\
+&&+\\
+ && \sum_{h=0}^1 (\startchain{C_i}\chainedlink{C_o}{\noact}\chainend{\noact})^h\ \link{\underline{C}_i}{\underline{C}_o} \startchain{\noact}\chainedlink{\noact}{\widehat{C}_i}\chainend{\widehat{C}_o}.   P(C,\widehat{C},\underline{C},\widetilde{C}) \\
+ %&  \overline{E} (a)&\defeq & \sum_{h=1}^2 (\startchain{\overline{a}_i}\chainedlink{\overline{a}_o}{\noact}\chainend{\noact})^h\ \link{\widehat{a}_i}{\widehat{a}_o}.E(a)\\
+%&&  &  && +\\
+%&& 
+%&
+%&& \sum_{h=1}^2 (\startchain{\overline{a}_i}\chainedlink{\overline{a}_o}{\noact}\chainend{\noact})^h\ \link{\underline{a}_i}{\underline{a}_o}.\overline{E}(q)\\
+\end{array}
+\]
+
+Then, we have
+\[
+\begin{array}{lcl @{\hspace{1cm}}lcl@{\hspace{0.4cm}}lcl@{\hspace{0.4cm}}lcl}
+P_C & \defeq &  P(C,\widehat{C},\underline{C},\widetilde{C})&  P_G& \defeq &   P(G,\widehat{G},\underline{G},\widetilde{G}) \\[6pt]
+\overline{P}_C & \defeq &  P(\overline{C},\widehat{C},\underline{C},\widetilde{C}) & 
+\overline{P}_G& \defeq &   P(\overline{G},\widehat{G},\underline{G},\widetilde{G})\\
+\end{array}
+\]
+
+The encoding of the entity $F$ that can only be provided by the context follows:
+\[
+\begin{array}{lcllcl}
+P_F&\defeq & \sum_{h=0}^1 (\startchain{F_i}\chainedlink{F_o}{\noact}\chainend{\noact})^h\ \link{\widehat{F}_i}{\widehat{F}_o}.P_F
+& +  & \sum_{h=0}^1 (\startchain{F_i}\chainedlink{F_o}{\noact}\chainend{\noact})^h\ \link{\underline{F}_i}{\underline{F}_o}.\overline{P}_F \\[6pt]
+\overline{P}_F&\defeq & \sum_{h=0}^1 (\startchain{\overline{F}_i}\chainedlink{\overline{F}_o}{\noact}\chainend{\noact})^h\ \link{\widehat{F}_i}{\widehat{F}_o}.P_F
+& +  & \sum_{h=0}^1 (\startchain{\overline{F}_i}\chainedlink{\overline{F}_o}{\noact}\chainend{\noact})^h\ \link{\underline{F}_i}{\underline{F}_o}.\overline{P}_F \\
+%\overline{P} (q)&\defeq &  \sum_{h=0}^1 (\startchain{\overline{T}_i}\chainedlink{\overline{T}_o}{\noact}\chainend{\noact})^h\link{\widetilde{T}_i}{\widetilde{T}_o}.P(q)\\
+%&& + & && +\\
+%&& \link{T_i}{T_o}.\overline{P}(T) &
+%&& \link{\overline{T}_i}{\overline{T}_o}.\overline{P}(T)\\
+\end{array}
+\]
+
+Also in this example we account for a nondeterministic context that can (nondeterministically) provide any combination of the entities $C$, $G$ $F$:
+\[
+\begin{array}{lcl}
+ Cxt & \defeq &
+ \sum_{\tiny \begin{array}{l}C^{\star} \in \{C,\overline{C}\}\\G^{\star} \in \{G,\overline{G}\}\\
+ F^{\star} \in \{F,\overline{F}\}
+  \end{array}}
+ \startchain{cxt} \chainedlink{C_i^{\star}}{\noact}\chainedlink{\noact}{C_o^{\star}}\chainedlink{G_i^{\star}}{\noact}\chainedlink{\noact}{G_o^{\star}}
+ \chainedlink{F_i^{\star}}{\noact}\chainedlink{\noact}{F_o^{\star}}\chainend{p_1}.Cxt\\
+\end{array}
+\]
+
+Now, to show a possible composition of a transition label, we assume a system where only the entities $a$, $T'$, and $G$ are present:
+\[
+\begin{array}{lcl}
+\mathit{Sys} &\defeq &%\restrict{\widetilde{C},\widetilde{G},\widetilde{F}, \widetilde{T},\widetilde{T'}}(
+I\mid P_a\mid \overline{P}_C\mid P_G\mid \overline{P}_F \mid \overline{P}_T \mid P_{T'} \mid P_1 \mid P_2 \mid P_3 \mid P_4 \mid \mathit{Cxt}
+\end{array}
+\]
+
+In the above configuration, reactions $1$ and $4$ can be applied, and also we assume that the context will provide the entity $F$, that will be available in the target configuration.
+Instead of showing the complete transition label, we give its flattened version obtained by applying the function $\mathit{flat}(\cdot)$:
+%The transition label appears as:
+\[
+%\restrict{r1,r2,r3,r4,a,\widetilde{C},\widetilde{G},\widetilde{F},\widetilde{T},\widetilde{T'}}\\
+% \startchain{\silent}\chainedlink{a_i}{\bf  a_i}\chainedlink{\bf a_o}{a_o}
+% \chainedlink{G_i}{\bf  G_i}\chainedlink{\bf G_o}{G_o}
+% \chainedlink{\overline{C}_i}{\bf \overline{C}_i}\chainedlink{\bf \overline{C}_o}{\overline{C}_o}
+% \chainedlink{r_2}{r_2}\chainedlink{G_i}{\bf G_i}\chainedlink{\bf G_o}{G_o}
+%\chainedlink{r_3}{r_3}\chainedlink{T'_i}{\bf T'_i}\chainedlink{\bf T'_o}{T'_o}\chainedlink{r_4}{r_4}\chainedlink{T'_i}{\bf T'_i}\chainedlink{\bf T'_o}{T'_o}\chainedlink{\overline{F}_i}{\bf \overline{F}_i}\chainedlink{\bf \overline{F}_o}{\overline{F}_o}\chainedlink{cxt}{cxt}
+%\chainedlink{\underline{C}_i}{\bf \underline{C}_i}\chainedlink{\bf \underline{C}_o}{\underline{C}_o}
+%\chainedlink{\underline{G}_i}{\bf \underline{G}_i}\chainedlink{\bf \underline{G}_o}{\underline{G}_o}
+%\chainedlink{\widehat{F}_i}{\bf \widehat{F}_i}\chainedlink{\bf \widehat{F}_o}{\widehat{F}_o}\chainedlink{p_1}{p_1} 
+% \chainedlink{\widetilde{T}_i}{\bf \widetilde{T}_i}\chainedlink{\bf \widetilde{T}_o}{\widetilde{T}_o}
+%  \chainedlink{p_2}{p_2}\chainedlink{p_3}{p_3}\chainedlink{p_4}{p_4} \chainedlink{\widetilde{G}_i}{\bf \widetilde{G}_i}\chainedlink{\bf \widetilde{G}_o}{\widetilde{G}_o} \chainend{\silent}
+r_1~ a~G~\overline{C}~ r_2~ G~ r_3~T'~r_4~T'~\overline{F}~cxt~\underline{C}~\underline{G}~\widehat{F}~p_1~\widetilde{T}~p_2~p_3~p_4~\widetilde{G} .
+\]
+
+The original label can then be reconstructed just applying the function $\mathit{unflat}(\cdot)$ to the string above.
+
+In \cite{BBF19} we have shown a more complex example, by modeling a RS 
+of a regulatory network for \emph{lac} operon, 
+presented in~\cite{CMMBM12}.
+
+

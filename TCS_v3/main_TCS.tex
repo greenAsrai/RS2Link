@@ -1,0 +1,158 @@
+\documentclass{elsarticle}
+%\pagestyle{plain}
+
+\usepackage{lineno,hyperref}
+\modulolinenumbers[5]
+
+\journal{Theoretical Computer Science}
+
+%\usepackage{amsmath,amsthm,amssymb,amsfonts,thmtools,thm-restate}
+\usepackage{amsmath,amssymb,amsfonts,thmtools,thm-restate}
+\usepackage[normalem]{ulem}
+\usepackage{tikz}
+\usepackage[all]{xy}
+
+\usepackage{natbib}
+
+\usepackage{soul}
+%%%%%%%%%%%%%%%%%%%%%%%
+%% Elsevier bibliography styles
+%%%%%%%%%%%%%%%%%%%%%%%
+%% To change the style, put a % in front of the second line of the current style and
+%% remove the % from the second line of the style you would like to use.
+%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Numbered
+%\bibliographystyle{model1-num-names}
+
+%% Numbered without titles
+%\bibliographystyle{model1a-num-names}
+
+%% Harvard
+%\bibliographystyle{model2-names.bst}\biboptions{authoryear}
+
+%% Vancouver numbered
+%\usepackage{numcompress}\bibliographystyle{model3-num-names}
+
+%% Vancouver name/year
+%\usepackage{numcompress}\bibliographystyle{model4-names}\biboptions{authoryear}
+
+%% APA style
+%\bibliographystyle{model5-names}\biboptions{authoryear}
+
+%% AMA style
+%\usepackage{numcompress}\bibliographystyle{model6-num-names}
+
+%% `Elsevier LaTeX' style
+\bibliographystyle{elsarticle-num}
+%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%% Authors' packages, macros, environments
+%%%%%%%%%%%%%%%%%%%%%%%
+\input{macros}
+ \newtheorem{theorem}{Theorem}
+ \newtheorem{lemma}[theorem]{Lemma}
+ \newtheorem{proposition}[theorem]{Proposition}
+ \newtheorem{corollary}[theorem]{Corollary}
+ \newdefinition{definition}[theorem]{Definition}
+ \newdefinition{remark}[theorem]{Remark}
+ \newdefinition{example}[theorem]{Example}
+\newproof{proof}{Proof}
+%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%% REDUCE VERTICAL SPACING FOR FLOATING FIGURES
+\textfloatsep 10pt
+\abovecaptionskip 5pt 
+\belowcaptionskip\abovecaptionskip
+
+\frenchspacing 
+% forza LaTeX ad una spaziatura uniforme, invece di lasciare più spazio
+% alla fine dei punti fermi come da convenzione inglese
+ 
+\raggedbottom
+
+\begin{document}
+
+\begin{frontmatter}
+
+\title{A process algebraic approach to reaction systems
+\tnoteref{mytitlenote}}
+\tnotetext[mytitlenote]{Research partially supported
+ by  Universit\`a degli Studi di Sassari \emph{Fondi di Ateneo per la ricerca 2019}.}
+
+%% Group authors per affiliation:
+
+
+ \author[uniss]{Linda Brodo\corref{cor}}
+ \ead{brodo@uniss.it}
+ 
+ \author[unipi]{Roberto Bruni}
+ \ead{bruni@di.unipi.it}
+ 
+ \author[unisi]{Moreno Falaschi}
+ \ead{moreno.falaschi@unisi.it}
+ 
+ \address[unipi]{Dipartimento di Informatica, Universit\`{a} di Pisa, Italy}
+ \address[uniss]{Dipartimento di Scienze Economiche e Aziendali,   Universit\`a di Sassari, Italy}
+ \address[unisi]{Dipartimento di Ingegneria dell'Informazione e Scienze Matematiche,   Univ. di Siena, Italy}
+ 
+% \cortext[cor]{Corresponding Author}
+
+
+%\author{ Linda Brodo\inst{1} \and Roberto Bruni\inst{2} \and Moreno 
+%Falaschi\inst{3}}
+%\institute{Dipartimento di Scienze economiche e aziendali,
+%          Universit\`a di Sassari, Italy\\
+%	   %\email{brodo@uniss.it.} 
+%	   \and
+%	   Dipartimento di Informatica,
+%	   Universit\`{a} di Pisa, Italy\\
+%	   %\email{bruni@di.unipi.it.} 
+%	   \and
+%           Dipartimento di Ingegneria dell'Informazione e Scienze Matematiche\\
+%           Universit\`a di Siena, Italy
+%           %\\
+%           %\email{moreno.falaschi@unisi.it.}
+%	   }
+%	   %\date{}
+%\maketitle
+
+\begin{abstract}
+\input{00-abstract}
+\end{abstract}
+
+\begin{keyword}
+process algebras \sep Reaction Systems \sep assertion language \sep HM-logic
+\end{keyword}
+
+\end{frontmatter}
+
+\linenumbers
+
+
+%\begin{keywords}
+% process algebras, 
+% reaction systems,
+% multi-party interaction 
+%\end{keywords}
+
+\input{01-introduction}
+\input{02-ReactionSystem}
+\input{04-CCNA}
+\input{05-translation}
+\input{06-examples}
+\input{06b-bisimulation}
+\input{06c-bioSimExample}
+\input{07-discussion}
+\input{08-conclusion}
+\section*{References}
+\bibliography{biblio_CNA}
+%\bibliographystyle{abbrv}
+
+\appendix
+\input{09-appendix}
+
+\end{document}
+

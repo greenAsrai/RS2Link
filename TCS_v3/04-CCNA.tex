@@ -1,0 +1,273 @@
+% !TEX root = ./main_TCS.tex
+
+\section{Chained \CNA \ (c\CNA)}
+\label{sec:ccna}
+
+In this section we introduce  the syntax and operational semantics
+of the process algebra c\CNA\  (chained \CNA)~\cite{BBF19} to be used for encoding RSs.
+As already explained in the Introduction, c\CNA\ is a variant of \CNA~\cite{BBB17}, the non-mobile
+fragment of {\tt link}-calculus~\cite{BodeiBB12,BODEI2020104587}.
+In c\CNA\  the action prefixes are link chains and not just links.
+%In this section we just focus on the basic ideas of link
+% interaction, while we shall enhance the model with name mobility in
+% the next section.
+
+\paragraph{Link Chains}
+Let $\mathcal{C}$ be the set of channels, ranged over by $\mathsf{a},\mathsf{b},...$, and 
+let $\mathit{Act} \defeq \mathcal{C} \cup \setof{\silent} \cup \setof{{\noacts}}$ be the set of actions, ranged over by $\alpha,\beta,...$,
+where the symbol $\silent$ denotes a \emph{silent} action, while the symbol $\noact$ denotes a \emph{virtual} (non-specified) action.
+A \emph{link} is a pair $\ell=\link{\alpha}{\beta}$;
+it is \emph{solid} if $\alpha,\beta \neq \ \noacts$; 
+intuitively, $\alpha$ and $\beta$ are two interaction points, one for incoming requests and the other for outgoing requests.
+The link $\link{\noact}{\noact}$ is called \emph{virtual}.
+A link is \emph{valid} if it is solid or virtual.
+We let $\mathcal{L}$ be the set of valid links.
+%
+A \emph{link chain} is a 
+finite sequence $v = \ell_{1}...\ell_{n}$ of (valid) links  $\ell_{i} = \link{\alpha_{i}}{\beta_{i}}$ such that:
+\begin{enumerate}
+\item for any $i\in [1,n-1]$, 
+$\left\{\begin{array}{ll}
+\beta_{i},\alpha_{i+1}\in \mathcal{C} & \mbox{ implies } \beta_{i} = \alpha_{i+1}\\
+\beta_{i}=\silent & \mbox{ iff } \alpha_{i+1}=\silent
+\end{array}\right.
+$
+\item  $\exists i \in [1,n]. \ \ell_i \neq \link{\noact}{\noact}$.
+\end{enumerate}
+
+Virtual links represent missing elements of a chain. 
+A chain is called \emph{solid} if it does not contain any virtual link.
+The empty chain is denoted by $\epsilon$.
+The equivalence $\blackstretcheq$ models expansion/contraction of virtual links to adjust the length of a link chain.
+
+
+\begin{definition}[Equivalence $\blackstretcheq$]\label{def:black}
+We let $\blackstretcheq$ be the least equivalence relation 
+over link chains closed under the axioms (whenever both sides are well defined):
+\[
+\begin{array}{rclcrcl}
+v\link{\noact}{\noact} & \blackstretcheq &  v & \qquad &
+v_1 \startchain{\noact}\chainedlink{\noact}{\noact}\chainend{\noact}v_2 & \blackstretcheq & v_1 \link{\noact}{\noact} v_2\\[5pt]
+\link{\noact}{\noact}v & \blackstretcheq & v & &
+v_1 \startchain{\alpha}\chainedlink{\mathsf{a}}{\mathsf{a}}\chainend{\beta} v_2
+& \blackstretcheq & 
+v_1 \startchain{\alpha}\chainedlink{\mathsf{a}}{\noact}\chainedlink{\noact}{\mathsf{a}}\chainend{\beta}v_2 
+\end{array}
+\]
+\end{definition}
+
+Two link chains of equal length can be merged whenever each position occupied by a solid link in one chain is occupied by a virtual link in the other chain and solid links in adjacent positions match. Positions occupied by virtual links in both chains remain virtual. Merging is denoted by $\merges{v_1}{v_2}$.
+%
+For example, given $v_1 = \startchain{\silent}\chainedlink{\mathsf{a}}{\noact}\chainedlink{\noact}{\noact}\chainend{\noact}$, $v_2 = \startchain{\noact}\chainedlink{\noact}{\mathsf{a}}\chainedlink{\mathsf{b}}{\noact}\chainend{\noact}$ and $v = \startchain{\silent}\chainedlink{\mathsf{a}}{\mathsf{a}}\chainedlink{\mathsf{b}}{\noact}\chainend{\noact}$
+we have $\merges{v_1}{v_2} = v$, whereas $\merges{v_1}{v}$ is not defined. Notably the merge operation is commutative and associative.
+
+Some names in a link chain can be restricted as non observable and transformed into silent actions $\silent$. This is possible only if they are matched by some adjacent link. Restriction is denoted by $\restrict{\mathsf{a}}v$.
+%
+For example, given $v = \startchain{\silent}\chainedlink{\mathsf{a}}{\mathsf{a}}\chainedlink{\mathsf{b}}{\noact}\chainend{\noact}$ as above, we have 
+$\restrict{\mathsf{a}}v = \startchain{\silent}\chainedlink{\silent}{\silent}\chainedlink{\mathsf{b}}{\noact}\chainend{\noact}$,
+whereas $\restrict{\mathsf{b}}v$ is not defined.
+
+\paragraph{Syntax}
+%\begin{definition}
+The set of c\CNA\ processes, denoted as $\cal{P}$ and ranged over by $P,Q$, is defined by the following grammar:
+\[
+\begin{array}{rcl}
+P,Q & ::= &
+\nil \prodsep
+%X \prodsep
+\upsilon.P  \prodsep
+%\sum_{i\in I} \upsilon_i.P_i \prodsep
+P+Q \prodsep
+P|Q \prodsep
+\restrict{\mathsf{a}} P \prodsep
+%P[\phi] \prodsep
+A
+\end{array}
+\]
+\noindent
+where $\upsilon_i$ is a  link chain,
+%(i.e.\  $\upsilon_i =
+%\startchain{\alpha}\chainedlink{\beta}{\noacts}\chainedlink{\noacts}{\alpha'}\chainend{\beta'}$
+%with $\alpha,\alpha',\beta,\beta'\neq \ \noacts$),
+%$\phi$ is a channel renaming function,
+and $A$ is a process identifier.
+The syntax of c\CNA\  extends that of \CNA~\cite{BBB17} by allowing to use link chains as prefixes instead of links, i.e. we allow to write $\upsilon.P$ instead of $\ell.P$.
+For the rest it features nondeterministic choice $P+Q$ (also called sum), parallel composition $P|Q$, restriction $\restrict{\mathsf{a}} P$, and possibly recursively defined process identifiers $A$. 
+Here we do not consider name mobility, which is present instead in the {\tt link}-calculus and we omit the relabelling operator of \CNA\ (not needed in the encoding).
+
+As common in process algebras we restrict to consider prefix-guarded sums $\upsilon_1.P_1 + \upsilon_2.P_2$ and, exploiting associativity, we use the shorthand $\sum_{i\in I} \upsilon_i.P_i$ for a finite set of indexes $I=\{i_1,...,i_k\}$ instead of $\upsilon_{i_1}.P_{i_1} + \cdots + \upsilon_{i_k}.P_{i_k}$.
+The inactive process $\nil$ is thus just the empty summation.
+
+In a prefix $\upsilon.P$ we can always assume that the links at the extremities of $\upsilon$ are solid: if $\upsilon$ needs to be used in larger chains, the operational semantics will add as many virtual links as needed by exploiting the equivalence $\blackstretcheq$ (see rule $\mathit{Sum}$ in Fig.~\ref{fig:cnasos}). For example, the process $\link{\mathsf{a}}{\mathsf{b}}.P$ and $\startchain{\mathsf{a}}\chainedlink{\mathsf{b}}{\noact}\chainend{\noact}.P$
+ are completely equivalent.
+ 
+Regarding process constants,  we rely on a given set $\Delta=\{A_i\defeq P_i\}_{i\in I}$ of (possibly
+recursive) process definitions.
+%\end{definition}
+
+
+\paragraph{Semantics}
+
+The operational semantics of c\CNA\ is defined in the SOS style by the inference rules in Fig.\ref{fig:cnasos}. The rules are reminiscent of those for Milner's CCS and they essentially coincide with those of \CNA\ in~\cite{BBB17}. The only difference is due to the presence of prefixes that are link chains.
+Briefly: rule (\textit{Sum}) selects one alternative and puts as label a possible contraction/expansion of the link chain in the selected prefix; rule (\textit{Ide}) selects one transition of the defining process for a constant; rule (\textit{Res}) restricts some names in the label (it cannot be applied when $\restrict{\mathsf{a}}v$ is not defined); rules (\textit{Lpar}) and (\textit{Rpar}) account for interleaving in parallel composition; rule (\textit{Com}) 
+synchronises interactions (it cannot be applied when $\merges{v}{v'}$ is not defined).
+
+\begin{example}
+As some simple examples, consider the recursive process definitions $H \defeq \link{\mathsf{a}}{\mathsf{b}}.\link{\mathsf{a}}{\mathsf{c}}.H$ and $K \defeq \link{\mathsf{a}}{\mathsf{b}}.K + \link{\mathsf{a}}{\mathsf{c}}.K$: the former recursively provides a link from $\mathsf{a}$ to $\mathsf{b}$ and then, at the next step, from $\mathsf{a}$ to $\mathsf{c}$; the latter provides at each step a link from $\mathsf{a}$ to $\mathsf{b}$ or from $\mathsf{a}$ to $\mathsf{c}$, nondeterministically. 
+\end{example}
+
+Analogously to \CNA, the operational semantics of c\CNA\ satisfies the so called Accordion Lemma: whenever $P \xrightarrow{v} P'$ and $v'\blackstretcheq v$ then $P \xrightarrow{v'} P'$.
+
+%\begin{figure}[t]
+%\begin{center} 
+%\begin{prooftree} 
+%\AxiomC{$\upsilon' \blackstretcheq \upsilon $} %\mbox{($\ell$ {\em only} solid link in $s$)}
+%\RightLabel{\scriptsize(\textit{Act})}
+%\UnaryInfC{$\upsilon.P \xrightarrow{\upsilon'} P$} 
+%% \DisplayProof
+%\end{prooftree}
+%\end{center}
+%\caption{SOS semantic rules of the c\CNA. Only rule $(Act)$ is
+%changed. The others are the same as in Figure~\ref{fig:cnasos}, in the Appendix.}
+%\label{fig:cnasos}
+%\end{figure}
+
+\begin{figure}[t]
+\begin{center} 
+\begin{prooftree} 
+\AxiomC{$\upsilon \blackstretcheq \upsilon_j\quad j\in I$} %\mbox{($\ell$ {\em only} solid link in $s$)}
+\RightLabel{\scriptsize(\textit{Sum})}
+\UnaryInfC{$\sum_{i\in I} \upsilon_i.P_i \xrightarrow{\upsilon} P_j$} 
+\DisplayProof
+\qquad
+\AxiomC{$P \xrightarrow{\upsilon} P'$}
+ \AxiomC{$(A \defeq P)\in\Delta$}
+\RightLabel{\scriptsize(\textit{Ide})}
+\BinaryInfC{$A \xrightarrow{\upsilon} P'$} 
+%\AxiomC{$P \xrightarrow{v} P'$} 
+%\RightLabel{\scriptsize(\textit{Lsum})}
+%\UnaryInfC{$P+Q \xrightarrow{v} P'$} 
+%\DisplayProof
+%\
+%\AxiomC{$Q \xrightarrow{s} Q'$} 
+%\RightLabel{\scriptsize(Rsum)}
+%\UnaryInfC{$P+Q \xrightarrow{s} Q'$} 
+\end{prooftree} 
+\end{center}
+
+\begin{center} 
+\begin{prooftree} 
+\AxiomC{$P \xrightarrow{\upsilon} P'$} 
+\RightLabel{\scriptsize(\textit{Res})}
+\UnaryInfC{$\restrict{\mathsf{a}}P \xrightarrow{\restrict{\mathsf{a}}\upsilon} \restrict{a}P'$} 
+\DisplayProof
+\quad
+%\,
+%\AxiomC{$P \xrightarrow{v} P'$} 
+%\RightLabel{\scriptsize(\textit{Rel})}
+%\UnaryInfC{$P[\phi] \xrightarrow{v[\phi]} P'[\phi]$} 
+%\DisplayProof
+\AxiomC{$P \xrightarrow{v} P'$} 
+\RightLabel{\scriptsize(\textit{Lpar})}
+\UnaryInfC{$P|Q \xrightarrow{\upsilon} P'|Q$} 
+\DisplayProof
+\quad
+\AxiomC{$Q \xrightarrow{v} Q'$} 
+\RightLabel{\scriptsize(\textit{Rpar})}
+\UnaryInfC{$P|Q \xrightarrow{\upsilon} P|Q'$} 
+%\DisplayProof
+\end{prooftree} 
+\end{center}
+
+\begin{center} 
+\begin{prooftree} 
+%\,
+%\AxiomC{$Q \xrightarrow{s} Q'$} 
+%\RightLabel{\scriptsize(Rpar)}
+%\UnaryInfC{$P|Q \xrightarrow{s} P|Q'$} 
+%\end{prooftree} 
+%\end{center}
+%\begin{center} 
+%\begin{prooftree} 
+\AxiomC{$P \xrightarrow{\upsilon'} P'$} 
+\AxiomC{$Q \xrightarrow{\upsilon} Q'$} 
+\RightLabel{\scriptsize(\textit{Com})}
+\BinaryInfC{$P|Q \xrightarrow{\merges{\upsilon}{\upsilon'}} P'|Q'$} 
+%\DisplayProof
+\end{prooftree} 
+\end{center}
+\caption{SOS semantics of c\CNA\  processes.}
+\label{fig:cnasos}
+\end{figure}
+
+\subsection{Notation for link chains}
+
+Hereafter we make use of some new notations for link chains that will facilitate  
+the presentation of our 
+%translation.
+encoding.
+
+\begin{definition}[Replication]
+Let $\upsilon$ be a valid link chain such that $\upsilon\upsilon$ is also a valid link chain. The $n$ times replication of $\upsilon$, written $\upsilon^n$, is defined recursively by letting
+$\upsilon^0 = \epsilon$ (i.e. the empty chain) and $\upsilon^n = \upsilon\upsilon^{n-1}$.
+%\[
+%\begin{array}{c@{\qquad}c}
+%%\ell ^1 = \ell & \ell^n = \ell^{n-1}\ell\\
+%\upsilon^1 = \upsilon& \upsilon^n = \upsilon^{n-1}\upsilon
+%\end{array}
+%\]
+%with the hypothesis that all the links in the resulting link chains match.
+%, and that $\upsilon^0 = \epsilon$ is the empty chain.
+\end{definition}
+
+For example,  the expression $(\startchain{\mathsf{a}}\chainedlink{\mathsf{b}}{\noact}\chainend{\noact})^3$  denotes the chain $\startchain{\mathsf{a}}\chainedlink{\mathsf{b}}{\noact}\chainedlink{\noact}{\mathsf{a}}\chainedlink{\mathsf{b}}{\noact}\chainedlink{\noact}{\mathsf{a}}\chainedlink{\mathsf{b}}{\noact}\chainend{\noact}$. 
+Instead the expression $(\link{\mathsf{a}}{\mathsf{b}})^2$ is ill-defined because $\mathsf{a}$ does not match with $\mathsf{b}$.
+
+Then, we introduce the notation for \emph{half links} that will be used in conjunction with the \emph{open block of chain} to form regular link chains.
+
+\begin{definition}[Half links]
+Let $\mathsf{a}$ be a channel name, we denote by $\link{\mathsf{a}}{}$ the \emph{half left link},  and by $\link{}{\mathsf{a}}$ the  \emph{half right link}.
+\end{definition}
+
+In the encoding of RS we will make extensive use of subscripted names:  each name $\mathsf{a}$ will come in two variants $\mathsf{a}_i$ and $\mathsf{a}_o$. This is just a technical issue to prevent accidental matching between links. To see why this is important, compare the chain 
+$\startchain{\silent}\chainedlink{\mathsf{a}}{\noact}\chainedlink{\noact}{\mathsf{a}}\chainend{\silent}$ with 
+$\startchain{\silent}\chainedlink{\mathsf{a}_i}{\noact}\chainedlink{\noact}{\mathsf{a}_o}\chainend{\silent}$: the former is $\blackstretcheq$ equivalent to the solid chain $\startchain{\silent}\chainedlink{\mathsf{a}}{\mathsf{a}}\chainend{\silent}$; the latter cannot become solid unless merged with a chain that links $\mathsf{a}_i$ to $\mathsf{a}_o$, like 
+$\startchain{\noact}\chainedlink{\noact}{\mathsf{a}_i}\chainedlink{\mathsf{a}_o}{\noact}\chainend{\noact}$.
+This form of subscripting is exploited in the definition of open blocks.
+
+\begin{definition}[Open block]
+Let $\sigma$ be a finite sequence of names. We 
+define an \emph{open block} as $\blockchain{\mathsf{a}_i}{\mathsf{a}_o}{\mathsf{a} \in \sigma}$, where $\mathsf{a}_i$ and $\mathsf{a}_o$ are annotated version of the name $\mathsf{a}$ (as explained above), by letting
+\[
+\blockchain{\mathsf{a}_i}{\mathsf{a}_o}{\mathsf{a} \in \sigma} \defeq
+\left\{
+\begin{array}{ll}
+\epsilon 
+& \mbox{if $\sigma=\epsilon$ is the empty sequence}\\[5pt]
+{}_{\mathsf{b}_i}^{\noact}\chainedlink{\noact}{\mathsf{b}_o}\blockchain{\mathsf{a}_i}{\mathsf{a}_o}{\mathsf{a} \in \rho}
+& \mbox{if $\sigma=\mathsf{b}\rho$}
+\end{array}
+\right.
+\]
+%\[
+%\begin{array}{l@{\quad}l@{\quad}l}
+%\mbox{set}& \mbox{block of chain}& \mbox{result}\\
+%R= \emptyset & \blockchain{a_i}{a_o}{a \in R}   &\epsilon\\
+%R = \{ b\}    &\blockchain{a_i}{a_o}{a \in R}  & {}_{b_i}^{\noact}\chainedlink{\noact}{b_o}\\
+%R = \{b\} \cup R' & \blockchain{a_i}{a_o}{a \in R} & {}_{b_i}^{\noact}\chainedlink{\noact}{b_o}\link{}{}\blockchain{a_i}{a_o}{a \in R'}
+%\end{array}
+%\]
+\end{definition}
+%Please note that, channel names of juxtaposed open blocks of chain are not required to match.
+
+Abusing the notation, we will use the open block notation for sets of names rather than sequences, assuming the names in the set are taken  according to some default order (e.g. the lexicographic one).
+
+%\noindent
+We then combine half links and  open blocks to form valid link chains.
+%
+%  $\halfl{a}\blockchain{c_i}{c_o}{c \in R}\halfr{b}$ to form a regular link chain; or we can put together half links and open blocks of chain:  $\halfl{a}\blockchain{c_i}{c_o}{c \in R}\blockchain{c_i}{c_o}{c \in R'}\dots \blockchain{c_i}{c_o}{c \in R^{''}}\halfr{b}$ to still form a regular  link chain.
+% Again,  all the channel names appearing in the half links or in the open blocks of chain are not required to match.
+
+ For example, for $X = \{\mathsf{a},\mathsf{b}\}$ the expression $ \blockchain{\mathsf{c}_i}{\mathsf{c}_o}{\mathsf{c} \in X} $
+denotes the block ${}_{\mathsf{a}_i}^{\noact}\chainedlink{\noact}{\mathsf{a}_o} \backslash{}_{\mathsf{b}_i}^{\noact}\chainedlink{\noact}{\mathsf{b}_o}$; and the expression $\link{\mathsf{r}_1}{} \blockchain{\mathsf{c}_i}{\mathsf{c}_o}{\mathsf{c} \in X}\link{}{\mathsf{r}_2} $ denotes the chain 
+$ \startchain{\mathsf{r}_1}\chainedlink{\mathsf{a}_i}{\noact}\chainedlink{\noact}{\mathsf{a}_o}\chainedlink{\mathsf{b}_i}{\noact}\chainedlink{\noact}{\mathsf{b}_o}\chainend{\mathsf{r}_2}$.

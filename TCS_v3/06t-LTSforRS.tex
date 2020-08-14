@@ -1,0 +1,87 @@
+% !TEX root = ./main_RS2L_LNCS.tex
+\section{Labelled Transition System for Reaction Systems}
+\label{sec:LTSforRS}
+
+\begin{definition}\label{def:LTSforRS}
+\[
+\begin{array}{lcl}
+S&::=&[K]\\
+K&::=&(R,I,P)~\mid~\{e\}~\mid~K|K~\mid C\\
+C&::=&recX.C~\mid~X~\mid~E.C~\mid~C+C\\
+\end{array}
+\]
+We assume that $\{e_1\}|\{e_2\}= \{e_1,e_2\}$
+\end{definition}
+
+\begin{figure}[t]
+\begin{center} 
+\begin{prooftree} 
+\AxiomC{}
+\RightLabel{\scriptsize(\textit{Cxt})}
+\UnaryInfC{$E.C \xrightarrow{E,(\emptyset,\emptyset,\emptyset)}C$} 
+\DisplayProof
+\
+\AxiomC{} 
+\RightLabel{\scriptsize(\textit{Ent})}
+\UnaryInfC{$\{e\}  \xrightarrow{\{e\},(\emptyset,\emptyset,\emptyset)} \emptyset$} 
+\end{prooftree} 
+\end{center}
+\begin{center} 
+\begin{prooftree} 
+\AxiomC{} %\mbox{($\ell$ {\em only} solid link in $s$)}
+\AxiomC{}
+%\AxiomC{}
+\RightLabel{\scriptsize(\textit{Pro})}
+\BinaryInfC{$(R,I,P)  \xrightarrow{\emptyset,(R,I,P)}(R,I,P)|P $}
+\end{prooftree} 
+\end{center}
+\begin{center} 
+\begin{prooftree} 
+\AxiomC{$e \in I$}
+\RightLabel{\scriptsize(\textit{Hin1})}
+\UnaryInfC{$(R,I,P) \xrightarrow{\emptyset,(\{e\},\emptyset,\emptyset)} (R,I,P)$}
+%\DisplayProof
+\end{prooftree} 
+\end{center}
+\begin{center} 
+\begin{prooftree}
+\AxiomC{$e \in R$}
+\RightLabel{\scriptsize(\textit{Hin2})}
+\UnaryInfC{$(R,I,P) \xrightarrow{\emptyset,(\emptyset,\{e\},\emptyset)}(R, I,P)$} 
+%\DisplayProof
+\
+%\AxiomC{$P \xrightarrow{v} P'$} 
+%\AxiomC{$P \xrightarrow{v} P'$} 
+%\RightLabel{\scriptsize(\textit{Lsum})}
+%\UnaryInfC{$P+Q \xrightarrow{v} P'$} 
+%\DisplayProof
+%\
+%\AxiomC{$Q \xrightarrow{s} Q'$} 
+%\RightLabel{\scriptsize(Rsum)}
+%\UnaryInfC{$P+Q \xrightarrow{s} Q'$} 
+\end{prooftree} 
+\end{center}
+
+
+\begin{center} 
+\begin{prooftree} 
+\AxiomC{$K_1 \xrightarrow{E_1,(R_1,I_1,P_1)} K'_1$}
+\AxiomC{$K_2 \xrightarrow{E_2,(R_2,I_2,P_2)} K'_2$} 
+\AxiomC{$(E_1\cup E_2 \cup R_1 \cup R_2) \cap (I_1 \cup I_2) = \emptyset$}
+\RightLabel{\scriptsize(\textit{Rel})}
+\TrinaryInfC{$ K_1|K_2\xrightarrow{E_1\cup E_2,(R_1\cup R_2,I_1\cup I_2,P_1\cup P_2)} 
+K'_1|K'_2$}
+\end{prooftree} 
+\end{center}
+
+\begin{center} 
+\begin{prooftree} 
+\AxiomC{$K \xrightarrow{E,(R,I,P)} K'$}
+\AxiomC{$R \subseteq E$}
+\RightLabel{\scriptsize(\textit{Sys})}
+\BinaryInfC{$ [K]\xrightarrow{E,(R,I,P)} [K']$}
+\end{prooftree} 
+\end{center}
+\caption{SOS semantics of the reaction system configurations.}
+\label{fig:LTSforRS}
+\end{figure}

@@ -1,0 +1,417 @@
+% !TEX root = ./main_TCS.tex
+\section{Bio-simulation}
+\label{sec:biosimulation}
+
+The classical notion of bisimulation for process algebras equates two processes
+when one process can simulate all the instructions executed by the other one and viceversa.
+In its weak formulation, internal instructions, i.e. non visible by external observers,
+are abstracted away. 
+There are many variants of the bisimulation for process algebras,  for example the
+barbed bisimulation~\cite{10.1007/3-540-55719-9_114} only considers the execution of invisible actions, and then equates two processes when they expose the same prefixes; for the mobile ambients~\cite{CardelliG00}, a process algebra equipped with a reduction semantics, a notion of
+behavioural equivalence equates two processes when they expose the same ambients~\cite{GC03}. 
+
+There are some previous works based on bisimulation applied to models for biological systems. Barbuti et al~\cite{BMMT08} define a classical setting for bisimulation for two formalisms: the Calculus of Looping Sequences, which is a rewriting system, and the Brane Calculi, which is based on process calculi.
+Bisimulation is used to verify properties of the regulation of lactose degradation in
+Escherichia coli and the EGF signalling pathway. These calculi allow the authors to model membranes' behaviour.
+Cardelli et al~\cite{CTTV15} present two quantitative behavioral equivalences over species of a 
+chemical reaction network with semantics based on ordinary differential equations.
+Bisimulation identifies a partition where each equivalence class represents the exact sum of the concentrations of the species belonging to that class.
+Bisimulation also relates species that have identical solutions at all time points when starting from the same initial conditions.
+Both the fore mentioned formalisms~\cite{BMMT08,CTTV15} adopt a classical approach to bisimulation. 
+Albeit the bisimulation is a powerful tool for verifying if the behaviour of two different software 
+programs is indistinguishable, in the case of biological systems the classical bisimulation seems to be inappropriate, as the labels of the transitions systems are too concrete.
+In fact, in a biological soup, a high number of interactions occur at every computational stage, and generally, biologists
+are only interested to analyse a small subset of them and to focus just on some entities.
+
+For this reason, we propose an alternative notion of bisimulation, that hereafter we call \emph{bio-simulation},
+that allows us  to compare two biological systems by restricting the observation to only a limited set of events of interest, which can be chosen according to the property one wants to investigate in an experiment.
+This allows one to tailor the equivalence to different applications and purposes. 
+
+The transition labels of our systems record detailed information about all the reactions that have been applied in one transition, about the elements that acted as reagents, as inhibitors or that have been produced, or that have been provided by the context.
+All these information are stored in the label because they are necessary to compose a transition in a modular way. Depending on the application, only a suitable abstraction over the label can be of interest.
+
+In a way, we want to query our transition labels to extract only the information we care about.
+To this goal, we introduce a simple language
+%simple assertion language 
+that allows us to formulate detailed and partial queries about what happened in a single transition.
+
+\begin{example} \label{properties_ex}
+For instance we would like to express properties about each step of the bio-simulation of a system like the ones below:
+\begin{enumerate}
+\item Has the entity $s_i$ been used by reaction $r_j$ as reagent?
+\item Has the entity $s_i$ been blocked the application of  reaction $r_j$?
+\item Has the entity $s_i$ been produced by reaction $r_j$?
+\item Has the entity $s_i$ been produced by some reaction?
+\item Has the entity $s_i$ been provided by the context? 
+\item Has the reaction $r_j$ not been applied? 
+%\item Has the entity $s$ been used by some rule as reagent ?
+%\item Has the entity $s$ blocked  the application of some rules ?
+%\item Has the entity $s$ been produced ?
+%\item Has the entity $s$ been provided by the context ?
+%\item Has the rule $i$ been applied ?
+\end{enumerate}
+\end{example}
+
+As detailed before, in the following we assume that: (i) the context can be non-deterministic, otherwise it makes little sense to rely on bisimulation to observe the branching structure of system dynamics; (ii) we are interested in observing the names of the entities involved in the transitions and also the reactions that have been applied, thus we assume top level restrictions are absent and rely on solid transitions only (with leftmost and rightmost silent actions).
+
+\subsection{Assertion language}
+
+%To simplify the query language, we first introduce a function that takes a solid link chain and returns a simple string by eliminating all the channel matching pairs leaving just one channel per each pair. This transformation is harmless, in the sense that it retains all the information in the chain, because it is applied to solid chains only. Below we denote by $\mathit{decs} = \{ s, \overline{s}, \widetilde{s},\widehat{s},\underline{s}~|~ s\in S\}$ the set of decorated names (without subscripts $_i$ and $_o$).
+%The function $\mathit{flat}$ is defined inductively as follows:
+%%\[
+%%\begin{array}{lcl@{\hspace{0.5cm}}lcl@{\hspace{0.5cm}}lcl@{\hspace{0.5cm}}lcl}
+%%\mathit{flat}(\epsilon)&\defeq & \epsilon &
+%%\mathit{flat}(\link{\gamma}{\gamma'}) &  \defeq & \left \{ \begin{array}{cl} \epsilon & \mathrm{if } (\gamma = \beta_i \wedge \gamma = \beta_o)  \vee \gamma = \silent\\
+%%\gamma' & \mathrm{otw }  \end{array} \right. &
+%%%\mathit{flat}(\link{\alpha}{\silent})& \defeq & \epsilon &
+%%%\mathit{flat}(\link{\alpha}{\beta}) & \defeq &\beta \\
+%%\end{array}\]
+%
+%\[
+%\mathit{flat}(\epsilon)\defeq \epsilon 
+%\qquad
+%\mathit{flat}(\link{\alpha}{\beta}) \defeq 
+%\left \{ \begin{array}{ll} 
+%\beta & \mbox{if $\beta\in \mathit{reacts}\cup\{\mathit{cxt}\}\cup\mathit{prods}$}\\
+%\gamma & \mbox{if $\beta=\gamma_i$ with $\gamma\in\mathit{decs}$}\\
+%\epsilon & \mbox{otherwise}  
+%\end{array} \right. 
+%\]
+%
+%\[
+%\begin{array}{lcl}
+%\mathit{flat}(\link{\alpha}{\beta}\upsilon)& \defeq & \mathit{flat}(\link{\alpha}{\beta}):: \mathit{flat}(\upsilon)\\
+%\end{array}\\
+%\]
+%where  $::$ is the usual string concatenation operator.
+%
+
+Next, we introduce an assertion language that operates on strings
+and that combines regular expression operators with conjunction and disjunction.
+We let $\mathit{names}$ be the set of symbolic names used in our assertion language.
+
+\begin{definition}[Assertion Language]
+\label{def:assetionl}
+Atomic assertions $\zeta$ and general assertions $\mathsf{F}$ are built from the syntax below: 
+$$
+%B ::=  s~\mid~ \tilde{s}~\mid~ \hat{s} ~\mid~ \overline{s} ~\mid~  \underline{s} ~\mid~ F \oplus F  
+\begin{array}{lcl}
+\zeta & ::= & 
+\eta ~\mid ~ 
+? ~\mid ~ 
+[N]
+\\
+\mathsf{F} & ::= & 
+\epsilon ~\mid ~ 
+\zeta ~\mid ~ 
+\mathsf{F}::\mathsf{F} ~\mid ~ 
+\mathsf{F}^+ ~\mid ~ 
+\mathsf{F}^* ~\mid ~ 
+\mathsf{F} \vee \mathsf{F} ~\mid ~ 
+\mathsf{F} \wedge \mathsf{F}
+\end{array}
+$$
+%\noindent where $s \in {\cal C}$, and  $\oplus \in \{\wedge, \vee, \to \}$. 
+where $\eta \in \mathit{names}$ and $N\subseteq \mathit{names}$.
+%, and  $\oplus \in \{\wedge, \vee \}$. 
+% \{\wedge, \vee, \to \}$. 
+\end{definition}
+
+Roughly, an atomic assertion $\zeta$ denotes either a string composed by a single name $\eta$ (one of the symbols in the set $\mathit{names}$ for denoting a particular entity, reaction, production or context), or
+the wildcard $?$ that stands for any symbol, or the pattern $[N]$ that stands for any string composed by a single symbol in the set $N$. Clearly $?$  is just a shorthand for $[\mathit{names}]$.
+We write $\mathbf{0}$ for $[\emptyset]$ and $[s_1,...,s_n]$ instead of $[\{s_1,...,s_n\}]$. 
+
+An assertion $\mathsf{F}$ is either the empty string $\epsilon$, an atomic assertion $\zeta$, the concatenation of two assertions $\mathsf{F}_1::\mathsf{F}_2$, the replication of $\mathsf{F}$ for 1 or more times $\mathsf{F}^+$, the replication of $\mathsf{F}$ for 0 or more times $\mathsf{F}^*$, the disjunction of two assertions $\mathsf{F}_1 \vee \mathsf{F}_2$ or their conjunction $\mathsf{F}_1 \wedge \mathsf{F}_2$. We denote by $\star$ the assertion $?^*$.
+
+An assertion denotes a set of strings over the alphabet $\mathit{names}$ as expected.
+Below we let $\wp(X)$ denote the powerset of a set $X$.
+
+\begin{definition}[Semantics of Assertions]
+ We define $\llbracket \mathsf{F}\rrbracket \subseteq\wp(\mathit{names}^*)$ by induction on the structure of $\mathsf{F}$: 
+\[
+\begin{array}{rcl@{\hspace{1cm}}rcl}
+ \llbracket \epsilon \rrbracket &\defeq&  \{\epsilon\}
+ & \llbracket \mathsf{F}_1::\mathsf{F}_2 \rrbracket &\defeq& \{\omega_1 :: \omega_2~\mid~ \omega_1 \in \llbracket \mathsf{F}_1 \rrbracket \wedge \omega_2 \in \llbracket \mathsf{F}_2 \rrbracket\}  \\
+ \llbracket \alpha \rrbracket &\defeq&  \{\alpha\} 
+ & \llbracket \mathsf{F}^+ \rrbracket &\defeq& \llbracket \mathsf{F} \rrbracket^+  \\
+ \llbracket ? \rrbracket &\defeq&   \mathit{names}
+ & \llbracket \mathsf{F}^* \rrbracket &\defeq& \llbracket \mathsf{F} \rrbracket^*  \\
+ \llbracket [N]\rrbracket &\defeq&   N
+ & \llbracket  \mathsf{F}_1 \vee \mathsf{F}_2 \rrbracket &\defeq& \llbracket  \mathsf{F}_1\rrbracket \cup \llbracket  \mathsf{F}_2\rrbracket  \\
+ &&&\llbracket  \mathsf{F}_1 \wedge \mathsf{F}_2 \rrbracket &\defeq& \llbracket \mathsf{F}_1 \rrbracket \cap \llbracket \mathsf{F}_2\rrbracket 
+\end{array}
+\]
+\end{definition}
+
+
+
+
+\begin{definition}[Satisfaction as Membership]\label{sec:semantics}
+Let  $\upsilon$ be  a transition label, and $\mathsf{F}$ be an assertion.
+We write $\upsilon \entails \mathsf{F}$ (read as the transition label $v$ satisfies the assertion $\mathsf{F}$) 
+if $\mathit{flat}(\upsilon)\in \llbracket \mathsf{F}\rrbracket$, otherwise we write $\upsilon \not\entails \mathsf{F}$ (or also $\upsilon \entails \neg \mathsf{F}$) and say that $\mathsf{F}$ does not hold at $v$. 
+\end{definition}
+
+Given two transition labels $v,w$ we write $v\equiv_{\mathsf{F}} w$ if $v \entails \mathsf{F}\ \Leftrightarrow\ w \entails \mathsf{F}$, i.e. if both $v,w$ satisfy $\mathsf{F}$ or they do not.
+
+%\begin{definition}[Semantics]\label{sec:semantics}
+%Let $\pi$ be a trace of transition labels, $v$ be  a transition label, and $F$ be an assertion.
+%We inductively define $\pi,v_i \entails F$ (read as the transition label $v$, which is at position $i$ of $\pi$ satisfies the formula $F$) as: 
+%\begin{itemize}
+% \item   $\pi, v_i \entails \zeta $ if $\zeta \in v_i$. 
+% \item   $\pi, v_i \entails F_1 \wedge F_2$ if   $\pi, v_i \entails F_1$  $\wedge$  $\pi, v_i \entails F_2$.
+%\item   $\pi, v_i \entails F_1 \vee F_2$ if   $\pi, v_i \entails F_1$  $\vee$  $\pi, v_i \entails F_2$.
+%\item   $\pi, v_i \entails F_1 \to F_2$ if   $\pi, v_i \entails F_1$  $\to$  $\pi, v_i \entails F_2$. 
+%\end{itemize}
+%If it is not the case vbthat $\pi, v_i \entails  F $, then we say that $F$ does not hold at $v_i$ and we write $\pi,v_i \not\entails F$. 
+%\end{definition}
+
+\begin{example}
+The assertions corresponding to the sample queries listed in Example~\ref{properties_ex} are as follows:
+\begin{enumerate}
+\item
+$\star :: r_j :: [ s_1,...,s_n ]^* :: s_i :: [  s_1,...,s_n ]^* :: [  \overline{s}_1,...,\overline{s}_n ]^+ :: \star$
+\item
+$\star :: r_j :: [s_i, \overline{s}_i] :: r_{j+1} :: \star$
+\item
+$\star :: p_j :: [  \mathit{ents} ]^* :: \widetilde{s}_i :: \star$
+\item
+$\star :: \widetilde{s}_i :: \star$
+\item
+$\star :: \widehat{s}_i :: \star$
+\item
+$\star :: r_j :: ? :: r_{j+1} :: \star$
+\end{enumerate}
+where in 1, 2, 6 we exploit the fact that in a reaction $(R,I,P)$ the sets $R$ of reactants and  $I$ of inhibitors are non empty, so that if there is only one symbol between the occurrence of $r_j$ and $r_{j+1}$ it means the reaction $r_j$ has not been applied. Viceversa, if the reaction $r_j$ has been applied the occurrence of $r_j$ must be followed by at least one of the symbols in $\{s_1,...,s_n\}$ and then by at least one of the symbols in $\{\overline{s}_1,...,\overline{s}_n\}$.
+\end{example}
+
+\subsection{Bio-similarity and bio-logical equivalence}
+
+The notion of bio-simulation builds on the above language of assertions to parameterize the induced equivalence on the property of interest. 
+Please recall that we have defined the behaviour of the context in a non deterministic way, thus 
+at each step, different possible sets of entities can be provided to the system and different sets of reactions can be enabled/disabled. 
+Bio-simulation can thus be used to compare the behaviour of different systems that share some of the reactions or entities or also to compare the behaviour of the same set of reactions when different contexts are provided.
+
+
+%situations where in the same conditions, two alternative (mutually exclusive) behaviors can happen.
+
+%With an example, we  illustrate a possible (interesting) application of the implication in a query.
+%Let us consider the following rule that acts as follows: if reagent $a$ is present and inhibitor $b$ is absent,  either $c$ or $z$ can be produced. 
+%Typically, a non-deterministic model reflects incomplete knowledge of the real system.
+%
+%
+%
+%{\small
+%\[
+%\begin{array}{lcl}
+%P & \defeq& \startchain{\silent}\chainedlink{a_i}{\noact}\chainedlink{\noact}{a_o}\chainedlink{\overline{b}_i}{\noact}\chainedlink{\noact}{\overline{b}_o}
+%\chainedlink{r_2}{\noact}\chainedlink{\noact}{p_1}
+%\chainedlink{\widetilde{c}_i}{\noact}\chainedlink{\noact}{\widetilde{c}_o}\chainend{p_2}.P  \\
+%&&+\\
+% && \startchain{\silent}\chainedlink{a_i}{\noact}\chainedlink{\noact}{a_o}\chainedlink{\overline{b}_i}{\noact}\chainedlink{\noact}{\overline{b}_o}
+%\chainedlink{r_2}{\noact}\chainedlink{\noact}{p_1}
+%\chainedlink{\widetilde{z}_i}{\noact}\chainedlink{\noact}{\widetilde{z}_o}\chainend{p_2}.P  \\
+%&&+\\
+%&&\dots\\
+%\end{array}
+%\]
+%}
+%In this situation, a comparison between two models including the above rule,  based on the query $\tilde{z} \vee \underline{b} \rightarrow x$  can happen that one system always satisfies the query, and the other one not.
+%This difference could reveals that in the first system there is another rule producing $z$, i.e. biologically there is another path to produce $z$ that is activated in the actual system configuration:
+%{\small
+%\[
+%\begin{array}{lcl}
+%P & \defeq& \dots \\
+%&&+\\
+% && \startchain{\silent}\chainedlink{a_i}{\noact}\chainedlink{\noact}{a_o}\chainedlink{z_i}{\noact}\chainedlink{\noact}{z_o}\chainedlink{\overline{b}_i}{\noact}\chainedlink{\noact}{\overline{b}_o}
+%\chainedlink{r_2}{\noact}\chainedlink{\noact}{p_1}
+%\chainedlink{\widetilde{z}_i}{\noact}\chainedlink{\noact}{\widetilde{z}_o}\chainend{p_2}.P  \\
+%&&+\\
+%&&\dots\\
+%\end{array}
+%\]
+%}
+
+
+
+
+
+\begin{definition}[Bio-similarity  $ \sim_{\mathsf{F}}$]
+Given an assertion $\mathsf{F}$, a \emph{bio-simulation} $\mathbf{R}_{\mathsf{F}}$ that respects $\mathsf{F}$ is a binary relation over c\CNA \  processes such that, whenever $P~\mathrel{\mathbf{R}_{\mathsf{F}}}~Q$ then:
+ \begin{itemize} 
+ \item
+ for any $v,P'$ such that 
+ $P \xRightarrow{v} P'$ then there exist $w,Q'$ such that $Q  \xRightarrow{w} Q'$ with $v\equiv_{\mathsf{F}} w$ and $P' \mathrel{\mathbf{R}_{\mathsf{F}}} Q'$.
+\item
+ for any $w,Q'$ such that 
+ $Q \xRightarrow{w} Q'$ then there exist $v,P'$ such that $P  \xRightarrow{v} P'$ with $v\equiv_{\mathsf{F}} w$ and $P' \mathrel{\mathbf{R}_{\mathsf{F}}} Q'$.
+\end{itemize}
+%\item i$Q \xrightarrow{v} Q'$ with $v \entails F$ iff $\exists v',P'$ s.t.~$v \stretcheq v'$, $P  \xrightarrow{v'} P'$ with $v \entails F$. and $P' \mathrel{\mathbf{R}_{F}} Q'$.
+%\end{itemize}
+
+We let $ \sim_{\mathsf{F}} $ denote the largest  bio-simulation and we say that $P$ is \emph{bio-similar} to $Q$, with respect to $\mathsf{F}$, if $P \sim_{\mathsf{F}} Q$.
+\end{definition}
+
+\begin{remark}
+Please remember that the notation $P \xRightarrow{v} P'$ refers to ordinary transitions $P \xrightarrow{v} P'$ where $v$ is a complete chain (solid and with $\silent$ actions at the extremes).
+The double arrow notation should not be confused with the notation for weak transitions commonly found in the literature on process algebras.
+\end{remark}
+
+\begin{remark}
+An alternative way to look at a bio-simulation that respects $\mathsf{F}$ is to define it as an ordinary bisimulation over the transition system labelled over $\{\mathsf{F},\neg \mathsf{F}\}$ obtained by transforming each transition $P \xRightarrow{v} P'$ such that $v\entails \mathsf{F}$ into $P \xrightarrow{\mathsf{F}} P'$ and  each transition $P \xRightarrow{v} P'$ such that $v\not\entails \mathsf{F}$ into $P \xrightarrow{\neg \mathsf{F}} P'$.
+\end{remark}
+
+It can be easily shown that the identity relation is a bio-simulation and that bio-simulations are closed under (relational) inverse, composition and union and that, as a consequence, bio-similarity is an equivalence relation.
+
+Now, we introduce a slightly modified version of the Hennessy Milner Logic (HML)~\cite{HM80}, called bioHML; due to the reasons we explained above, we do not want to look at the complete transition labels, thus we rely on our simple assertion language to make it parametric w.r.t the assertion $\mathsf{F}$ of interest:
+
+\begin{definition}[BioHML]
+Let   $\mathsf{F}$ be an assertion, then 
+the set of bioHML formulas $\mathsf{G}$ that respects $\mathsf{F}$ are built by the following syntax:
+$$
+\begin{array}{rcl}
+\chi & ::= & \mathsf{F}~\mid~ \neg \mathsf{F}\\
+\mathsf{G},\mathsf{H} &::= &{\tt t} ~\mid~ {\tt f} ~\mid~ \mathsf{G}\wedge \mathsf{G} ~\mid~ \mathsf{G} \vee \mathsf{G} ~\mid~ \langle \chi \rangle \mathsf{G} ~\mid~ [\chi]\mathsf{G}
+\end{array}
+$$
+\end{definition}
+
+\begin{remark}
+An alternative way to look at bioHML formulas is as ordinary HML formulas over the set of labels $\{\mathsf{F},\neg \mathsf{F}\}$.
+\end{remark}
+
+As usual, the semantics of a bioHML formula is the set of c\CNA~processes that satisfy it.
+
+\begin{definition}[Semantics of BioHML]
+ We define $\llbracket \mathsf{G}\rrbracket \subseteq {\cal P}$ by induction on the structure of $\mathsf{G}$:
+ %(read as the transition label $v$ satisfies the formula $F$) as: 
+\[
+\begin{array}{ccl@{\hspace{1cm}}ccl}
+ \llbracket {\tt t}\rrbracket &\defeq& {\cal P} &  \llbracket \mathsf{G}\wedge \mathsf{H}\rrbracket &\defeq&  \llbracket \mathsf{G}\rrbracket  \cap \llbracket \mathsf{H}\rrbracket  \\
+\llbracket {\tt f}\rrbracket& \defeq& \emptyset &
+  \llbracket \mathsf{G}\vee \mathsf{H}\rrbracket &\defeq&  \llbracket \mathsf{G}\rrbracket  \cup \llbracket \mathsf{H}\rrbracket \\
+%\item   $ v \entails F_1 \vee F_2$ iff   $v \entails F_1$  $\vee$  $v \entails F_2$.
+\end{array}
+\]
+\[
+\begin{array}{lcl}
+ \llbracket  \langle \chi \rangle \mathsf{G} \rrbracket &\defeq& \{P \in {\cal P}: \exists v,P'.\ P\xRightarrow{v}P' \mbox{ with } v \entails \chi \mbox{ and } P' \in  \llbracket  \mathsf{G} \rrbracket\} \\
+ \llbracket [\chi]\mathsf{G} \rrbracket &\defeq& \{P \in {\cal P}: \forall v,P'.\ P\xRightarrow{v}P' \mbox{ implies } v \entails \chi \mbox{ and } P' \in  \llbracket  \mathsf{G} \rrbracket\}
+\end{array}
+\]
+
+We write $P \entails \mathsf{G}$ ($P$ satisfies $\mathsf{G}$) if and only if $P \in  \llbracket \mathsf{G} \rrbracket$.
+\end{definition}
+
+Negation is not included in the syntax, but the converse $\overline{\mathsf{G}}$ of a bioHML formula $\mathsf{G}$ can be easily defined inductively in the same way as for HML logic.
+
+\begin{definition}[Converse]
+Given a bioHML formula $\mathsf{G}$ we define its converse $\overline{\mathsf{G}}$ as follows:
+\[
+\begin{array}{rcl@{\hspace{1cm}}rcl@{\hspace{1cm}}rcl}
+\overline{\tt t} & \defeq & {\tt f} &
+\overline{\mathsf{G} \wedge \mathsf{H}} & \defeq & \overline{\mathsf{G}} \vee \overline{\mathsf{H}} &
+\overline{\langle \chi \rangle \mathsf{G}} & \defeq & [\chi]\overline{\mathsf{G}}
+\\
+\overline{\tt f} & \defeq & {\tt t} &
+\overline{\mathsf{G} \vee \mathsf{H}} & \defeq & \overline{\mathsf{G}} \wedge \overline{\mathsf{H}} &
+\overline{[\chi]\mathsf{G}} & \defeq & \langle \chi \rangle\overline{\mathsf{G}}
+\end{array}
+\]
+\end{definition}
+
+We observe that, as expected, for any bioHML formula $G$ and process $P$ we have $\overline{\overline{\mathsf{G}}} = \mathsf{G}$ and  $P \entails \overline{\mathsf{G}}$ iff  $P\not\entails \mathsf{G}$.
+
+\begin{definition}[Bio-logical equivalence]
+We let $\mathcal{L}_{\mathsf{F}}$ be the set of all bioHML formulas that respects $\mathsf{F}$ and 
+we say that two processes $P,Q$ are \emph{bio-logically equivalent w.r.t. $\mathsf{F}$}, written $P \equiv_{\mathcal{L}_{\mathsf{F}}}Q$, when $P$ and $Q$ satisfy exactly the same bioHML formulas in $\mathcal{L}_{\mathsf{F}}$, i.e. when for any $\mathsf{G}\in \mathcal{L}_{\mathsf{F}}$ we have $P \entails \mathsf{G}\ \Leftrightarrow Q \entails \mathsf{G}$.
+\end{definition}
+
+Finally, we extend the classical result establishing the correspondence between the logical equivalence induced by HML with bisimilarity for proving that bio-similarity coincides with bio-logical equivalence.
+
+
+
+\begin{restatable}[Correspondence]{theorem}{theocorr}
+%\begin{theorem}
+$\sim_{\mathsf{F}}\ =\ \equiv_{\mathcal{L}_{\mathsf{F}}}$
+%\end{theorem}
+\end{restatable}
+%\begin{proof}
+%The proof is just an adaptation of the classical result. The two implications are proved separately.
+%\begin{description}
+%\item[$\sim_F\ \subseteq\ \equiv_{\mathcal{L}_F}$:]
+%Given any two processes $P\sim_F Q$ we need to prove that for any bioHML formula $G$ we have $P\entails G$ iff $Q\entails G$. 
+%Without loss of generality, we prove that $P\entails G$ implies $Q\entails G$.
+%The proof is by structural induction on $G$.
+%\begin{itemize}
+%\item 
+%if $G={\tt t}$, then $Q\entails G$.
+%
+%\item
+%if $G={\tt f}$, then the assumption $P\entails G$ is false and the implication holds.
+%
+%\item
+%if $G=G_1 \wedge G_2$ we take as inductive hypotheses that
+%$$
+%\begin{array}{l}
+%\forall R,S.\ R \sim_F S \wedge R\entails G_1 \Rightarrow S \entails G_1\\
+%\forall R,S.\ R \sim_F S \wedge R\entails G_2 \Rightarrow S \entails G_2
+%\end{array}
+%$$
+%We need to prove that $Q\entails G$.
+%Since $P\entails G=G_1 \wedge G_2$ we have $P\entails G_1$ and $P\entails G_2$.
+%Since $P\sim_F Q$, by inductive hypotheses we get $Q\entails G_1$ and $Q\entails G_2$.
+%Hence $Q\entails G_1 \wedge G_2=G$.
+%
+%
+%\item
+%if $G=G_1 \vee G_2$  we take as inductive hypotheses that
+%$$
+%\begin{array}{l}
+%\forall R,S.\ R \sim_F S \wedge R\entails G_1 \Rightarrow S \entails G_1\\
+%\forall R,S.\ R \sim_F S \wedge R\entails G_2 \Rightarrow S \entails G_2
+%\end{array}
+%$$
+%We need to prove that $Q\entails G$.
+%Since $P\entails G=G_1 \vee G_2$ we have $P\entails G_1$ or $P\entails G_2$.
+%If $P\entails G_1$, since $P\sim_F Q$, by inductive hypotheses we get $Q\entails G_1$ and thus $Q\entails G_1 \vee G_2=G$.
+%If $P\entails G_2$, since $P\sim_F Q$, by inductive hypotheses we get $Q\entails G_2$ and thus $Q\entails G_1 \vee G_2=G$.
+%
+%\item
+%if $G=\langle\chi\rangle H$ we take as inductive hypothesis that
+%$$
+%\forall R,S.\ R \sim_F S \wedge R\entails H \Rightarrow S \entails H
+%$$
+%We need to prove that $Q\entails G$.
+%Since $P\entails \langle\chi\rangle H$ it means that there exists $\upsilon, P'$ such that $P\xRightarrow{\upsilon} P'$ with $\upsilon\entails \chi$ and $P'\entails H$.
+%Since $P\sim_F Q$, there exists $w,Q'$ such that $Q\xRightarrow{w} Q'$ with $w\entails \chi$ and $P'\sim_F Q'$. Then, by inductive hypothesis, $Q'\entails H$ and thus $Q\entails \langle\chi\rangle H=G$.
+%
+%\item
+%if $G=[\chi] H$ we take as inductive hypothesis that
+%$$
+%\forall R,S.\ R \sim_F S \wedge R\entails H \Rightarrow S \entails H
+%$$
+%We need to prove that $Q\entails G$.
+%If there is no $\upsilon\entails \chi$ such that $Q\xRightarrow{\upsilon}Q'$ for some $Q'$, then 
+% $Q\entails [\chi] H=G$ trivially.
+%For any $\upsilon,Q'$ such that $Q\xRightarrow{\upsilon}Q'$ with $\upsilon\entails \chi$, then as $P\sim_F Q$ there must exist $w,P'$ such that $P\xRightarrow{w}P'$ with $w\entails \chi$ and $P'\sim_F Q'$. Since $P\entails G=[\chi] H$ then it must be $P'\entails H$. Since $P'\sim_F Q'$, by inductive hypothesis $Q'\entails H$. Hence $Q\entails [\chi] H = G$.
+%\end{itemize}
+%
+%\item[$\equiv_{\mathcal{L}_F}\ \subseteq\ \sim_F$:]
+%We prove that $\equiv_{\mathcal{L}_F}$ is a bio-simulation and thus included in $\sim_F$.
+%Take two generic processes $P\equiv_{\mathcal{L}_F} Q$ and suppose $P\xRightarrow{\upsilon}P'$ for some $\upsilon,P'$. 
+%\begin{itemize}
+%\item
+%If $\upsilon \entails F$ we want to prove that there exists some $w,Q'$ such that $Q\xRightarrow{w}Q'$, with $w\entails F$ and $P'\equiv_{\mathcal{L}_F} Q'$.
+%
+%Towards a contradiction, assume that we cannot find such $w,Q'$.
+%
+%If there is no transition $Q\xRightarrow{w}Q'$ such that $w\entails F$, then the bioHML formula $G \defeq \langle F\rangle{\tt t}$ is such that $P\entails G$ and $Q\not\entails G$, contradicting the assumption $P\equiv_{\mathcal{L}_F} Q$.
+%
+%Otherwise, let $\mathcal{Q}\defeq \{Q'~\mid~\exists w.\ Q\xRightarrow{w}Q' \ \wedge\ w\entails F\}$ be the set of processes reachable from $Q$ via a transition with a (complete) label that satisfies $F$. Since our processes are with guarded recursion, the set $\mathcal{Q}$ is finite. Let $\mathcal{Q} = \{Q'_1,...,Q'_n\}$. By hypothesis all processes in $\mathcal{Q}$ must not be bio-logically equivalent to $P'$, hence for any $i\in[1,n]$ there exists a bioHML formula $G_i$ such that $P'\entails G_i$ and $Q'_i\not\entails G_i$ (if it was the opposite, $P'\not\entails G_i$ and $Q'_i\entails G_i$, we can use the converse formulas). But then the formula $G\defeq \langle F\rangle(G_1\wedge\dots\wedge G_n)$ is such that $P\entails G$ and $Q\not\entails G$, contradicting the assumption $P\equiv_{\mathcal{L}_F} Q$.
+%
+%\item
+%If $\upsilon \not\entails F$ then the proof is analogous to the previous case and thus omitted.
+%\end{itemize}
+%\end{description}
+%\end{proof}
