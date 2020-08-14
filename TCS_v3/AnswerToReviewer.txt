@@ -1,0 +1,45 @@
+Dear Editor and Referees,
+
+we thank you very much for your detailed comments and remarks, which greatly helped us to correct and improve our presentation. 
+We updated the manuscript following the advices of the referees. Please find below a detailed description of the way in which 
+the items pointed out by the referees were addressed in the revised version.
+
+Best regards,
+Linda Brodo, Roberto Bruni, Moreno Falaschi
+
+-------------------------
+
+
+Manuscript Number: TCS-D-20-00267R1
+Manuscript Title: A process algebraic approach to reaction systems.
+Author(s): Linda Brodo, Researcher; Roberto Bruni, Professor; Moreno Falaschi, Professor
+Submitted to: Theoretical Computer Science
+
+-------------------------
+Reviewer #1: I think my original comments have been addressed satisfactorily by the authors, but I still have some remarks:
+
+p.6, l.12 - replace "set of entities" by "sets of entities"
+> OK. Done
+
+p.7, l.42 - replace "where v_i is a link chain" by "where v is a link chain" 
+as in the syntax from the previous line you use v.P and not v_i.P
+> OK. Done
+
+p.8, l.13, (Res) rule - make sure all a's have same font as it seems the one in (\nu a)P' is different
+> OK. Done
+
+p.8, l.30 - replace "Fig.1" by "Fig. 1"
+> OK. Done
+
+p.12, l.35 (item 2 of Lemma 12) - replace "for each reaction" by "each reaction"
+> OK. We have corrected the formulation.
+
+p.12, l.51 - in Def. 13 shouldn't be P \xrightarrow{(\nu names)v} P' instead of P \xrightarrow{v}P' ?  Only starting on p.15, l.52 you say "In this section, for simplicity, we shall often omit topmost restrictions (\nu names)". Thus, either move this assumption earlier or till Section 5 keep using (\nu names) on \xrightarrow
+
+p.13, l.56 - (\nu names) missing from \xrightarrow label
+
+p.17, l.49 - replace "(starting at cxt and ending at p1" by "(starting at cxt and ending at p1)", namely add missing bracket
+
+p.33, l.41 - shouldn't be "j \geq 1" (as assumed on p.33, l.38) instead of "j \geq 0"?
+
+p.33, l.47 and l.49 - in the proof of the base case "j=1", instead of "j-1" shouldn't be "j"? This is due to the fact that Prop. 16 you mention you have the case j=1 and also on p.33 on l.52 you got \gamma^j and not \gamma^{j-1}.
