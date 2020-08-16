@@ -35,11 +35,16 @@ p.12, l.35 (item 2 of Lemma 12) - replace "for each reaction" by "each reaction"
 > OK. We have corrected the formulation.
 
 p.12, l.51 - in Def. 13 shouldn't be P \xrightarrow{(\nu names)v} P' instead of P \xrightarrow{v}P' ?  Only starting on p.15, l.52 you say "In this section, for simplicity, we shall often omit topmost restrictions (\nu names)". Thus, either move this assumption earlier or till Section 5 keep using (\nu names) on \xrightarrow
+>  ***TO BE ANSWERED***
 
 p.13, l.56 - (\nu names) missing from \xrightarrow label
+>  ***TO BE ANSWERED***
 
 p.17, l.49 - replace "(starting at cxt and ending at p1" by "(starting at cxt and ending at p1)", namely add missing bracket
+> OK. Done
 
 p.33, l.41 - shouldn't be "j \geq 1" (as assumed on p.33, l.38) instead of "j \geq 0"?
+> OK. Done
 
 p.33, l.47 and l.49 - in the proof of the base case "j=1", instead of "j-1" shouldn't be "j"? This is due to the fact that Prop. 16 you mention you have the case j=1 and also on p.33 on l.52 you got \gamma^j and not \gamma^{j-1}.
+>  ***TO BE DONE/ANSWERED***
