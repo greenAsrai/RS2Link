@@ -368,12 +368,14 @@ We proceed by induction on the transition number $j \geq 1$.
 \item[base case $j=1$:]
  This case falls into the case of Proposition~\ref{prop:corr1}.
 \item[inductive case:]
-We assume, by inductive hypothesis, that $\exists P'$ such that 
-$$P \xrightarrow{\link{\silent}{\silent}\dots \link{\silent}{\silent}}^{j-1} P'$$ 
-and $P' = \llbracket{\cal A},\gamma^{j-1}\rrbracket$.
+We assume that the property holds for some generic $j\geq 1$ and we prove that it holds for $j+1$.
+Suppose that
+$$P \xrightarrow{\link{\silent}{\silent}\dots \link{\silent}{\silent}}^{j+1} P'' .$$
+Then, it must exist $P'$ such that 
+$$P \xrightarrow{\link{\silent}{\silent}\dots \link{\silent}{\silent}}^{j} P' \xrightarrow{\link{\silent}{\silent}\dots \link{\silent}{\silent}} P'' .$$ 
+By inductive hypothesis, $P' = \llbracket{\cal A},\gamma^{j}\rrbracket$.
 %, with $1 \leq  i < t-1$.\\
-As $P'$ is the encoding of an extended interactive process, by Proposition~\ref{prop:corr1}, it exists $P''$  such that $P' \xrightarrow{\link{\silent}{\silent}\dots\link{\silent}{\silent}} P''$,
- and $P'' = \llbracket{\cal A},\gamma^j\rrbracket$. 
+As $P'$ is the encoding of an extended interactive process, by Proposition~\ref{prop:corr1},  $P'' = \llbracket{\cal A},(\gamma^j)^1\rrbracket =\llbracket{\cal A},\gamma^{j+1}\rrbracket $. 
 % By Lemma~\ref{lem:compl2}.2, if $\exists$ $P'$ such that $P'' \xrightarrow{\link{\silent}{\silent}} P'$, then $P'$ is 
  %unique, and by Lemma~\ref{lem:compl2}.1 $P' = [|{\cal A},\gamma'|]$. 
 %By Proposition~\ref{prop:corr1}, we know that  $C_0''=C_1' \cup D_1'$, $C_i''= C_{i+1}'$,
