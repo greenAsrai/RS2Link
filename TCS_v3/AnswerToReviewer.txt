@@ -47,4 +47,4 @@ p.33, l.41 - shouldn't be "j \geq 1" (as assumed on p.33, l.38) instead of "j \g
 > OK. Done
 
 p.33, l.47 and l.49 - in the proof of the base case "j=1", instead of "j-1" shouldn't be "j"? This is due to the fact that Prop. 16 you mention you have the case j=1 and also on p.33 on l.52 you got \gamma^j and not \gamma^{j-1}.
->  We imagine you meant "in the proof of the inductive case". Yuo are right, we have slightly expanded the proof to make it clear the application of the inductive hypothesis.
+>  We imagine you meant "in the proof of the inductive case". You are right, we have slightly expanded the proof to make it clear the application of the inductive hypothesis.
